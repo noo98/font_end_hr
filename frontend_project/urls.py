@@ -18,7 +18,12 @@ from django.contrib import admin
 
 from django.urls import path
 from frontend.views import fetch_items
-urlpatterns = [
+from frontend import views
+
+urlpatterns = [ 
     path('admin/', admin.site.urls),
     path('api/frontend-items/', fetch_items),
+    path('', views.index, name='index'),
+    path('tables_emp', views.tables_emp, name='tables_emp'),
+    path('form_emp', views.tables_emp, name='form_emp'),
 ]
