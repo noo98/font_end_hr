@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% load static %} 
+<title>Lcic-HR</title>
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">New post</h1>
+    <div class="container mt-5">
+        <div class="mb-3 mt-3">
+            <input type="file" class="form-control" id="file_news" name="file_news"></input>
+        </div>
+        <div class="mb-3 mt-3">
+            <textarea class="form-control" rows="5" id="comments" name="text" placeholder="ລາຍລະອຽດຂ່າວ...."></textarea>
+        </div>
+        <div class="mb-3 mt-6">
+            <div class="row mb-3">
+                <div class="col-md-1">
+                    <div class="form-floating mb-3 mt-3">
+                        <p style="text-align: center;">ວັນທີ</p>
+                    </div>
+                </div>
+                <div class="col-md-11">
+                    <div class="form-floating mb-3">
+                        <input type="date" class="form-control" id="date_post" name="date_post">                                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 mt-6">
+            <div class="row mb-3">
+                <div class="col-md-1">
+                    <div class="form-floating mb-3 mt-3">
+                        <p style="text-align: center;">ພະແນກ</p>
+                    </div>
+                </div>
+                <div class="col-md-11">
+                    <div class="form-floating mb-3">
+                        <select class="form-control" id="department" name="department">
+                            <option value="#">ເລືອກພະແນກ:</option>
+                            <option value="#">ພະແນກໄອທີ</option>
+                            <option value="#">ພະແນກບໍລິຫານ</option>
+                            <option value="#">ພະແນກກວດກາ</option>
+                            <option value="#">ພະແນກ</option>
+                        </select>                                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 mt-6">
+            <div class="row mb-9 ">
+                
+                    <button type="submit" class="btn btn-primary mb-3 w-50 p-45 border">Post</button>
+                    <button type="reset" class="btn btn-danger mb-3 w-50 p-45 border" >Reset</button>
+                       
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date_post').value = today;
+</script>       
+{% endblock %}

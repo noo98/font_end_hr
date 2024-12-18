@@ -1,19 +1,19 @@
-"""
-URL configuration for frontend_project project.
+# """
+# URL configuration for frontend_project project.
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+# The `urlpatterns` list routes URLs to views. For more information please see:
+#     https://docs.djangoproject.com/en/5.1/topics/http/urls/
+# Examples:
+# Function views
+#     1. Add an import:  from my_app import views
+#     2. Add a URL to urlpatterns:  path('', views.home, name='home')
+# Class-based views
+#     1. Add an import:  from other_app.views import Home
+#     2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+# Including another URLconf
+#     1. Import the include() function: from django.urls import include, path
+#     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+# """
 from django.contrib import admin
 
 from django.urls import path
@@ -25,5 +25,16 @@ urlpatterns = [
     path('api/frontend-items/', fetch_items),
     path('', views.index, name='index'),
     path('tables_emp', views.tables_emp, name='tables_emp'),
-    path('form_emp', views.tables_emp, name='form_emp'),
+    path('form_emp', views.form_emp, name='form_emp'),
+    path('form_post', views.form_post, name='form_post'),
+    path('post', views.post, name='post'),
+    path('test', views.test, name='test'),
 ]
+# from django.contrib import admin
+# from django.urls import path
+# from frontend.views import fetch_items
+
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('api/frontend-items/', fetch_items),  # Frontend API
+# ]

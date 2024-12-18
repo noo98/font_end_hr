@@ -1,4 +1,6 @@
-{% extends "base.html" %} {% load static %} 
+{% extends "base.html" %}
+{% load static %}
+
 <title>Lcic-HR</title>
 
 {% block content %}
@@ -8,16 +10,16 @@
 
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">ຂໍ້ມູນພະນັກງານ</h1>
-        
-        <!-- DataTales Example -->
+
+        <!-- Data Table -->
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                <a href="{% url 'form_emp' %}" class="btn btn-primary ">ເພີ່ມ</a>
+                <h6 class="m-0 font-weight-bold text-primary">Employee List</h6>
+                <a href="{% url 'form_emp' %}" class="btn btn-primary">ເພີ່ມ</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="200px" cellspacing="0">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead class="thead-dark">
                             <tr>
                                 <th>ລະຫັດ</th>
@@ -39,68 +41,11 @@
                                 <th>ວິຊາສະເພາະ</th>
                                 <th>ສະຖານະພາບ</th>
                                 <th>ຂັ້ນເງິນເດືອນ</th>
-                                <th>ປີການ</th>
-                                
+                                <th>ປີການ</th>                               
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edifgdfg</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                                <td>$320,800</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>Garrett Winters</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>63</td>
-                                <td>2011/07/25</td>
-                                <td>$170,750</td>
-                                <td>$170,750</td>
-                                <td>$170,750</td>
-                                <td>$170,750</td>
-                            </tr>
-                            <tr>
-                                <td>Ashton Cox</td>
-                                <td>Junior Technical Author</td>
-                                <td>San Francisco</td>
-                                <td>66</td>
-                                <td>2009/01/12</td>
-                                <td>$86,000</td>
-                                <td>$86,000</td>
-                                <td>$86,000</td>
-                                <td>$86,000</td>
-                            </tr>
-                            <tr>
-                                <td>Cedric Kelly</td>
-                                <td>Senior Javascript Developer</td>
-                                <td>Edinburgh</td>
-                                <td>22</td>
-                                <td>2012/03/29</td>
-                                <td>$433,060</td>
-                                <td>$433,060</td>
-                                <td>$433,060</td>
-                                <td>$433,060</td>
-                            </tr>
-                            
+                        <tbody id="employeeTableBody">
+                            <!-- Data will be inserted dynamically -->
                         </tbody>
                     </table>
                 </div>
@@ -109,8 +54,53 @@
 
     </div>
     <!-- /.container-fluid -->
-
 </div>
-<!-- End of Main Content -->       
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // API URL
+        const apiUrl = "http://192.168.45.71:8000/api/list/employees/";
+
+        // Fetch Data from API
+        fetch(apiUrl)
+            .then(response => response.json()) 
+            .then(data => {
+                const tableBody = document.getElementById("employeeTableBody");
+                tableBody.innerHTML = ""; 
+
+                
+                data.forEach(employee => {
+                    const row = `
+                        <tr>
+                            <td>${employee.emp_id}</td>
+                            <td>${employee.gender}</td>
+                            <td>${employee.name_E}</td>
+                            <td>${employee.name_L}</td>
+                            <td>${employee.nickname}</td>
+                            <td>${employee.position}</td>
+                            <td>${employee.date_of_birth}</td>
+                            <td>${employee.employment_date}</td>
+                            <td>${employee.percent_95}</td>
+                            <td>${employee.youth_reserve}</td>
+                            <td>${employee.youth_full}</td>
+                            <td>${employee.labor_union}</td>
+                            <td>${employee.phone}</td>
+                            <td>${employee.home_address}</td>
+                            <td>${employee.current_address}</td>
+                            <td>${employee.education_level}</td>
+                            <td>${employee.field_of_study}</td>
+                            <td>${employee.status}</td>
+                            <td>${employee.salary_grade}</td>
+                            <td>${employee.employment_years}</td>
+                        </tr>
+                    `;
+                    tableBody.insertAdjacentHTML("beforeend", row);
+                });
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
+    });
+</script>
 
 {% endblock %}
