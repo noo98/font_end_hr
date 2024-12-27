@@ -18,17 +18,23 @@ from django.contrib import admin
 
 from django.urls import path
 from frontend.views import fetch_items
+from frontend.views import tables_emp     
 from frontend import views
+
 
 urlpatterns = [ 
     path('admin/', admin.site.urls),
-    path('api/frontend-items/', fetch_items),
     path('', views.index, name='index'),
     path('tables_emp', views.tables_emp, name='tables_emp'),
     path('form_emp', views.form_emp, name='form_emp'),
     path('form_post', views.form_post, name='form_post'),
     path('post', views.post, name='post'),
     path('test', views.test, name='test'),
+    path('fetch-items/', fetch_items, name='fetch_items'),
+    path('department', views.department, name='department'),
+    path('education_level', views.education_level, name='education_level'),
+    path('salary_grade', views.salary_grade, name='salary_grade'),
+    path('documents', views.documents, name='documents'),
 ]
 # from django.contrib import admin
 # from django.urls import path

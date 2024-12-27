@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+<title>Lcic-HR</title>
+
+{% block content %}
+<div id="content">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">ຂໍ້ມູນພະນັກງານ</h1>
+
+        <!-- Data Table -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Employee List</h6>
+                <a href="{% url 'form_emp' %}" class="btn btn-primary">ເພີ່ມ</a>
+            </div>     
+                <div class="table-responsive">
+                    {% if documents %}
+                    <table class="table table-striped" width="100%">
+                        <thead class="thead-dark">
+                            <tr style="text-align: center;">
+                                <th style="min-width: auto">ລະຫັດ</th>
+                                <th style="min-width: 150px;">ວັນທີ່</th>          
+                                <th style="min-width: 150px;">ຫົວຂໍ້</th>
+                                <th style="min-width: 100px;">ຕຳແໜ່ງ</th>
+                                <th style="min-width: 150px;">ໄຟລ໌</th>
+                                <th style="min-width: 150px;">ຜູ້ຮັບ</th>   
+                                <th style="min-width: 100px;">ເອກະສານ</th>
+                                <th style="min-width: 80px;">Action</th>                               
+                            </tr>
+                        </thead>
+                        <tbody id="documentsTableBody">
+                            {% for doc in documents %}
+                            <tr style="text-align: center;">
+                                <td>{{ doc.number}}</td>
+                                <td>{{ doc.date}}</td>
+                                <td>{{ doc.subject}}</td>
+                                <td>{{ doc.section}}</td>
+                                <td>{{ doc.file}}</td>
+                                <td>{{ doc.receiver}}</td>
+                                <td>{{ doc.document}}</td>
+                                <td class="text-center" style="width: 80px">
+                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="ແກ້ໄຂຂໍ້ມູນ"><i class="fas fa-edit text-success"></i></a>
+                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="ລືບຂໍ້ມູນ"><i class="fas fa-trash-alt text-danger"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                        <p>No documents found.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

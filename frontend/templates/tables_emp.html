@@ -16,38 +16,69 @@
             <div class="card-header py-3 d-flex justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Employee List</h6>
                 <a href="{% url 'form_emp' %}" class="btn btn-primary">ເພີ່ມ</a>
-            </div>
-            <div class="card-body">
+            </div>     
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    {% if employees %}
+                    <table class="table table-striped" width="100%">
                         <thead class="thead-dark">
-                            <tr>
-                                <th>ລະຫັດ</th>
-                                <th>ເພດ</th>
-                                <th>ຊື່ພາສາອັງກິດ</th>
-                                <th>ຊື່ພາສາລາວ</th>
-                                <th>ຊື່ຫຼີ້ນ</th>
-                                <th>ຕຳແໜ່ງ</th>
-                                <th>ວັນ.ເດືອນ.ປີເກີດ</th>
-                                <th>ວັນ.ເດືອນ.ປີເຂົ້າວຽກ</th>
-                                <th>ວັນເຂົ້າພະນັກງານ 95%</th>
-                                <th>ວັນເຂົ້າພັກສຳຮອງ</th>
-                                <th>ວັນເຂົ້າພັກສົມບູນ</th>
-                                <th>ວັນເຂົ້າກຳມະບານ</th>
-                                <th>ເບີໂທ</th>
-                                <th>ບ້ານເກີດ.ເມືອງ.ແຂວງ</th>
-                                <th>ທີ່ຢູ່ປະຈຸບັນ ບ້ານ.ເມືອງ.ແຂວງ</th>
-                                <th>ລະດັບການສືກສາ</th>
-                                <th>ວິຊາສະເພາະ</th>
-                                <th>ສະຖານະພາບ</th>
-                                <th>ຂັ້ນເງິນເດືອນ</th>
-                                <th>ປີການ</th>                               
+                            <tr style="text-align: center;">
+                                <th style="min-width: auto">ລະຫັດ</th>
+                                <th style="min-width: 80px;">ເພດ</th>
+                                <th style="min-width: 150px;">ຊື່ພາສາອັງກິດ</th>               
+                                <th style="min-width: 150px;">ຊື່ພາສາລາວ</th>
+                                <!-- <th style="min-width: 150px;">ຊື່ຫຼີ້ນ</th> -->
+                                <th style="min-width: 150px;">ຕຳແໜ່ງ</th>
+                                <!-- <th style="min-width: 150px;">ວັນ.ເດືອນ.ປີເກີດ</th>
+                                <th style="min-width: 150px;">ວັນ.ເດືອນ.ປີເຂົ້າວຽກ</th>
+                                <th style="min-width: 150px;">ວັນເຂົ້າພະນັກງານ 95%</th>
+                                <th style="min-width: 150px;">ວັນເຂົ້າພັກສຳຮອງ</th>
+                                <th style="min-width: 150px;">ວັນເຂົ້າພັກສົມບູນ</th>
+                                <th style="min-width: 150px;">ວັນເຂົ້າກຳມະບານ</th> -->
+                                <th style="min-width: 150px;">ເບີໂທ</th>
+                                <!-- <th style="min-width: 150px;">ບ້ານເກີດ.ເມືອງ.ແຂວງ</th>
+                                <th style="min-width: 200px;">ທີ່ຢູ່ປະຈຸບັນ ບ້ານ.ເມືອງ.ແຂວງ</th>
+                                <th style="min-width: 150px;">ລະດັບການສືກສາ</th>
+                                <th style="min-width: 150px;">ວິຊາສະເພາະ</th>
+                                <th style="min-width: 100px;">ສະຖານະພາບ</th> -->
+                                <th style="min-width: 100px;">ຂັ້ນເງິນເດືອນ</th>
+                                <!-- <th style="min-width: 60px">ປີການ</th>                                -->
+                                <th style="min-width: 80px;">Action</th>                               
                             </tr>
                         </thead>
                         <tbody id="employeeTableBody">
-                            <!-- Data will be inserted dynamically -->
+                            {% for emp in employees %}
+                            <tr style="text-align: center;">
+                                <td>{{ emp.emp_id}}</td>
+                                <td>{{ emp.gender}}</td>
+                                <td>{{ emp.name_E}}</td>
+                                <td>{{ emp.name_L}}</td>
+                                <!-- <td>{{ emp.nickname}}</td> -->
+                                <td>{{ emp.position}}</td>
+                                <!-- <td>{{ emp.date_of_birth}}</td>
+                                <td>{{ emp.employment_date}}</td>
+                                <td>{{ emp.percent_95}}</td>
+                                <td>{{ emp.youth_reserve}}</td>
+                                <td>{{ emp.youth_full}}</td>
+                                <td>{{ emp.labor_union}}</td> -->
+                                <td>{{ emp.phone}}</td>
+                                <!-- <td>{{ emp.home_address}}</td>
+                                <td>{{ emp.current_address}}</td>
+                                <td>{{ emp.education_level}}</td>
+                                <td>{{ emp.field_of_study}}</td>
+                                <td>{{ emp.status}}</td> -->
+                                <td>{{ emp.salary_grade}}</td>
+                                <!-- <td>{{ emp.employment_years}}</td> -->
+                                <td class="text-center" style="width: 80px">
+                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="ແກ້ໄຂຂໍ້ມູນ"><i class="fas fa-edit text-success"></i></a>
+                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="ລືບຂໍ້ມູນ"><i class="fas fa-trash-alt text-danger"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
+                    {% else %}
+                        <p>No employees found.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -56,51 +87,5 @@
     <!-- /.container-fluid -->
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // API URL
-        const apiUrl = "http://192.168.45.71:8000/api/list/employees/";
-
-        // Fetch Data from API
-        fetch(apiUrl)
-            .then(response => response.json()) 
-            .then(data => {
-                const tableBody = document.getElementById("employeeTableBody");
-                tableBody.innerHTML = ""; 
-
-                
-                data.forEach(employee => {
-                    const row = `
-                        <tr>
-                            <td>${employee.emp_id}</td>
-                            <td>${employee.gender}</td>
-                            <td>${employee.name_E}</td>
-                            <td>${employee.name_L}</td>
-                            <td>${employee.nickname}</td>
-                            <td>${employee.position}</td>
-                            <td>${employee.date_of_birth}</td>
-                            <td>${employee.employment_date}</td>
-                            <td>${employee.percent_95}</td>
-                            <td>${employee.youth_reserve}</td>
-                            <td>${employee.youth_full}</td>
-                            <td>${employee.labor_union}</td>
-                            <td>${employee.phone}</td>
-                            <td>${employee.home_address}</td>
-                            <td>${employee.current_address}</td>
-                            <td>${employee.education_level}</td>
-                            <td>${employee.field_of_study}</td>
-                            <td>${employee.status}</td>
-                            <td>${employee.salary_grade}</td>
-                            <td>${employee.employment_years}</td>
-                        </tr>
-                    `;
-                    tableBody.insertAdjacentHTML("beforeend", row);
-                });
-            })
-            .catch(error => {
-                console.error("Error fetching data:", error);
-            });
-    });
-</script>
 
 {% endblock %}
