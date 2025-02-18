@@ -2,64 +2,63 @@
 <title>Lcic-HR</title>
 
 {% block content %}
-<div class="container-fluid">
-    <div class="row p-4 ml-2">
-        <div class="card border-primary mr-2 ml-2 mb-2" style="width: 21rem; height: 18rem;">
-            <div class="card-header mb-3">ຂໍ້ມູນລະດັບການສືກສາ
-                
-            </div>
-            <div class="container">
-                <form action="">                    
-                        <div class="col-md-12">
-                            <div class="form-floating mb-3">
-                                <input type="text"class="form-control"id="fname"name="firstname"placeholder="Your name"readonly>
-                                <label for="fname">ລະຫັດໃສ່ອັດຕະໂນມັດ....</label>
+<di class="container-fluid">
+    <div class="row mx-3">
+        <div class="col-md-4">
+            <fieldset class="border border-primary p-2 px-4 pb-4" style="border-radius: 15px; background-color: #E7E9EB">
+                <legend class="float-none w-auto p-2 h5">ຈັດການຂໍ້ມູນພະແນກ</legend>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="dno" class="form-label">ລະຫັດພະແນກ:</label>
+                        <input type="text" class="form-control" id="department.id" placeholder="ປ້ອນລະຫັດພະແນກ" name="department.id" value="" required maxlength="3">
+                        <div class="form-control-feedback">
+                            <div class="text-danger align-middle">
+                                {% if errors.department.id %}
+                                    {{ errors.department.id.0 }}
+                                {% endif %}                
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="employment_years" name="employment_years" placeholder="" value="">
-                                <label for="fname">ປ້ອນລະດັບການສືກສາ....</label>
-                            </div>
-                        </div>                    
-                    <div class="row p-3">
-                        <button type="submit" class="btn btn-primary mb-3 w-50">Submit</button>
-                        <button type="reset" class="btn btn-danger mb-3 w-50" >Reset</button>
                     </div>
+        
+                    <div class="mb-3">
+                        <label for="name" class="form-label">ຊື່ພະແນກ:</label>
+                        <input type="text" class="form-control" id="department_name" placeholder="ປ້ອນຊື່ພະແນກ" name="department_name" value="" required>
+                    </div>                
+                    <button type="submit" name="btnEdit" class="btn btn-info" style="width: 110px; border-radius: 20px"><i class="fas fa-edit"></i>&nbsp;&nbsp;ແກ້ໄຂ</button>  
+                    
+                    <button type="submit" name="btnAdd" class="btn btn-primary" style="width: 110px; border-radius: 20px"><i class="fas fa-plus-circle"></i>&nbsp;&nbsp;ເພີ້ມ</button> 
+                    
+                    <a href="department.php" class="btn btn-warning" style="width: 110px; border-radius: 20px"><i class="fas fa-sync"></i>&nbsp;&nbsp;ຍົກເລີກ</a>
+        
                 </form>
-            </div>              
+            </fieldset>
         </div>
-        <div class="card border-primary mr-2 ml-2 mb-2" style="width: 43rem; height: 18rem;">
-            <div class="card-header mb-3">ສະແດງຂໍ້ມູນລະດັບການສືກສາ</div>
-            
-            <div class="container">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead class="thead-dark">
-                            <tr style="text-align: center;">
-                                <th style="min-width: auto">ລະຫັດ</th>            
-                                <th style="min-width: 150px;">ລະດັບການສືກສາ</th>
-                                <th style="min-width: 80px;">Action</th>                               
-                            </tr>
-                        </thead>
-                        <tbody>                            
-                            <tr style="text-align: center;">
+        <div class="col-md-8 mt-4">
+            <fieldset class="border border-primary p-2 px-4 pb-4" style="border-radius: 15px;">
+                <table id="example" class="table table-striped" style="width:100%">
+                    <thead class="bg-secondary text-center text-white">
+                        <tr>
+                            <th>ລໍາດັບ</th>
+                            <th>ລະຫັດພະແນກ</th>
+                            <th>ຊື່ພະແນກ</th>                        
+                            <th>Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
                                 <td></td>
-                                <td></td>    
-                                <td class="text-center" style="width: 80px">
+                                <td class="text-center">
                                     <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="ແກ້ໄຂຂໍ້ມູນ"><i class="fas fa-edit text-success"></i></a>
                                     <a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="ລືບຂໍ້ມູນ"><i class="fas fa-trash-alt text-danger"></i></a>
                                 </td>
                             </tr>
-                            
-                        </tbody>
-                    </table>
-                </div> 
-            </div>
+                    </tbody>
+                </table>
+            </fieldset>
         </div>
-        
-    </div>
-      
     </div>
 </div>
 {% endblock %}

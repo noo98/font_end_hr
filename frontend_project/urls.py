@@ -1,46 +1,41 @@
-# """
-# URL configuration for frontend_project project.
-
-# The `urlpatterns` list routes URLs to views. For more information please see:
-#     https://docs.djangoproject.com/en/5.1/topics/http/urls/
-# Examples:
-# Function views
-#     1. Add an import:  from my_app import views
-#     2. Add a URL to urlpatterns:  path('', views.home, name='home')
-# Class-based views
-#     1. Add an import:  from other_app.views import Home
-#     2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-# Including another URLconf
-#     1. Import the include() function: from django.urls import include, path
-#     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-# """
+from django.shortcuts import redirect
 from django.contrib import admin
-
+from django.shortcuts import render
 from django.urls import path
-from frontend.views import fetch_items
-from frontend.views import tables_emp     
+from frontend.views import documentEntry
 from frontend import views
-
+from frontend.views import add_documentE, add_documentO
+# from frontend.views import form_login
+def redirect_to_login(request):
+    return redirect('/login/')
 
 urlpatterns = [ 
+    path('', redirect_to_login), 
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('tables_emp', views.tables_emp, name='tables_emp'),
-    path('form_emp', views.form_emp, name='form_emp'),
-    path('form_post', views.form_post, name='form_post'),
+    path('index/', views.index, name='index'),
+    path('index1/', views.index1, name='index1'),
+    path('tables_emp/', views.tables_emp, name='tables_emp'),
+    path('login/', views.form_login, name='form_login'),
+    path('profile/', views.profile, name='profile'), 
+    path('register/',views.register, name='register'),
+    path('form_emp/', views.form_emp, name='form_emp'),
+    path('form_post/', views.form_post, name='form_post'),
     path('post', views.post, name='post'),
-    path('test', views.test, name='test'),
-    path('fetch-items/', fetch_items, name='fetch_items'),
-    path('department', views.department, name='department'),
-    path('education_level', views.education_level, name='education_level'),
-    path('salary_grade', views.salary_grade, name='salary_grade'),
-    path('documents', views.documents, name='documents'),
-]
-# from django.contrib import admin
-# from django.urls import path
-# from frontend.views import fetch_items
+    path('doc_format/', views.doc_format, name='doc_format'),
+    
+    path('documentEntry/', documentEntry, name='document_entry'),
+    path('department/', views.department, name='department'),
+    path('education_level/', views.education_level, name='education_level'),
+    path('salary_grade/', views.salary_grade, name='salary_grade'),
+    path('documentEntry/', views.documentEntry, name='documentEntry'),
+    path('documentOut/', views.documentOut, name='documentOut'),
+    path('add_documentE/', add_documentE, name='add_documentE'),
+    path('add_documentO/', add_documentO, name='add_documentO'),
+    path('add_documentG/', views.add_documentG, name='add_documentG'),
+    path('documentGen/',views.documentGen, name='documentGen'),
+    
+    path('test', views.test_view, name='test'),
 
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-#     path('api/frontend-items/', fetch_items),  # Frontend API
-# ]
+    path('update_document/<int:doc_id>/', views.update_document, name='update_document'),
+
+]

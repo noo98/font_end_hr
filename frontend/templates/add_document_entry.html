@@ -1,0 +1,218 @@
+{% extends "base.html" %} {% load static %} 
+<title>Lcic-HR</title>
+
+{% block content %}
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header ">
+            <h2 class="mb-2 text-center fw-bold">ເພີ່ມເອກະສານຂາເຂົ້າ</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" id="documentForm" >                
+                {% csrf_token %}
+                
+                <div class="row mb-3">
+                    <div class="col-sm-12 col-md-6">
+                        <input type="text" class="form-control" id="doc_number" name="doc_number" placeholder="ເລກທີ່ເອກະສານ" required>                  
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <input type="date" class="form-control" id="insert_date" name="insert_date" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-12 col-md-6">
+                        <input type="text" class="form-control" id="subject" name="subject" placeholder="ຊື່ເອກະສານ" required>                 
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <select id="formatFilter" name="format" class="form-select d-inline-block" required>
+                            <option value="">ປະເພດເອກະສານ</option>
+                        </select>
+                    </div>
+                </div>                
+                <!-- File Upload and Receiver -->
+                <div class="row mb-3">
+                    <div class="col-sm-12 col-md-6">                        
+                        <input class="form-control mb-3" type="file" id="file" name="file" multiple>
+                        <input type="hidden" class="form-control mb-3" id="department" name="department" placeholder="ຈາກພະແນກ" required>
+                        <input type="hidden" class="form-control" id="doc_type_info" name="doc_type_info" value="ຂາເຂົ້າ">
+                        <textarea class="form-control " id="document_detail" name="document_detail" placeholder="ຄຳອະທິບາຍ" required></textarea>
+                    </div>
+                    <div class="col-sm-12 col-md-6 ">
+                        <div id="departmentContainer">
+                            
+                        </div>
+                        <input type="hidden" id="doc_type" name="doc_type" value="ຂາເຂົ້າ">
+                        
+                    </div>
+                </div>                           
+                <div class="row mb-3">
+                                      
+                    <div class="col-sm-12 col-md-6">
+                        <input type="hidden" class="form-control" id="name" name="name" placeholder="ຜູ້ບັນທືກ" required>
+                    </div>
+                </div>
+                <!-- Submit and Reset Buttons -->
+                <div class="row p-3 " style="justify-content: center;">
+                        <button type="submit" class="btn btn-primary mx-3" style="width: 150px; border-radius: 10px"><i class="fas fa-save me-1"></i>ບັນທຶກ</button>
+                        <button type="reset" class="btn btn-warning mx-3" style="width: 150px; border-radius: 10px"><i class="fas fa-sync me-1"></i></i>Reset</button>
+                </div>
+           </form>
+        </div>
+    </div>
+</div>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+<!-- sweetalert -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", async function () {
+        // ເອີ້ນໃຊ້ຟັງຊັນ
+
+    let username = localStorage.getItem("username");
+    // const userna= localStorage.getItem("department");
+    
+    let department = localStorage.getItem("department"); 
+    console.log("noo get data",localStorage.getItem("id"))
+
+    if (username) {
+        document.getElementById("name").value = username;
+    }
+    if (department) {
+        document.getElementById("department").value = department; //  ใช้ชื่อ 'department'
+    }
+
+    try {
+        //  ດຶງຂໍ້ມູນ User
+        let userResponse = await fetch("http://192.168.45.71:8000/api/users/me");
+        if (!userResponse.ok) throw new Error("Error fetching user data");
+        let userData = await userResponse.json();
+
+        localStorage.setItem("username", userData.username); //  ບັນທຶກ username
+        let departmentId = userData.Department; //  ດຶງ Department ID ຂອງ user
+
+        //  ດຶງຂໍ້ມູນພະແນກທັງໝົດ
+        let deptResponse = await fetch("http://192.168.45.71:8000/api/list/departments/");
+        console.log(deptResponse)
+        if (!deptResponse.ok) throw new Error("Error fetching departments");
+        let departments = await deptResponse.json(); //  ປ່ຽນ Departments → departments
+
+        //  ຄົ້ນຫາຊື່ພະແນກຂອງ user
+        let userDepartment = departments.find(dept => dept.id === departmentId);
+        if (userDepartment) {
+            localStorage.setItem("department", userDepartment.id); //  ບັນທຶກ 'department'
+           
+            document.getElementById("department").value = userDepartment.id; //  ໃສ່ຄ່າໃນ input
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+});
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const formatDropdown = document.getElementById('formatFilter');
+    const dataform = document.getElementById('insert_date');
+
+    const today = new Date();
+    const dd = today.toISOString().split('T')[0];
+
+    dataform.value = dd;
+
+    fetch('http://192.168.45.71:8000/api/list/departments/')
+    .then(response => response.json())
+    .then(data => {
+        const container = document.getElementById('departmentContainer'); 
+        container.innerHTML = ''; 
+
+        data.forEach(department => {
+           
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = `department${department.id}`;
+            // checkbox.name = 'department_into[]';
+            checkbox.name = 'department_into';
+
+
+            checkbox.value = department.id;
+            
+            const label = document.createElement('label');
+            label.htmlFor = `department${department.id}`;
+            label.textContent = department.name;
+           
+            container.appendChild(checkbox);
+            container.appendChild(label);
+            container.appendChild(document.createElement('br')); 
+        });
+    })
+    .catch(error => console.error('Error fetching departments:', error));
+
+    
+    fetch('http://192.168.45.71:8000/api/list/Document_format/')
+    .then(response => response.json())
+    .then(data => {
+        formatDropdown.innerHTML = '<option value="">ປະເພດເອກະສານ</option>';
+        data.forEach(format => {
+            const option = document.createElement('option');
+            option.value = format.dmf_id; 
+            option.textContent = format.name;
+            formatDropdown.appendChild(option);
+        });
+    })
+    .catch(error => console.error('Error fetching formats:', error));
+
+});
+document.getElementById("documentForm").addEventListener("submit", function(event) {
+    event.preventDefault();  // ປ້ອງກັນການ Submit ໂດຍກົງ
+    let formData = new FormData(this);
+      
+    for (let pair of formData.entries()) {
+        console.log(pair[0] + ": " + pair[1]); // ສະແດງຄ່າໃນ Console
+
+    }
+
+    // ສົ່ງໄປ Backend
+    fetch("http://192.168.45.71:8000/api/add/document_lcic/", {
+    method: "POST",
+    body: formData
+})
+.then(response => response.json())
+.then(data => {
+    console.log("Response Data:", data); 
+
+    if ("Success Response:", data) {  
+        Swal.fire({
+            title: "ສຳເລັດ!",
+            text: data.message || "ບັນທຶກສຳເລັດ",
+            icon: "success",
+            
+        }).then(() => {
+            window.location.href = "{% url 'documentEntry' %}";
+        });
+    } else {
+        console.error(data.status === 404);  
+        Swal.fire({
+            title: "ເກີດຂໍ້ຜິດພາດ!",
+            text: data.error || "ບໍ່ສາມາດບັນທຶກເອກະສານ",
+            icon: "error",
+            confirmButtonText: "ຕົກລົງ"
+        });
+    }
+})
+.catch(error => {
+    console.error("Fetch Error:", error);
+    Swal.fire({
+        title: "ເກີດຂໍ້ຜິດພາດ!",
+        text: "ຂໍ້ຜິດພາດ: " + error.message,
+        icon: "error",
+        confirmButtonText: "ຕົກລົງ"
+    });
+});
+
+
+});
+
+</script>
+
+{% endblock %}

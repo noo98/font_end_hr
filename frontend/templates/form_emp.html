@@ -16,11 +16,11 @@
             <div class="col-md-6">
                 <div class="form-floating mb-3">
                     <select class="form-control" id="gender" name="gender">
-                        <option value="#">ເລືອກເພດ</option>
+                        <option value="" disabled selected>ເລືອກເພດ</option>
                         <option value="Male">ຊາຍ</option>
                         <option value="FeMale">ຍີງ</option>
                     </select>
-                    <label for="fname">ເພດ:</label>
+                    
                 </div> 
             </div>                               
         </div>
@@ -47,8 +47,12 @@
             </div>
             <div class="col-md-6">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="position" name="position" placeholder="" value="">
-                    <label for="fname">ປ້ອນຕຳແໜ່ງ....</label>
+                    <select class="form-select" id="position" name="position" required>
+                        <option value="" disabled selected>ຕຳແໜ່ງ</option>
+                        <option value="Finance">Finance</option>
+                        <option value="HR">HR</option>
+                        <option value="Operations">Operations</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -101,32 +105,59 @@
                     <label for="fname">ປ້ອນເບີໂທ....</label>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5 d-flex gap-2 w-50">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="home_address" name="home_address" placeholder="" value="">
-                    <label for="fname">ປ້ອນບ້ານເກີດ.ເມືອງ.ແຂວງ....</label>
+                    <label for="fname">ບ້ານເກີດ...</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="home_address" name="home_address" placeholder="" value="">
+                    <label for="fname">ເມືອງ....</label>
+                </div><div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="home_address" name="home_address" placeholder="" value="">
+                    <label for="fname">ແຂວງ....</label>
                 </div>
             </div>
         </div>
         <div class="row mb-1">
-            <div class="col-md-6">
+            <div class="col-md-5 d-flex gap-2 w-50">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="current_address" name="current_address" placeholder="" value="">
-                    <label for="fname">ປ້ອນທີ່ຢູ່ປະຈຸບັນ ບ້ານ.ເມືອງ.ແຂວງ....</label>
+                    <label for="fname">ບ້ານຢູ່ປະຈຸບັນ...</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="home_address" name="home_address" placeholder="" value="">
+                    <label for="fname">ເມືອງ....</label>
+                </div><div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="home_address" name="home_address" placeholder="" value="">
+                    <label for="fname">ແຂວງ....</label>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="education_level" name="education_level" placeholder="" value="">
-                    <label for="fname">ປ້ອນລະດັບການສືກສາ....</label>
+                    <select class="form-select" id="education_level" name="education_level" required>
+                        <option value="" disabled selected>ລະດັບການສືກສາ</option>
+                        <option value="">ຊັ້ນກາງ</option>
+                        <option value="">ຊັ້ນສູງ</option>
+                        <option value="">ປະລີນຍາຕີ</option>
+                        <option value="">ປະລີນຍາໂທ</option>
+                        <option value="">ປະລີນຍາເອກ</option>
+                    </select>
                 </div>
             </div>
         </div>
         <div class="row mb-1">
             <div class="col-md-6">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="field_of_study" name="field_of_study" placeholder="" value="">
-                    <label for="fname">ປ້ອນວິຊາສະເພາະ....</label>
+                    <select class="form-select" id="field_of_study" name="field_of_study" required>
+                        <option value="" disabled selected>ວິຊາສະເພາະ</option>
+                        <option value="">ເຕັກໂນໂລຊີຂໍ້ມູນຂ່ານສານ</option>
+                        <option value="">ການເງິນ</option>
+                        <option value="">ການທະນາຄານ</option>
+                        <option value="">ກວດສອບ</option>
+                        <option value="">ບັນຊີ</option>
+                        <option value="">ພາສາອັງກິດ</option>
+                    </select>
                 </div>
             </div>
             <div class="col-md-6">
@@ -150,10 +181,49 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-floating mb-3 text-center">
+                    <img id="avatarPreview" 
+                        src="{% static 'images/avatar.png' %}" 
+                        alt="Avatar" 
+                      style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; padding: 5px; " />
+                    <input type="file" class="form-control" id="avatarInput" name="avatar" accept="image/*">
+                </div>
+            </div>                        
+        </div>
         <div class="row p-3">
             <button type="submit" class="btn btn-primary mb-3 w-50">Submit</button>
             <button type="reset" class="btn btn-danger mb-3 w-50" >Reset</button>
         </div>
     </form>
-</div>          
+</div>
+
+
+<script>
+    // ฟังก์ชันสำหรับอัปเดตรูปภาพ
+    document.addEventListener('DOMContentLoaded', function () {
+    // ฟังก์ชันสำหรับอัปเดตรูปภาพ
+    document.getElementById('avatarInput').addEventListener('change', function (event) {
+        const file = event.target.files[0]; // ไฟล์ที่ผู้ใช้เลือก
+        const preview = document.getElementById('avatarPreview'); // อ้างถึง <img>
+
+        if (file) {
+            const reader = new FileReader();
+
+            // อ่านไฟล์และอัปเดต src เมื่อโหลดเสร็จ
+            reader.onload = function (e) {
+                preview.src = e.target.result; // ใช้ข้อมูล base64 จากไฟล์
+            };
+
+            reader.readAsDataURL(file); // แปลงไฟล์เป็น base64
+        } else {
+            // หากไม่มีไฟล์ ให้แสดงรูปภาพเริ่มต้น
+            preview.src = '{% static "images/avatar.png" %}';
+        }
+    });
+});
+
+</script>
+          
 {% endblock %}

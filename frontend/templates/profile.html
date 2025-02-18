@@ -1,0 +1,40 @@
+{% extends "base.html" %} 
+
+
+    {% block content %}
+    <h2>User Profile</h2>
+    <p><strong>Username:</strong> <span id="username"></span></p>
+    <p><strong>Department:</strong> <span id="department"></span></p>
+    
+    
+    <button onclick="logout()">Logout</button>
+
+    
+<script>
+    // ດຶງຂໍ້ມູນຈາກ localStorage
+let user = JSON.parse(localStorage.getItem("user"));
+let department = localStorage.getItem("department"); // ✅ ດຶງຂໍ້ມູນພະແນກ
+
+if (!user) {
+    alert("You are not logged in!");
+    window.location.href = "/login/";
+} else {
+    document.getElementById("username").textContent = user.username;
+    
+    // ✅ ສະແດງພະແນກຖ້າມີຂໍ້ມູນ
+    if (department) {
+        document.getElementById("departments").textContent = department;
+    } else {
+        document.getElementById("departments").textContent = "N/A"; // ຖ້າບໍ່ມີຂໍ້ມູນ
+    }
+}
+
+// Logout function
+function logout() {
+    localStorage.removeItem("user");
+    localStorage.removeItem("department"); // ✅ ລົບຂໍ້ມູນພະແນກຂອງ user
+    window.location.href = "/login/";
+}
+
+</script>
+    {% endblock %}

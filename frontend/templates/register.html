@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+{% load static %}
+
+<title>Lcic-HR</title>
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mx-3">
+        <!-- Form Section -->
+        <div class="col-md-4">
+            <fieldset class="border border-primary p-2 px-4 pb-4" style="border-radius: 15px; background-color: #E7E9EB">
+                <legend class="float-none w-auto p-2 h5">ເພີ່ນຂໍ້ມູນຜູ້ໃຊ້</legend>
+                <form id="registerForm">
+                    {% csrf_token %}
+                    <input type="hidden" id="id" name="id">
+                    
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="username" name="username" 
+                               placeholder="ຊື່ຜູ້ໃຊ້..." required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="pwd" name="pwd" 
+                               placeholder="ລະຫັດຜ່ານ..." required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="empname" name="empname" 
+                               placeholder="ຊື່ພະນັກງານ..." list="employeeList" 
+                               oninput="setDepartment()" required>
+                        <datalist id="employeeList"></datalist>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="depname" name="depname" 
+                               placeholder="ຊື່ພະແນກ..." readonly required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <select class="form-select" id="status" name="status" required>
+                            <option value="">ເລືອກສະຖານະ</option>
+                            <option value="1">Admin</option>
+                            <option value="2">ບໍລິຫານ ແລະ ສັງລວມ </option>
+                            <option value="3">ເຕັກໂນໂລຊີຂໍ້ມູນຂ່າວສານ</option>
+                            <option value="4">ເກັບກຳ ແລະ ສະໜອງຂໍ້ມູນ</option>
+                            <option value="5">ກວດກາ ແລະ ແກ້ໄຂຂໍ້ມູນ</option>
+                        </select>
+                    </div>
+                    
+                    <div class="row mt-4" style="justify-content: center;">
+                        <button type="submit" name="btnEdit" class="btn btn-info" 
+                                style="width: 110px; border-radius: 20px; display: none;">
+                            <i class="fas fa-edit"></i>&nbsp;&nbsp;ແກ້ໄຂ
+                        </button>
+                        <button type="submit" name="btnAdd" class="btn btn-primary mx-2" 
+                                style="width: 110px; border-radius: 20px;">
+                            <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;ເພີ່ມ
+                        </button>
+                        <button type="reset" id="btnCancel" class="btn btn-warning mx-2" 
+                                style="width: 110px; border-radius: 20px;">
+                            <i class="fas fa-sync"></i>&nbsp;&nbsp;ຍົກເລີກ
+                        </button>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+
+        <!-- Table Section -->
+        <div class="col-md-8 mt-4">
+            <fieldset class="border border-primary p-2 px-4 pb-4" style="border-radius: 15px;">
+                <table id="example" class="table table-striped" style="width:100%">
+                    <thead class="bg-secondary text-white">
+                        <tr>
+                            <th class="text-center">ລໍາດັບ</th>
+                            <th>ຊື່ຜູ້ໃຊ້</th>
+                            <th>ຊື່ພະນັກງານ</th>
+                            <th>ຊື່ພະແນກ</th>
+                            <th>ສະຖານະ</th>
+                            <th class="text-center">Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for register in register %}
+                        <tr>
+                            <td class="text-center">{{ forloop.counter }}</td>
+                            <td>{{ register.username }}</td>
+                            <td>{{ register.employee_name }}</td>
+                            <td>{{ register.department_name }}</td>
+                            <td>{{ register.status }}</td>
+                            <td class="text-center">
+                                <a href="#" onclick="editRegister('{{ register.id }}')" 
+                                   data-bs-toggle="tooltip" title="ແກ້ໄຂຂໍ້ມູນ">
+                                    <i class="fas fa-edit text-success"></i>
+                                </a>
+                                <a href="#" onclick="deleteRegister('{{ register.id }}')" 
+                                   data-bs-toggle="tooltip" title="ລືບຂໍ້ມູນ">
+                                    <i class="fas fa-trash-alt text-danger"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center text-danger">ບໍ່ມີຂໍ້ມູນ</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+const API_BASE_URL = 'http://192.168.45.71:8000/api';
+
+let departments = {};
+
+        async function fetchData() {
+            // 1. ດຶງຂໍ້ມູນພະແນກ
+            const depResponse = await fetch(`${API_BASE_URL}/list/departments/`);
+            const depData = await depResponse.json();
+            depData.forEach(dep => {
+                departments[dep.id] = dep.name; // ສ້າງແມບຄວາມສຳພັນ ລະຫັດ -> ຊື່
+            });
+
+            // 2. ດຶງຂໍ້ມູນພະນັກງານ
+            const empResponse = await fetch(`${API_BASE_URL}/employee/`);
+            const employees = await empResponse.json();
+            console.log(" Employees:", employees);
+            let dataList = document.getElementById("employeeList");
+            employees.forEach(emp => {
+                let option = document.createElement("option");
+                option.value = emp.lao_name;
+                option.setAttribute("data-emp-id", emp.emp_id);
+                option.setAttribute("data-dep-id", emp.Department); // ບັນທຶກ ID ຂອງພະແນກ
+                dataList.appendChild(option);
+            });
+        }
+
+        function setDepartment() {
+            let input = document.getElementById("empname");
+            let options = document.getElementById("employeeList").options;
+            for (let option of options) {
+                if (option.value === input.value) {
+                    let depId = option.getAttribute("data-dep-id");
+                    document.getElementById("depname").value = departments[depId] || "ບໍ່ພົບຂໍ້ມູນ";
+                    break;
+                }
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", fetchData);
+
+        document.getElementById("registerForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    // 1. ສ້າງ FormData ຈາກຟ້ອມ
+    let formData = new FormData(this);
+
+    // 2. ດຶງຂໍ້ມູນທີ່ໃສ່ໃນຟອມ
+    let username = formData.get("username");
+    let password = formData.get("pwd");
+    let empname = formData.get("empname");
+    let department = formData.get("depname");
+    let status = formData.get("status");
+
+    // 3. ຊອກຫາ `emp_id` ຂອງ Employee
+    let employeeId = null;
+    let employeeOptions = document.getElementById("employeeList").options;
+    for (let option of employeeOptions) {
+        if (option.value === empname) {
+            employeeId = option.getAttribute("data-emp-id"); 
+            break;
+        }
+    }
+    console.log("🔹 Employee ID:", employeeId);
+    if (!employeeId) {
+        Swal.fire("ຜິດພາດ", "ບໍ່ພົບຂໍ້ມູນພະນັກງານ!", "error");
+        return;
+    }
+
+    // 4. ຊອກຫາ `department_id` ຂອງພະແນກ
+    let departmentId = Object.keys(departments).find(key => departments[key] === department);
+    if (!departmentId) {
+        Swal.fire("ຜິດພາດ", "ບໍ່ພົບພະແນກ!", "error");
+        return;
+    }
+
+    // 5. ສ້າງ JSON ຂໍ້ມູນທີ່ຈະສົ່ງໄປ API
+    let requestData = {
+        username: username,
+        password: password, 
+        status: parseInt(status), 
+        Department: parseInt(departmentId),
+        Employee: parseInt(employeeId)
+    };
+
+    console.log("🔹 Data to send:", requestData);
+
+    // 6. ສົ່ງຄ່າໄປ API
+    try {
+        let response = await fetch("http://192.168.45.71:8000/api/users/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": formData.get("csrfmiddlewaretoken")
+            },
+            body: JSON.stringify(requestData)
+        });
+
+        let result = await response.json();
+        console.log(" API Response:", result);
+
+        if (response.ok) {
+            Swal.fire({
+                title: "ສຳເລັດ!",
+                text: "ເພີ່ມຜູ້ໃຊ້ສຳເລັດ",
+                icon: "success"
+            }).then(() => {
+                location.reload();  
+            });
+
+            document.getElementById("registerForm").reset(); 
+        } else {
+                Swal.fire("ຜິດພາດ", result.message || "ບໍ່ສາມາດເພີ່ມຜູ້ໃຊ້ໄດ້", "error");
+        }
+    } catch (error) {
+        console.error(" API Error:", error);
+        Swal.fire("ຜິດພາດ", "ເກີດບັນຫາໃນລະບົບ", "error");
+    }
+});
+
+</script>
+{% endblock %}

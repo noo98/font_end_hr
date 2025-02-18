@@ -1,0 +1,169 @@
+{% extends "base.html" %} {% load static %} 
+<title>Lcic-HR</title>
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mx-3">
+        <div class="col-md-4">
+            <fieldset class="border border-primary p-2 px-4 pb-4" style="border-radius: 15px; background-color: #E7E9EB">
+                <legend class="float-none w-auto p-2 h5">ຈັດການປະເພດເອກະສານ</legend>
+                <form id="doc_formatForm">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="id" placeholder="ລະຫັດປະເພດ" name="id" readonly> 
+                    </div>
+        
+                    <div class="mb-3">
+                        
+                        <input type="text" class="form-control" id="name" placeholder="ປ້ອນຊື່ປະເພດ" name="name" value="" required>
+                    </div>
+                    <div class="row mt-4" style="justify-content: center;">                
+                        <button type="submit" name="btnEdit" class="btn btn-info" style="width: 110px; border-radius: 20px; display: none;">
+                            <i class="fas fa-edit"></i>&nbsp;&nbsp;ແກ້ໄຂ
+                        </button>
+                        <button type="submit" name="btnAdd" class="btn btn-primary mx-2" style="width: 110px; border-radius: 20px;">
+                            <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;ເພີ່ມ
+                        </button>
+                        <button type="reset" id="btnCancel" class="btn btn-warning mx-2" style="width: 110px; border-radius: 20px;">
+                            <i class="fas fa-sync"></i>&nbsp;&nbsp;ຍົກເລີກ
+                        </button>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+        <div class="col-md-8 mt-4">
+            <fieldset class="border border-primary p-2 px-4 pb-4" style="border-radius: 15px;">
+                <table id="example" class="table table-striped" style="width:100%">
+                    <thead class="bg-secondary text-white">
+                        <tr>
+                            <th class="text-center">ລໍາດັບ</th>
+                            <!-- <th>ລະຫັດປະເພດ</th> -->
+                            <th >ຊື່ປະເພດ</th>                        
+                            <th class="text-center">Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for doc_format in doc_format %}
+                            <tr>
+                                <td class="text-center">{{ forloop.counter }}</td>
+                                <!-- <td>{{ doc_format.dmf_id}}</td> -->
+                                <td>{{ doc_format.name}}</td>
+                                <td class="text-center">
+                                    <a href="#" onclick="editDoc_format('{{ doc_format.dmf_id }}')" data-bs-toggle="tooltip" data-bs-placement="top" title="ແກ້ໄຂຂໍ້ມູນ"><i class="fas fa-edit text-success"></i></a>
+                                    <a href="#" onclick="deleteDoc_format('{{ doc_format.dmf_id }}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="ລືບຂໍ້ມູນ"><i class="fas fa-trash-alt text-danger"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}                            
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    const API_BASE_URL = 'http://192.168.45.71:8000/api';
+    const doc_formatForm = document.getElementById('doc_formatForm');
+    const btnAdd = document.querySelector('button[name="btnAdd"]');
+    const btnEdit = document.querySelector('button[name="btnEdit"]');
+    
+    // Form Submission Handler
+    doc_formatForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+    
+        const doc_formatId = document.getElementById('id').value;
+        const doc_formatName = document.getElementById('name').value;
+        const isEdit = Boolean(doc_formatId);
+    
+        const apiUrl = isEdit
+            ? `${API_BASE_URL}/update/Document_format/${doc_formatId}/`
+            : `${API_BASE_URL}/add/Document_format/`;
+        const method = isEdit ? 'PUT' : 'POST';
+    
+        try {
+            const response = await fetch(apiUrl, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                body: JSON.stringify({ id: doc_formatId, name: doc_formatName }),
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Error: ${response.statusText}`);
+            }
+    
+            const successMessage = isEdit
+                ? 'ແກ້ໄຂຂໍ້ມູນສຳເລັດ'
+                : 'ເພີ່ມຂໍ້ມູນສຳເລັດ';
+            Swal.fire('ສຳເລັດ!', successMessage, 'success').then(() => {
+                window.location.reload();
+            });
+        } catch (error) {
+            Swal.fire('ມີຂໍ້ຜິດພາດ!', error.message, 'error');
+        }
+    });
+    
+    // Edit Document Format
+    async function editDoc_format(dofId) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/list/Document_format/${dofId}`);
+            if (!response.ok) {
+                throw new Error(`Error fetching data: ${response.statusText}`);
+            }
+    
+            const doc_format = await response.json();
+            document.getElementById('id').value = doc_format.dmf_id; 
+            document.getElementById('name').value = doc_format.name;
+    
+            btnAdd.style.display = 'none';
+            btnEdit.style.display = 'inline-block';
+        } catch (error) {
+            Swal.fire('Error', error.message, 'error');
+        }
+    }
+    
+    // Delete Document Format
+    function deleteDoc_format(dofId) {
+        const apiUrl = `${API_BASE_URL}/delete/Document_format/${dofId}/`;
+    
+        Swal.fire({
+            title: 'ທ່ານແນ່ໃຈບໍ?',
+            text: 'ຂໍ້ມູນຈະຖືກລືບອອກ!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'ຢືນຢັນ',
+            cancelButtonText: 'ຍົກເລີກ',
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await fetch(apiUrl, { method: 'DELETE' });
+                    if (!response.ok) {
+                        throw new Error(`Error deleting data: ${response.statusText}`);
+                    }
+    
+                    Swal.fire('ລຶບສຳເລັດ!', '', 'success').then(() => {
+                        window.location.reload();
+                    });
+                } catch (error) {
+                    Swal.fire('Error!', error.message, 'error');
+                }
+            }
+        });
+    }
+    
+    // Reset Form
+    document.getElementById('btnCancel').addEventListener('click', () => {
+        btnAdd.style.display = 'inline-block';
+        btnEdit.style.display = 'none';
+        doc_formatForm.reset();
+    });
+</script>
+    
+
+    
+{% endblock %}

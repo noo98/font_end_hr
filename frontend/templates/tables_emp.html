@@ -19,63 +19,38 @@
             </div>     
                 <div class="table-responsive">
                     {% if employees %}
-                    <table class="table table-striped" width="100%">
-                        <thead class="thead-dark">
-                            <tr style="text-align: center;">
-                                <th style="min-width: auto">ລະຫັດ</th>
-                                <th style="min-width: 80px;">ເພດ</th>
-                                <th style="min-width: 150px;">ຊື່ພາສາອັງກິດ</th>               
-                                <th style="min-width: 150px;">ຊື່ພາສາລາວ</th>
-                                <!-- <th style="min-width: 150px;">ຊື່ຫຼີ້ນ</th> -->
-                                <th style="min-width: 150px;">ຕຳແໜ່ງ</th>
-                                <!-- <th style="min-width: 150px;">ວັນ.ເດືອນ.ປີເກີດ</th>
-                                <th style="min-width: 150px;">ວັນ.ເດືອນ.ປີເຂົ້າວຽກ</th>
-                                <th style="min-width: 150px;">ວັນເຂົ້າພະນັກງານ 95%</th>
-                                <th style="min-width: 150px;">ວັນເຂົ້າພັກສຳຮອງ</th>
-                                <th style="min-width: 150px;">ວັນເຂົ້າພັກສົມບູນ</th>
-                                <th style="min-width: 150px;">ວັນເຂົ້າກຳມະບານ</th> -->
-                                <th style="min-width: 150px;">ເບີໂທ</th>
-                                <!-- <th style="min-width: 150px;">ບ້ານເກີດ.ເມືອງ.ແຂວງ</th>
-                                <th style="min-width: 200px;">ທີ່ຢູ່ປະຈຸບັນ ບ້ານ.ເມືອງ.ແຂວງ</th>
-                                <th style="min-width: 150px;">ລະດັບການສືກສາ</th>
-                                <th style="min-width: 150px;">ວິຊາສະເພາະ</th>
-                                <th style="min-width: 100px;">ສະຖານະພາບ</th> -->
-                                <th style="min-width: 100px;">ຂັ້ນເງິນເດືອນ</th>
-                                <!-- <th style="min-width: 60px">ປີການ</th>                                -->
-                                <th style="min-width: 80px;">Action</th>                               
-                            </tr>
-                        </thead>
-                        <tbody id="employeeTableBody">
-                            {% for emp in employees %}
-                            <tr style="text-align: center;">
-                                <td>{{ emp.emp_id}}</td>
-                                <td>{{ emp.gender}}</td>
-                                <td>{{ emp.name_E}}</td>
-                                <td>{{ emp.name_L}}</td>
-                                <!-- <td>{{ emp.nickname}}</td> -->
-                                <td>{{ emp.position}}</td>
-                                <!-- <td>{{ emp.date_of_birth}}</td>
-                                <td>{{ emp.employment_date}}</td>
-                                <td>{{ emp.percent_95}}</td>
-                                <td>{{ emp.youth_reserve}}</td>
-                                <td>{{ emp.youth_full}}</td>
-                                <td>{{ emp.labor_union}}</td> -->
-                                <td>{{ emp.phone}}</td>
-                                <!-- <td>{{ emp.home_address}}</td>
-                                <td>{{ emp.current_address}}</td>
-                                <td>{{ emp.education_level}}</td>
-                                <td>{{ emp.field_of_study}}</td>
-                                <td>{{ emp.status}}</td> -->
-                                <td>{{ emp.salary_grade}}</td>
-                                <!-- <td>{{ emp.employment_years}}</td> -->
-                                <td class="text-center" style="width: 80px">
-                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="ແກ້ໄຂຂໍ້ມູນ"><i class="fas fa-edit text-success"></i></a>
-                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="ລືບຂໍ້ມູນ"><i class="fas fa-trash-alt text-danger"></i></a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                        <table class="table table-striped" width="100%">
+                            <thead class="thead-dark">
+                                <tr style="text-align: center;">
+                                    <th style="min-width: auto">ລະຫັດ</th>                               
+                                    <th style="min-width: 150px;">ຊື່ພາສາລາວ</th>               
+                                    <th style="min-width: 150px;">ຊື່ພາສາອັງກິດ</th>
+                                    <th style="min-width: 150px;">ຊື່ຫຼີ້ນ</th>
+                                    <th style="min-width: 80px;">ເພດ</th>
+                                    <th style="min-width: 150px;">ພະແນກ</th>
+                                                               
+                                    <th style="min-width: 80px;">Action</th>                               
+                                </tr>
+                            </thead>
+                            <tbody id="employeeTableBody">
+                                {% for emp in employees %}
+                                <tr style="text-align: center;">
+                                    <td>{{ emp.emp_id}}</td>
+                                    <td>{{ emp.lao_name}}</td>
+                                    <td>{{ emp.eng_name}}</td>
+                                    <td>{{ emp.nickname}}</td>
+                                    <td>{{ emp.Gender}}</td>
+                                    <td>{{ emp.department}}</td>
+                                    
+                                    <td class="text-center" style="width: 80px">
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="ແກ້ໄຂຂໍ້ມູນ"><i class="fas fa-edit text-success"></i></a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="ແກ້ໄຂຂໍ້ມູນ"><i class="fas fa-edit text-success"></i></a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="ລືບຂໍ້ມູນ"><i class="fas fa-trash-alt text-danger"></i></a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     {% else %}
                         <p>No employees found.</p>
                     {% endif %}

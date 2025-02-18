@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-39&2x*6r3v1aso_!^-barb#x0+lylg1!j#4kbs(d@dj#vxkve=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.45.49']
+ALLOWED_HOSTS = ['192.168.45.49',
+                 '192.168.45.71',
+                 'localhost',]
 
 
 # Application definition
@@ -40,8 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'frontend',
     'rest_framework',
+     'tailwind',
+    #  'theme',
 ]
-
+TAILWIND_APP_NAME = 'theme'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -52,10 +56,44 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware'
 ]
+MIDDLEWARE += [
+    'django.middleware.security.SecurityMiddleware',
+]
+from django.utils.deprecation import MiddlewareMixin
+
+class AddCOOPHeaderMiddleware(MiddlewareMixin):
+    def process_response(self, request, response):
+        response['Cross-Origin-Opener-Policy'] = 'same-origin'
+        return response
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',  # ไฟล์ log
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',  # ระดับการบันทึก log
+            'propagate': True,
+        },
+    },
+}
 
 ROOT_URLCONF = 'frontend_project.urls'
 
+import sys
 import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.join(BASE_DIR, '../backend'))
 
 TEMPLATES = [
     {
@@ -81,11 +119,14 @@ WSGI_APPLICATION = 'frontend_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',  
+        'NAME': 'hr_server',                      
+        'USER': 'postgres',                       
+        'PASSWORD': 'Lcic@123',                  
+        'HOST': '192.168.45.71',                      
+        'PORT': '5432',                           
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -127,3 +168,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+import environ
+env = environ.Env()
+environ.Env.read_env()
+DATABASE_URL = env('DATABASE_URL') 
