@@ -34,8 +34,8 @@ urlpatterns = [
     path('add_documentG/', views.add_documentG, name='add_documentG'),
     path('documentGen/',views.documentGen, name='documentGen'),
     
-    path('test', views.test_view, name='test'),
-
+    path('test/', views.test_view, name='test'),
+    path('testttt/', views.testttt, name='testttt'),
     path('update_document/<int:doc_id>/', views.update_document, name='update_document'),
 
 ]

@@ -21,37 +21,32 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-12 col-md-6">
-                        <input type="text" class="form-control" id="subject" name="subject" placeholder="ຊື່ເອກະສານ" required>                 
+                        <textarea class="form-control mb-3" id="subject" name="subject" placeholder="ຊື່ເອກະສານ" required></textarea>
+                        <input class="form-control mb-3" type="file" id="file" name="file" multiple>                 
                     </div>
+
                     <div class="col-sm-12 col-md-6">
-                        <select id="formatFilter" name="format" class="form-select d-inline-block" required>
+                        <select id="formatFilter" name="format" class="form-select d-inline-block mb-3" required>
                             <option value="">ປະເພດເອກະສານ</option>
                         </select>
+                        <div id="departmentContainer"></div>
                     </div>
                 </div>                
-                <!-- File Upload and Receiver -->
+
                 <div class="row mb-3">
                     <div class="col-sm-12 col-md-6">                        
-                        <input class="form-control mb-3" type="file" id="file" name="file" multiple>
                         <input type="hidden" class="form-control mb-3" id="department" name="department" placeholder="ຈາກພະແນກ" required>
                         <input type="hidden" class="form-control" id="doc_type_info" name="doc_type_info" value="ຂາເຂົ້າ">
-                        <textarea class="form-control " id="document_detail" name="document_detail" placeholder="ຄຳອະທິບາຍ" required></textarea>
+                        
                     </div>
                     <div class="col-sm-12 col-md-6 ">
-                        <div id="departmentContainer">
-                            
-                        </div>
+                        <input type="hidden" class="form-control" id="name" name="name" placeholder="ຜູ້ບັນທືກ" required>
                         <input type="hidden" id="doc_type" name="doc_type" value="ຂາອອກ">
                         
                     </div>
                 </div>                           
-                <div class="row mb-3">
-                                      
-                    <div class="col-sm-12 col-md-6">
-                        <input type="hidden" class="form-control" id="name" name="name" placeholder="ຜູ້ບັນທືກ" required>
-                    </div>
-                </div>
-                <!-- Submit and Reset Buttons -->
+                
+
                 <div class="row p-3 " style="justify-content: center;">
                         <button type="submit" class="btn btn-primary mx-3" style="width: 150px; border-radius: 10px"><i class="fas fa-save me-1"></i>ບັນທຶກ</button>
                         <button type="reset" class="btn btn-warning mx-3" style="width: 150px; border-radius: 10px"><i class="fas fa-sync me-1"></i></i>Reset</button>
@@ -75,7 +70,7 @@
     // const userna= localStorage.getItem("department");
     
     let department = localStorage.getItem("department"); 
-    console.log("noo get data",localStorage.getItem("id"))
+   
 
     if (username) {
         document.getElementById("name").value = username;
@@ -85,11 +80,6 @@
     }
 
     try {
-        //  ດຶງຂໍ້ມູນ User
-        let userResponse = await fetch("http://192.168.45.71:8000/api/users/me");
-        if (!userResponse.ok) throw new Error("Error fetching user data");
-        let userData = await userResponse.json();
-
         localStorage.setItem("username", userData.username); //  ບັນທຶກ username
         let departmentId = userData.Department; //  ດຶງ Department ID ຂອງ user
 
@@ -107,7 +97,7 @@
             document.getElementById("department").value = userDepartment.id; //  ໃສ່ຄ່າໃນ input
         }
     } catch (error) {
-        console.error("Error:", error);
+        
     }
 });
 

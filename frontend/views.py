@@ -147,10 +147,10 @@ def form_login(request):
 DATABASE_URL = os.getenv('DATABASE_URL')
 def documentEntry(request):
     department_into = request.GET.get('department_into', '')
-    print(f"department_intoວ: {department_into}")
+    # print(f"department_into: {department_into}")
     
     document_api_url = f'http://192.168.45.71:8000/api/search/document_lcic/?doc_type_info=ຂາເຂົ້າ&department_into={department_into}'
-    print(f"document_api_url: {document_api_url}")
+    # print(f"document_api_url: {document_api_url}")
     department_api_url = "http://192.168.45.71:8000/api/list/departments/"
     format_api_url = "http://192.168.45.71:8000/api/list/Document_format/"
     
@@ -356,7 +356,7 @@ def add_documentO(request):
     return render(request, 'add_document_out.html',)
 
 def add_documentG(request):
-    return render(request, 'add_documentG.html',)
+    return render(request, 'add_documentGeneral.html',)
 
 def update_document(request, doc_id):
     document_url = f"http://192.168.45.71:8000/api/list/document_lcic/{doc_id}/"
@@ -407,8 +407,17 @@ def update_document(request, doc_id):
 
             
 
-def test_view(request,):
-    return render(request, 'test.html',)
+def test_view(request):
+    format_api_url = "http://192.168.45.71:8000/api/list/Document_format/"
+    response = requests.get(format_api_url)
+
+    formats = response.json() if response.status_code == 200 else []
+
+    context = {
+        'formats': formats,
+        'format_filter': request.GET.get('format', '')
+    }
+    return render(request, "test.html", context)
 
 def form_emp(request):
     return render(request, 'form_emp.html',)
@@ -418,3 +427,6 @@ def form_post(request):
 
 def post(request):
     return render(request, 'post.html',)
+
+def testttt(request):
+    return render(request, 'testttt.html',)

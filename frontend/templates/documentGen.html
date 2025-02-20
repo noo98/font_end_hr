@@ -4,35 +4,50 @@
 <title>Lcic-HR</title>
 {% block content %}
 <div id="content ">
-    <h3 class="mb-2 text-center fw-bold">ເອກະສານຂາອອກ</h3>
+    <h3 class="mb-2 text-center fw-bold">ເອກະສານທົ່ວໄປ</h3>
     <div class="card shadow mb-4 m-2">
         <div class="card-body">
             <div class="row p-6">
-                <form method="get" action="" class="mb-4">
+                <form method="get" action="" class="mb-4"> 
                     <div class="card-header d-flex justify-content-between">
-                        <div class="d-flex gap-2 ">
-                            <select name="format" class="form-control filter-select">
-                                <option value="">ປະເພດເອກະສານ</option>
-                                {% for format in formats %}
-                                <option value="{{ format.dmf_id }}" {% if format.dmf_id|stringformat:"s" == format_filter %}selected{% endif %}>
-                                    {{ format.name }}
-                                </option>
-                                {% endfor %}
-                            </select>
+                        <div class="row g-2 align-items-center"> 
+                            <div class="col-md-3 col-6">
+                                <select name="format" class="form-control filter-select">
+                                    <option value="">ປະເພດເອກະສານ</option>
+                                    {% for format in formats %}
+                                    <option value="{{ format.dmf_id }}" {% if format.dmf_id|stringformat:"s" == format_filter %}selected{% endif %}>
+                                        {{ format.name }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                
+                            <!-- ช่องเลือกวันที่ -->
+                            <div class="col-md-3 col-6">
+                                <input type="date" name="start_date" class="form-control date-input" value="{{ start_date_filter }}">
+                            </div>
+                
                             
-                        
-                            <input type="date" name="start_date" class="form-control date-input" value="{{ start_date_filter }}">
-                            <span class="mr-2">To</span>
-                            <input type="date" name="end_date" class="form-control date-input" value="{{ end_date_filter }}">
-                            <button type="submit" class="btn btn-info"><i class="fa fa-search"></i></button>
-                            <button type="reset" class="btn btn-danger" id="resetFilter"><i class="fas fa-sync"></i></button>
+                
+                            <div class="col-md-3 col-6">
+                                <input type="date" name="end_date" class="form-control date-input" value="{{ end_date_filter }}">
+                            </div>
+                
+                            <!-- ปุ่มกด -->
+                            <div class="col-md-2 col-6 d-flex gap-2 justify-end">
+                                <button type="submit" class="btn btn-info"><i class="fa fa-search"></i></button>
+                                <button onclick="window.location.reload();" class="btn btn-danger" id="resetFilter">
+                                    <i class="fas fa-sync"></i>
+                                </button>
+                                
+                            </div>
                         </div>
                         <div>
-                            <a href="#" class="btn btn-primary">ເພີ່ມ</a>
+                            <a href="/add_documentG/" class="btn btn-primary">ເພີ່ມ</a>
                         </div>
                     </div>
                 </form>
-                
+                               
             </div>
             {% if error %}
                 <div class="alert alert-danger" role="alert">
@@ -44,15 +59,15 @@
                 <table id="dataTable"class="table table-bordered"  width="100%" cellspacing="0">
                     <thead class="thead-light">
                         <tr>
-                            <th>ລ/ດ</th>
+                            <th style="text-align: center; width: 50px;">ລ/ດ</th>
                             <th>ເລກທີ່</th>
                             <th>ປະເພດ</th>
                             <th>ເນື້ອໃນ</th>
                             <th>ວັນທີ່</th>
                             <!-- <th>ຈາກພະແນກ</th> -->
-                            <th>ຫາພະແນກ</th>
+                            <!-- <th>ຫາພະແນກ</th> -->
                             <th>ຜູ້ສົ່ງ</th>
-                            <th>ໄຟລ໌</th>
+                            <th >ໄຟລ໌</th>
                             <!-- <th>ສະຖານະ</th> -->
                             <th>Action</th>
                         </tr>
@@ -74,70 +89,65 @@
 
 
 <script> 
-async function fetchData() { 
-    let department = localStorage.getItem("department_name");
-    console.log("data local", department);
-    
-    const documentApiUrl = `http://192.168.45.71:8000/api/document_general/?department=${department}`;
-    const departmentApiUrl = "http://192.168.45.71:8000/api/list/departments/";
-    const formatApiUrl = "http://192.168.45.71:8000/api/list/Document_format/";
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const formatFilter = urlParams.get('format') || '';
-    const departmentFilter = urlParams.get('department') || '';
-    const startDateFilter = urlParams.get('start_date') || '';
-    const endDateFilter = urlParams.get('end_date') || '';
-
-    try {
-        const [documentsRes, departmentsRes, formatsRes] = await Promise.all([
-            fetch(documentApiUrl),
-            fetch(departmentApiUrl),
-            fetch(formatApiUrl)
-        ]);
-
-        const documents = documentsRes.ok ? await documentsRes.json() : [];
-        const departments = departmentsRes.ok ? await departmentsRes.json() : [];
-        const formats = formatsRes.ok ? await formatsRes.json() : [];
+document.addEventListener("DOMContentLoaded", async function() {
+    async function fetchData() { 
+        let department = localStorage.getItem("department_name");
+        // console.log("data local", department);
         
-        console.log("formats", formats);
+        const documentApiUrl = `http://192.168.45.71:8000/api/search/document_general/?department=${department}`;
+        const departmentApiUrl = "http://192.168.45.71:8000/api/list/departments/";
+        const formatApiUrl = "http://192.168.45.71:8000/api/list/Document_format/";
+    
+        const urlParams = new URLSearchParams(window.location.search);
+        const formatFilter = urlParams.get('format') || '';
+        const startDateFilter = urlParams.get('start_date') || '';
+        const endDateFilter = urlParams.get('end_date') || '';
+        console.log("Format:", urlParams.get('format'));
+        console.log("Start Date:", urlParams.get('start_date'));
+        console.log("End Date:", urlParams.get('end_date'));
+        try {
+            const [documentsRes, departmentsRes, formatsRes] = await Promise.all([
+                fetch(documentApiUrl),
+                fetch(departmentApiUrl),
+                fetch(formatApiUrl)
+            ]);
+    
+            const documents = documentsRes.ok ? await documentsRes.json() : [];
+            const departments = departmentsRes.ok ? await departmentsRes.json() : [];
+            const formats = formatsRes.ok ? await formatsRes.json() : [];
+            console.log("format", formats);
+            const departmentMap = Object.fromEntries(departments.map(d => [d.id, d.name]));
+            const formatMap = Object.fromEntries(formats.map(f => [f.dmf_id, f.name]));
+            console.log("Format Map:", formatMap);
 
-        // 🔹 Map department & format IDs to their names
-        const departmentMap = Object.fromEntries(departments.map(d => [d.id, d.name]));
-        const formatMap = Object.fromEntries(formats.map(f => [f.dmf_id, f.name]));
-
-        const processedDocuments = documents.map((doc, index) => ({
-            index: index + 1,
-            docg_id: doc.docg_id || 'N/A',
-            doc_number: doc.doc_number || 'N/A',
-            format_id: doc.format || null,
-            format_name: formatMap[doc.format] || 'N/A',
-            subject: doc.subject || 'N/A',
-            insert_date: doc.insert_date || 'N/A',
-            department_id: doc.department || null,
-            department: departmentMap[doc.department] || 'N/A',               
-            name: doc.name || 'N/A',               
-            file: doc.file ? `http://192.168.45.71:8000/${doc.file}` : '#'
-        }));
-
-        // 🔹 Filter Documents
-        const filteredDocuments = processedDocuments.filter(doc => {
-            const docDate = new Date(doc.insert_date);
-            return (!formatFilter || doc.format_id == formatFilter) &&
-                   (!departmentFilter || doc.department_id == departmentFilter) &&
-                   (!startDateFilter || docDate >= new Date(startDateFilter)) &&
-                   (!endDateFilter || docDate <= new Date(endDateFilter));
-        });
-
-        console.log("Filtered Documents:", filteredDocuments);
-        return filteredDocuments;
-
-    } catch (error) {
-        console.error("Error fetching API data:", error);
-        return [];
+            const processedDocuments = documents.map((doc, index) => ({
+                index: index + 1,
+                docg_id: doc.docg_id || 'N/A',
+                doc_number: doc.doc_number || 'N/A',
+                format_id: doc.format || null,
+                format_name: formatMap[doc.format] || 'N/A',
+                subject: doc.subject || 'N/A',
+                insert_date: doc.insert_date || 'N/A',
+                name: doc.name || 'N/A',
+                file: doc.file ? `http://192.168.45.71:8000/${doc.file}` : '#'
+            }));
+    
+            const filteredDocuments = processedDocuments.filter(doc => {
+                const docDate = new Date(doc.insert_date);
+                return (!formatFilter || doc.format_id.toString() === formatFilter) &&
+                       (!startDateFilter || docDate >= new Date(startDateFilter)) &&
+                       (!endDateFilter || docDate <= new Date(endDateFilter));
+            });
+            // console.log("filteredDocuments", filteredDocuments);
+    
+            return filteredDocuments;
+    
+        } catch (error) {
+            console.error("Error fetching API data:", error);
+            return [];
+        }
     }
-}
-
-
+    
 function renderTable(documents) {
     const userRole = localStorage.getItem("user_role");
     if ($.fn.DataTable.isDataTable("#dataTable")) {
@@ -162,13 +172,11 @@ function renderTable(documents) {
             <td>${doc.format_name || ''}</td>
             <td>${doc.subject || ''}</td>
             <td>${doc.insert_date || ''}</td>
-            <td>${doc.department || ''}</td>           
+                       
             <td>${doc.name || ''}</td>
             <td>
-                <a href="${doc.file}" target="_blank" class="btn btn-sm btn-link btn-view-doc" data-id="${doc.doc_id}">
-                    <span id="status-${doc.doc_id}" class="badge ${doc.status === 'viewed' ? 'bg-success' : 'bg-danger'}">
-                        ${doc.status === 'viewed' ? 'ເບີ່ງແລ້ວ' : 'ຍັງບໍ່ໄດ້ເບິ່ງ'}
-                    </span>
+                <a href="${doc.file}" target="_blank" class="btn btn-sm btn-link btn-view-doc">
+                    <i class="fas fa-eye text-primary"></i>
                 </a>
             </td>               
             <td class="text-center">
@@ -183,66 +191,24 @@ function renderTable(documents) {
         `;
         fragment.appendChild(tr);
     });
+    
+        tableBody.appendChild(fragment);
+        $(document).ready(function() {
+  $('#dataTable').DataTable();
 
-    tableBody.appendChild(fragment);
+  $(".dataTables_filter").insertBefore(".dataTables_wrapper");
+  
+});
+    }
 
-   
-    $("#dataTable").DataTable({
-        responsive: true,
-        pageLength: 10,
-        language: {
-            search: "ຄົ້ນຫາ:",
-            lengthMenu: "ສະແດງ _MENU_ ແຖວ",
-            info: "ສະແດງ _START_ - _END_ ຂອງ _TOTAL_ ລາຍການ",
-            paginate: {
-                first: "ຫນ້າທໍາອິດ",
-                last: "ຫນ້າສຸດທ້າຍ",
-                next: "ຖັດໄປ",
-                previous: "ກ່ອນໜ້າ"
-            }
-        }
-    });
-}
-
-// 🔥 ดึงข้อมูลมา render ตาราง
-fetchData().then(renderTable);
-
-document.querySelectorAll(".btn-view-doc").forEach(function (element) {
-    element.addEventListener("click", function (event) {
-        
-        let docId = this.getAttribute("data-id");
-        event.preventDefault();  // ✅ ປ້ອງກັນ reload
-        // ✅ ສະແດງ ID ທີ່ຖືກສົ່ງໄປ
-        console.log("Clicked document ID:", docId);
-
-        fetch(`http://192.168.45.71:8000/api/update-status/${docId}/`, {
-            method: "PUT",
-            headers: {
-                "X-CSRFToken": getCSRFToken(),
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ status: "viewed" })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Server response:", data);  // ✅ ສະແດງຂໍ້ມູນທີ່ຮັບຈາກ API
-            if (data.success) {
-                let statusBadge = document.querySelector(`#status-${docId}`);
-                statusBadge.classList.remove("bg-danger");
-                statusBadge.classList.add("bg-success");
-                statusBadge.textContent = "ເບີ່ງແລ້ວ";
-            } else {
-                console.error("Update failed:", data.message);
-            }
-        })
-        .catch(error => console.error("Error:", error));
-    });
+    const documents = await fetchData();
+    renderTable(documents);
 });
 
 
 
     function deleteDocument(docId) {
-        const apiUrl = `http://192.168.45.71:8000/api/delete/document_lcic/${docId}/`;
+        const apiUrl = `http://192.168.45.71:8000/api/delete/document/${docId}/`;
 
         Swal.fire({
             title: "ທ່ານແນ່ໃຈບໍ?",
