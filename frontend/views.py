@@ -14,8 +14,6 @@ environ.Env.read_env()
 DATABASE_URL = env('DATABASE_URL')  
 
 
-
-
 @api_view(['GET'])
 
 def index(request):
@@ -58,10 +56,12 @@ def tables_emp(request):
     except Exception as e:
         print(" Error fetching data:", e)
 
-    return render(request, 'tables_emp.html', {"employees": employees})
+    return render(request, 'tables_emp.html', {
+        "employees": employees, 
+        'database_url': DATABASE_URL,})
 
 def doc_format(request):
-    url = "http://192.168.45.71:8000/api/list/Document_format/"
+    url = f"{DATABASE_URL}/api/list/Document_format/"
     
     # Fetch data from the API
     try:
@@ -73,10 +73,13 @@ def doc_format(request):
         doc_format = []  
         print(f"Error fetching data: {e}")
      
-    return render(request, 'doc_format.html', {'doc_format': doc_format})
+    return render(request, 'doc_format.html', {
+        'doc_format': doc_format, 
+        'database_url': DATABASE_URL,
+        })
 
 def department(request):
-    url = "http://192.168.45.71:8000/api/list/departments/"
+    url = f"{DATABASE_URL}/api/list/departments/"
     
     # Fetch data from the API
     try:
@@ -87,13 +90,16 @@ def department(request):
     except requests.exceptions.RequestException as e:
         department = []  
         print(f"Error fetching data: {e}")   
-    return render(request, 'department.html', {'department': department})
+    return render(request, 'department.html', {
+        'department': department,                        
+        'database_url': DATABASE_URL,  
+    })
 
 def register(request):
     # API URLs
-    users_api = "http://192.168.45.71:8000/api/users"
-    departments_api = "http://192.168.45.71:8000/api/list/departments/"
-    employees_api = "http://192.168.45.71:8000/api/employee"
+    users_api = f"{DATABASE_URL}/api/users"
+    departments_api = f"{DATABASE_URL}/api/list/departments/"
+    employees_api = f"{DATABASE_URL}/api/employee"
 
     try:
         users = requests.get(users_api).json()  # ດຶງຂໍ້ມູນ user
@@ -130,7 +136,10 @@ def register(request):
         register_list = []
         print("Error fetching data:", e)
 
-    return render(request, 'register.html', {"register": register_list})
+    return render(request, 'register.html', {
+        "register": register_list,
+        'database_url': DATABASE_URL,
+        })
 
 def education_level(request):
     return render(request, 'education_level.html',)
@@ -142,17 +151,19 @@ def profile(request):
     return render(request, 'profile.html',)
 
 def form_login(request):
-    return render(request, "form_login.html")
+    return render(request, "form_login.html",{
+        'database_url': DATABASE_URL,  
+    })
 
 DATABASE_URL = os.getenv('DATABASE_URL')
 def documentEntry(request):
     department_into = request.GET.get('department_into', '')
     # print(f"department_into: {department_into}")
     
-    document_api_url = f'http://192.168.45.71:8000/api/search/document_lcic/?doc_type_info=ຂາເຂົ້າ&department_into={department_into}'
+    document_api_url = f'{DATABASE_URL}/api/search/document_lcic/?doc_type_info=ຂາເຂົ້າ&department_into={department_into}'
     # print(f"document_api_url: {document_api_url}")
-    department_api_url = "http://192.168.45.71:8000/api/list/departments/"
-    format_api_url = "http://192.168.45.71:8000/api/list/Document_format/"
+    department_api_url = f"{DATABASE_URL}/api/list/departments/"
+    format_api_url = f"{DATABASE_URL}/api/list/Document_format/"
     
     
     format_filter = request.GET.get('format', '')
@@ -219,76 +230,16 @@ def documentEntry(request):
         'start_date_filter': start_date_filter,
         'end_date_filter': end_date_filter,
         'documents_json': json.dumps(documents),
+        'database_url': DATABASE_URL,
     }
     )
 
-# def documentEntry(request):
-#     department_into = request.GET.get('department_into', '')
-    
-#     document_api_url =  f'http://192.168.45.71:8000/api/search/document_lcic/?doc_type_info=ຂາເຂົ້າ&department_into={department_into}'
-#     department_api_url = "http://192.168.45.71:8000/api/list/departments/"
-#     format_api_url = "http://192.168.45.71:8000/api/list/Document_format/"
-
-#     format_filter = request.GET.get('format', '')
-#     department_filter = request.GET.get('department', '')
-#     start_date_filter = request.GET.get('start_date', '')
-#     end_date_filter = request.GET.get('end_date', '')
-
-#     try:
-#         documents_response = requests.get(document_api_url)
-#         departments_response = requests.get(department_api_url)
-#         formats_response = requests.get(format_api_url)
-
-#         documents = documents_response.json() if documents_response.status_code == 200 else []
-#         departments = departments_response.json() if departments_response.status_code == 200 else []
-#         formats = formats_response.json() if formats_response.status_code == 200 else []
-
-#         department_map = {d['id']: d['name'] for d in departments}
-#         format_map = {f['dmf_id']: f['name'] for f in formats}
-
-#         for doc in documents:
-
-#             doc['department'] = department_map.get(doc['department']['id'], 'N/A') if doc.get('department') else 'N/A'
-            
-#             doc['format_name'] = format_map.get(doc['format']['dmf_id'], 'N/A') if doc.get('format') else 'N/A'
-            
-#             if 'department_into' in doc and isinstance(doc['department_into'], list):
-#                 doc['department_into'] = [department_map.get(dep['id'], 'N/A') for dep in doc['department_into']]
-#             else:
-#                 doc['department_into'] = []
-
-#         if format_filter:
-#             documents = [doc for doc in documents if str(doc['format']['dmf_id']) == format_filter]
-#         if department_filter:
-#             documents = [doc for doc in documents if str(doc['department']) == department_filter]
-#         if start_date_filter:
-#             documents = [doc for doc in documents if doc['insert_date'] >= start_date_filter]
-#         if end_date_filter:
-#             documents = [doc for doc in documents if doc['insert_date'] <= end_date_filter]
-
-#     except requests.exceptions.RequestException as e:
-#         documents = []
-#         print(f"Error fetching API data: {e}")
-
-#     return render(request, 'documentEntry.html', 
-#                   {
-#         'documents': documents,
-#         'departments': departments,
-#         'formats': formats,
-#         'format_filter': format_filter,
-#         'department_filter': department_filter,
-#         'start_date_filter': start_date_filter,
-#         'end_date_filter': end_date_filter,
-#         'documents_json': json.dumps(documents),
-#     }
-#     )
 
 
 def documentOut(request):
-
-    document_api_url = "http://192.168.45.71:8000/api/list/document_lcic/"
-    department_api_url = "http://192.168.45.71:8000/api/list/departments/"
-    format_api_url = "http://192.168.45.71:8000/api/list/Document_format/"
+    document_api_url = f"{DATABASE_URL}/api/list/document_lcic/"
+    department_api_url = f"{DATABASE_URL}/api/list/departments/"
+    format_api_url = f"{DATABASE_URL}/api/list/Document_format/"
 
     format_filter = request.GET.get('format', '')
     department_filter = request.GET.get('department', '')
@@ -311,13 +262,8 @@ def documentOut(request):
 
         # ປັບປຸງຂໍ້ມູນໃນ documents
         for doc in documents:
-            # ແມບ department
             doc['department'] = department_map.get(doc['department']['id'], 'N/A') if doc.get('department') else 'N/A'
-            
-            # ແມບ format
             doc['format_name'] = format_map.get(doc['format']['dmf_id'], 'N/A') if doc.get('format') else 'N/A'
-            
-            # ແມບ department_into
             if 'department_into' in doc and isinstance(doc['department_into'], list):
                 doc['department_into'] = [department_map.get(dep['id'], 'N/A') for dep in doc['department_into']]
             else:
@@ -345,24 +291,42 @@ def documentOut(request):
         'department_filter': department_filter,
         'start_date_filter': start_date_filter,
         'end_date_filter': end_date_filter,
+        'database_url': DATABASE_URL,  
     })
 def documentGen(request):
-    return render(request, 'documentGen.html',)
+    format_api_url = f"{DATABASE_URL}/api/list/Document_format/"
+    response = requests.get(format_api_url)
+
+    formats = response.json() if response.status_code == 200 else []
+
+    context = {
+        'formats': formats,
+        'format_filter': request.GET.get('format', '')
+    }
+    return render(request, 'documentGen.html',{
+        'database_url': DATABASE_URL,  
+    })
 
 def add_documentE(request):
-    return render(request, 'add_document_entry.html',)
+    return render(request, 'add_document_entry.html',{
+        'database_url': DATABASE_URL,  
+    })
 
 def add_documentO(request):
-    return render(request, 'add_document_out.html',)
+    return render(request, 'add_document_out.html',{               
+        'database_url': DATABASE_URL,  
+    })
 
-def add_documentG(request):
-    return render(request, 'add_documentGeneral.html',)
+def add_documentG(request):   
+    return render(request, 'add_documentGeneral.html',{            
+        'database_url': DATABASE_URL, 
+    })
 
-def update_document(request, doc_id):
-    document_url = f"http://192.168.45.71:8000/api/list/document_lcic/{doc_id}/"
-    departments_url = "http://192.168.45.71:8000/api/list/departments/"
-    document_format_url = "http://192.168.45.71:8000/api/list/Document_format/"
-    update_url = f"http://192.168.45.71:8000/api/update/document_lcic/{doc_id}/"
+def update_documentE(request, doc_id):
+    document_url = f"{DATABASE_URL}/api/list/document_lcic/{doc_id}/"
+    departments_url = f"{DATABASE_URL}/api/list/departments/"
+    document_format_url = f"{DATABASE_URL}/api/list/Document_format/"
+    update_url = f"{DATABASE_URL}/api/update/document_lcic/{doc_id}/"
 
     if request.method == 'GET':
         try:
@@ -373,10 +337,11 @@ def update_document(request, doc_id):
             print(f"Error fetching data: {e}")
             document, departments, document_format = {}, [], []
             
-        return render(request, 'update_document.html', {
+        return render(request, 'update_documentE.html', {
             'document': document,
             'departments': departments,
             'Document_format': document_format,
+            'database_url': DATABASE_URL,
         })
 
     elif request.method == 'POST':        
@@ -403,10 +368,78 @@ def update_document(request, doc_id):
         except requests.exceptions.RequestException as e:
             print(f"Error updating document: {e}")
             return JsonResponse({'success': False, 'error': str(e)}, status=400)
+        
+def update_documentO(request, doc_id):
+    document_url = f"{DATABASE_URL}/api/list/document_lcic/{doc_id}/"
+    departments_url = f"{DATABASE_URL}/api/list/departments/"
+    document_format_url = f"{DATABASE_URL}/api/list/Document_format/"
 
+    if request.method == 'GET':
+        try:
+            document = requests.get(document_url).json()
+            departments = requests.get(departments_url).json()
+            document_format = requests.get(document_format_url).json()
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching data: {e}")
+            document, departments, document_format = {}, [], []
 
+        return render(request, 'update_documentO.html', {
+            'document': document,
+            'departments': departments,
+            'Document_format': document_format,
+            'database_url': DATABASE_URL,  
+            'doc_id': doc_id,  
+        })
+
+    # ບໍ່ຈັດການ POST ທີ່ນີ້ ເພາະ frontend ຈະເຮັດແທນ
+    return JsonResponse({'success': False, 'error': 'Method not allowed'}, status=405)
+
+        
+def update_documentGen(request, docg_id):
+    document_url = f"{DATABASE_URL}/api/document_general/{docg_id}/"
+    departments_url = f"{DATABASE_URL}/api/list/departments/"
+    document_format_url = f"{DATABASE_URL}/api/list/Document_format/"
+    update_url = f"{DATABASE_URL}/api/document_general/{docg_id}/"
+
+    if request.method == 'GET':
+        try:
+            document = requests.get(document_url).json()
+            departments = requests.get(departments_url).json()
+            document_format = requests.get(document_format_url).json()
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching data: {e}")
+            document, departments, document_format = {}, [], []
             
-
+        return render(request, 'update_documentGen.html', {
+            'document': document,
+            'departments': departments,
+            'Document_format': document_format,
+            'database_url': DATABASE_URL,  
+        })
+    elif request.method == 'POST':        
+        try:
+            data = {
+                'doc_number': request.POST.get('doc_number'),
+                'insert_date': request.POST.get('insert_date'),
+                'subject': request.POST.get('subject'),
+                'format': request.POST.get('format'),
+                'doc_type': request.POST.get('doc_type'),
+                'document_detail': request.POST.get('document_detail'),
+                'department': request.POST.get('department'),
+                'name': request.POST.get('name'),
+            }
+            if request.FILES.get('file'):
+                files = {'file': request.FILES['file']}
+                response = requests.put(update_url, data=data, files=files)  
+            else:
+                response = requests.put(update_url, json=data)  
+            
+            response.raise_for_status()
+            return JsonResponse({'success': True, 'message': 'ບັນທືກຂໍ້ມູນສຳເລັດ!'})
+            
+        except requests.exceptions.RequestException as e:
+            print(f"Error updating document: {e}")
+            return JsonResponse({'success': False, 'error': str(e)}, status=400)
 def test_view(request):
     format_api_url = "http://192.168.45.71:8000/api/list/Document_format/"
     response = requests.get(format_api_url)

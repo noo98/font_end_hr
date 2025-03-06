@@ -2,8 +2,8 @@ html,
 body {
   height: 100%;
   font-family: 'NotoSansLao', sans-serif;
+src: url('../fonts/NotoSansLao-VariableFont_wdth,wght.ttf') format('truetype');
 }
-
 .form-signin {
   max-width: 330px;
   padding: 1rem;
@@ -30,7 +30,7 @@ body {
   font-weight: normal;
   font-style: normal;
 }
-
+ 
 .field-icon {
   float: right;
   margin-left: -30px;
@@ -44,3 +44,49 @@ body {
   margin: auto;
 }
 
+.input-group-custom {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.input-group-custom label {
+  position: absolute;
+  top: -10px; 
+  left: 5%;
+  background-color: rgb(255, 255, 255); 
+  font-size: 0.8rem; 
+  color: #3a3a3a; 
+}
+
+.input-group-custom input {
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid #ced4da; 
+}
+
+.card:hover {
+  transform: scale(1.05);
+  transition: transform 0.1s ease-in-out;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+
+}
+.card-item  { 
+  padding: 20px;
+  background-color: #eeeeee;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px rgba(2, 1, 1, 0.1);
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+}
+.form-control {
+  margin-bottom: 5px;
+  padding: 5px;
+}

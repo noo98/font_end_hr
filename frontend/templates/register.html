@@ -50,15 +50,15 @@
                     <div class="row mt-4" style="justify-content: center;">
                         <button type="submit" name="btnEdit" class="btn btn-info" 
                                 style="width: 110px; border-radius: 20px; display: none;">
-                            <i class="fas fa-edit"></i>&nbsp;&nbsp;ແກ້ໄຂ
+                            <i class="fas fa-edit"></i>  ແກ້ໄຂ
                         </button>
                         <button type="submit" name="btnAdd" class="btn btn-primary mx-2" 
                                 style="width: 110px; border-radius: 20px;">
-                            <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;ເພີ່ມ
+                            <i class="fas fa-plus-circle"></i>  ເພີ່ມ
                         </button>
                         <button type="reset" id="btnCancel" class="btn btn-warning mx-2" 
                                 style="width: 110px; border-radius: 20px;">
-                            <i class="fas fa-sync"></i>&nbsp;&nbsp;ຍົກເລີກ
+                            <i class="fas fa-sync"></i>  ຍົກເລີກ
                         </button>
                     </div>
                 </form>
@@ -67,7 +67,9 @@
 
         <!-- Table Section -->
         <div class="col-md-8 mt-4">
+            
             <fieldset class="border border-primary p-2 px-4 pb-4" style="border-radius: 15px;">
+                <div class="table-responsive">
                 <table id="example" class="table table-striped" style="width:100%">
                     <thead class="bg-secondary text-white">
                         <tr>
@@ -105,7 +107,8 @@
                         {% endfor %}
                     </tbody>
                 </table>
-            </fieldset>
+            </div>
+            </fieldset>        
         </div>
     </div>
 </div>
@@ -115,96 +118,94 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-const API_BASE_URL = 'http://192.168.45.71:8000/api';
+const DATABASE_URL = "{{ database_url | escapejs }}";
 
 let departments = {};
+let employees = {};  // ເພີ່ມ object ເພື່ອ map Employee ID ກັບຊື່
 
-        async function fetchData() {
-            // 1. ດຶງຂໍ້ມູນພະແນກ
-            const depResponse = await fetch(`${API_BASE_URL}/list/departments/`);
-            const depData = await depResponse.json();
-            depData.forEach(dep => {
-                departments[dep.id] = dep.name; // ສ້າງແມບຄວາມສຳພັນ ລະຫັດ -> ຊື່
-            });
+async function fetchData() {
+    try {
+        const depResponse = await fetch(`${DATABASE_URL}/list/departments/`);
+        const depData = await depResponse.json();
+        depData.forEach(dep => {
+            departments[dep.id] = dep.name;
+        });
 
-            // 2. ດຶງຂໍ້ມູນພະນັກງານ
-            const empResponse = await fetch(`${API_BASE_URL}/employee/`);
-            const employees = await empResponse.json();
-            console.log(" Employees:", employees);
-            let dataList = document.getElementById("employeeList");
-            employees.forEach(emp => {
-                let option = document.createElement("option");
-                option.value = emp.lao_name;
-                option.setAttribute("data-emp-id", emp.emp_id);
-                option.setAttribute("data-dep-id", emp.Department); // ບັນທຶກ ID ຂອງພະແນກ
-                dataList.appendChild(option);
-            });
+        const empResponse = await fetch(`${DATABASE_URL}/employee/`);
+        const empData = await empResponse.json();
+        let dataList = document.getElementById("employeeList");
+        empData.forEach(emp => {
+            employees[emp.emp_id] = emp.lao_name;  // ເກັບ emp_id -> lao_name
+            let option = document.createElement("option");
+            option.value = emp.lao_name;
+            option.setAttribute("data-emp-id", emp.emp_id);
+            option.setAttribute("data-dep-id", emp.Department);
+            dataList.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Error fetching initial data:", error);
+    }
+}
+
+function setDepartment() {
+    let input = document.getElementById("empname");
+    let options = document.getElementById("employeeList").options;
+    for (let option of options) {
+        if (option.value === input.value) {
+            let depId = option.getAttribute("data-dep-id");
+            document.getElementById("depname").value = departments[depId] || "ບໍ່ພົບຂໍ້ມູນ";
+            break;
         }
+    }
+}
 
-        function setDepartment() {
-            let input = document.getElementById("empname");
-            let options = document.getElementById("employeeList").options;
-            for (let option of options) {
-                if (option.value === input.value) {
-                    let depId = option.getAttribute("data-dep-id");
-                    document.getElementById("depname").value = departments[depId] || "ບໍ່ພົບຂໍ້ມູນ";
-                    break;
-                }
-            }
-        }
+document.addEventListener("DOMContentLoaded", fetchData);
 
-        document.addEventListener("DOMContentLoaded", fetchData);
-
-        document.getElementById("registerForm").addEventListener("submit", async function(event) {
+document.getElementById("registerForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    // 1. ສ້າງ FormData ຈາກຟ້ອມ
     let formData = new FormData(this);
+    let id = formData.get("id");
+    let method = id ? "PUT" : "POST";
+    let url = id ? `${DATABASE_URL}/users/${id}/` : `${DATABASE_URL}/users/`;
 
-    // 2. ດຶງຂໍ້ມູນທີ່ໃສ່ໃນຟອມ
     let username = formData.get("username");
+    
     let password = formData.get("pwd");
     let empname = formData.get("empname");
     let department = formData.get("depname");
     let status = formData.get("status");
 
-    // 3. ຊອກຫາ `emp_id` ຂອງ Employee
     let employeeId = null;
     let employeeOptions = document.getElementById("employeeList").options;
     for (let option of employeeOptions) {
         if (option.value === empname) {
-            employeeId = option.getAttribute("data-emp-id"); 
+            employeeId = option.getAttribute("data-emp-id");
             break;
         }
     }
-    console.log("🔹 Employee ID:", employeeId);
     if (!employeeId) {
         Swal.fire("ຜິດພາດ", "ບໍ່ພົບຂໍ້ມູນພະນັກງານ!", "error");
         return;
     }
 
-    // 4. ຊອກຫາ `department_id` ຂອງພະແນກ
     let departmentId = Object.keys(departments).find(key => departments[key] === department);
     if (!departmentId) {
         Swal.fire("ຜິດພາດ", "ບໍ່ພົບພະແນກ!", "error");
         return;
     }
 
-    // 5. ສ້າງ JSON ຂໍ້ມູນທີ່ຈະສົ່ງໄປ API
     let requestData = {
         username: username,
-        password: password, 
-        status: parseInt(status), 
+        password: password || undefined,
+        status: parseInt(status),
         Department: parseInt(departmentId),
         Employee: parseInt(employeeId)
     };
 
-    console.log("🔹 Data to send:", requestData);
-
-    // 6. ສົ່ງຄ່າໄປ API
     try {
-        let response = await fetch("http://192.168.45.71:8000/api/users/", {
-            method: "POST",
+        let response = await fetch(url, {
+            method: method,
             headers: {
                 "Content-Type": "application/json",
                 "X-CSRFToken": formData.get("csrfmiddlewaretoken")
@@ -213,26 +214,85 @@ let departments = {};
         });
 
         let result = await response.json();
-        console.log(" API Response:", result);
 
         if (response.ok) {
             Swal.fire({
                 title: "ສຳເລັດ!",
-                text: "ເພີ່ມຜູ້ໃຊ້ສຳເລັດ",
+                text: id ? "ແກ້ໄຂຜູ້ໃຊ້ສຳເລັດ" : "ເພີ່ມຜູ້ໃຊ້ສຳເລັດ",
                 icon: "success"
             }).then(() => {
-                location.reload();  
+                location.reload();
             });
-
-            document.getElementById("registerForm").reset(); 
+            document.getElementById("registerForm").reset();
+            document.querySelector('button[name="btnAdd"]').style.display = "inline-block";
+            document.querySelector('button[name="btnEdit"]').style.display = "none";
         } else {
-                Swal.fire("ຜິດພາດ", result.message || "ບໍ່ສາມາດເພີ່ມຜູ້ໃຊ້ໄດ້", "error");
+            Swal.fire("ຜິດພາດ", result.message || "ບໍ່ສາມາດດຳເນີນການໄດ້", "error");
         }
     } catch (error) {
-        console.error(" API Error:", error);
+        console.error("API Error:", error);
         Swal.fire("ຜິດພາດ", "ເກີດບັນຫາໃນລະບົບ", "error");
     }
 });
 
+async function editRegister(id) {
+    try {
+        let response = await fetch(`${DATABASE_URL}/users/${id}/`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        let text = await response.text();
+        let userData = JSON.parse(text);
+
+        // ກຳນົດຄ່າໃສ່ຟອມ
+        document.getElementById("id").value = userData.us_id || userData.id || "";
+        document.getElementById("username").value = userData.username || "";
+        console.log("Show", userData.username);
+        document.getElementById("pwd").value = "";
+        document.getElementById("empname").value = employees[userData.Employee] || userData.employee_name || "";
+        document.getElementById("depname").value = departments[userData.Department] || userData.department_name || "ບໍ່ພົບຂໍ້ມູນ";
+        document.getElementById("status").value = userData.status || "";
+        let btnAdd = document.querySelector('button[name="btnAdd"]');
+        let btnEdit = document.querySelector('button[name="btnEdit"]');
+        btnAdd.style.display = "none";
+        btnEdit.style.display = "inline-block";
+    } catch (error) {
+        console.error("Error fetching user data:", error);
+        Swal.fire("ຜິດພາດ", "ບໍ່ສາມາດດຶງຂໍ້ມູນຜູ້ໃຊ້ໄດ້: " + error.message, "error");
+    }
+}
+
+async function deleteRegister(id) {
+    Swal.fire({
+        title: "ທ່ານແນ່ໃຈບໍ?",
+        text: "ທ່ານຕ້ອງການລຶບຜູ້ໃຊ້ນີ້ບໍ່?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "ຕົກລົງ",
+        cancelButtonText: "ຍົກເລີກ"
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            try {
+                let response = await fetch(`${DATABASE_URL}/users/${id}/`, {
+                    method: "DELETE",
+                    headers: {
+                        "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
+                    }
+                });
+
+                if (response.ok) {
+                    Swal.fire("ສຳເລັດ!", "ລຶບຜູ້ໃຊ້ສຳເລັດ", "success").then(() => {
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire("ຜິດພາດ", "ບໍ່ສາມາດລຶບຜູ້ໃຊ້ໄດ້", "error");
+                }
+            } catch (error) {
+                console.error("Error deleting user:", error);
+                Swal.fire("ຜິດພາດ", "ເກີດບັນຫາໃນລະບົບ", "error");
+            }
+        }
+    });
+}
 </script>
 {% endblock %}

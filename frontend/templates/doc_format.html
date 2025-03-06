@@ -65,104 +65,110 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    const API_BASE_URL = 'http://192.168.45.71:8000/api';
-    const doc_formatForm = document.getElementById('doc_formatForm');
-    const btnAdd = document.querySelector('button[name="btnAdd"]');
-    const btnEdit = document.querySelector('button[name="btnEdit"]');
+    document.addEventListener("DOMContentLoaded", function () {
+        const DATABASE_URL = "{{ database_url | escapejs }}";
+        const doc_formatForm = document.getElementById('doc_formatForm');
+        const btnAdd = document.querySelector('button[name="btnAdd"]');
+        const btnEdit = document.querySelector('button[name="btnEdit"]');
     
-    // Form Submission Handler
-    doc_formatForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
+        // Form Submission Handler
+        doc_formatForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
     
-        const doc_formatId = document.getElementById('id').value;
-        const doc_formatName = document.getElementById('name').value;
-        const isEdit = Boolean(doc_formatId);
+            const doc_formatId = document.getElementById('id').value;
+            const doc_formatName = document.getElementById('name').value;
+            const isEdit = Boolean(doc_formatId);
     
-        const apiUrl = isEdit
-            ? `${API_BASE_URL}/update/Document_format/${doc_formatId}/`
-            : `${API_BASE_URL}/add/Document_format/`;
-        const method = isEdit ? 'PUT' : 'POST';
+            const apiUrl = isEdit
+                ? `${DATABASE_URL}/api/update/Document_format/${doc_formatId}/`
+                : `${DATABASE_URL}/api/add/Document_format/`;
+            const method = isEdit ? 'PUT' : 'POST';
     
-        try {
-            const response = await fetch(apiUrl, {
-                method: method,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}',
-                },
-                body: JSON.stringify({ id: doc_formatId, name: doc_formatName }),
-            });
+            try {
+                const response = await fetch(apiUrl, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id: doc_formatId, name: doc_formatName }),
+                });
     
-            if (!response.ok) {
-                throw new Error(`Error: ${response.statusText}`);
-            }
+                const data = await response.json(); // ດຶງ JSON response ມາສະເໝີ
     
-            const successMessage = isEdit
-                ? 'ແກ້ໄຂຂໍ້ມູນສຳເລັດ'
-                : 'ເພີ່ມຂໍ້ມູນສຳເລັດ';
-            Swal.fire('ສຳເລັດ!', successMessage, 'success').then(() => {
-                window.location.reload();
-            });
-        } catch (error) {
-            Swal.fire('ມີຂໍ້ຜິດພາດ!', error.message, 'error');
-        }
-    });
-    
-    // Edit Document Format
-    async function editDoc_format(dofId) {
-        try {
-            const response = await fetch(`${API_BASE_URL}/list/Document_format/${dofId}`);
-            if (!response.ok) {
-                throw new Error(`Error fetching data: ${response.statusText}`);
-            }
-    
-            const doc_format = await response.json();
-            document.getElementById('id').value = doc_format.dmf_id; 
-            document.getElementById('name').value = doc_format.name;
-    
-            btnAdd.style.display = 'none';
-            btnEdit.style.display = 'inline-block';
-        } catch (error) {
-            Swal.fire('Error', error.message, 'error');
-        }
-    }
-    
-    // Delete Document Format
-    function deleteDoc_format(dofId) {
-        const apiUrl = `${API_BASE_URL}/delete/Document_format/${dofId}/`;
-    
-        Swal.fire({
-            title: 'ທ່ານແນ່ໃຈບໍ?',
-            text: 'ຂໍ້ມູນຈະຖືກລືບອອກ!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'ຢືນຢັນ',
-            cancelButtonText: 'ຍົກເລີກ',
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                try {
-                    const response = await fetch(apiUrl, { method: 'DELETE' });
-                    if (!response.ok) {
-                        throw new Error(`Error deleting data: ${response.statusText}`);
-                    }
-    
-                    Swal.fire('ລຶບສຳເລັດ!', '', 'success').then(() => {
-                        window.location.reload();
-                    });
-                } catch (error) {
-                    Swal.fire('Error!', error.message, 'error');
+                if (!response.ok) {
+                    throw new Error(data.error || `Error: ${response.statusText}`);
                 }
+    
+                const successMessage = isEdit
+                    ? 'ແກ້ໄຂຂໍ້ມູນສຳເລັດ'
+                    : 'ເພີ່ມຂໍ້ມູນສຳເລັດ';
+                Swal.fire('ສຳເລັດ!', successMessage, 'success').then(() => {
+                    window.location.reload();
+                });
+            } catch (error) {
+                Swal.fire('ມີຂໍ້ຜິດພາດ!', error.message, 'error');
             }
         });
-    }
     
-    // Reset Form
-    document.getElementById('btnCancel').addEventListener('click', () => {
-        btnAdd.style.display = 'inline-block';
-        btnEdit.style.display = 'none';
-        doc_formatForm.reset();
+        // Edit Document Format
+        window.editDoc_format = async function(dofId) { // ເພີ່ມ window ໃຫ້ໃຊ້ໄດ້ຈາກ HTML
+            try {
+                const response = await fetch(`${DATABASE_URL}/api/list/Document_format/${dofId}/`);
+                if (!response.ok) {
+                    throw new Error(`Error fetching data: ${response.statusText}`);
+                }
+    
+                const doc_format = await response.json();
+                document.getElementById('id').value = doc_format.dmf_id;
+                document.getElementById('name').value = doc_format.name;
+    
+                btnAdd.style.display = 'none';
+                btnEdit.style.display = 'inline-block';
+            } catch (error) {
+                Swal.fire('Error', error.message, 'error');
+            }
+        };
+    
+        // Delete Document Format
+        window.deleteDoc_format = function(dofId) { // ເພີ່ມ window ໃຫ້ໃຊ້ໄດ້ຈາກ HTML
+            const apiUrl = `${DATABASE_URL}/api/delete/Document_format/${dofId}/`;
+    
+            Swal.fire({
+                title: 'ທ່ານແນ່ໃຈບໍ?',
+                text: 'ຂໍ້ມູນຈະຖືກລືບອອກ!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'ຢືນຢັນ',
+                cancelButtonText: 'ຍົກເລີກ',
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const response = await fetch(apiUrl, { method: 'DELETE' });
+                        const data = await response.json(); // ດຶງ JSON response ຖ້າມີ
+    
+                        if (!response.ok) {
+                            throw new Error(data.error || `Error deleting data: ${response.statusText}`);
+                        }
+    
+                        Swal.fire('ລຶບສຳເລັດ!', '', 'success').then(() => {
+                            window.location.reload();
+                        });
+                    } catch (error) {
+                        Swal.fire('Error!', error.message, 'error');
+                    }
+                }
+            });
+        };
+    
+        // Reset Form
+        document.getElementById('btnCancel').addEventListener('click', () => {
+            btnAdd.style.display = 'inline-block';
+            btnEdit.style.display = 'none';
+            doc_formatForm.reset();
+            document.getElementById('id').value = ''; // ຮັບປະກັນວ່າ id ຖືກລ້າງ
+        });
     });
-</script>
+    </script>
     
 
     

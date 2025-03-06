@@ -3,14 +3,13 @@
 
 {% block content %}
 <div class="container-fluid">
-    <div class="card">
+    <div class="card-item">
         <div class="card-header ">
             <h2 class="mb-2 text-center fw-bold">ເພີ່ມເອກະສານຂາອອກ</h2>
         </div>
         <div class="card-body">
             <form method="POST" id="documentForm" >                
-                {% csrf_token %}
-                
+                {% csrf_token %}               
                 <div class="row mb-3">
                     <div class="col-sm-12 col-md-6">
                         <input type="text" class="form-control" id="doc_number" name="doc_number" placeholder="ເລກທີ່ເອກະສານ" required>                  
@@ -21,7 +20,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-12 col-md-6">
-                        <textarea class="form-control mb-3" id="subject" name="subject" placeholder="ຊື່ເອກະສານ" required></textarea>
+                        <textarea class="form-control mb-3" style="height: 120px;" id="subject" name="subject" placeholder="ເນື້ອໃນ" required></textarea>
                         <input class="form-control mb-3" type="file" id="file" name="file" multiple>                 
                     </div>
 
@@ -29,7 +28,9 @@
                         <select id="formatFilter" name="format" class="form-select d-inline-block mb-3" required>
                             <option value="">ປະເພດເອກະສານ</option>
                         </select>
-                        <div id="departmentContainer"></div>
+                        <div id="departmentContainer">
+                            
+                        </div>
                     </div>
                 </div>                
 
@@ -45,9 +46,7 @@
                         
                     </div>
                 </div>                           
-                
-
-                <div class="row p-3 " style="justify-content: center;">
+                <div class="row mb-3 " style="justify-content: center;">
                         <button type="submit" class="btn btn-primary mx-3" style="width: 150px; border-radius: 10px"><i class="fas fa-save me-1"></i>ບັນທຶກ</button>
                         <button type="reset" class="btn btn-warning mx-3" style="width: 150px; border-radius: 10px"><i class="fas fa-sync me-1"></i></i>Reset</button>
                 </div>
@@ -63,146 +62,117 @@
 
 
 <script>
+    const DATABASE_URL = "{{ database_url | escapejs }}";
+    
     document.addEventListener("DOMContentLoaded", async function () {
-        // ເອີ້ນໃຊ້ຟັງຊັນ
-
-    let username = localStorage.getItem("username");
-    // const userna= localStorage.getItem("department");
+        // ກຳນົດຄ່າເບື້ອງຕົ້ນໃຫ້ input
+        let username = localStorage.getItem("username");
+        let department = localStorage.getItem("department");
     
-    let department = localStorage.getItem("department"); 
-   
-
-    if (username) {
-        document.getElementById("name").value = username;
-    }
-    if (department) {
-        document.getElementById("department").value = department; //  ใช้ชื่อ 'department'
-    }
-
-    try {
-        localStorage.setItem("username", userData.username); //  ບັນທຶກ username
-        let departmentId = userData.Department; //  ດຶງ Department ID ຂອງ user
-
-        //  ດຶງຂໍ້ມູນພະແນກທັງໝົດ
-        let deptResponse = await fetch("http://192.168.45.71:8000/api/list/departments/");
-        console.log(deptResponse)
-        if (!deptResponse.ok) throw new Error("Error fetching departments");
-        let departments = await deptResponse.json(); //  ປ່ຽນ Departments → departments
-
-        //  ຄົ້ນຫາຊື່ພະແນກຂອງ user
-        let userDepartment = departments.find(dept => dept.id === departmentId);
-        if (userDepartment) {
-            localStorage.setItem("department", userDepartment.id); //  ບັນທຶກ 'department'
-           
-            document.getElementById("department").value = userDepartment.id; //  ໃສ່ຄ່າໃນ input
+        if (username) {
+            document.getElementById("name").value = username;
         }
-    } catch (error) {
-        
-    }
-});
-
-    document.addEventListener('DOMContentLoaded', function () {
-    const formatDropdown = document.getElementById('formatFilter');
-    const dataform = document.getElementById('insert_date');
-
-    const today = new Date();
-    const dd = today.toISOString().split('T')[0];
-
-    dataform.value = dd;
-
-    fetch('http://192.168.45.71:8000/api/list/departments/')
-    .then(response => response.json())
-    .then(data => {
-        const container = document.getElementById('departmentContainer'); 
-        container.innerHTML = ''; 
-
-        data.forEach(department => {
-           
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.id = `department${department.id}`;
-            // checkbox.name = 'department_into[]';
-            checkbox.name = 'department_into';
-
-
-            checkbox.value = department.id;
-            
-            const label = document.createElement('label');
-            label.htmlFor = `department${department.id}`;
-            label.textContent = department.name;
-           
-            container.appendChild(checkbox);
-            container.appendChild(label);
-            container.appendChild(document.createElement('br')); 
-        });
-    })
-    .catch(error => console.error('Error fetching departments:', error));
-
+        if (department) {
+            document.getElementById("department").value = department;
+        }
     
-    fetch('http://192.168.45.71:8000/api/list/Document_format/')
-    .then(response => response.json())
-    .then(data => {
-        formatDropdown.innerHTML = '<option value="">ປະເພດເອກະສານ</option>';
-        data.forEach(format => {
-            const option = document.createElement('option');
-            option.value = format.dmf_id; 
-            option.textContent = format.name;
-            formatDropdown.appendChild(option);
+        // ກຳນົດວັນທີປັດຈຸບັນ
+        const today = new Date();
+        const dd = today.toISOString().split('T')[0];
+        document.getElementById("insert_date").value = dd;
+    
+        try {
+            // ດຶງຂໍ້ມູນພະແນກ
+            let deptResponse = await fetch(`${DATABASE_URL}/api/list/departments/`);
+            if (!deptResponse.ok) throw new Error("Error fetching departments");
+            let departments = await deptResponse.json();
+    
+            // Populate department checkboxes
+            const container = document.getElementById('departmentContainer');
+            container.innerHTML = '';
+            departments.forEach(department => {
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `department${department.id}`;
+                checkbox.name = 'department_into'; // ໃຊ້ name ດຽວກັນໃຫ້ເປັນ array
+                checkbox.value = department.id;
+    
+                const label = document.createElement('label');
+                label.htmlFor = `department${department.id}`;
+                label.textContent = department.name;
+    
+                container.appendChild(checkbox);
+                container.appendChild(label);
+                container.appendChild(document.createElement('br'));
+            });
+    
+            // Populate format dropdown
+            const formatDropdown = document.getElementById('formatFilter');
+            let formatResponse = await fetch(`${DATABASE_URL}/api/list/Document_format/`);
+            if (!formatResponse.ok) throw new Error("Error fetching formats");
+            let formats = await formatResponse.json();
+    
+            formatDropdown.innerHTML = '<option value="">ປະເພດເອກະສານ</option>';
+            formats.forEach(format => {
+                const option = document.createElement('option');
+                option.value = format.dmf_id;
+                option.textContent = format.name;
+                formatDropdown.appendChild(option);
+            });
+    
+        } catch (error) {
+            console.error("Error during initialization:", error);
+        }
+    
+        // Submit form
+        document.getElementById("documentForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let formData = new FormData(this);
+    
+            // Debug: ສະແດງຄ່າ FormData
+            for (let pair of formData.entries()) {
+                console.log(pair[0] + ": " + pair[1]);
+            }
+    
+            // ສົ່ງຂໍ້ມູນໄປ API
+            fetch(`${DATABASE_URL}/api/add/document_lcic/`, {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Response Data:", data); 
+
+                if ("Success Response:", data) {  
+                    Swal.fire({
+                        title: "ສຳເລັດ!",
+                        text: data.message || "ບັນທຶກສຳເລັດ",
+                        icon: "success",
+                        
+                    }).then(() => {
+                        window.location.href = "{% url 'documentOut' %}";
+                    });
+                } else {
+                    console.error(data.status === 404);  
+                    Swal.fire({
+                        title: "ເກີດຂໍ້ຜິດພາດ!",
+                        text: data.error || "ບໍ່ສາມາດບັນທຶກເອກະສານ",
+                        icon: "error",
+                        confirmButtonText: "ຕົກລົງ"
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Fetch Error:", error);
+                Swal.fire({
+                    title: "ເກີດຂໍ້ຜິດພາດ!",
+                    text: "ຂໍ້ຜິດພາດ: " + error.message,
+                    icon: "error",
+                    confirmButtonText: "ຕົກລົງ"
+                });
+            });
         });
-    })
-    .catch(error => console.error('Error fetching formats:', error));
-
-});
-document.getElementById("documentForm").addEventListener("submit", function(event) {
-    event.preventDefault();  // ປ້ອງກັນການ Submit ໂດຍກົງ
-    let formData = new FormData(this);
-      
-    for (let pair of formData.entries()) {
-        console.log(pair[0] + ": " + pair[1]); // ສະແດງຄ່າໃນ Console
-
-    }
-
-    // ສົ່ງໄປ Backend
-    fetch("http://192.168.45.71:8000/api/add/document_lcic/", {
-    method: "POST",
-    body: formData
-})
-.then(response => response.json())
-.then(data => {
-    console.log("Response Data:", data); 
-
-    if ("Success Response:", data) {  
-        Swal.fire({
-            title: "ສຳເລັດ!",
-            text: data.message || "ບັນທຶກສຳເລັດ",
-            icon: "success",
-            
-        }).then(() => {
-            window.location.href = "{% url 'documentOut' %}";
-        });
-    } else {
-        console.error(data.status === 404);  
-        Swal.fire({
-            title: "ເກີດຂໍ້ຜິດພາດ!",
-            text: data.error || "ບໍ່ສາມາດບັນທຶກເອກະສານ",
-            icon: "error",
-            confirmButtonText: "ຕົກລົງ"
-        });
-    }
-})
-.catch(error => {
-    console.error("Fetch Error:", error);
-    Swal.fire({
-        title: "ເກີດຂໍ້ຜິດພາດ!",
-        text: "ຂໍ້ຜິດພາດ: " + error.message,
-        icon: "error",
-        confirmButtonText: "ຕົກລົງ"
     });
-});
-
-
-});
-
-</script>
+    </script>
 
 {% endblock %}

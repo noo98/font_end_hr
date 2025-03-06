@@ -1,6 +1,8 @@
+{% extends 'base.html' %}
 
+{% block content %}
 <div class="container-fluid">
-    <div class="card">
+    <div class="card-item">
         <div class="card-header ">
             <h2 class="mb-2 text-center fw-bold">ເພີ່ມເອກະສານຂາເຂົ້າ</h2> 
         </div>
@@ -18,21 +20,22 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-12 col-md-6">
+                        <textarea class="form-control mb-3" style="height: 100px;" id="subject" name="subject" placeholder="ເນື້ອໃນ" required></textarea>
+                        <!-- <div id="departmentContainer">
+                            
+                        </div> -->
+                    </div>
+                    <div class="col-sm-12 col-md-6">
                         <select id="formatFilter" name="format" class="form-select d-inline-block mb-3" required>
                             <option value="">ປະເພດເອກະສານ</option>
                         </select>
                         
                         <input class="form-control mb-3" type="file" id="file" name="file" multiple>                 
                     </div>
-                    <div class="col-sm-12 col-md-6">
-                        <textarea class="form-control mb-3" id="subject" name="subject" placeholder="ຊື່ເອກະສານ" required></textarea>
-                        <!-- <div id="departmentContainer">
-                            
-                        </div> -->
-                    </div>
+                    
                 </div>                
                 <!-- File Upload and Receiver -->
-                <div class="row mb-3">
+                <div class="row">
                     <div class="col-sm-12 col-md-6">                        
                         
                         <input type="hidden" class="form-control mb-3" id="department_from" name="department" placeholder="ຈາກພະແນກ">
@@ -47,14 +50,13 @@
                         
                     </div>
                 </div>                           
-                <div class="row mb-3">
-                                      
+                <div class="row">                                     
                     <div class="col-sm-12 col-md-6">
                         <input type="hidden" class="form-control" id="name" name="name" placeholder="ຜູ້ບັນທືກ" required>
                     </div>
                 </div>
                 <!-- Submit and Reset Buttons -->
-                <div class="row p-3 " style="justify-content: center;">
+                <div class="row " style="justify-content: center;">
                         <button type="submit" class="btn btn-primary mx-3" style="width: 150px; border-radius: 10px"><i class="fas fa-save me-1"></i>ບັນທຶກ</button>
                         <button type="reset" class="btn btn-warning mx-3" style="width: 150px; border-radius: 10px"><i class="fas fa-sync me-1"></i></i>Reset</button>
                 </div>
@@ -70,6 +72,7 @@
 
 
 <script>
+    const DATABASE_URL = "{{ database_url | escapejs }}";
     document.addEventListener("DOMContentLoaded", async function () {
         // ເອີ້ນໃຊ້ຟັງຊັນ
 
@@ -89,16 +92,13 @@
    
 
     try {
-        //  ດຶງຂໍ້ມູນ User
-        // let userResponse = await fetch("http://192.168.45.71:8000/api/users/me");
-        // if (!userResponse.ok) throw new Error("Error fetching user data");
-        // let userData = await userResponse.json();
+        
 
         localStorage.setItem("username", userData.username); //  ບັນທຶກ username
         let departmentId = userData.Department; //  ດຶງ Department ID ຂອງ user
 
         //  ດຶງຂໍ້ມູນພະແນກທັງໝົດ
-        let deptResponse = await fetch("http://192.168.45.71:8000/api/list/departments/");
+        let deptResponse = await fetch(`${DATABASE_URL}/api/list/departments/`);
         // console.log(deptResponse)
         if (!deptResponse.ok) throw new Error("Error fetching departments");
         let departments = await deptResponse.json(); //  ປ່ຽນ Departments → departments
@@ -124,7 +124,7 @@
 
     dataform.value = dd;
    
-    fetch('http://192.168.45.71:8000/api/list/Document_format/')
+    fetch((`${DATABASE_URL}/api/list/Document_format/`))
     .then(response => response.json())
     .then(data => {
         formatDropdown.innerHTML = '<option value="">ປະເພດເອກະສານ</option>';
@@ -143,18 +143,18 @@ document.getElementById("documentForm").addEventListener("submit", function(even
     let formData = new FormData(this);
       
     for (let pair of formData.entries()) {
-        console.log(pair[0] + ": " + pair[1]); // ສະແດງຄ່າໃນ Console
+        // console.log(pair[0] + ": " + pair[1]); // ສະແດງຄ່າໃນ Console
 
     }
 
     // ສົ່ງໄປ Backend
-    fetch("http://192.168.45.71:8000/api/add/document_lcic/", {
+    fetch(`${DATABASE_URL}/api/add/document_lcic/`, {
     method: "POST",
     body: formData
 })
 .then(response => response.json())
 .then(data => {
-    console.log("Response Data:", data); 
+    // console.log("Response Data:", data); 
 
     if ("Success Response:", data) {  
         Swal.fire({
@@ -176,7 +176,7 @@ document.getElementById("documentForm").addEventListener("submit", function(even
     }
 })
 .catch(error => {
-    console.error("Fetch Error:", error);
+    // console.error("Fetch Error:", error);
     Swal.fire({
         title: "ເກີດຂໍ້ຜິດພາດ!",
         text: "ຂໍ້ຜິດພາດ: " + error.message,
@@ -189,5 +189,4 @@ document.getElementById("documentForm").addEventListener("submit", function(even
 });
 
 </script>
-
 {% endblock %}

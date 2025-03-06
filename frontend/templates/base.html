@@ -12,18 +12,20 @@
     
     {% block title %}
     <title>Lcic-HR</title>
-    {% endblock %}
+    {% endblock %} 
     
     <!-- Custom fonts for this template-->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="{% static 'css/sb-admin-2.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/sb-admin-2.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">   
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}">
@@ -119,27 +121,25 @@
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">                  
-                    <!-- Nav Item - Messages -->
-                    <li class="nav-item dropdown no-arrow mx-1">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ພະແນກ:
-                            <span class="mr-2 d-none pl-1 d-lg-inline small" id="departments"></span>
-                            
-                        </a>                       
-                    </li>
-
+                   
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ຜູ້ໃຊ້:
-                            <span class="mr-2 d-none pl-2 d-lg-inline small" id="username"></span>
+                        <a class="nav-link dropdown-toggle mr-4" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{% static 'images/img.png' %}" alt="logo" width="35" height="35">
+                            
                             
                         </a>
                         <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        <div class="dropdown-menu dropdown-menu-right mr-1 shadow animated--grow-in" style="width: 230px;"
                             aria-labelledby="userDropdown">
+                            <div class="mx-2">
+                                <i class="fa fa-user mr-2"></i>ຜູ້ໃຊ້ :<span class=" d-none pl-2 d-lg-inline" id="username"></span><br>
+                                <i class="fa fa-address-book mr-2"></i>ພະແນກ : <span class=" d-none pl-1 d-lg-inline " id="departments"></span>
+                            </div>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/profile/">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 ໂປຣໄຟລ໌
@@ -147,10 +147,6 @@
                             <a class="dropdown-item" href="/register/">
                                 <i class="fa fa-user-plus mr-2 text-gray-400"></i>
                                 ເພີ່ມຜູ້ໃຊ້
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Activity Log
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="" onclick="logout()" data-toggle="modal" data-target="#logoutModal">

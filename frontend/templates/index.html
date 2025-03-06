@@ -1,7 +1,9 @@
 {% extends "base.html" %} 
 {% load static %}
 
-    {% block content %}
+<title>Lcic-HR</title>
+
+{% block content %}
     <div class="container-fluid">
 
         <!-- Page Heading -->
@@ -13,7 +15,7 @@
         <div class="row">
             <div class="col-xl-3 col-md-6 mb-4">               
                 <div class="dropdown">
-                    <div class="card border-left-success shadow h-100 py-2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="card border-left-primary shadow h-100 py-2" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
@@ -28,9 +30,27 @@
                         </div>
                     </div>
                     <ul class="dropdown-menu shadow" style="width: 100%">
-                        <li><a class="dropdown-item" href="/documentOut/">ຂາອອກ</a></li>
-                        <li><a class="dropdown-item" href="/documentEntry/">ຂາເຂົ້າ</a></li>
-                        <li><a class="dropdown-item" href="/documentGen/">ເອກະສານທົ່ວໄປ</a></li>
+                        <li><a class="dropdown-item" href="/documentOut/">
+                                <div class="d-flex align-items-center">
+                                    <span class="material-icons text-gray-400 mr-2">outbox</span>                                        
+                                    <div class="text-sm font-weight-bold">ຂາອອກ</div>                                   
+                                </div>
+                            </a>
+                        </li>
+                        <li><a class="dropdown-item" href="/documentEntry/">
+                                <div class="d-flex align-items-center">
+                                    <span class="material-icons text-gray-400 mr-2">move_to_inbox</span>                                         
+                                    <div class="text-sm font-weight-bold">ຂາເຂົ້າ</div> 
+                                </div>   
+                            </a>
+                        </li>
+                        <li><a class="dropdown-item" href="/documentGen/">
+                                <div class="d-flex align-items-center">
+                                    <span class="material-icons text-gray-400 mr-2">assignment_add</span>                                         
+                                    <div class="text-sm font-weight-bold">ເອກະສານທົ່ວໄປ</div> 
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -86,17 +106,18 @@
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-sm font-weight-bold text-warning mb-5">
-                                        ຈັດການຜູ້ໃຊ້</div>
+                                        ຈັດການຂໍ້ມູນທົ່ວໄປ</div>
                                 </div>
-                                <div class="col-auto">
-                                    <i class="fa fa-user-plus fa-2x text-warning"></i>
+                                <div class="col-auto">                                   
+                                    <i class="material-icons fa-2x text-warning">queue</i>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <ul class="dropdown-menu shadow" style="width: 100%">
-                        <li><a class="dropdown-item" href="/testttt/">Test</a></li>
-                        <li><a class="dropdown-item" href="">Test</a></li>
+                        <li><a class="dropdown-item" href="/register/">ເພີ່ມຜູ້ໃຊ້</a></li>
+                        <li><a class="dropdown-item" href="">ຂໍ້ມູນພະແນກ</a></li>
+                        <li><a class="dropdown-item" href="">ປະເພດເອກະສານ</a></li>
                     </ul>
                 </div>
             </div>

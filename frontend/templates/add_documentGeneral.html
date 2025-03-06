@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="container-fluid">
-    <div class="card">
+    <div class="card-item">
         <div class="card-header ">
             <h2 class="mb-2 text-center fw-bold">ເພີ່ມເອກະສານທົ່ວໄປ</h2>
         </div>
@@ -28,14 +28,14 @@
                         <input class="form-control mb-3" type="file" id="file" name="file" multiple>                 
                     </div>
                     <div class="col-sm-12 col-md-6">
-                        <textarea class="form-control mb-3" id="subject" name="subject" placeholder="ຊື່ເອກະສານ" required></textarea>
+                        <textarea class="form-control mb-3" style="height: 150px;" id="subject" name="subject" placeholder="ເນື້ອໃນ" required></textarea>
                         <!-- <div id="departmentContainer">
                             
                         </div> -->
                     </div>
                 </div>                
                 <!-- File Upload and Receiver -->
-                <div class="row mb-3">
+                <div class="row">
                     <div class="col-sm-12 col-md-6">                        
                         
                         <input type="hidden" class="form-control mb-3" id="department_from" name="department" placeholder="ຈາກພະແນກ">
@@ -50,14 +50,14 @@
                         
                     </div>
                 </div>                           
-                <div class="row mb-3">
+                <div class="row">
                                       
                     <div class="col-sm-12 col-md-6">
                         <input type="hidden" class="form-control" id="name" name="name" placeholder="ຜູ້ບັນທືກ" required>
                     </div>
                 </div>
                 <!-- Submit and Reset Buttons -->
-                <div class="row p-3 " style="justify-content: center;">
+                <div class="row mb-3" style="justify-content: center;">
                         <button type="submit" class="btn btn-primary mx-3" style="width: 150px; border-radius: 10px"><i class="fas fa-save me-1"></i>ບັນທຶກ</button>
                         <button type="reset" class="btn btn-warning mx-3" style="width: 150px; border-radius: 10px"><i class="fas fa-sync me-1"></i></i>Reset</button>
                 </div>
@@ -73,6 +73,7 @@
 
 
 <script>
+    const DATABASE_URL = "{{ database_url | escapejs }}";
     document.addEventListener("DOMContentLoaded", async function () {
         // ເອີ້ນໃຊ້ຟັງຊັນ
 
@@ -90,28 +91,22 @@
         document.getElementById("department_into").value = department; 
     }
    
-
     try {
-        
+    
+        localStorage.setItem("username", userData.username); 
+        let departmentId = userData.Department; 
 
-        localStorage.setItem("username", userData.username); //  ບັນທຶກ username
-        let departmentId = userData.Department; //  ດຶງ Department ID ຂອງ user
-
-        //  ດຶງຂໍ້ມູນພະແນກທັງໝົດ
-        let deptResponse = await fetch("http://192.168.45.71:8000/api/list/departments/");
+        let deptResponse = await fetch("${DATABASE_URL}/api/list/departments/");
         // console.log(deptResponse)
         if (!deptResponse.ok) throw new Error("Error fetching departments");
-        let departments = await deptResponse.json(); //  ປ່ຽນ Departments → departments
-
-        //  ຄົ້ນຫາຊື່ພະແນກຂອງ user
+        let departments = await deptResponse.json(); 
         let userDepartment = departments.find(dept => dept.id === departmentId);
         if (userDepartment) {
-            localStorage.setItem("department", userDepartment.id); //  ບັນທຶກ 'department'
+            localStorage.setItem("department", userDepartment.id); 
            
-            document.getElementById("department").value = userDepartment.nane; //  ໃສ່ຄ່າໃນ input
+            document.getElementById("department").value = userDepartment.nane; 
         }
     } catch (error) {
-        // console.error("Error:", error);
     }
 });
 
@@ -124,7 +119,7 @@
 
     dataform.value = dd;
 
-    fetch('http://192.168.45.71:8000/api/list/Document_format/')
+    fetch(`${DATABASE_URL}/api/list/Document_format/`)
     .then(response => response.json())
     .then(data => {
         formatDropdown.innerHTML = '<option value="">ປະເພດເອກະສານ</option>';
@@ -139,16 +134,16 @@
 
 });
 document.getElementById("documentForm").addEventListener("submit", function(event) {
-    event.preventDefault();  // ປ້ອງກັນການ Submit ໂດຍກົງ
+    event.preventDefault();  
     let formData = new FormData(this);
       
     for (let pair of formData.entries()) {
-        console.log(pair[0] + ": " + pair[1]); // ສະແດງຄ່າໃນ Console
+        console.log(pair[0] + ": " + pair[1]); 
 
     }
 
     // ສົ່ງໄປ Backend
-    fetch("http://192.168.45.71:8000/api/document_general/", {
+    fetch(`${DATABASE_URL}/api/document_general/`, {
     method: "POST",
     body: formData
 })

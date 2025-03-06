@@ -5,15 +5,15 @@
 {% block content %}
 <div id="content ">
     <h3 class="mb-2 text-center fw-bold">ເອກະສານຂາເຂົ້າ</h3>
-    <div class="card shadow mb-4 m-2">
+    <div class="cardd shadow mb-4 m-2">
         <div class="card-body">
-            <div class="row p-6">
+            <div class="row p-6"> 
                 <form method="get" action="" class="mb-4"> 
                     <div class="card-header d-flex justify-content-between">
                         <div class="row g-2 align-items-center"> 
                             <div class="col-md-3 col-6">
                                 <select name="format" class="form-control filter-select">
-                                    <option value="">ປະເພດເອກະສານ</option>
+                                    <option value="">ເອກະສານທັງໝົດ</option>
                                     {% for format in formats %}
                                     <option value="{{ format.dmf_id }}" {% if format.dmf_id|stringformat:"s" == format_filter %}selected{% endif %}>
                                         {{ format.name }}
@@ -22,7 +22,6 @@
                                 </select>
                             </div>
                 
-                            <!-- ช่องเลือกวันที่ -->
                             <div class="col-md-3 col-6">
                                 <input type="date" name="start_date" class="form-control date-input" value="{{ start_date_filter }}">
                             </div>
@@ -88,203 +87,176 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-<script> 
-async function fetchData() {
-    let department = localStorage.getItem("department_name");
-    console.log("data local", department);
-    const documentApiUrl = `http://192.168.45.71:8000/api/search/document_lcic/?doc_type_info=ຂາເຂົ້າ&department_into=${department}`;
-    // const documentApiUrl = "http://192.168.45.71:8000/api/list/document_lcic/";
-    const departmentApiUrl = "http://192.168.45.71:8000/api/list/departments/";
-    const formatApiUrl = "http://192.168.45.71:8000/api/list/Document_format/";
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const formatFilter = urlParams.get('format') || '';
-    const departmentFilter = urlParams.get('department') || '';
-    const startDateFilter = urlParams.get('start_date') || '';
-    const endDateFilter = urlParams.get('end_date') || '';
-
-    try {
-        const [documentsRes, departmentsRes, formatsRes] = await Promise.all([
-            fetch(documentApiUrl),
-            fetch(departmentApiUrl),
-            fetch(formatApiUrl)
-        ]);
-
-        const documents = documentsRes.ok ? await documentsRes.json() : [];
-        const departments = departmentsRes.ok ? await departmentsRes.json() : [];
-        const formats = formatsRes.ok ? await formatsRes.json() : [];
-        console.log("formats", formats);
-        
-
-        const departmentMap = Object.fromEntries(departments.map(d => [d.id, d.name]));
-        const formatMap = Object.fromEntries(formats.map(f => [f.dmf_id, f.name]));
-
-        const processedDocuments = documents.map((doc, index) => {
-            return {
-                index: index + 1,
-                doc_id: doc.doc_id || 'N/A',
-                doc_number: doc.doc_number || 'N/A',
-                format_id: doc.format ? doc.format.dmf_id : null,
-                format_name: doc.format ? formatMap[doc.format.dmf_id] || 'N/A' : 'N/A',
-                subject: doc.subject || 'N/A',
-                insert_date: doc.insert_date || 'N/A',
-                department_id: doc.department ? doc.department.id : null,
-                department: doc.department ? departmentMap[doc.department.id] || 'N/A' : 'N/A',
-                department_into: Array.isArray(doc.department_into) ?
-                    doc.department_into.map(dep => departmentMap[dep.id] || 'N/A').join(', ') : 'N/A',
-                name: doc.name || 'N/A',
-                status2: doc.status2 || 'N/A',
-                file: doc.file ? `http://192.168.45.71:8000/${doc.file}` : '#'
-            };
-        });
-
-        const filteredDocuments = processedDocuments.filter(doc => {
-            const docDate = new Date(doc.insert_date);
-            return (!formatFilter || doc.format_id == formatFilter) &&
-                   (!departmentFilter || doc.department_id == departmentFilter) &&
-                   (!startDateFilter || docDate >= new Date(startDateFilter)) &&
-                   (!endDateFilter || docDate <= new Date(endDateFilter));
-        });
-
-        console.log("Filtered Documents:", filteredDocuments);
-        return filteredDocuments;
-
-    } catch (error) {
-        console.error("Error fetching API data:", error);
-        return [];
+<script>
+    const DATABASE_URL = "{{ database_url | escapejs }}";  
+    
+    async function fetchData() {
+        let department = localStorage.getItem("department_name");
+        let user = localStorage.getItem("user_id");
+    
+        const documentApiUrl = `${DATABASE_URL}/api/search/document_lcic/?doc_type_info=ຂາເຂົ້າ&department_into=${department}`;
+        const departmentApiUrl = `${DATABASE_URL}/api/list/departments/`;
+        const formatApiUrl = `${DATABASE_URL}/api/list/Document_format/`;
+    
+        const urlParams = new URLSearchParams(window.location.search);
+        const formatFilter = urlParams.get('format') || '';
+        const departmentFilter = urlParams.get('department') || '';
+        const startDateFilter = urlParams.get('start_date') || '';
+        const endDateFilter = urlParams.get('end_date') || '';
+    
+        try {
+            const [documentsRes, departmentsRes, formatsRes] = await Promise.all([
+                fetch(documentApiUrl),
+                fetch(departmentApiUrl),
+                fetch(formatApiUrl)
+            ]);
+    
+            const documents = documentsRes.ok ? await documentsRes.json() : [];
+            const departments = departmentsRes.ok ? await departmentsRes.json() : [];
+            const formats = formatsRes.ok ? await formatsRes.json() : [];
+    
+            const departmentMap = Object.fromEntries(departments.map(d => [d.id, d.name]));
+            const formatMap = Object.fromEntries(formats.map(f => [f.dmf_id, f.name]));
+    
+            const processedDocuments = documents.map((doc, index) => {
+                return {
+                    index: index + 1,
+                    doc_id: doc.doc_id || 'N/A',
+                    doc_number: doc.doc_number || 'N/A',
+                    format_id: doc.format ? doc.format.dmf_id : null,
+                    format_name: doc.format ? formatMap[doc.format.dmf_id] || 'N/A' : 'N/A',
+                    subject: doc.subject || 'N/A',
+                    insert_date: doc.insert_date || 'N/A',
+                    department_id: doc.department ? doc.department.id : null,
+                    department: doc.department ? departmentMap[doc.department.id] || 'N/A' : 'N/A',
+                    department_into: Array.isArray(doc.department_into) ?
+                        doc.department_into.map(dep => departmentMap[dep.id] || 'N/A').join(', ') : 'N/A',
+                    name: doc.name || 'N/A',
+                    status2: doc.status2 || 'N/A',
+                    file: doc.file ? `${DATABASE_URL}/${doc.file}` : '#',  // ໃຊ້ DATABASE_URL ກັບ file path
+                    status: doc.status || []
+                };
+            });
+    
+            const filteredDocuments = processedDocuments.filter(doc => {
+                const docDate = new Date(doc.insert_date);
+                return (!formatFilter || doc.format_id == formatFilter) &&
+                       (!departmentFilter || doc.department_id == departmentFilter) &&
+                       (!startDateFilter || docDate >= new Date(startDateFilter)) &&
+                       (!endDateFilter || docDate <= new Date(endDateFilter));
+            });
+    
+            return filteredDocuments;
+    
+        } catch (error) {
+            console.error("Error fetching API data:", error);
+            return [];
+        }
     }
-}
-
-function renderTable(documents) {
-    const userRole = localStorage.getItem("user_role");
-    if ($.fn.DataTable.isDataTable("#dataTable")) {
-        $("#dataTable").DataTable().destroy();
-    }
-
-    const tableBody = document.getElementById("dataTableBody");
-    tableBody.innerHTML = '';
-
-    if (!documents?.length) {
-        tableBody.innerHTML = '<tr><td colspan="10" class="text-center">ບໍ່ພົບຂໍ້ມູນ</td></tr>';
-        return;
-    }
-
-    const fragment = document.createDocumentFragment();
-    documents.forEach((doc, index) => {
-        const tr = document.createElement('tr');
-        tr.dataset.id = doc.doc_id;
-        tr.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${doc.doc_number || ''}</td>
-            <td>${doc.format_name || ''}</td>
-            <td>${doc.subject || ''}</td>
-            <td>${doc.insert_date || ''}</td>
-            <td>${doc.department || ''}</td>           
-            <td>${doc.name || ''}</td>
-            <td style="text-align: center;">
+    
+    function renderTable(documents) {
+        const userRole = localStorage.getItem("user_role");
+        const userId = localStorage.getItem("user_id");
+    
+        if ($.fn.DataTable.isDataTable("#dataTable")) {
+            $("#dataTable").DataTable().destroy();
+        }
+    
+        const tableBody = document.getElementById("dataTableBody");
+        tableBody.innerHTML = '';
+    
+        if (!documents?.length) {
+            tableBody.innerHTML = '<tr><td colspan="10" class="text-center">ບໍ່ພົບຂໍ້ມູນ</td></tr>';
+            return;
+        }
+    
+        const fragment = document.createDocumentFragment();
+        documents.forEach((doc, index) => {
+            const userViewed = doc.status?.some(status => {
+                return status.us_id == userId && status.Doc_status === "viewed";
+            });
+    
+            const tr = document.createElement('tr');
+            tr.dataset.id = doc.doc_id;
+            tr.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${doc.doc_number || ''}</td>
+                <td>${doc.format_name || ''}</td>
+                <td>${doc.subject || ''}</td>
+                <td>${doc.insert_date || ''}</td>
+                <td>${doc.department || ''}</td>           
+                <td>${doc.name || ''}</td>
+                <td style="text-align: center;">
                     <a href="${doc.file}" onclick="UpDocument(event, '${doc.doc_id}')" target="_blank" class="btn btn-sm btn-link">
-                        <span id="status-${doc.doc_id}" class="badge ${doc.status2 === 'viewed' ? 'bg-success' : 'bg-danger'}">
-                            ${doc.status2 === 'viewed' ? '<i class="fas fa-check "></i>' : '<i class="fas fa-eye "></i>'}
+                        <span id="status-${doc.doc_id}" class="badge ${userViewed ? 'bg-success' : 'bg-danger'}">
+                            ${userViewed ? '<i class="fas fa-check"></i>' : '<i class="fas fa-eye"></i>'}
                         </span>
                     </a>
-            </td>
-            
-            <td class="text-center">
-                <a href="/update_document/${doc.doc_id}" class="btn btn-sm btn-link" title="ແກ້ໄຂ">
-                    <i class="fas fa-edit text-success"></i>
-                </a>
-                ${userRole === "admin" ? `
-                <a href="#" onclick="deleteDocument('${doc.doc_id}')" class="btn btn-sm btn-link" title="ລືບ">
-                    <i class="fas fa-trash-alt text-danger"></i>
-                </a>` : ""}
-            </td>
-        `;
-        fragment.appendChild(tr);
-    });
-
-    tableBody.appendChild(fragment);
-
-    $(document).ready(function() {
-  $('#dataTable').DataTable();
-
-  $(".dataTables_filter").insertBefore(".dataTables_wrapper");
-  
-});
-}
-
-function UpDocument(event, docId) {  
-    console.log("Button clicked!" + docId);
-    // event.preventDefault();  // ป้องกันหน้าโหลดใหม่
-
-    const apiUrl = `http://192.168.45.71:8000/api/update_status/${docId}/`;
-
-    fetch(apiUrl, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ status2: "viewed" })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Server response:", data);  
-
-        if (data.success) {
-            let statusBadge = document.querySelector(`#status-${docId}`);
-            if (statusBadge) {
-                statusBadge.classList.remove("bg-danger");
-                statusBadge.classList.add("bg-success");
-                statusBadge.textContent = "ເບີ່ງແລ້ວ";
-            }
-        } else {
-            console.error("Update failed:", data.message);
-        }
-    })
-    .catch(error => console.error("Error:", error));
+                </td>
+                <td class="text-center">
+                    <a href="/update_documentE/${doc.doc_id}" class="btn btn-sm btn-link" title="ແກ້ໄຂ">
+                        <i class="fas fa-edit text-success"></i>
+                    </a>
+                    ${userRole === "admin" ? `
+                    <a href="#" onclick="deleteDocument('${doc.doc_id}')" class="btn btn-sm btn-link" title="ລືບ">
+                        <i class="fas fa-trash-alt text-danger"></i>
+                    </a>` : ""}
+                </td>
+            `;
+            fragment.appendChild(tr);
+        });
     
-}
-fetchData().then(renderTable);
-
-// document.addEventListener("DOMContentLoaded", function () {
-//     document.querySelectorAll(".view-document, .view-btn").forEach(function (element) {
-//         element.addEventListener("click", function () {
-//             let docId = this.getAttribute("data-id");
-
-//             fetch(`/update-view-status/${docId}/`, {
-//                 method: "POST",
-//                 headers: {
-//                     "X-CSRFToken": getCSRFToken(),
-//                     "Content-Type": "application/json"
-//                 },
-//                 body: JSON.stringify({ status2: "viewed" })
-//             })
-//             .then(response => response.json())
-//             .then(data => {
-//                 if (data.success) {
-//                     let row = document.querySelector(`tr[data-id='${docId}']`);
-//                     row.querySelector(".view-btn").style.display = "none";
-//                     row.querySelector(".viewed-btn").style.display = "inline-block";
-//                 }
-//             })
-//             .catch(error => console.error("Error:", error));
-//         });
-//     });
-
-//     function getCSRFToken() {
-//         return document.querySelector("input[name='csrfmiddlewaretoken']").value;
-//     }
-      
-// });
-
-
-
-$(document).ready(function() {
-        $('#dataTable').DataTable();
-    });
+        tableBody.appendChild(fragment);
+    
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+            $(".dataTables_filter").insertBefore(".dataTables_wrapper");
+        });
+    }
+    
+    function UpDocument(event, docId) {
+        // event.preventDefault();  // ຖ້າບໍ່ຕ້ອງການໃຫ້ປິດການ redirect ໃຫ້ເອົາອອກ
+        const userId = localStorage.getItem("user_id");
+        if (!userId) {
+            console.error("User ID not found in localStorage");
+            return;
+        }
+    
+        const apiUrl = `${DATABASE_URL}/api/update_doc_status/`;
+    
+        fetch(apiUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ 
+                doc_id: docId,   
+                us_id: userId    
+            })
+        })
+        .then(async response => {
+            if (!response.ok) {
+                let text = await response.text();
+                throw new Error(text);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                let statusBadge = document.querySelector(`#status-${docId}`);
+                if (statusBadge) {
+                    statusBadge.classList.remove("bg-danger");
+                    statusBadge.classList.add("bg-success");
+                    statusBadge.innerHTML = '<i class="fas fa-check"></i>';
+                }
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    }
     
     function deleteDocument(docId) {
-        const apiUrl = `http://192.168.45.71:8000/api/delete/document_lcic/${docId}/`;
-
+        const apiUrl = `${DATABASE_URL}/api/delete/document_lcic/${docId}/`;
+    
         Swal.fire({
             title: "ທ່ານແນ່ໃຈບໍ?",
             text: "ທ່ານຈະບໍ່ສາມາດກູ້ຂໍ້ມູນຄືນໄດ້!",
@@ -295,26 +267,27 @@ $(document).ready(function() {
             confirmButtonText: "ຢືນຢັນ",
             cancelButtonText: "Cancel"
         }).then((result) => {
-        if (result.isConfirmed) {
-            fetch(apiUrl, { method: 'DELETE' })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(() => {
-                    $('#dataTable').DataTable().row($(`tr[data-id="${docId}"]`)).remove().draw();
-                    Swal.fire("ລຶບສຳເລັດ!", "ເອກະສານໄດ້ຖືກລຶບແລ້ວ.", "success");
-                    location.reload(); // ໂຫຼດໜ້າໃໝ່
-                })
-                .catch(error => {
-                    Swal.fire("Error!", `ລຶບເອກະສານບໍ່ສຳເລັດ: ${error.message}`, "error");
-                });
-        }
-    });
-}
-
+            if (result.isConfirmed) {
+                fetch(apiUrl, { method: 'DELETE' })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(() => {
+                        $('#dataTable').DataTable().row($(`tr[data-id="${docId}"]`)).remove().draw();
+                        Swal.fire("ລຶບສຳເລັດ!", "ເອກະສານໄດ້ຖືກລຶບແລ້ວ.", "success");
+                        location.reload();
+                    })
+                    .catch(error => {
+                        Swal.fire("Error!", `ລຶບເອກະສານບໍ່ສຳເລັດ: ${error.message}`, "error");
+                    });
+            }
+        });
+    }
+    
+    fetchData().then(renderTable);
 </script>
 
 {% endblock %}

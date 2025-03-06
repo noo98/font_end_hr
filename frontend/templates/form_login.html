@@ -46,6 +46,7 @@
         <div class="input-with-icon">
           <i class="fas fa-user" style="margin-left: 2vh;"></i>
           <input type="text" class="form-control" id="username" name="username" placeholder="ຊື່ຜູ້ໃຊ້...">
+          
         </div>
         <div class="mt-4 input-with-icon">
           <i class="fa-solid fa-key" style="margin-left: 2vh;"></i>
@@ -70,6 +71,7 @@
 
 
 <script>
+const DATABASE_URL = "{{ database_url | escapejs }}";
 document.getElementById("loginForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
@@ -78,7 +80,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
 
     try {
         // 1. ส่งข้อมูลไป API Login
-        let response = await fetch("http://192.168.45.71:8000/api/login/", {
+        let response = await fetch(`${DATABASE_URL}/api/login/`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, password })
@@ -95,19 +97,20 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
             return;
         }
 
-         // 2. ດຶງຂໍ້ມູນ user ຈາກ API `/api/users/{username}`
-        let userResponse = await fetch(`http://192.168.45.71:8000/api/users/${data.user || data.username}`);
+        let userResponse = await fetch(`${DATABASE_URL}/api/users/${data.user || data.username}`);
         let userData = await userResponse.json();
         console.log("User Data:", userData);
 
-        // 3. ບັນທຶກຂໍ້ມູນ User ລົງ localStorage
-        localStorage.setItem("username", userData.username);
+        // 3. ເກັບຂໍ້ມູນລົງ localStorage (ໃຫ້ຄ່າ user_id)
+        localStorage.setItem("user_id", userData.us_id); // ເກັບຄ່າ id
+        localStorage.setItem("username", userData.username); // ເກັບຊື່ຜູ້ໃຊ້
         localStorage.setItem("user", JSON.stringify(userData));
         localStorage.setItem("user_role", userData.status === 1 ? "admin" : "user");
+      
         let redirectURL = (userData.status === 1) ? "/index/" : "/index1/";
 
-        // 3. ดึงข้อมูลแผนก
-        let deptResponse = await fetch("http://192.168.45.71:8000/api/list/departments/");
+        // 4. ດຶງຂໍ້ມູນແຜນກົດ
+        let deptResponse = await fetch(`${DATABASE_URL}/api/list/departments/`);
         let departments = await deptResponse.json();
 
         let userDepartment = departments.find(dept => dept.id === userData.Department);
@@ -115,6 +118,9 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
             localStorage.setItem("department", userDepartment.id);
             localStorage.setItem("department_name", userDepartment.name);
         }
+
+        // 5. ສະແດງ username ໃນໜ້າຈໍ
+        // document.getElementById("displayUsername").textContent = userData.username;
 
         // 4. แสดง SweetAlert2 พร้อมนับถอยหลัง
         Swal.fire({

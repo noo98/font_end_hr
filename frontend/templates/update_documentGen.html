@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load static %}
+<title>Lcic-HR</title>
+
+{% block content %}
+<div class="container-fluid">
+    <div class="card-item">
+        <div class="card-header">
+            <h3 class="mb-2 text-center fw-bold">ແກ້ໄຂເອກະສານ</h3>
+        </div>
+        <div class="card-body">
+            <form id="updateForm" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <!-- Show errors if any -->
+                {% if messages %}
+                <div class="alert-container">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <div class="row mb-3">
+                    <div class="col-sm-12 col-md-6">
+                        <input type="text" class="form-control" id="doc_number" name="doc_number" value="{{ document.doc_number }}" required>                  
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <input type="date" class="form-control" id="insert_date" name="insert_date" value="{{ document.insert_date }}" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-12 col-md-6">
+                        <textarea class="form-control" id="subject" name="subject">{{ document.subject }}</textarea>
+                    </div>
+                    <div class="col-sm-12 col-md-6">                        
+                        <select id="formatFilter" name="format" class="form-control d-inline-block mb-3" required>
+                            <option value="">ປະເພດເອກະສານ</option>
+                            {% for format in Document_format %}
+                                <option value="{{ format.dmf_id }}" {% if format.dmf_id == document.format %}selected{% endif %}>
+                                    {{ format.name }}
+                                </option>
+                            {% endfor %}
+                        </select>                        
+                    </div>
+                </div>
+
+                                            
+                <div class="row mb-3" style="display: none;">
+                    <div class="col-sm-12 col-md-6" >                   
+                        <textarea class="form-control" id="document_detail" name="document_detail">{{ document.document_detail }}</textarea>
+                    </div>                   
+                    <div class="col-sm-12 col-md-6">                       
+                        <select id="departmentFilter" name="department" class="form-control d-inline-block mb-3" required>
+                            <option value="">ພະແນກ</option>
+                            {% for department in departments %}
+                                <option value="{{ department.id }}" {% if department.id == document.department %}selected{% endif %}>
+                                    {{ department.name }}
+                                </option>
+                            {% endfor %}
+                        </select>                          
+                        <input type="text" class="form-control" id="name" name="name" value="{{ document.name }}" required>
+                    </div>
+                </div>
+                
+                <!-- Submit and Reset Buttons -->
+                <div class="row p-3" style="justify-content: center;">
+                    <button type="submit" name="btnEdit" class="btn btn-info mx-3" style="width: 150px; border-radius: 10px"><i class="fas fa-edit me-1"></i>ແກ້ໄຂ</button>   
+                    <a href="{% url 'documentGen' %}" class="btn btn-danger mx-3" style="width: 150px; border-radius: 10px"><i class="fas fa-times me-1"></i>ຍົກເລີກ</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- sweetalert -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+document.querySelector("#updateForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+
+    // Debug: ພິມຄ່າ FormData
+    for (let pair of formData.entries()) {
+        console.log(pair[0] + ": " + pair[1]);
+    }
+
+    // ສົ່ງ request ໄປ Django view
+    fetch("{% url 'update_documentGen' document.docg_id %}", {
+        method: "POST",
+        body: formData,
+        headers: {
+            "X-CSRFToken": "{{ csrf_token }}"
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, message: ${text}`); });
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            Swal.fire({
+                title: "ສຳເລັດ!",
+                text: data.message || "ແກ້ໄຂສຳເລັດ",
+                icon: "success",
+                confirmButtonText: "ຕົກລົງ"
+            }).then(() => {
+                window.location.href = "{% url 'documentGen' %}";
+            });
+        } else {
+            Swal.fire({
+                title: "ເກີດຂໍ້ຜິດພາດ!",
+                text: data.error || "ບໍ່ສາມາດແກ້ໄຂເອກະສານ",
+                icon: "error",
+                confirmButtonText: "ຕົກລົງ"
+            });
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        Swal.fire({
+            title: "ເກີດຂໍ້ຜິດພາດ!",
+            text: "ມີບາງຢ່າງຜິດປົກກະຕິ: " + error.message,
+            icon: "error",
+            confirmButtonText: "ຕົກລົງ"
+        });
+    });
+});
+</script>
+
+{% endblock %}

@@ -12,7 +12,7 @@
         <h1 class="h3 mb-2 text-gray-800">ຂໍ້ມູນພະນັກງານ</h1>
 
         <!-- Data Table -->
-        <div class="card shadow mb-4">
+        <div class="card-item">
             <div class="card-header py-3 d-flex justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Employee List</h6>
                 <a href="{% url 'form_emp' %}" class="btn btn-primary">ເພີ່ມ</a>
@@ -21,7 +21,7 @@
                     {% if employees %}
                         <table class="table table-striped" width="100%">
                             <thead class="thead-dark">
-                                <tr style="text-align: center;">
+                                <tr style="text-align: start;">
                                     <th style="min-width: auto">ລະຫັດ</th>                               
                                     <th style="min-width: 150px;">ຊື່ພາສາລາວ</th>               
                                     <th style="min-width: 150px;">ຊື່ພາສາອັງກິດ</th>
@@ -34,7 +34,7 @@
                             </thead>
                             <tbody id="employeeTableBody">
                                 {% for emp in employees %}
-                                <tr style="text-align: center;">
+                                <tr style="text-align: start;">
                                     <td>{{ emp.emp_id}}</td>
                                     <td>{{ emp.lao_name}}</td>
                                     <td>{{ emp.eng_name}}</td>
