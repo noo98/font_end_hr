@@ -14257,3 +14257,150 @@ Starting new HTTP connection (1): 192.168.45.71:8000
 http://192.168.45.71:8000 "GET /api/list/departments/ HTTP/11" 200 355
 Starting new HTTP connection (1): 192.168.45.71:8000
 http://192.168.45.71:8000 "GET /api/list/Document_format/ HTTP/11" 200 342
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Starting new HTTP connection (1): 192.168.45.71:8000
+http://192.168.45.71:8000 "GET /api/employee/ HTTP/11" 200 1085
+Starting new HTTP connection (1): 192.168.45.71:8000
+http://192.168.45.71:8000 "GET /api/list/departments/ HTTP/11" 200 355
+Internal Server Error: /form_emp/
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py", line 456, in form_emp
+    return render(request, 'form_emp.html',)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: form_emp.html
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Starting new HTTP connection (1): 192.168.45.71:8000
+http://192.168.45.71:8000 "GET /api/employee/ HTTP/11" 200 1085
+Starting new HTTP connection (1): 192.168.45.71:8000
+http://192.168.45.71:8000 "GET /api/list/departments/ HTTP/11" 200 355
+Starting new HTTP connection (1): 192.168.45.71:8000
+http://192.168.45.71:8000 "GET /api/employee/ HTTP/11" 200 1085
+Starting new HTTP connection (1): 192.168.45.71:8000
+http://192.168.45.71:8000 "GET /api/list/departments/ HTTP/11" 200 355
+Starting new HTTP connection (1): 192.168.45.71:8000
+http://192.168.45.71:8000 "GET /api/list/Document_format/ HTTP/11" 200 342
+Starting new HTTP connection (1): 192.168.45.71:8000
+http://192.168.45.71:8000 "GET /api/list/departments/ HTTP/11" 200 355
+Starting new HTTP connection (1): 192.168.45.71:8000
+http://192.168.45.71:8000 "GET /api/list/Document_format/ HTTP/11" 200 342
+Starting new HTTP connection (1): 192.168.45.71:8000
+http://192.168.45.71:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 27183
+Starting new HTTP connection (1): 192.168.45.71:8000
+http://192.168.45.71:8000 "GET /api/list/document_lcic/ HTTP/11" 200 27183
+Starting new HTTP connection (1): 192.168.45.71:8000
+http://192.168.45.71:8000 "GET /api/list/departments/ HTTP/11" 200 355
+Starting new HTTP connection (1): 192.168.45.71:8000
+http://192.168.45.71:8000 "GET /api/list/Document_format/ HTTP/11" 200 342
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'

@@ -56,7 +56,7 @@ def tables_emp(request):
     except Exception as e:
         print(" Error fetching data:", e)
 
-    return render(request, 'tables_emp.html', {
+    return render(request, 'employee/tables_emp.html', {
         "employees": employees, 
         'database_url': DATABASE_URL,})
 
@@ -219,7 +219,7 @@ def documentEntry(request):
         documents = []
         print(f"Error fetching API data: {e}")
     
-    return render(request, 'documentEntry.html', 
+    return render(request, 'documents/documentEntry.html', 
                   {
         'department_into': department_into,
         'documents': documents,
@@ -283,7 +283,7 @@ def documentOut(request):
         documents = []
         print(f"Error fetching API data: {e}")
 
-    return render(request, 'documentOut.html', {
+    return render(request, 'documents/documentOut.html', {
         'documents': documents,
         'departments': departments,
         'formats': formats,
@@ -303,22 +303,22 @@ def documentGen(request):
         'formats': formats,
         'format_filter': request.GET.get('format', '')
     }
-    return render(request, 'documentGen.html',{
+    return render(request, 'documents/documentGen.html',{
         'database_url': DATABASE_URL,  
     })
 
 def add_documentE(request):
-    return render(request, 'add_document_entry.html',{
+    return render(request, 'documents/add_document_entry.html',{
         'database_url': DATABASE_URL,  
     })
 
 def add_documentO(request):
-    return render(request, 'add_document_out.html',{               
+    return render(request, 'documents/add_document_out.html',{               
         'database_url': DATABASE_URL,  
     })
 
 def add_documentG(request):   
-    return render(request, 'add_documentGeneral.html',{            
+    return render(request, 'documents/add_documentGeneral.html',{            
         'database_url': DATABASE_URL, 
     })
 
@@ -337,7 +337,7 @@ def update_documentE(request, doc_id):
             print(f"Error fetching data: {e}")
             document, departments, document_format = {}, [], []
             
-        return render(request, 'update_documentE.html', {
+        return render(request, 'documents/update_documentE.html', {
             'document': document,
             'departments': departments,
             'Document_format': document_format,
@@ -383,7 +383,7 @@ def update_documentO(request, doc_id):
             print(f"Error fetching data: {e}")
             document, departments, document_format = {}, [], []
 
-        return render(request, 'update_documentO.html', {
+        return render(request, 'documents/update_documentO.html', {
             'document': document,
             'departments': departments,
             'Document_format': document_format,
@@ -410,7 +410,7 @@ def update_documentGen(request, docg_id):
             print(f"Error fetching data: {e}")
             document, departments, document_format = {}, [], []
             
-        return render(request, 'update_documentGen.html', {
+        return render(request, 'documents/update_documentGen.html', {
             'document': document,
             'departments': departments,
             'Document_format': document_format,
@@ -453,7 +453,7 @@ def test_view(request):
     return render(request, "test.html", context)
 
 def form_emp(request):
-    return render(request, 'form_emp.html',)
+    return render(request, 'employee/form_emp.html',)
 
 def form_post(request):
     return render(request, 'form_post.html',)
