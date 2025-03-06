@@ -29,13 +29,15 @@ urlpatterns = [
     path('salary_grade/', views.salary_grade, name='salary_grade'),
     path('documentEntry/', views.documentEntry, name='documentEntry'),
     path('documentOut/', views.documentOut, name='documentOut'),
-    path('add_documentE/', add_documentE, name='add_documentE'),
+    path('add_documentE/', views.add_documentE, name='add_documentE'),
     path('add_documentO/', add_documentO, name='add_documentO'),
     path('add_documentG/', views.add_documentG, name='add_documentG'),
     path('documentGen/',views.documentGen, name='documentGen'),
-    
+    path('update_documentGen/<int:docg_id>/', views.update_documentGen, name='update_documentGen'),
     path('test/', views.test_view, name='test'),
-    path('testttt/', views.testttt, name='testttt'),
-    path('update_document/<int:doc_id>/', views.update_document, name='update_document'),
+    path('update_documentO/<int:doc_id>/', views.update_documentO, name='update_documentO'),
+    path('update_documentE/<int:doc_id>/', views.update_documentE, name='update_documentE'),
+    # path('testttt/', views.testttt_view, name='testttt'),
+   
 
 ]
