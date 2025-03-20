@@ -40,7 +40,9 @@
                             <tr>
                                 <th class="text-center">ລໍາດັບ</th>
                                 <th>ຊື່ພະແນກ</th>
-                                <th class="text-center">Option</th>
+                                <!-- <th>ມື້ສ້າງ</th>
+                                <th>ມື້ແກ້ໄຂ</th> -->
+                                <th class="text-center">ຈັດການ</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,6 +50,8 @@
                             <tr>
                                 <td class="text-center">{{ forloop.counter }}</td>
                                 <td>{{ department.name }}</td>
+                                <!-- <td>{{department}}</td>
+                                <td></td> -->
                                 <td class="text-center">
                                     <a href="#" onclick="editDepartment('{{ department.id }}')" data-bs-toggle="tooltip" title="ແກ້ໄຂຂໍ້ມູນ">
                                         <i class="fas fa-edit text-success"></i>

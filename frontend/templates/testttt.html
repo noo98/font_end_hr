@@ -94,9 +94,9 @@ document.addEventListener("DOMContentLoaded", async function() {
         let department = localStorage.getItem("department_name");
         // console.log("data local", department);
         
-        const documentApiUrl = `http://192.168.45.71:8000/api/search/document_general/?department=${department}`;
-        const departmentApiUrl = "http://192.168.45.71:8000/api/list/departments/";
-        const formatApiUrl = "http://192.168.45.71:8000/api/list/Document_format/";
+        const documentApiUrl = `http://192.168.45.53:8000/api/search/document_general/?department=${department}`;
+        const departmentApiUrl = "http://192.168.45.53:8000/api/list/departments/";
+        const formatApiUrl = "http://192.168.45.53:8000/api/list/Document_format/";
     
         const urlParams = new URLSearchParams(window.location.search);
         const formatFilter = urlParams.get('format') || '';
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", async function() {
                 subject: doc.subject || 'N/A',
                 insert_date: doc.insert_date || 'N/A',
                 name: doc.name || 'N/A',
-                file: doc.file ? `http://192.168.45.71:8000/${doc.file}` : '#'
+                file: doc.file ? `http://192.168.45.53:8000/${doc.file}` : '#'
             }));
     
             const filteredDocuments = processedDocuments.filter(doc => {
@@ -208,7 +208,7 @@ function renderTable(documents) {
 
 
     function deleteDocument(docId) {
-        const apiUrl = `http://192.168.45.71:8000/api/delete/document/${docId}/`;
+        const apiUrl = `http://192.168.45.53:8000/api/delete/document/${docId}/`;
 
         Swal.fire({
             title: "ທ່ານແນ່ໃຈບໍ?",

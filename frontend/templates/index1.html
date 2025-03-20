@@ -1,107 +1,400 @@
-{% extends "base.html" %} 
+{% extends "base1.html" %}
 {% load static %}
+{% block content %}
+<title>Lcic-HR - ລະບົບບໍລິຫານ ແລະ ຈັດການພາຍໃນ</title>
 
-    {% block content %}
-    <div class="container-fluid">
+<header>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</header>
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center mb-2">
-            <h1 class="h3 mb-0 text-gray-800 ">Dashboard</h1>            
+
+    <!-- Page Heading -->
+    <div class="dashboard-header ml-2">
+        <h1><i class="fas fa-tachometer-alt"></i> ລະບົບບໍລິຫານ ແລະ ຈັດການພາຍໃນ</h1>            
+    </div>
+
+    <!-- Content Row -->
+    <div class="row ml-1">
+        <!-- Document Management -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="dropdown">
+                <div class="card border-left-primary shadow h-100 py-2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-sm font-weight-bold text-primary mb-3">
+                                    ຈັດການເອກະສານ
+                                </div>
+                                <div class="text-xs text-gray-600">ຄລິກເພື່ອຈັດການຂໍ້ມູນເອກະສານ</div>                                 
+                            </div>                               
+                            <div class="col-auto">
+                                <i class="fa fa-folder fa-2x text-primary"></i>
+                            </div>
+                            <i class="fa fa-folder card-icon text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+                <ul class="dropdown-menu shadow" style="width: 100%">
+                    <li>
+                        <a class="dropdown-item" href="/documentEntry/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-primary mr-3">move_to_inbox</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ເອກະສານຂາເຂົ້າ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການເອກະສານຂາເຂົ້າ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/documentOut/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-primary mr-3">outbox</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ເອກະສານຂາອອກ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການເອກະສານຂາອອກ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/documentGen/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-primary mr-3">assignment_add</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ເອກະສານທົ່ວໄປ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການເອກະສານທົ່ວໄປ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
 
-        <!-- Content Row -->
-        <div class="row">
-            <div class="col-xl-3 col-md-6 mb-4">               
-                <div class="dropdown">
-                    <div class="card border-left-success shadow h-100 py-2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-sm font-weight-bold text-primary mb-5">
-                                        ຈັດການເອກະສານ</div>
-                                    
+        <!-- <div class="col-xl-3 col-md-6 mb-4">
+            <div class="dropdown">
+                <div class="card border-left-success shadow h-100 py-2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-sm font-weight-bold text-success mb-3">
+                                    ຈັດການຂໍ້ມູນພະນັກງານ
                                 </div>
-                                <div class="col-auto">
-                                    <i class="fa fa-folder fa-2x text-primary"></i>
-                                </div>
+                                <div class="text-xs text-gray-600">ຄລິກເພື່ອຈັດການຂໍ້ມູນພະນັກງານ</div>                                 
+                            </div>                               
+                            <div class="col-auto">
+                                <i class="fa fa-users fa-2x text-success"></i>
                             </div>
+                            <i class="fa fa-users card-icon text-success"></i>
                         </div>
                     </div>
-                    <ul class="dropdown-menu shadow" style="width: 100%">
-                        <li><a class="dropdown-item" href="/documentOut/">ຂາອອກ</a></li>
-                        <li><a class="dropdown-item" href="/documentEntry/">ຂາເຂົ້າ</a></li>
-                        <li><a class="dropdown-item" href="/documentEntry/">ເອກະສານທົ່ວໄປ</a></li>
-                    </ul>
                 </div>
+                <ul class="dropdown-menu shadow" style="width: 100%">
+                    <li>
+                        <a class="dropdown-item" href="/tables_emp/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-success mr-3">person_add</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ບັນທຶກຂໍ້ມູນພະນັກງານ</div>
+                                    <div class="text-xs text-gray-500">ເພີ່ມຫຼືແກ້ໄຂຂໍ້ມູນພະນັກງານ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/form_emp/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-success mr-3">visibility</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ສະແດງຂໍ້ມູນພະນັກງານ</div>
+                                    <div class="text-xs text-gray-500">ເບິ່ງລາຍລະອຽດພະນັກງານ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
             </div>
-
-            <!-- <div class="col-xl-3 col-md-6 mb-4">
-                <div class="dropdown">
-                    <div class="card border-left-success shadow h-100 py-2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-sm font-weight-bold text-success mb-5">
-                                        ຈັດການຂໍ້ມູນພະນັກງານ
-                                    </div>                                
-                                </div>                               
-                                <div class="col-auto">
-                                    <i class="fa fa-users fa-2x text-success"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="dropdown-menu shadow">
-                        <li><a class="dropdown-item" href="/tables_emp/"> ບັນທຶກຂໍ້ມູນພະນັກງານ</a></li>
-                        <li><a class="dropdown-item" href="/form_emp/"> ສະແດງຂໍ້ມູນພະນັກງານ</a></li>
-                    </ul>
-                </div>
-            </div> -->
-
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="dropdown">
-                    <div class="card border-left-info shadow h-100 py-2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-sm font-weight-bold text-info mb-5">ຈັດການຊັບສີນ</div>                               
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-clipboard-list fa-2x text-info"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="dropdown-menu shadow" style="width: 100%">
-                        <li><a class="dropdown-item" href="">Test</a></li>
-                        <li><a class="dropdown-item" href="">Test</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- <div class="col-xl-3 col-md-6 mb-4">
-                <div class="dropdown">
-                    <div class="card border-left-warning shadow h-100 py-2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-sm font-weight-bold text-warning mb-5">
-                                        ຈັດການຜູ້ໃຊ້</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fa fa-user-plus fa-2x text-warning"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="dropdown-menu shadow">
-                        <li><a class="dropdown-item" href="">Test</a></li>
-                        <li><a class="dropdown-item" href="">Test</a></li>
-                    </ul>
-                </div>
-            </div> -->
-
         </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="dropdown">
+                <div class="card border-left-info shadow h-100 py-2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-sm font-weight-bold text-info mb-3">ຈັດການຊັບສີນ</div>
+                                <div class="text-xs text-gray-600">ຄລິກເພື່ອຈັດການຂໍ້ມູນຊັບສີນ</div>                               
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-clipboard-list fa-2x text-info"></i>
+                            </div>
+                            <i class="fas fa-clipboard-list card-icon text-info"></i>
+                        </div>
+                    </div>
+                </div>
+                <ul class="dropdown-menu shadow" style="width: 100%">
+                    <li>
+                        <a class="dropdown-item" href="/asset_add/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-info mr-3">inventory</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ເພີ່ມຊັບສີນ</div>
+                                    <div class="text-xs text-gray-500">ບັນທຶກຊັບສີນໃໝ່</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/asset_report/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-info mr-3">assignment</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ລາຍງານຊັບສີນ</div>
+                                    <div class="text-xs text-gray-500">ເບິ່ງລາຍການຊັບສີນທັງໝົດ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="dropdown">
+                <div class="card border-left-warning shadow h-100 py-2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-sm font-weight-bold text-warning mb-3">
+                                    ຈັດການຂໍ້ມູນທົ່ວໄປ</div>
+                                <div class="text-xs text-gray-600">ຄລິກເພື່ອຈັດການຂໍ້ມູນຂອງລະບົບ</div>
+                            </div>
+                            <div class="col-auto">                                   
+                                <i class="material-icons fa-2x text-warning">queue</i>
+                            </div>
+                            <i class="material-icons card-icon text-warning">settings</i>
+                        </div>
+                    </div>
+                </div>
+                <ul class="dropdown-menu shadow" style="width: 100%">
+                    <li>
+                        <a class="dropdown-item" href="/register/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-warning mr-3">person_add</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ເພີ່ມຜູ້ໃຊ້</div>
+                                    <div class="text-xs text-gray-500">ເພີ່ມຜູ້ໃຊ້ລະບົບໃໝ່</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/department/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-warning mr-3">business</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຂໍ້ມູນພະແນກ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການຂໍ້ມູນພະແນກ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/document_types/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-warning mr-3">category</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ປະເພດເອກະສານ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການປະເພດເອກະສານ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="row m-1">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header py-3 bg-primary">
+                <h6 class="m-0 font-weight-bold text-white">ແຈ້ງການ ແລະ ຂ່າວສານ</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered"  width="100%" cellspacing="0">
+                        <thead class="thead-light">
+                            <tr>
+                                <th style="width: 40px;">ລ/ດ</th>                               
+                                <th style="width: 400px;">ເນື້ອໃນ</th>
+                                <th style="width: 70px;">ລົງວັນທີ່</th>                 
+                                <th style="width: 40px;">ໄຟລ໌</th>                
+                            </tr>
+                        </thead>                   
+                        <tbody id="dataTableBody">
+                            
+                        </tbody>
+                    </table>
+                    
+                </div> 
+                <div class="dots-container" id="dots"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Stats Section -->
+    <div class="stats-container mx-2">
+        <div class="stats-header">
+            <h5 class="text-primary m-0 font-weight-bold">ສະຖິຕິລະບົບ</h5>
+            <div>
+                <select class="form-select form-select-sm">
+                    <option selected>ປະຈຳວັນນີ້</option>
+                    <option>ປະຈຳອາທິດ</option>
+                    <option>ປະຈຳເດືອນ</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="text-xs text-primary">ພະນັກງານທັງໝົດ</div>
+                <div class="number">125</div>
+                <div class="text-xs text-success">+2 ຄົນໃນເດືອນນີ້</div>
+            </div>
+            <div class="stat-card" style="border-left-color: #1cc88a;">
+                <div class="text-xs text-success">ເອກະສານຂາເຂົ້າ</div>
+                <div class="number">42</div>
+                <div class="text-xs text-gray-600">ໃນເດືອນນີ້</div>
+            </div>
+            <div class="stat-card" style="border-left-color: #36b9cc;">
+                <div class="text-xs text-info">ເອກະສານຂາອອກ</div>
+                <div class="number">56</div>
+                <div class="text-xs text-gray-600">ໃນເດືອນນີ້</div>
+            </div>
+            <div class="stat-card" style="border-left-color: #f6c23e;">
+                <div class="text-xs text-warning">ຊັບສີນທັງໝົດ</div>
+                <div class="number">583</div>
+                <div class="text-xs text-success">+12 ໃນເດືອນນີ້</div>
+            </div>
+        </div>
+    </div>
+</div>
+
        
-    {% endblock %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", async function() {
+        const DATABASE_URL = "{{ database_url | escapejs }}";  
+    
+        async function fetchData() { 
+            
+            
+            const documentApiUrl = `${DATABASE_URL}/api/search/document_general/?status_doc=1`;
+            const departmentApiUrl = `${DATABASE_URL}/api/list/departments/`;
+            const formatApiUrl = `${DATABASE_URL}/api/list/Document_format/`;
+        
+            const urlParams = new URLSearchParams(window.location.search);
+            const formatFilter = urlParams.get('format') || '';
+            const startDateFilter = urlParams.get('start_date') || '';
+            const endDateFilter = urlParams.get('end_date') || '';
+        
+            try {
+                const [documentsRes, departmentsRes, formatsRes] = await Promise.all([
+                    fetch(documentApiUrl),
+                    fetch(departmentApiUrl),
+                    fetch(formatApiUrl)
+                ]);
+        
+                const documents = documentsRes.ok ? await documentsRes.json() : [];
+                const departments = departmentsRes.ok ? await departmentsRes.json() : [];
+                const formats = formatsRes.ok ? await formatsRes.json() : [];
+        
+                const departmentMap = Object.fromEntries(departments.map(d => [d.id, d.name]));
+                const formatMap = Object.fromEntries(formats.map(f => [f.dmf_id, f.name]));
+        
+                const processedDocuments = documents.map((doc, index) => ({
+                    index: index + 1,
+                    docg_id: doc.docg_id || 'N/A',
+                    doc_number: doc.doc_number || 'N/A',
+                    format_id: doc.format || null,
+                    format_name: formatMap[doc.format] || 'N/A',
+                    subject: doc.subject || 'N/A',
+                    insert_date: doc.insert_date || 'N/A',
+                    name: doc.name || 'N/A',
+                    file: doc.file ? `${DATABASE_URL}/${doc.file}` : '#'  // ໃຊ້ DATABASE_URL ກັບ file path
+                }));
+        
+                const filteredDocuments = processedDocuments.filter(doc => {
+                    const docDate = new Date(doc.insert_date);
+                    return (!formatFilter || doc.format_id.toString() === formatFilter) &&
+                           (!startDateFilter || docDate >= new Date(startDateFilter)) &&
+                           (!endDateFilter || docDate <= new Date(endDateFilter));
+                });
+        
+                return filteredDocuments;
+        
+            } catch (error) {
+                console.error("Error fetching API data:", error);
+                return [];
+            }
+        }
+        
+        function renderTable(documents) {
+            const userRole = localStorage.getItem("user_role");
+            if ($.fn.DataTable.isDataTable("#dataTable")) {
+                $("#dataTable").DataTable().destroy();
+            }
+        
+            const tableBody = document.getElementById("dataTableBody");
+            tableBody.innerHTML = '';
+        
+            if (!documents?.length) {
+                tableBody.innerHTML = '<tr><td colspan="10" class="text-center">ບໍ່ພົບຂໍ້ມູນ</td></tr>';
+                return;
+            }
+        
+            const fragment = document.createDocumentFragment();
+            documents.forEach((doc, index) => {
+                const tr = document.createElement('tr');
+                tr.dataset.id = doc.docg_id;  
+                tr.innerHTML = `
+                    <td>${index + 1}</td>
+                    
+                    <td>${doc.subject || ''}</td>
+                    <td>${doc.insert_date || ''}</td>                      
+                    
+                    <td>
+                        <a href="${doc.file}" target="_blank" class="btn btn-sm btn-link btn-view-doc">
+                            <img src="{% static 'images/clips paper.png' %}" alt="View Document" style="width: 30px; height: 30px;">
+                        </a>
+                    </td>                                  
+                `;
+                fragment.appendChild(tr);
+            });
+        
+            tableBody.appendChild(fragment);
+            $(document).ready(function() {
+                $('#dataTable').DataTable({
+                    "pageLength": 10,
+                    "order": [[0, "asc"]]
+                });
+                $(".dataTables_filter").insertBefore(".dataTables_wrapper");
+            });
+    
+            
+        }
+        
+        
+        
+        const documents = await fetchData();
+        renderTable(documents);
+    });
+        </script>
+        {% endblock %}

@@ -8,7 +8,7 @@
     <div class="cardd shadow mb-4 m-2">
         <div class="card-body">
             <div class="row p-6">
-                <form method="get" action="" class="mb-4"> 
+                <form method="GET" id="filterForm" class="row g-3 mb-4">
                     <div class="card-header d-flex justify-content-between">
                         <div class="row g-2 align-items-center"> 
                             <div class="col-md-3 col-6">
@@ -43,7 +43,9 @@
                             </div>
                         </div>
                         <div>
-                            <a href="/add_documentG/" class="btn btn-primary">ເພີ່ມ</a>
+                            <a href="/add_documentG/" class="btn btn-primary mx-2" style="width: 110px; border-radius: 20px;">
+                                <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;ເພີ່ມ
+                            </a>
                         </div>
                     </div>
                 </form>
@@ -103,7 +105,7 @@
             const formatFilter = urlParams.get('format') || '';
             const startDateFilter = urlParams.get('start_date') || '';
             const endDateFilter = urlParams.get('end_date') || '';
-    
+        
             try {
                 const [documentsRes, departmentsRes, formatsRes] = await Promise.all([
                     fetch(documentApiUrl),
@@ -114,10 +116,10 @@
                 const documents = documentsRes.ok ? await documentsRes.json() : [];
                 const departments = departmentsRes.ok ? await departmentsRes.json() : [];
                 const formats = formatsRes.ok ? await formatsRes.json() : [];
-    
+        
                 const departmentMap = Object.fromEntries(departments.map(d => [d.id, d.name]));
                 const formatMap = Object.fromEntries(formats.map(f => [f.dmf_id, f.name]));
-    
+        
                 const processedDocuments = documents.map((doc, index) => ({
                     index: index + 1,
                     docg_id: doc.docg_id || 'N/A',
@@ -150,19 +152,19 @@
             if ($.fn.DataTable.isDataTable("#dataTable")) {
                 $("#dataTable").DataTable().destroy();
             }
-    
+        
             const tableBody = document.getElementById("dataTableBody");
             tableBody.innerHTML = '';
-    
+        
             if (!documents?.length) {
                 tableBody.innerHTML = '<tr><td colspan="10" class="text-center">ບໍ່ພົບຂໍ້ມູນ</td></tr>';
                 return;
             }
-    
+        
             const fragment = document.createDocumentFragment();
             documents.forEach((doc, index) => {
                 const tr = document.createElement('tr');
-                tr.dataset.id = doc.docg_id;  // ແກ້ doc_id ເປັນ docg_id
+                tr.dataset.id = doc.docg_id;  
                 tr.innerHTML = `
                     <td>${index + 1}</td>
                     <td>${doc.doc_number || ''}</td>
@@ -180,9 +182,9 @@
                             <i class="fas fa-edit text-success"></i>
                         </a>
                         ${userRole === "admin" ? `
-                        <a href="#" onclick="deleteDocument('${doc.docg_id}')" class="btn btn-sm btn-link" title="ລືບ">
+                        <button class="btn btn-sm btn-link delete-btn" data-id="${doc.docg_id}" title="ລືບ">
                             <i class="fas fa-trash-alt text-danger"></i>
-                        </a>` : ""}
+                        </button>` : ""}
                     </td>
                 `;
                 fragment.appendChild(tr);
@@ -190,14 +192,25 @@
         
             tableBody.appendChild(fragment);
             $(document).ready(function() {
-                $('#dataTable').DataTable();
+                $('#dataTable').DataTable({
+                    "pageLength": 10,
+                    "order": [[0, "asc"]]
+                });
                 $(".dataTables_filter").insertBefore(".dataTables_wrapper");
             });
+    
+            // ເພີ່ມ event listener ສຳລັບປຸ່ມລຶບ
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    deleteDocument(this.dataset.id);
+                });
+            });
         }
-    
-        function deleteDocument(docId) {
-            const apiUrl = `${DATABASE_URL}/api/delete/document/${docId}/`;
-    
+        
+        async function deleteDocument(docId) {
+            const apiUrl = `${DATABASE_URL}/api/document_general/${docId}/`;
+        
             Swal.fire({
                 title: "ທ່ານແນ່ໃຈບໍ?",
                 text: "ທ່ານຈະບໍ່ສາມາດກູ້ຂໍ້ມູນຄືນໄດ້!",
@@ -217,7 +230,9 @@
                             return response.json();
                         })
                         .then(() => {
-                            $('#dataTable').DataTable().row($(`tr[data-id="${docId}"]`)).remove().draw();
+                            // ລຶບຕົວແບບຈາກ DataTable ໂດຍບໍ່reload
+                            const table = $('#dataTable').DataTable();
+                            table.row($(`tr[data-id="${docId}"]`)).remove().draw();
                             Swal.fire("ລຶບສຳເລັດ!", "ເອກະສານໄດ້ຖືກລຶບແລ້ວ.", "success");
                             location.reload();
                         })
@@ -227,7 +242,7 @@
                 }
             });
         }
-    
+        
         const documents = await fetchData();
         renderTable(documents);
     });

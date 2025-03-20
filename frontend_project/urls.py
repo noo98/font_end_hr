@@ -14,11 +14,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index, name='index'),
     path('index1/', views.index1, name='index1'),
+
+    path('form_emp/', views.form_emp, name='form_emp'),
     path('tables_emp/', views.tables_emp, name='tables_emp'),
+    path('update_emp/<int:emp_id>/', views.update_emp, name='update_emp'),
+
     path('login/', views.form_login, name='form_login'),
     path('profile/', views.profile, name='profile'), 
     path('register/',views.register, name='register'),
-    path('form_emp/', views.form_emp, name='form_emp'),
+    
     path('form_post/', views.form_post, name='form_post'),
     path('post', views.post, name='post'),
     path('doc_format/', views.doc_format, name='doc_format'),
@@ -35,6 +39,7 @@ urlpatterns = [
     path('documentGen/',views.documentGen, name='documentGen'),
     path('update_documentGen/<int:docg_id>/', views.update_documentGen, name='update_documentGen'),
     path('test/', views.test_view, name='test'),
+    path('view_documentGen/<int:docg_id>/', views.view_documentGen, name='view_documentGen'),
     path('update_documentO/<int:doc_id>/', views.update_documentO, name='update_documentO'),
     path('update_documentE/<int:doc_id>/', views.update_documentE, name='update_documentE'),
     # path('testttt/', views.testttt_view, name='testttt'),

@@ -4,25 +4,26 @@
 
 {% block content %}
 <div class="container-fluid py-4">
-    <form id="employeeForm" enctype="multipart/form-data">
+    <form id="employeeForm" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
         <fieldset class="border border-primary p-2 px-4 pb-4 shadow" style="border-radius: 15px; background-color: #ffffff">
             <legend class="float-none w-auto p-2 h3">ບັນທຶກຂໍ້ມູນພະນັກງານ</legend>
             <div class="row g-3">
                 <div class="col-md-4">
                     <div class="input-group-custom">
-                        <input type="text" class="form-control" id="lao_name" name="lao_name" required>
+                        <input type="text" class="form-control" id="lao_name" name="lao_name" value="{{ employee.lao_name }}">
                         <label>ຊື່ພາສາລາວ</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="input-group-custom">
-                        <input type="text" class="form-control" id="eng_name" name="eng_name" required>
+                        <input type="text" class="form-control" id="eng_name" name="eng_name" value="{{ employee.eng_name }}">
                         <label>ຊື່ພາສາອັງກິດ</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="input-group-custom">
-                        <input type="text" class="form-control" id="nickname" name="nickname" required>
+                        <input type="text" class="form-control" id="nickname" name="nickname" value="{{ employee.nickname }}">
                         <label>ຊື່ຫຼີ້ນ</label>
                     </div>
                 </div>
@@ -31,23 +32,22 @@
                 <div class="col-md-4">
                     <div class="input-group-custom">
                         <select class="form-select" name="Gender" id="Gender" required>
-                            <option value="" selected disabled>ເລືອກ</option>
-                            <option value="ຊາຍ">ຊາຍ</option>
-                            <option value="ຍິງ">ຍິງ</option>
-                            
+                            <option value="" disabled {% if not employee.Gender %}selected{% endif %}>ເລືອກ</option>
+                            <option value="ຊາຍ" {% if employee.Gender == "ຊາຍ" %}selected{% endif %}>ຊາຍ</option>
+                            <option value="ຍິງ" {% if employee.Gender == "ຍິງ" %}selected{% endif %}>ຍິງ</option>
                         </select>
                         <label>ເລືອກເພດ</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="input-group-custom">
-                        <input type="date" class="form-control" id="birth_date" name="birth_date" required>
+                        <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{ employee.birth_date }}">
                         <label>ວັນ.ເດືອນ.ປີເກີດ</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="input-group-custom">
-                        <input type="text" class="form-control" id="status" name="status" required>
+                        <input type="text" class="form-control" id="status" name="status" value="{{ employee.status }}">
                         <label>ສະຖານະ</label>
                     </div>
                 </div>
@@ -55,19 +55,19 @@
             <div class="row g-3">
                 <div class="col-md-4">
                     <div class="input-group-custom">
-                        <input type="text" class="form-control" id="position" name="position" required>
+                        <input type="text" class="form-control" id="position" name="position" value="{{ employee.position }}">
                         <label>ຕຳແໜ່ງ</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="input-group-custom">
-                        <input type="date" class="form-control" id="year_entry" name="year_entry" required>
+                        <input type="date" class="form-control" id="year_entry" name="year_entry" value="{{ employee.year_entry }}">
                         <label>ປີເຂົ້າການ</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="input-group-custom">
-                        <input type="text" class="form-control" id="salary_level" name="salary_level" required>
+                        <input type="text" class="form-control" id="salary_level" name="salary_level" value="{{ employee.salary_level }}">
                         <label>ຂັ້ນເງິນເດືອນ</label>
                     </div>
                 </div>
@@ -75,24 +75,27 @@
             <div class="row g-3">
                 <div class="col-md-4">
                     <div class="input-group-custom">
-                        <input type="text" class="form-control" id="phone" name="phone" required>
+                        <input type="text" class="form-control" id="phone" name="phone" value="{{ employee.phone }}">
                         <label>ເບີໂທ</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="input-group-custom">
-                        <div class="mb-3">
-                            <label for="department" class="form-label">ພະແນກ</label>
-                            <select id="Department" name="Department" class="form-select" required>
-                                <option value="" selected disabled>ກະລຸນາເລືອກພະແນກ</option>
-                            </select>
-                        </div>
+                        <select class="form-select" name="Department" id="Department" required>
+                            <option value="" disabled {% if not employee.Department %}selected{% endif %}>ເລືອກພະແນກ</option>
+                            {% for dept in departments %}
+                                <option value="{{ dept.id }}" {% if dept.id == employee.Department %}selected{% endif %}>
+                                    {{ dept.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <label>ພະແນກ</label>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="input-group-custom">
                         <img id="avatarPreview" 
-                             src="{% static 'images/avatar.png' %}" 
+                             src="{% if employee.pic %}{{ database_url }}{{ employee.pic }}{% else %}{% static 'images/avatar.png' %}{% endif %}" 
                              alt="Avatar" 
                              class="rounded-circle shadow-sm"
                              style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #007bff;" />
@@ -112,89 +115,57 @@
     </form>
 </div>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const DATABASE_URL = "{{ database_url | escapejs }}";
-
-    // Fetch departments
-    const departmentSelect = document.getElementById('Department');
-    fetch(`${DATABASE_URL}/api/list/departments/`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            departmentSelect.innerHTML = '<option value="" selected disabled>ກະລຸນາເລືອກພະແນກ</option>';
-            data.forEach(department => {
-                const option = document.createElement('option');
-                option.value = department.id;
-                option.textContent = department.name;
-                departmentSelect.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching departments:', error);
-            departmentSelect.innerHTML = '<option value="">ບໍ່ສາມາດໂຫຼດພະແນກໄດ້</option>';
-        });
-
-    // Avatar preview
-    document.getElementById('avatarInput').addEventListener('change', function (event) {
-        const file = event.target.files[0];
-        const preview = document.getElementById('avatarPreview');
+$(document).ready(function() {
+    $('#avatarInput').change(function() {
+        const file = this.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = function (e) {
-                preview.src = e.target.result;
+            reader.onload = function(e) {
+                $('#avatarPreview').attr('src', e.target.result);
             };
             reader.readAsDataURL(file);
-        } else {
-            preview.src = '{% static "images/avatar.png" %}';
         }
     });
 
-    // Form submission
-    document.getElementById('employeeForm').addEventListener('submit', function (event) {
-        // console.log('Form submitted');
-        event.preventDefault();
+    $('#employeeForm').submit(function(e) {
+        e.preventDefault();
         const formData = new FormData(this);
-
-        // Debug FormData
-        for (let [key, value] of formData.entries()) {
-            // console.log(`${key}: ${value}`);
-        }
-
-        fetch(`${DATABASE_URL}/api/employee/`, {
-            method: 'POST',
+        fetch(this.action, {
+            method: "POST",
             body: formData
         })
+        
         .then(response => response.json())
         .then(data => {
-            // console.log("Response Data:", data); 
-
-            if ("Success Response:", data) {  
+            if (data.success) {
                 Swal.fire({
                     title: "ສຳເລັດ!",
-                    text: data.message || "ບັນທຶກສຳເລັດ",
+                    text: data.message,
                     icon: "success",
-                    
+                    confirmButtonText: "ຕົກລົງ"
                 }).then(() => {
-                    window.location.href = "//tables_emp//";
+                    window.location.href = "{% url 'documentEntry' %}";
                 });
+                console.log("FormData:",formData);
             } else {
-                // console.error(data.status === 404);  
                 Swal.fire({
                     title: "ເກີດຂໍ້ຜິດພາດ!",
-                    text: data.error || "ບໍ່ສາມາດບັນທຶກເອກະສານ",
+                    text: "ຂໍ້ຜິດພາດ: " + data.error,
                     icon: "error",
                     confirmButtonText: "ຕົກລົງ"
                 });
             }
         })
+        .catch(error => {
+            console.error("Error:", error);
+            Swal.fire({
+                title: "ເກີດຂໍ້ຜິດພາດ!",
+                text: "ມີບາງຢ່າງຜິດປົກກະຕິ!",
+                icon: "error",
+                confirmButtonText: "ຕົກລົງ"
+            });
+        });
     });
 });
 </script>

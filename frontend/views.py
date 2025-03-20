@@ -7,7 +7,7 @@ import json
 from django.http import JsonResponse
 import environ
 import os
-
+from datetime import datetime
 
 env = environ.Env()
 environ.Env.read_env()  
@@ -17,9 +17,9 @@ DATABASE_URL = env('DATABASE_URL')
 @api_view(['GET'])
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'index.html',{ 'database_url': DATABASE_URL, })
 def index1(request):
-    return render(request, 'index1.html')
+    return render(request, 'index1.html',{ 'database_url': DATABASE_URL, })
 
 def tables_emp(request):
     api_url = f"{DATABASE_URL}/api/employee/"
@@ -31,52 +31,35 @@ def tables_emp(request):
         emp_response = requests.get(api_url)
         dept_response = requests.get(departments_api)
 
-        if emp_response.status_code == 200:
-            emp_data = emp_response.json()
-        else:
-            emp_data = []
+        # Check API response status
+        emp_data = emp_response.json() if emp_response.status_code == 200 else []
+        dept_data = dept_response.json() if dept_response.status_code == 200 else []
 
-        if dept_response.status_code == 200:
-            dept_data = dept_response.json()
-        else:
-            dept_data = []
-
+        # Create department mapping
         department_map = {dept["id"]: dept["name"] for dept in dept_data}
 
+        # Process employee data
         for emp in emp_data:
             employees.append({
                 "emp_id": emp.get("emp_id", "N/A"),
                 "lao_name": emp.get("lao_name", "N/A"),
                 "eng_name": emp.get("eng_name", "N/A"),
                 "nickname": emp.get("nickname", "N/A"),
-                "Gender": emp.get("Gender", "N/A"),
-                "department": department_map.get(emp.get("department"), "N/A"),
+                "Gender": emp.get("Gender", "N/A"),  # Match backend field name
+                "Department": department_map.get(emp.get("Department"), "N/A"),  # Match backend field name
             })
-    
+
     except Exception as e:
-        print(" Error fetching data:", e)
+        print(f"Error fetching data: {e}")
+        employees = []  # Ensure employees is empty on error
 
     return render(request, 'employee/tables_emp.html', {
-        "employees": employees, 
-        'database_url': DATABASE_URL,})
+        "employees": employees,
+        "database_url": DATABASE_URL,
+    })
 
 def doc_format(request):
-    url = f"{DATABASE_URL}/api/list/Document_format/"
-    
-    # Fetch data from the API
-    try:
-        response = requests.get(url)
-        response.raise_for_status()  
-        doc_format = response.json()  
-        # print(documents)  
-    except requests.exceptions.RequestException as e:
-        doc_format = []  
-        print(f"Error fetching data: {e}")
-     
-    return render(request, 'doc_format.html', {
-        'doc_format': doc_format, 
-        'database_url': DATABASE_URL,
-        })
+    return render(request, 'doc_format.html', {'database_url': DATABASE_URL})
 
 def department(request):
     url = f"{DATABASE_URL}/api/list/departments/"
@@ -293,17 +276,63 @@ def documentOut(request):
         'end_date_filter': end_date_filter,
         'database_url': DATABASE_URL,  
     })
+def view_documentGen(request, docg_id):
+    document_url = f"{DATABASE_URL}/api/document_general/{docg_id}/"
+    departments_url = f"{DATABASE_URL}/api/list/departments/"
+    document_format_url = f"{DATABASE_URL}/api/list/Document_format/"
+
+    if request.method == 'GET':
+        try:
+            document = requests.get(document_url).json()
+            departments = requests.get(departments_url).json()
+            document_format = requests.get(document_format_url).json()
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching data: {e}")
+            document, departments, document_format = {}, [], []
+
+        return render(request, 'documents/view_documentGen.html', {
+            'document': document,
+            'departments': departments,
+            'Document_format': document_format,
+            'database_url': DATABASE_URL,  
+        })
+
+    # ບໍ່ຈັດການ POST ທີ້ນີ້ ເພາະ frontend ຈະເຮັດແທນ
+    return JsonResponse({'success': False, 'error': 'Method not allowed'}, status=405)
+
 def documentGen(request):
+    document_api_url = f"{DATABASE_URL}/api/document_general/"
+    department_api_url = f"{DATABASE_URL}/api/list/departments/"
     format_api_url = f"{DATABASE_URL}/api/list/Document_format/"
-    response = requests.get(format_api_url)
 
-    formats = response.json() if response.status_code == 200 else []
+    format_filter = request.GET.get('format', '')
+    department_filter = request.GET.get('department', '')
+    start_date_filter = request.GET.get('start_date', '')
+    end_date_filter = request.GET.get('end_date', '')
 
-    context = {
+    try:
+        # ດຶງຂໍ້ມູນ API
+        documents_response = requests.get(document_api_url)
+        departments_response = requests.get(department_api_url)
+        formats_response = requests.get(format_api_url)
+
+        documents = documents_response.json() if documents_response.status_code == 200 else []
+        departments = departments_response.json() if departments_response.status_code == 200 else []
+        formats = formats_response.json() if formats_response.status_code == 200 else []
+
+
+    except requests.exceptions.RequestException as e:
+        documents = []
+        print(f"Error fetching API data: {e}")
+
+    return render(request, 'documents/documentGen.html', {
+        'documents': documents,
+        'departments': departments,
         'formats': formats,
-        'format_filter': request.GET.get('format', '')
-    }
-    return render(request, 'documents/documentGen.html',{
+        'format_filter': format_filter,
+        'department_filter': department_filter,
+        'start_date_filter': start_date_filter,
+        'end_date_filter': end_date_filter,
         'database_url': DATABASE_URL,  
     })
 
@@ -441,7 +470,7 @@ def update_documentGen(request, docg_id):
             print(f"Error updating document: {e}")
             return JsonResponse({'success': False, 'error': str(e)}, status=400)
 def test_view(request):
-    format_api_url = "http://192.168.45.71:8000/api/list/Document_format/"
+    format_api_url = "http://192.168.45.53:8000/api/list/Document_format/"
     response = requests.get(format_api_url)
 
     formats = response.json() if response.status_code == 200 else []
@@ -453,7 +482,9 @@ def test_view(request):
     return render(request, "test.html", context)
 
 def form_emp(request):
-    return render(request, 'employee/form_emp.html',)
+    return render(request, 'employee/form_emp.html',{
+        'database_url': DATABASE_URL,  
+    })
 
 def form_post(request):
     return render(request, 'form_post.html',)
@@ -463,3 +494,51 @@ def post(request):
 
 def testttt(request):
     return render(request, 'testttt.html',)
+def update_emp(request, emp_id):
+    employee_url = f"{DATABASE_URL}/api/employee/{emp_id}/"
+    departments_url = f"{DATABASE_URL}/api/list/departments/"
+    update_url = f"{DATABASE_URL}/api/employee/{emp_id}/"
+
+    if request.method == 'GET':
+        try:
+            employee = requests.get(employee_url).json()
+            departments = requests.get(departments_url).json()
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching data: {e}")
+            employee, departments = {}, []
+
+        return render(request, 'employee/update_emp.html', {
+            'employee': employee,
+            'departments': departments,
+            'database_url': DATABASE_URL,  
+        })
+
+    elif request.method == 'POST':
+        try:
+            data = {
+                'emp_id': request.POST.get('emp_id'),
+                'lao_name': request.POST.get('lao_name'),
+                'eng_name': request.POST.get('eng_name'),
+                'nickname': request.POST.get('nickname'),
+                'Gender': request.POST.get('Gender'),
+                'birth_date': request.POST.get('birth_date'),
+                'status': request.POST.get('status'),
+                'position': request.POST.get('position'),
+                'year_entry': request.POST.get('year_entry'),
+                'salary_level': request.POST.get('salary_level'),
+                'phone': request.POST.get('phone'),
+                'Department': request.POST.get('Department'),                
+                }
+            if request.FILES.get('pic'):
+                files = {'pic': request.FILES['pic']}
+                response = requests.put(update_url, data=data, files=files)  
+            else:
+                response = requests.put(update_url, json=data)  
+            
+            response.raise_for_status()
+            print(response.json())
+            return JsonResponse({'success': True, 'message': 'ບັນທືກຂໍ້ມູນສຳເລັດ!'})
+            
+        except requests.exceptions.RequestException as e:
+            print(f"Error updating document: {e}")
+            return JsonResponse({'success': False, 'error': str(e)}, status=400)

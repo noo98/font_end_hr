@@ -121,7 +121,7 @@
             });
     
         } catch (error) {
-            console.error("Error during initialization:", error);
+            // console.error("Error during initialization:", error);
         }
     
         // Submit form
@@ -131,7 +131,7 @@
     
             // Debug: ສະແດງຄ່າ FormData
             for (let pair of formData.entries()) {
-                console.log(pair[0] + ": " + pair[1]);
+                // console.log(pair[0] + ": " + pair[1]);
             }
     
             // ສົ່ງຂໍ້ມູນໄປ API
@@ -141,7 +141,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log("Response Data:", data); 
+                // console.log("Response Data:", data); 
 
                 if ("Success Response:", data) {  
                     Swal.fire({
@@ -153,7 +153,7 @@
                         window.location.href = "{% url 'documentOut' %}";
                     });
                 } else {
-                    console.error(data.status === 404);  
+                    // console.error(data.status === 404);  
                     Swal.fire({
                         title: "ເກີດຂໍ້ຜິດພາດ!",
                         text: data.error || "ບໍ່ສາມາດບັນທຶກເອກະສານ",
@@ -163,7 +163,7 @@
                 }
             })
             .catch(error => {
-                console.error("Fetch Error:", error);
+                // console.error("Fetch Error:", error);
                 Swal.fire({
                     title: "ເກີດຂໍ້ຜິດພາດ!",
                     text: "ຂໍ້ຜິດພາດ: " + error.message,
