@@ -17,6 +17,7 @@
     <!-- Custom fonts for this template-->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="{% static 'css/sb-admin-2.min.css' %}">
@@ -43,7 +44,7 @@
         <ul class="navbar-nav  sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #0685f5;">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'index1' %}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                 <div class="sidebar-brand-icon">
                     <img src="{% static 'images/Logo LCIC.png' %}" alt="logo" width="50" height="50">
                 </div>
@@ -55,7 +56,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'index1' %}">
+                <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -78,7 +79,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">ຈັດການຂໍ້ມູນ:</h6>
-                        <a class="collapse-item" href="{% url 'tables_emp' %}">ເພີ່ມຂໍ້ມູນພະນັກງານ</a>
+                        <!-- <a class="collapse-item" href="{% url 'tables_emp' %}">ເພີ່ມຂໍ້ມູນພະນັກງານ</a> -->
                         <div class="nav-item dropdown">
                             <a class="collapse-item dropdown-toggle" href="#" data-toggle="collapse" data-target="#nestedDropdown" aria-expanded="false">
                                 ຈັດການເອກະສານ
@@ -86,15 +87,16 @@
                             <div id="nestedDropdown" class="collapse">
                                 <a class="collapse-item" href="{% url 'documentEntry' %}">ຂາເຂົ້າ</a>
                                 <a class="collapse-item" href="{% url 'documentOut' %}">ຂາອອກ</a>
+                                <a class="collapse-item" href="{% url 'documentGen' %}">ຂາອອກ</a>
                             </div>
                         </div>
-                        <a class="collapse-item" href="{% url 'department' %}">ເພີ່ມຂໍ້ມູນພະແນກ</a>
+                        <!-- <a class="collapse-item" href="{% url 'department' %}">ເພີ່ມຂໍ້ມູນພະແນກ</a> -->
                         <a class="collapse-item" href="{% url 'doc_format' %}">ເພີ່ມປະເພດເອກສານ</a>
-                        <a class="collapse-item" href="{% url 'salary_grade' %}">ເພີ່ມຂໍ້ມູນຂັ້ນເງິນເດືອນ</a>
+                        <!-- <a class="collapse-item" href="{% url 'salary_grade' %}">ເພີ່ມຂໍ້ມູນຂັ້ນເງິນເດືອນ</a>
                         <a class="collapse-item" href="{% url 'education_level' %}">ເພີ່ມຂໍ້ມູນລະດັບການສືກສາ</a>
                         <a class="collapse-item" href="#">ເພີ່ມຂໍ້ມູນບ້ານ</a>
                         <a class="collapse-item" href="{% url 'education_level' %}">ເພີ່ມຂໍ້ມູນເມືອງ</a>
-                        <a class="collapse-item" href="{% url 'education_level' %}">ເພີ່ມຂໍ້ມູນແຂວງ</a>
+                        <a class="collapse-item" href="{% url 'education_level' %}">ເພີ່ມຂໍ້ມູນແຂວງ</a> -->
                     </div>
                 </div>
             </li>
@@ -140,7 +142,7 @@
                                 <i class="fa fa-user mr-2"></i>ຜູ້ໃຊ້ :<span class=" d-none pl-2 d-lg-inline" id="username"></span><br>
                                 <i class="fa fa-address-book mr-2"></i>ພະແນກ : <span class=" d-none pl-1 d-lg-inline " id="departments"></span>
                             </div>
-                            <div class="dropdown-divider"></div>
+                            <!-- <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 ໂປຣໄຟລ໌
@@ -148,7 +150,7 @@
                             <a class="dropdown-item" href="/register/">
                                 <i class="fa fa-user-plus mr-2 text-gray-400"></i>
                                 ເພີ່ມຜູ້ໃຊ້
-                            </a>
+                            </a> -->
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="" onclick="logout()" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

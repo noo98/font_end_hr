@@ -217,33 +217,31 @@
     </div>
 
     <div class="row m-1">
-    <div class="col-12">
-        <div class="card shadow">
-            <div class="card-header py-3 bg-primary">
-                <h6 class="m-0 font-weight-bold text-white">ແຈ້ງການ ແລະ ຂ່າວສານ</h6>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered"  width="100%" cellspacing="0">
-                        <thead class="thead-light">
-                            <tr>
-                                <th style="width: 40px;">ລ/ດ</th>                               
-                                <th style="width: 400px;">ເນື້ອໃນ</th>
-                                <th style="width: 70px;">ລົງວັນທີ່</th>                 
-                                <th style="width: 40px;">ໄຟລ໌</th>                
-                            </tr>
-                        </thead>                   
-                        <tbody id="dataTableBody">
-                            
-                        </tbody>
-                    </table>
-                    
-                </div> 
-                <div class="dots-container" id="dots"></div>
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header py-3 bg-primary">
+                    <h6 class="m-0 font-weight-bold text-white">ແຈ້ງການ ແລະ ຂ່າວສານ</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th style="width: 40px;">ລ/ດ</th>                               
+                                    <th style="width: 400px;">ເນື້ອໃນ</th>
+                                    <th style="width: 70px;">ລົງວັນທີ່</th>                 
+                                    <th style="width: 40px;">ໄຟລ໌</th>                
+                                </tr>
+                            </thead>                   
+                            <tbody id="dataTableBody">
+                            </tbody>
+                        </table>
+                    </div> 
+                    <button id="viewAllBtn" class="view-more-btn">ເບິ່ງທັງໝົດ</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
     <!-- Stats Section -->
@@ -262,40 +260,74 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="text-xs text-primary">ພະນັກງານທັງໝົດ</div>
-                <div class="number">125</div>
-                <div class="text-xs text-success">+2 ຄົນໃນເດືອນນີ້</div>
+                <div class="number">25</div>
+                <div class="text-xs text-success">+0 ຄົນໃນເດືອນນີ້</div>
             </div>
             <div class="stat-card" style="border-left-color: #1cc88a;">
                 <div class="text-xs text-success">ເອກະສານຂາເຂົ້າ</div>
-                <div class="number">42</div>
+                <div class="number" id="ingoing-docs-count">42</div>
                 <div class="text-xs text-gray-600">ໃນເດືອນນີ້</div>
             </div>
             <div class="stat-card" style="border-left-color: #36b9cc;">
                 <div class="text-xs text-info">ເອກະສານຂາອອກ</div>
-                <div class="number">56</div>
+                <div class="number" id="outgoing-docs-count">56</div>
                 <div class="text-xs text-gray-600">ໃນເດືອນນີ້</div>
             </div>
             <div class="stat-card" style="border-left-color: #f6c23e;">
                 <div class="text-xs text-warning">ຊັບສີນທັງໝົດ</div>
-                <div class="number">583</div>
-                <div class="text-xs text-success">+12 ໃນເດືອນນີ້</div>
+                <div class="number">ກຳລັງພັດທະນາ..</div>
+                <div class="text-xs text-success">ກຳລັງພັດທະນາ..</div>
             </div>
         </div>
     </div>
 </div>
 
        
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener("DOMContentLoaded", async function() {
         const DATABASE_URL = "{{ database_url | escapejs }}";  
+        let showingAll = false;
+        let allDocuments = [];
+        const department = localStorage.getItem('department_name'); // ດຶງ department ຈາກ localStorage
+        // console.log("Department from localStorage:", department);
     
-        async function fetchData() { 
-            
-            
+        // ຟັງຊັນເພື່ອດືງຂໍ້ມູນເອກະສານຂາອອກ
+        async function fetchOutgoingDocs() {
+            const outgoingApiUrl = `http://192.168.45.53:8000/api/search/document_lcic/?doc_type=ຂາອອກ&department=${department}`;
+            try {
+                const response = await fetch(outgoingApiUrl);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const outgoingDocs = await response.json();
+                return outgoingDocs.length;
+            } catch (error) {
+                // console.error("Error fetching outgoing documents:", error);
+                return 0;
+            }
+        }
+    
+        // ຟັງຊັນເພື່ອດືງຂໍ້ມູນເອກະສານຂາເຂົ້າ
+        async function fetchIngoingDocs() {
+            const ingoingApiUrl = `http://192.168.45.53:8000/api/search/document_lcic/?doc_type_info=ຂາເຂົ້າ&department_into=${department}`;
+            try {
+                const response = await fetch(ingoingApiUrl);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const ingoingDocs = await response.json();
+                return ingoingDocs.length;
+            } catch (error) {
+                console.error("Error fetching ingoing documents:", error);
+                return 0;
+            }
+        }
+    
+        async function fetchData(showAll = false) { 
             const documentApiUrl = `${DATABASE_URL}/api/search/document_general/?status_doc=1`;
             const departmentApiUrl = `${DATABASE_URL}/api/list/departments/`;
             const formatApiUrl = `${DATABASE_URL}/api/list/Document_format/`;
@@ -328,18 +360,23 @@
                     subject: doc.subject || 'N/A',
                     insert_date: doc.insert_date || 'N/A',
                     name: doc.name || 'N/A',
-                    file: doc.file ? `${DATABASE_URL}/${doc.file}` : '#'  // ໃຊ້ DATABASE_URL ກັບ file path
+                    file: doc.file ? `${DATABASE_URL}/${doc.file}` : '#'
                 }));
         
-                const filteredDocuments = processedDocuments.filter(doc => {
-                    const docDate = new Date(doc.insert_date);
-                    return (!formatFilter || doc.format_id.toString() === formatFilter) &&
-                           (!startDateFilter || docDate >= new Date(startDateFilter)) &&
-                           (!endDateFilter || docDate <= new Date(endDateFilter));
+                const sortedDocuments = processedDocuments.sort((a, b) => {
+                    return new Date(b.insert_date) - new Date(a.insert_date);
                 });
         
-                return filteredDocuments;
+                allDocuments = sortedDocuments;
+                
+                const filteredDocuments = sortedDocuments.filter(doc => {
+                    const docDate = new Date(doc.insert_date);
+                    return (!formatFilter || doc.format_id.toString() === formatFilter) &&
+                            (!startDateFilter || docDate >= new Date(startDateFilter)) &&
+                            (!endDateFilter || docDate <= new Date(endDateFilter));
+                });
         
+                return showAll ? filteredDocuments : filteredDocuments.slice(0, 5);
             } catch (error) {
                 console.error("Error fetching API data:", error);
                 return [];
@@ -347,54 +384,135 @@
         }
         
         function renderTable(documents) {
-            const userRole = localStorage.getItem("user_role");
-            if ($.fn.DataTable.isDataTable("#dataTable")) {
-                $("#dataTable").DataTable().destroy();
-            }
-        
             const tableBody = document.getElementById("dataTableBody");
             tableBody.innerHTML = '';
         
             if (!documents?.length) {
-                tableBody.innerHTML = '<tr><td colspan="10" class="text-center">ບໍ່ພົບຂໍ້ມູນ</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="4" class="text-center">ບໍ່ພົບຂໍ້ມູນ</td></tr>';
                 return;
             }
         
             const fragment = document.createDocumentFragment();
             documents.forEach((doc, index) => {
                 const tr = document.createElement('tr');
-                tr.dataset.id = doc.docg_id;  
+                tr.dataset.id = doc.docg_id;
+                
+                const dateObj = new Date(doc.insert_date);
+                const formattedDate = dateObj.toLocaleDateString('lo-LA');
+                
+                const newBadge = (index < 3) ? 
+                    `<span class="badge badge-success ml-2 new-badge blink" 
+                            style="cursor: pointer;" 
+                            onclick="showDocDetails('${doc.docg_id}', '${doc.subject}', '${formattedDate}')">ໃໝ່</span>` : 
+                    '';
+                
                 tr.innerHTML = `
-                    <td>${index + 1}</td>
-                    
-                    <td>${doc.subject || ''}</td>
-                    <td>${doc.insert_date || ''}</td>                      
-                    
-                    <td>
-                        <a href="${doc.file}" target="_blank" class="btn btn-sm btn-link btn-view-doc">
-                            <img src="{% static 'images/clips paper.png' %}" alt="View Document" style="width: 30px; height: 30px;">
+                    <td class="text-center">${index + 1}</td>
+                    <td>${doc.subject || ''}${newBadge}</td>
+                    <td class="text-center">${formattedDate || ''}</td>
+                    <td class="text-center">
+                        <a href="${doc.file}" target="_blank" class="btn btn-sm btn-outline-primary btn-view-doc">
+                            <i class="fas fa-file-pdf"></i> ເບິ່ງ
                         </a>
-                    </td>                                  
+                    </td>
                 `;
                 fragment.appendChild(tr);
             });
         
             tableBody.appendChild(fragment);
-            $(document).ready(function() {
-                $('#dataTable').DataTable({
-                    "pageLength": 10,
-                    "order": [[0, "asc"]]
-                });
-                $(".dataTables_filter").insertBefore(".dataTables_wrapper");
-            });
-    
             
+            const table = document.querySelector(".table");
+            if (table) {
+                table.classList.add("table-hover");
+                
+                let captionText = showingAll ? 
+                    `ທັງໝົດ ${documents.length} ລາຍການ` : 
+                    "5 ລາຍການແຈ້ງການລ່າສຸດ";
+                
+                const existingCaption = table.querySelector("caption");
+                if (existingCaption) {
+                    existingCaption.textContent = captionText;
+                } else {
+                    const caption = document.createElement("caption");
+                    caption.textContent = captionText;
+                    caption.style.captionSide = "top";
+                    caption.style.textAlign = "right";
+                    caption.style.color = "#4e73df";
+                    caption.style.fontWeight = "bold";
+                    caption.style.padding = "0.5rem";
+                    table.appendChild(caption);
+                }
+            }
+    
+            const viewAllBtn = document.getElementById("viewAllBtn");
+            if (viewAllBtn) {
+                viewAllBtn.textContent = showingAll ? "ສະແດງໜ້ອຍລົງ" : "ເບິ່ງທັງໝົດ";
+            }
         }
         
+        window.showDocDetails = function(docId, subject, date) {
+            Swal.fire({
+                title: 'ລາຍລະອຽດແຈ້ງການ',
+                html: `
+                    <p><strong>ເລກທີ່ເອກະສານ:</strong> ${docId}</p>
+                    <p><strong>ເນື້ອໃນ:</strong> ${subject}</p>
+                    <p><strong>ວັນທີ່:</strong> ${date}</p>
+                `,
+                icon: 'info',
+                confirmButtonText: 'ປິດ'
+            });
+        }
         
+        // ອັບເດດຈຳນວນເອກະສານຂາອອກ
+        async function updateOutgoingDocsCount() {
+            const totalOutgoingDocs = await fetchOutgoingDocs();
+            const outgoingCountElement = document.getElementById("outgoing-docs-count");
+            if (outgoingCountElement) {
+                outgoingCountElement.textContent = totalOutgoingDocs;
+            }
+        }
+    
+        // ອັບເດດຈຳນວນເອກະສານຂາເຂົ້າ
+        async function updateIngoingDocsCount() {
+            const totalIngoingDocs = await fetchIngoingDocs();
+            const ingoingCountElement = document.getElementById("ingoing-docs-count");
+            if (ingoingCountElement) {
+                ingoingCountElement.textContent = totalIngoingDocs;
+            }
+        }
+    
+        // ເລີ່ມຕົ້ນດືງຂໍ້ມູນ
+        async function initializeData() {
+            const documents = await fetchData();
+            renderTable(documents);
+            await updateOutgoingDocsCount(); // ອັບເດດຈຳນວນເອກະສານຂາອອກ
+            await updateIngoingDocsCount(); // ອັບເດດຈຳນວນເອກະສານຂາເຂົ້າ
+        }
+    
+        initializeData();
         
-        const documents = await fetchData();
-        renderTable(documents);
+        const cardHeader = document.querySelector('.card-header.py-3.bg-primary');
+        if (cardHeader) {
+            const refreshBtn = document.createElement('button');
+            refreshBtn.className = 'btn btn-sm btn-light float-right';
+            refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i>';
+            refreshBtn.addEventListener('click', async function() {
+                const newDocuments = await fetchData(showingAll);
+                renderTable(newDocuments);
+                await updateOutgoingDocsCount(); // ອັບເດດຈຳນວນເອກະສານຂາອອກ
+                await updateIngoingDocsCount(); // ອັບເດດຈຳນວນເອກະສານຂາເຂົ້າ
+            });
+            cardHeader.appendChild(refreshBtn);
+        }
+    
+        const viewAllBtn = document.getElementById("viewAllBtn");
+        if (viewAllBtn) {
+            viewAllBtn.addEventListener("click", async function() {
+                showingAll = !showingAll;
+                const documentsToShow = await fetchData(showingAll);
+                renderTable(documentsToShow);
+            });
+        }
     });
-        </script>
+    </script>
         {% endblock %}

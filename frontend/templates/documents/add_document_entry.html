@@ -12,7 +12,7 @@
                 {% csrf_token %}               
                 <div class="row mb-3">
                     <div class="col-sm-12 col-md-6">
-                        <input type="text" class="form-control" id="doc_number" name="doc_number" placeholder="ເລກທີ່ເອກະສານ" required>                  
+                        <input type="text" class="form-control" id="doc_number" name="doc_number" placeholder="ເລກທີ່ເອກະສານ" >                  
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <input type="date" class="form-control" id="insert_date" name="insert_date" required>
@@ -36,7 +36,8 @@
 
                 <div class="row mb-3">
                     <div class="col-sm-12 col-md-6">                        
-                        <input type="hidden" class="form-control mb-3" id="department" name="department" placeholder="ຈາກພະແນກ" required>
+                        <input type="hidden" class="form-control mb-3" id="department" name="department" placeholder="ຈາກພະແນກ" >
+                        <input type="hidden" class="form-control mb-3" id="departmen" name="department_into" placeholder="ຫາພະແນກ" >
                         <input type="hidden" class="form-control" id="doc_type_info" name="doc_type_info" value="ຂາເຂົ້າ">
                         
                     </div>
@@ -65,15 +66,20 @@
     const DATABASE_URL = "{{ database_url | escapejs }}";
     
     document.addEventListener("DOMContentLoaded", async function () {
+        // JavaScript
         // ກຳນົດຄ່າເບື້ອງຕົ້ນໃຫ້ input
         let username = localStorage.getItem("username");
         let department = localStorage.getItem("department");
-    
+        let departmentInto = localStorage.getItem("department"); // ເພີ່ມຕົວແປສຳລັບ department_into
+
         if (username) {
-            document.getElementById("name").value = username;
+            document.getElementById("name").value = username; // ຖ້າມີ input id="name" ໃນ HTML
         }
         if (department) {
-            document.getElementById("department").value = department;
+            document.getElementById("department").value = department; // ກຳນົດຄ່າໃຫ້ "ຈາກພະແນກ"
+        }
+        if (departmentInto) {
+            document.getElementById("departmen").value = departmentInto; // ກຳນົດຄ່າໃຫ້ "ຫາພະແນກ"
         }
     
         // ກຳນົດວັນທີປັດຈຸບັນ

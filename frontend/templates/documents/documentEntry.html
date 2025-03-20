@@ -94,12 +94,13 @@
     
     async function fetchData() {
         let department = localStorage.getItem("department_name");
+        
         let user = localStorage.getItem("user_id");
     
         const documentApiUrl = `${DATABASE_URL}/api/search/document_lcic/?doc_type_info=ຂາເຂົ້າ&department_into=${department}`;
         const departmentApiUrl = `${DATABASE_URL}/api/list/departments/`;
         const formatApiUrl = `${DATABASE_URL}/api/list/Document_format/`;
-    
+
         const urlParams = new URLSearchParams(window.location.search);
         const formatFilter = urlParams.get('format') || '';
         const departmentFilter = urlParams.get('department') || '';
@@ -186,7 +187,8 @@
                 <td>${doc.format_name || ''}</td>
                 <td>${doc.subject || ''}</td>
                 <td>${doc.insert_date || ''}</td>
-                <td>${doc.department || ''}</td>           
+                <td>${doc.department || ''}</td>
+                          
                 <td>${doc.name || ''}</td>
                 <td style="text-align: center;">
                     <a href="${doc.file}" onclick="UpDocument(event, '${doc.doc_id}')" target="_blank" class="btn btn-sm btn-link">
