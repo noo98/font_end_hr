@@ -22084,3 +22084,16 @@ Starting new HTTP connection (1): 192.168.45.53:8000
 http://192.168.45.53:8000 "GET /api/list/departments/ HTTP/11" 200 342
 Starting new HTTP connection (1): 192.168.45.53:8000
 http://192.168.45.53:8000 "GET /api/list/departments/ HTTP/11" 200 392
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Starting new HTTP connection (1): 192.168.45.53:8000
+Starting new HTTP connection (1): 192.168.45.53:8000
+Starting new HTTP connection (1): 192.168.45.53:8000
+Starting new HTTP connection (1): 192.168.45.53:8000
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Starting new HTTP connection (1): 192.168.45.53:8000
+Starting new HTTP connection (1): 192.168.45.53:8000
+Starting new HTTP connection (1): 192.168.45.53:8000
