@@ -1,4 +1,4 @@
-.table-responsive {
+/* .table-responsive {
     margin-top: 10px;
 }
 
@@ -7,22 +7,22 @@
     margin-bottom: 0;
 }
 
-.table thead th {
+.table thead {
     background-color: #f8f9fc;
     border-bottom: 2px solid #4e73df;
     text-align: center;
     font-weight: bold;
     vertical-align: middle;
-}
+} */
 
 .table tbody tr:hover {
     background-color: rgba(78, 115, 223, 0.05);
 }
 
-.table td {
+/* .table td {
     vertical-align: middle;
     padding: 0.75rem;
-}
+} */
 
 .btn-view-doc {
     padding: 0.25rem 0.5rem;
@@ -143,20 +143,22 @@
         }
 
         .view-more-btn {
-            display: block;
-            margin: 15px auto;
-            padding: 8px 20px;
-            background-color: #4e73df;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-align: center;
-            text-decoration: none;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* ສີພື້ນຫຼັງ */
+            color: white; /* ສີຕົວອັກສອນ */
+            text-decoration: none; /* ລຶບເສັ້ນໃຕ້ */
+            border-radius: 5px; /* ມົນມຸມ */
+            font-size: 16px;
+            cursor: pointer;
+            
+            
         }
 
         .view-more-btn:hover {
             background-color: #224abe;
             color: white;
+            
         }
         * {box-sizing: border-box}
         body {

@@ -107,7 +107,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
         localStorage.setItem("user", JSON.stringify(userData));
         localStorage.setItem("user_role", userData.status === 1 ? "admin" : "user");
       
-        let redirectURL = (userData.status === 1) ? "/index/" : "/index1/";
+        let redirectURL =  "/index/";
 
         // 4. ດຶງຂໍ້ມູນແຜນກົດ
         let deptResponse = await fetch(`${DATABASE_URL}/api/list/departments/`);

@@ -276,30 +276,10 @@ def documentOut(request):
         'end_date_filter': end_date_filter,
         'database_url': DATABASE_URL,  
     })
-def view_documentGen(request, docg_id):
-    document_url = f"{DATABASE_URL}/api/document_general/{docg_id}/"
-    departments_url = f"{DATABASE_URL}/api/list/departments/"
-    document_format_url = f"{DATABASE_URL}/api/list/Document_format/"
-
-    if request.method == 'GET':
-        try:
-            document = requests.get(document_url).json()
-            departments = requests.get(departments_url).json()
-            document_format = requests.get(document_format_url).json()
-        except requests.exceptions.RequestException as e:
-            print(f"Error fetching data: {e}")
-            document, departments, document_format = {}, [], []
-
-        return render(request, 'documents/view_documentGen.html', {
-            'document': document,
-            'departments': departments,
-            'Document_format': document_format,
-            'database_url': DATABASE_URL,  
-        })
-
-    # ບໍ່ຈັດການ POST ທີ້ນີ້ ເພາະ frontend ຈະເຮັດແທນ
-    return JsonResponse({'success': False, 'error': 'Method not allowed'}, status=405)
-
+def view_post(request):
+    return render(request, 'documents/view_post.html', {       
+        'database_url': DATABASE_URL,  
+    })
 def documentGen(request):
     document_api_url = f"{DATABASE_URL}/api/document_general/"
     department_api_url = f"{DATABASE_URL}/api/list/departments/"

@@ -37,9 +37,10 @@ urlpatterns = [
     path('add_documentO/', add_documentO, name='add_documentO'),
     path('add_documentG/', views.add_documentG, name='add_documentG'),
     path('documentGen/',views.documentGen, name='documentGen'),
+    path('view_post/', views.view_post, name='view_post'),
     path('update_documentGen/<int:docg_id>/', views.update_documentGen, name='update_documentGen'),
     path('test/', views.test_view, name='test'),
-    path('view_documentGen/<int:docg_id>/', views.view_documentGen, name='view_documentGen'),
+    
     path('update_documentO/<int:doc_id>/', views.update_documentO, name='update_documentO'),
     path('update_documentE/<int:doc_id>/', views.update_documentE, name='update_documentE'),
     # path('testttt/', views.testttt_view, name='testttt'),

@@ -43,7 +43,7 @@
         <ul class="navbar-nav  sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #0685f5;">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/index/">
                 <div class="sidebar-brand-icon">
                     <img src="{% static 'images/Logo LCIC.png' %}" alt="logo" width="50" height="50">
                 </div>
@@ -55,7 +55,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/index/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -86,15 +86,12 @@
                             <div id="nestedDropdown" class="collapse">
                                 <a class="collapse-item" href="{% url 'documentEntry' %}">ຂາເຂົ້າ</a>
                                 <a class="collapse-item" href="{% url 'documentOut' %}">ຂາອອກ</a>
+                                <a class="collapse-item" href="{% url 'documentGen' %}">ເອກະສານທົ່ວໄປ</a>
                             </div>
                         </div>
                         <a class="collapse-item" href="{% url 'department' %}">ເພີ່ມຂໍ້ມູນພະແນກ</a>
                         <a class="collapse-item" href="{% url 'doc_format' %}">ເພີ່ມປະເພດເອກສານ</a>
-                        <a class="collapse-item" href="{% url 'salary_grade' %}">ເພີ່ມຂໍ້ມູນຂັ້ນເງິນເດືອນ</a>
-                        <a class="collapse-item" href="{% url 'education_level' %}">ເພີ່ມຂໍ້ມູນລະດັບການສືກສາ</a>
-                        <a class="collapse-item" href="#">ເພີ່ມຂໍ້ມູນບ້ານ</a>
-                        <a class="collapse-item" href="{% url 'education_level' %}">ເພີ່ມຂໍ້ມູນເມືອງ</a>
-                        <a class="collapse-item" href="{% url 'education_level' %}">ເພີ່ມຂໍ້ມູນແຂວງ</a>
+                      
                     </div>
                 </div>
             </li>
@@ -145,10 +142,10 @@
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 ໂປຣໄຟລ໌
                             </a>
-                            <a class="dropdown-item" href="/register/">
+                            <!-- <a class="dropdown-item" href="/register/">
                                 <i class="fa fa-user-plus mr-2 text-gray-400"></i>
                                 ເພີ່ມຜູ້ໃຊ້
-                            </a>
+                            </a> -->
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="" onclick="logout()" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

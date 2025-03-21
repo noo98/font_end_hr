@@ -136,7 +136,7 @@
                 </div>
                 <ul class="dropdown-menu shadow" style="width: 100%">
                     <li>
-                        <a class="dropdown-item" href="/asset_add/">
+                        <a class="dropdown-item" href="#">
                             <div class="d-flex align-items-center">
                                 <span class="material-icons text-info mr-3">inventory</span>
                                 <div>
@@ -147,7 +147,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="/asset_report/">
+                        <a class="dropdown-item" href="#">
                             <div class="d-flex align-items-center">
                                 <span class="material-icons text-info mr-3">assignment</span>
                                 <div>
@@ -178,18 +178,9 @@
                         </div>
                     </div>
                 </div>
-                <ul class="dropdown-menu shadow" style="width: 100%">
-                    <li>
-                        <a class="dropdown-item" href="/register/">
-                            <div class="d-flex align-items-center">
-                                <span class="material-icons text-warning mr-3">person_add</span>
-                                <div>
-                                    <div class="text-sm font-weight-bold">ເພີ່ມຜູ້ໃຊ້</div>
-                                    <div class="text-xs text-gray-500">ເພີ່ມຜູ້ໃຊ້ລະບົບໃໝ່</div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
+                <ul id="generalDataMenu" class="dropdown-menu shadow" style="width: 100%">
+                    <!-- ສ່ວນນີ້ຈະເພີ່ມ "ເພີ່ມຜູ້ໃຊ້" ດ້ວຍ JavaScript -->
+                    <!-- ເມນູອື່ນທີ່ບໍ່ກ່ຽວກັບ admin ຢູ່ໃນ HTML -->
                     <li>
                         <a class="dropdown-item" href="/department/">
                             <div class="d-flex align-items-center">
@@ -202,7 +193,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="/document_types/">
+                        <a class="dropdown-item" href="/doc_format/">
                             <div class="d-flex align-items-center">
                                 <span class="material-icons text-warning mr-3">category</span>
                                 <div>
@@ -225,20 +216,20 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" width="100%" cellspacing="0">
+                        <table class="table table-hover" width="100%" cellspacing="0">
                             <thead class="thead-light">
                                 <tr>
                                     <th style="width: 40px;">ລ/ດ</th>                               
-                                    <th style="width: 400px;">ເນື້ອໃນ</th>
+                                    <th class="text-start" style="width: 400px;">ເນື້ອໃນ</th>
                                     <th style="width: 70px;">ລົງວັນທີ່</th>                 
                                     <th style="width: 40px;">ໄຟລ໌</th>                
                                 </tr>
-                            </thead>                   
+                            </thead>                     
                             <tbody id="dataTableBody">
                             </tbody>
                         </table>
                     </div> 
-                    <button id="viewAllBtn" class="view-more-btn">ເບິ່ງທັງໝົດ</button>
+                    <a href="/view_post/" class="view-more-btn" style="text-decoration: none;">ເບິ່ງທັງໝົດ</a>
                 </div>
             </div>
         </div>
@@ -266,12 +257,12 @@
             </div>
             <div class="stat-card" style="border-left-color: #1cc88a;">
                 <div class="text-xs text-success">ເອກະສານຂາເຂົ້າ</div>
-                <div class="number" id="ingoing-docs-count">42</div>
+                <div class="number" id="ingoing-docs-count">0</div>
                 <div class="text-xs text-gray-600">ໃນເດືອນນີ້</div>
             </div>
             <div class="stat-card" style="border-left-color: #36b9cc;">
                 <div class="text-xs text-info">ເອກະສານຂາອອກ</div>
-                <div class="number" id="outgoing-docs-count">56</div>
+                <div class="number" id="outgoing-docs-count">0</div>
                 <div class="text-xs text-gray-600">ໃນເດືອນນີ້</div>
             </div>
             <div class="stat-card" style="border-left-color: #f6c23e;">
@@ -289,7 +280,36 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    // ດຶງ userRole ຈາກ localStorage
+    const userRole = localStorage.getItem("user_role");
+    // ຟັງຊັນສຳລັບເພີ່ມເມນູ "ເພີ່ມຜູ້ໃຊ້" ຖ້າເປັນ admin
+    function renderAdminMenu() {
+        const menuContainer = document.getElementById("generalDataMenu");
+        // ກວດສອບວ່າ userRole ເປັນ "admin" ຫຼືບໍ່
+        if (userRole === "admin") {
+            // ສ້າງແທັກ <li> ສຳລັບ "ເພີ່ມຜູ້ໃຊ້" ພ້ອມກຳນົດສະເພາະ
+            const adminMenuItem = document.createElement("li");
+            adminMenuItem.id = "menu-add-user"; // ກຳນົດ ID
+            adminMenuItem.className = "menu-item-admin"; // ກຳນົດ Class
+            adminMenuItem.setAttribute("data-role", "admin-only"); // ກຳນົດ Data Attribute
+            // ໃສ່ເນື້ອຫາພາຍໃນ <li>
+            adminMenuItem.innerHTML = `
+                <a class="dropdown-item" href="/register/">
+                    <div class="d-flex align-items-center">
+                        <span class="material-icons text-warning mr-3">person_add</span>
+                        <div>
+                            <div class="text-sm font-weight-bold">ເພີ່ມຜູ້ໃຊ້</div>
+                            <div class="text-xs text-gray-500">ເພີ່ມຜູ້ໃຊ້ລະບົບໃໝ່</div>
+                        </div>
+                    </div>
+                </a>
+            `;
+            // ເພີ່ມ <li> ໄປທີ່ຕຳແໜ່ງທຳອິດຂອງ dropdown menu
+            menuContainer.insertBefore(adminMenuItem, menuContainer.firstChild);
+        }
+    }
     document.addEventListener("DOMContentLoaded", async function() {
+        renderAdminMenu();
         const DATABASE_URL = "{{ database_url | escapejs }}";  
         let showingAll = false;
         let allDocuments = [];
@@ -298,7 +318,7 @@
     
         // ຟັງຊັນເພື່ອດືງຂໍ້ມູນເອກະສານຂາອອກ
         async function fetchOutgoingDocs() {
-            const outgoingApiUrl = `http://192.168.45.53:8000/api/search/document_lcic/?doc_type=ຂາອອກ&department=${department}`;
+            const outgoingApiUrl = `${DATABASE_URL}/api/search/document_lcic/?doc_type=ຂາອອກ&department=${department}`;
             try {
                 const response = await fetch(outgoingApiUrl);
                 if (!response.ok) {
@@ -314,7 +334,7 @@
     
         // ຟັງຊັນເພື່ອດືງຂໍ້ມູນເອກະສານຂາເຂົ້າ
         async function fetchIngoingDocs() {
-            const ingoingApiUrl = `http://192.168.45.53:8000/api/search/document_lcic/?doc_type_info=ຂາເຂົ້າ&department_into=${department}`;
+            const ingoingApiUrl = `${DATABASE_URL}/api/search/document_lcic/?doc_type_info=ຂາເຂົ້າ&department_into=${department}`;
             try {
                 const response = await fetch(ingoingApiUrl);
                 if (!response.ok) {
@@ -377,7 +397,7 @@
                             (!endDateFilter || docDate <= new Date(endDateFilter));
                 });
         
-                return showAll ? filteredDocuments : filteredDocuments.slice(0, 5);
+                return showAll ? filteredDocuments : filteredDocuments.slice(0, 8);
             } catch (error) {
                 console.error("Error fetching API data:", error);
                 return [];

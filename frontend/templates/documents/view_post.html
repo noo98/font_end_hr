@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+
+<title>Lcic-HR - ລະບົບບໍລິຫານ ແລະ ຈັດການພາຍໃນ</title>
+
+{% block content %}
+<div class="row m-1">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header py-3 bg-primary d-flex  align-items-center">
+                <button onclick="goBack()" class="btn btn-primary btn-sm">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                </button>
+                <h6 class="m-0 font-weight-bold text-white">ແຈ້ງການ ແລະ ຂ່າວສານ</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" width="100%" cellspacing="0">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="text-center" style="width: 40px;">ລ/ດ</th>                               
+                                <th style="width: 400px;">ເນື້ອໃນ</th>
+                                <th class="text-center" style="width: 70px;">ລົງວັນທີ່</th>                 
+                                <th class="text-center" style="width: 40px;">ໄຟລ໌</th>                
+                            </tr>
+                        </thead>                   
+                        <tbody id="dataTableBody">
+                        </tbody>
+                    </table>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", async function() {
+    const DATABASE_URL = "{{ database_url | escapejs }}";
+    let currentPage = 1;
+    let rowsPerPage = 10;
+    let documentsData = [];
+
+    async function fetchData() {
+        const documentApiUrl = `${DATABASE_URL}/api/search/document_general/?status_doc=1`;
+        try {
+            const response = await fetch(documentApiUrl);
+            const documents = response.ok ? await response.json() : [];
+            
+            documentsData = documents.map((doc, index) => ({
+                index: index + 1,
+                docg_id: doc.docg_id || 'N/A',
+                subject: doc.subject || 'N/A',
+                insert_date: doc.insert_date || 'N/A',
+                file: doc.file ? `${DATABASE_URL}/${doc.file}` : '#'
+            })).sort((a, b) => new Date(b.insert_date) - new Date(a.insert_date));
+            
+            renderTable();
+        } catch (error) {
+            console.error("Error fetching API data:", error);
+        }
+    }
+
+    function renderTable() {
+        const tableBody = document.getElementById("dataTableBody");
+        tableBody.innerHTML = '';
+        
+        let start = (currentPage - 1) * rowsPerPage;
+        let end = start + rowsPerPage;
+        let paginatedDocs = documentsData.slice(start, end);
+
+        if (!paginatedDocs.length) {
+            tableBody.innerHTML = '<tr><td colspan="4" class="text-center">ບໍ່ພົບຂໍ້ມູນ</td></tr>';
+            return;
+        }
+        
+        paginatedDocs.forEach((doc, index) => {
+            const tr = document.createElement('tr');
+            const formattedDate = new Date(doc.insert_date).toLocaleDateString('lo-LA');
+            tr.innerHTML = `
+                <td class="text-center">${start + index + 1}</td>
+                <td>${doc.subject}</td>
+                <td class="text-center">${formattedDate}</td>
+                <td class="text-center">
+                    <a href="${doc.file}" target="_blank" class="btn btn-sm btn-outline-primary">
+                        <i class="fas fa-file-pdf"></i> ເບິ່ງ
+                    </a>
+                </td>
+            `;
+            tableBody.appendChild(tr);
+        });
+        updatePaginationControls();
+    }
+
+    function updatePaginationControls() {
+        const paginationContainer = document.getElementById("paginationControls");
+        paginationContainer.innerHTML = `
+            <button class="btn btn-sm btn-primary" onclick="prevPage()" ${currentPage === 1 ? 'disabled' : ''}>ຍ້ອນກັບ</button>
+            <span> ໜ້າ ${currentPage} ຈາກ ${Math.ceil(documentsData.length / rowsPerPage)} </span>
+            <button class="btn btn-sm btn-primary" onclick="nextPage()" ${currentPage * rowsPerPage >= documentsData.length ? 'disabled' : ''}>ຕໍ່ໄປ</button>
+        `;
+    }
+
+    window.prevPage = function() {
+        if (currentPage > 1) {
+            currentPage--;
+            renderTable();
+        }
+    }
+    
+    window.nextPage = function() {
+        if (currentPage * rowsPerPage < documentsData.length) {
+            currentPage++;
+            renderTable();
+        }
+    }
+    
+    fetchData();
+
+    // Add pagination controls to the DOM
+    const paginationContainer = document.createElement("div");
+    paginationContainer.id = "paginationControls";
+    paginationContainer.className = "text-center mt-3";
+    document.querySelector(".card-body").appendChild(paginationContainer);
+
+    
+});
+function goBack() {
+    window.history.back(); // ຫລື ສາມາດໃຊ້ window.history.go(-1);
+}
+</script>
+{% endblock %}
