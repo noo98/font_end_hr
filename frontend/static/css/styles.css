@@ -96,3 +96,13 @@ body {
 .date-range {
   display: none;
 }
+.btn-no-style {
+  background: none; 
+  border: none; 
+  padding: 0; 
+  color: #242323; 
+  cursor: pointer; 
+}
+.btn-no-style:hover {
+  color: #3302f8; 
+}

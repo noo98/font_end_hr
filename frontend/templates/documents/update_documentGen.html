@@ -6,6 +6,9 @@
 <div class="container-fluid">
     <div class="card-item">
         <div class="card-header">
+            <button onclick="goBack()" class="btn-no-style mx-2">
+                <i class="fas fa-arrow-left mr-2"></i>
+            </button>
             <h3 class="mb-2 text-center fw-bold">ແກ້ໄຂເອກະສານ</h3>
         </div>
         <div class="card-body">
@@ -132,6 +135,9 @@ document.querySelector("#updateForm").addEventListener("submit", function(event)
         });
     });
 });
+function goBack() {
+    window.history.back(); 
+}
 </script>
 
 {% endblock %}

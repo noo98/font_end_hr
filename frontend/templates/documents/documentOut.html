@@ -5,8 +5,12 @@
 
 {% block content %}
 <div id="content ">
-    <h3 class="mb-2 text-center fw-bold">ເອກະສານຂາອອກ</h3>
-    <div class="cardd shadow mb-4 m-2">
+    <div class="card-header ">
+        <button onclick="goBack()" class="btn-no-style mx-2">
+            <i class="fas fa-arrow-left mr-2"></i>
+        </button>
+        <h2 class="mb-2 text-center fw-bold">ເອກະສານຂາອອກ</h2>
+    </div>
         <div class="card-body">
             <div class="row p-6">
                 <form method="get" action="" class="mb-4"> 
@@ -291,5 +295,8 @@
     }
 
     fetchData().then(renderTable);
+    function goBack() {
+    window.history.back(); 
+}
 </script>
 {% endblock %}

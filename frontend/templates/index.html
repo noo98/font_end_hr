@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
-{% block content %}
 <title>Lcic-HR - ລະບົບບໍລິຫານ ແລະ ຈັດການພາຍໃນ</title>
+{% block content %}
+
 
 <header>
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
@@ -219,10 +220,10 @@
                         <table class="table table-hover" width="100%" cellspacing="0">
                             <thead class="thead-light">
                                 <tr>
-                                    <th style="width: 40px;">ລ/ດ</th>                               
+                                    <th class="text-center" style="width: 40px;">ລ/ດ</th>                               
                                     <th class="text-start" style="width: 400px;">ເນື້ອໃນ</th>
-                                    <th style="width: 70px;">ລົງວັນທີ່</th>                 
-                                    <th style="width: 40px;">ໄຟລ໌</th>                
+                                    <th class="text-center" style="width: 70px;">ລົງວັນທີ່</th>                 
+                                    <th class="text-center" style="width: 40px;">ໄຟລ໌</th>                
                                 </tr>
                             </thead>                     
                             <tbody id="dataTableBody">
