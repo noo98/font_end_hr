@@ -219,12 +219,12 @@
     
         $(document).ready(function() {
             $('#dataTable').DataTable();
-            $(".dataTables_filter").insertBefore(".dataTables_wrapper");
+            // $(".dataTables_filter").insertBefore(".dataTables_wrapper");
         });
     }
     
     function UpDocument(event, docId) {
-        // event.preventDefault();  // ຖ້າບໍ່ຕ້ອງການໃຫ້ປິດການ redirect ໃຫ້ເອົາອອກ
+        // event.preventDefault();  
         const userId = localStorage.getItem("user_id");
         if (!userId) {
             console.error("User ID not found in localStorage");
