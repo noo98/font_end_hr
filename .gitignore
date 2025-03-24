@@ -1,4 +1,5 @@
 .env
-settings.py
-__pycache__
+settings.py/
+__pycache__/
 __init__.py
+venv/
