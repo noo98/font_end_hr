@@ -994,7 +994,7 @@
 
         // 🚀 ส่งไปยัง API
         try {
-            const response = await fetch(`http://192.168.45.52:8000/api/employee/${employeeId}/`, requestOptions);
+            const response = await fetch(`${DATABASE_URL}/api/employee/${employeeId}/`, requestOptions);
             const data = await response.json();
 
             if (!response.ok) throw new Error(JSON.stringify(data));

@@ -146,6 +146,18 @@
             option.textContent = format.name;
             formatDropdown.appendChild(option);
         });
+         // เพิ่ม option สำหรับ "ເພີ່ມປະເພດເອກສານ"
+         const addOption = document.createElement('option');
+            addOption.value = 'add_format';
+            addOption.textContent = '➕ ເພີ່ມ';
+            formatDropdown.appendChild(addOption);
+
+            // จัดการการเลือก
+            formatDropdown.addEventListener('change', function() {
+                if (this.value === 'add_format') {
+                    window.location.href = "/doc_format/";
+                }
+            });
     })
     .catch(error => console.error('Error fetching formats:', error));
 

@@ -30,6 +30,7 @@
                     <div class="col-sm-12 col-md-6">
                         <select id="formatFilter" name="format" class="form-select d-inline-block mb-3" required>
                             <option value="">ປະເພດເອກະສານ</option>
+                            
                         </select>
                         <div id="departmentContainer">
                             
@@ -123,7 +124,18 @@
                 option.textContent = format.name;
                 formatDropdown.appendChild(option);
             });
-    
+            // เพิ่ม option สำหรับ "ເພີ່ມປະເພດເອກສານ"
+            const addOption = document.createElement('option');
+            addOption.value = 'add_format';
+            addOption.textContent = '➕ ເພີ່ມ';
+            formatDropdown.appendChild(addOption);
+
+            // จัดการการเลือก
+            formatDropdown.addEventListener('change', function() {
+                if (this.value === 'add_format') {
+                    window.location.href = "{% url 'doc_format' %}";
+                }
+            });
         } catch (error) {
             // console.error("Error during initialization:", error);
         }

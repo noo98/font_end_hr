@@ -884,7 +884,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     
 
-        fetch('http://192.168.45.52:8000/api/employee/', requestOptions)
+        fetch('${DATABASE_URL}/api/employee/', requestOptions)
             .then(response => {
                 if (!response.ok) {
                     return response.json().then(err => { throw new Error(JSON.stringify(err)); });
