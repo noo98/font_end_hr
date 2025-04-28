@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import path
 from frontend.views import documentEntry
 from frontend import views
-from frontend.views import add_documentE, add_documentO
+from frontend.views import add_documentO
 # from frontend.views import form_login
 def redirect_to_login(request):
     return redirect('/login/')
@@ -18,6 +18,8 @@ urlpatterns = [
     path('form_emp/', views.form_emp, name='form_emp'),
     path('tables_emp/', views.tables_emp, name='tables_emp'),
     path('update_emp/<int:emp_id>/', views.update_emp, name='update_emp'),
+    path('view_emp/', views.view_emp, name='view_emp'),
+    path('print_emp/', views.print_emp, name='print_emp'),
 
     path('login/', views.form_login, name='form_login'),
     path('profile/', views.profile, name='profile'), 

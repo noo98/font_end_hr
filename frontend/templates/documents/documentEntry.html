@@ -4,16 +4,19 @@
 <title>Lcic-HR</title>
 {% block content %}
 <div id="content ">
-    <div class="card-header ">
-        <button onclick="goBack()" class="btn-no-style mx-2">
+    <div class="row">
+        <div class="col-md-4 "><button onclick="goBack()" class="btn-no-style mx-2 d-flex justify-start">
             <i class="fas fa-arrow-left mr-2"></i>
-        </button>
-        <h2 class="mb-2 text-center fw-bold">ເອກະສານຂາເຂົ້າ</h2>
+        </button></div>
+        <div class="col-md-4 text-center">
+            <h3 class=" text-center fw-bold">ເອກະສານຂາເຂົ້າ</h3>
+        </div>
+        <div class="col-md-4"></div>       
     </div>
-    <div class="cardd shadow mb-4 m-2">
+    <div class="cardd shadow mb-4 m-1">
         <div class="card-body">
             <div class="row p-6"> 
-                <form method="get" action="" class="mb-4"> 
+                <form method="get" action="" class="mb-1"> 
                     <div class="card-header d-flex justify-content-between">
                         <div class="row g-2 align-items-center"> 
                             <div class="col-md-3 col-6">
@@ -40,10 +43,9 @@
                             <!-- ปุ่มกด -->
                             <div class="col-md-2 col-6 d-flex gap-2 justify-end">
                                 <button type="submit" class="btn btn-info"><i class="fa fa-search"></i></button>
-                                <button onclick="window.location.reload();" class="btn btn-danger" id="resetFilter">
+                                <button type="button" class="btn btn-danger" id="resetFilter">
                                     <i class="fas fa-sync"></i>
-                                </button>
-                                
+                                </button>                         
                             </div>
                         </div>
                         <div>
@@ -75,7 +77,9 @@
                             <th>ຜູ້ສົ່ງ</th>
                             <!-- <th>ໄຟລ໌</th> -->
                             <th style="text-align: center; width: 70px;">ສະຖານະ</th>
+                            
                             <th style="text-align: center; width: 70px;">Action</th>
+                            
                         </tr>
                     </thead>                   
                     <tbody id="dataTableBody">
@@ -163,71 +167,85 @@
     }
     
     function renderTable(documents) {
-        const userRole = localStorage.getItem("user_role");
-        const userId = localStorage.getItem("user_id");
-    
-        if ($.fn.DataTable.isDataTable("#dataTable")) {
-            $("#dataTable").DataTable().destroy();
-        }
-    
-        const tableBody = document.getElementById("dataTableBody");
-        tableBody.innerHTML = '';
-    
-        if (!documents?.length) {
-            tableBody.innerHTML = '<tr><td colspan="10" class="text-center">ບໍ່ພົບຂໍ້ມູນ</td></tr>';
-            return;
-        }
-    
-        const fragment = document.createDocumentFragment();
-        documents.forEach((doc, index) => {
-            const userViewed = doc.status?.some(status => {
-                return status.us_id == userId && status.Doc_status === "viewed";
-            });
-    
-            const tr = document.createElement('tr');
-            tr.dataset.id = doc.doc_id;
-            tr.innerHTML = `
-                <td>${index + 1}</td>
-                <td>${doc.doc_number || ''}</td>
-                <td>${doc.format_name || ''}</td>
-                <td>${doc.subject || ''}</td>
-                <td>${doc.insert_date || ''}</td>
-                <td>${doc.department || ''}</td>
-                          
-                <td>${doc.name || ''}</td>
-                <td style="text-align: center;">
-                    <a href="${doc.file}" onclick="UpDocument(event, '${doc.doc_id}')" target="_blank" class="btn btn-sm btn-link">
-                        <span id="status-${doc.doc_id}" class="badge ${userViewed ? 'bg-success' : 'bg-danger'}">
-                            ${userViewed ? '<i class="fas fa-check"></i>' : '<i class="fas fa-eye"></i>'}
-                        </span>
-                    </a>
-                </td>
+    const userRole = localStorage.getItem("user_role");
+    const user = JSON.parse(localStorage.getItem("user"));
+    const currentUsername = user?.username || ""; 
+    const userId = localStorage.getItem("user_id");
+
+    if ($.fn.DataTable.isDataTable("#dataTable")) {
+        $("#dataTable").DataTable().destroy();
+    }
+
+    const tableBody = document.getElementById("dataTableBody");
+    tableBody.innerHTML = '';
+
+    if (!documents?.length) {
+        tableBody.innerHTML = '<tr><td colspan="10" class="text-center">ບໍ່ພົບຂໍ້ມູນ</td></tr>';
+        return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    documents.forEach((doc) => {
+        const userViewed = doc.status?.some(status => {
+            return status.us_id == userId && status.Doc_status === "viewed";
+        });
+        const tr = document.createElement('tr');
+        tr.dataset.id = doc.doc_id;
+        tr.innerHTML = `
+            <td></td>
+            <td>${doc.doc_number || ''}</td>
+            <td>${doc.format_name || ''}</td>
+            <td>${doc.subject || ''}</td>
+            <td>${doc.insert_date || ''}</td>
+            <td>${doc.department || ''}</td>
+            <td>${doc.name || ''}</td> 
+            <td style="text-align: center;">
+                <a href="${doc.file}" onclick="UpDocument(event, '${doc.doc_id}')" target="_blank" class="btn btn-sm btn-link">
+                    <span id="status-${doc.doc_id}" class="badge ${userViewed ? 'bg-success' : 'bg-danger'}">
+                        ${userViewed ? '<i class="fas fa-check"></i>' : '<i class="fas fa-eye"></i>'}
+                    </span>
+                </a>
+            </td>
+            ${(userRole === "admin" || doc.name === currentUsername) ? `              
                 <td class="text-center">
                     <a href="/update_documentE/${doc.doc_id}" class="btn btn-sm btn-link" title="ແກ້ໄຂ">
                         <i class="fas fa-edit text-success"></i>
                     </a>
-                    ${userRole === "admin" ? `
-                    <a href="#" onclick="deleteDocument('${doc.doc_id}')" class="btn btn-sm btn-link" title="ລືບ">
+                    <button class="btn btn-sm btn-link delete-btn" data-id="${doc.doc_id}" title="ລຶບ">
                         <i class="fas fa-trash-alt text-danger"></i>
-                    </a>` : ""}
-                </td>
+                    </button>
+                </td>` : "<td></td>"}
             `;
-            fragment.appendChild(tr);
+        fragment.appendChild(tr);
+    });
+
+    tableBody.appendChild(fragment);
+
+    $(document).ready(function() {
+        const table = $('#dataTable').DataTable({
+            "order": [[4, "desc"]], // ຈັດລຽງຕາມຄໍລຳທີ 4 (insert_date) ແບບ descending
+            "drawCallback": function(settings){
+                const api = this.api();
+                api.rows({ page: 'current'}). every(function(rowIdx, tableLoop, rowLoop) {
+                    const cell = this.cell(rowIdx, 0);
+                    cell.data(rowLoop + 1);
+                });
+            }
         });
-    
-        tableBody.appendChild(fragment);
-    
-        $(document).ready(function() {
-            $('#dataTable').DataTable();
-            // $(".dataTables_filter").insertBefore(".dataTables_wrapper");
+
+        // ເພີ່ມ Delegated Event Listener ໃຫ້ປຸ່ມລຶບ
+        $('#dataTable').on('click', '.delete-btn', function() {
+            const docId = $(this).data('id');
+            deleteDocument(docId);
         });
-    }
+    });
+}
     
     function UpDocument(event, docId) {
         // event.preventDefault();  
         const userId = localStorage.getItem("user_id");
         if (!userId) {
-            console.error("User ID not found in localStorage");
+            // console.error("User ID not found in localStorage");
             return;
         }
     
@@ -287,7 +305,7 @@
                     .then(() => {
                         $('#dataTable').DataTable().row($(`tr[data-id="${docId}"]`)).remove().draw();
                         Swal.fire("ລຶບສຳເລັດ!", "ເອກະສານໄດ້ຖືກລຶບແລ້ວ.", "success");
-                        location.reload();
+                        fetchData().then(renderTable);
                     })
                     .catch(error => {
                         Swal.fire("Error!", `ລຶບເອກະສານບໍ່ສຳເລັດ: ${error.message}`, "error");
@@ -299,7 +317,17 @@
     fetchData().then(renderTable);
     function goBack() {
     window.history.back(); 
-}
+    }
+    document.getElementById("resetFilter").addEventListener("click", function() {
+        // เคลียร์ input ทั้งหมดใน form
+        document.querySelector('select[name="format"]').value = "";
+        document.querySelector('input[name="start_date"]').value = "";
+        document.querySelector('input[name="end_date"]').value = "";
+
+        // ลบ query string และ reload หน้า
+        window.history.replaceState({}, document.title, window.location.pathname);
+        location.reload(); // ดึงข้อมูลใหม่โดยไม่ใช้ filter
+    });
 </script>
 
 {% endblock %}

@@ -114,7 +114,6 @@
         document.querySelectorAll('input[name="department_into"]:checked').forEach(checkbox => {
             departmentInto.push(parseInt(checkbox.value));
         });
-
         // ລຶບ department_into ເກົ່າ ແລະເພີ່ມຄ່າໃໝ່
         formData.delete('department_into');
         departmentInto.forEach(id => {
@@ -126,7 +125,7 @@
         for (let pair of formData.entries()) {
             console.log(pair[0] + ": " + pair[1]);
         }
-
+ 
         // ສົ່ງ request ໄປ API ດ້ວຍ PUT
         fetch(`${DATABASE_URL}/api/update/document_lcic/${DOC_ID}/`, {
             method: "PUT",

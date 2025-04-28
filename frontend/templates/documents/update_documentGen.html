@@ -35,11 +35,8 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-sm-12 col-md-6">
-                        <textarea class="form-control" id="subject" name="subject">{{ document.subject }}</textarea>
-                    </div>
                     <div class="col-sm-12 col-md-6">                        
-                        <select id="formatFilter" name="format" class="form-control d-inline-block mb-3" required>
+                        <select name="format" name="format" class="form-select d-inline-block mb-3">
                             <option value="">ປະເພດເອກະສານ</option>
                             {% for format in Document_format %}
                                 <option value="{{ format.dmf_id }}" {% if format.dmf_id == document.format %}selected{% endif %}>
@@ -48,6 +45,10 @@
                             {% endfor %}
                         </select>                        
                     </div>
+                    <div class="col-sm-12 col-md-6">
+                        <textarea class="form-control" id="subject" name="subject">{{ document.subject }}</textarea>
+                    </div>
+                    
                 </div>
 
                                             

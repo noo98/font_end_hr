@@ -21,13 +21,14 @@ def index(request):
 def index1(request):
     return render(request, 'index1.html',{ 'database_url': DATABASE_URL, })
 
-def tables_emp(request):
+def tables_emp(request): 
     api_url = f"{DATABASE_URL}/api/employee/"
     departments_api = f"{DATABASE_URL}/api/list/departments/"
 
     employees = []
 
     try:
+        # Fetch data from API
         emp_response = requests.get(api_url)
         dept_response = requests.get(departments_api)
 
@@ -41,12 +42,27 @@ def tables_emp(request):
         # Process employee data
         for emp in emp_data:
             employees.append({
-                "emp_id": emp.get("emp_id", "N/A"),
-                "lao_name": emp.get("lao_name", "N/A"),
-                "eng_name": emp.get("eng_name", "N/A"),
-                "nickname": emp.get("nickname", "N/A"),
-                "Gender": emp.get("Gender", "N/A"),  # Match backend field name
-                "Department": department_map.get(emp.get("Department"), "N/A"),  # Match backend field name
+                "emp_id": emp.get("employee", {}).get("emp_id", "N/A"),
+                "lao_name": emp.get("employee", {}).get("lao_name", "N/A"),
+                "eng_name": emp.get("employee", {}).get("eng_name", "N/A"),
+                "nickname": emp.get("employee", {}).get("nickname", "N/A"),
+                "Gender": emp.get("employee", {}).get("Gender", "N/A"),
+                "Department": department_map.get(emp.get("employee", {}).get("Department"), "N/A"),
+                "position": emp.get("employee", {}).get("position", "N/A"),
+                "phone": emp.get("employee", {}).get("phone", "N/A"),
+                "salary_level": emp.get("employee", {}).get("salary_level", "N/A"),
+
+                # Additional Data
+                "education": emp.get("education", []),
+                "specialized_education": emp.get("specialized_education", []),
+                "political_theory_education": emp.get("political_theory_education", []),
+                "foreign_languages": emp.get("foreign_languages", []),
+                "work_experiences": emp.get("work_experiences", []),
+                "training_courses": emp.get("training_courses", []),
+                "awards": emp.get("awards", []),
+                "disciplinary_actions": emp.get("disciplinary_actions", []),
+                "family_members": emp.get("family_members", []),
+                "evaluation": emp.get("evaluation", {}),
             })
 
     except Exception as e:
@@ -56,6 +72,10 @@ def tables_emp(request):
     return render(request, 'employee/tables_emp.html', {
         "employees": employees,
         "database_url": DATABASE_URL,
+    })
+def print_emp(request):
+    return render(request, 'employee/print_emp.html', {
+        'database_url': DATABASE_URL,  
     })
 
 def doc_format(request):
@@ -79,32 +99,35 @@ def department(request):
     })
 
 def register(request):
-    # API URLs
-    users_api = f"{DATABASE_URL}/api/users"
+    users_api = f"{DATABASE_URL}/api/users/"
     departments_api = f"{DATABASE_URL}/api/list/departments/"
-    employees_api = f"{DATABASE_URL}/api/employee"
+    employees_api = f"{DATABASE_URL}/api/employee/"
 
     try:
-        users = requests.get(users_api).json()  # ດຶງຂໍ້ມູນ user
-        departments = requests.get(departments_api).json()  # ດຶງຂໍ້ມູນ department
-        employees = requests.get(employees_api).json()  # ດຶງຂໍ້ມູນ employee
+        users_response = requests.get(users_api)
+        if users_response.status_code != 200:
+            raise Exception(f"Users API returned {users_response.status_code}: {users_response.text}")
+        users = users_response.json()
+        # print("Users:", users)
 
-        # ສ້າງແຜນທີ່ຂອງ department
+        departments_response = requests.get(departments_api)
+        if departments_response.status_code != 200:
+            raise Exception(f"Departments API returned {departments_response.status_code}: {departments_response.text}")
+        departments = departments_response.json()
+        # print("Departments:", departments)
+
+        employees_response = requests.get(employees_api)
+        if employees_response.status_code != 200:
+            raise Exception(f"Employees API returned {employees_response.status_code}: {employees_response.text}")
+        employees = employees_response.json()
+        # print("Employees:", employees)
+
+        # ປັບໃຫ້ເຂົ້າເຖິງ "employee" ພາຍໃນ JSON
         department_map = {dept["id"]: dept["name"] for dept in departments}
-        
-        # ສ້າງແຜນທີ່ຂອງ employee
-        employee_map = {emp["emp_id"]: emp["lao_name"] for emp in employees}
+        employee_map = {emp["employee"]["emp_id"]: emp["employee"]["lao_name"] for emp in employees}
 
-        # ສະຖານະຂອງ User
-        status_map = {
-            1: "Admin",
-            2: "User MM",
-            3: "User IT",
-            4: "User OP",
-            5: "User DQ",
-        }
+        status_map = {1: "Admin", 2: "User MM", 3: "User IT", 4: "User OP", 5: "User DQ"}
 
-        # ປະກອບຂໍ້ມູນໃຫ້ພ້ອມສົ່ງໄປໃນ template
         register_list = []
         for user in users:
             register_list.append({
@@ -112,18 +135,19 @@ def register(request):
                 "username": user["username"],
                 "employee_name": employee_map.get(user["Employee"], "N/A"),
                 "department_name": department_map.get(user["Department"], "N/A"),
-                "status": status_map.get(user["status"], "Unknown")  # ດຶງສະຖານະຕາມຄ່າ
+                "status": status_map.get(user["status"], "Unknown")
             })
+        # print("Register List:", register_list)
 
     except Exception as e:
         register_list = []
-        print("Error fetching data:", e)
+        print("Error fetching data:", str(e))
 
     return render(request, 'register.html', {
         "register": register_list,
         'database_url': DATABASE_URL,
-        })
-
+    })
+        
 def education_level(request):
     return render(request, 'education_level.html',)
 
@@ -180,13 +204,12 @@ def documentEntry(request):
         
         for doc in documents:
             doc['department'] = department_map.get(str(doc.get('department', {}).get('id', '')), 'N/A')
-            doc['format_name'] = format_map.get(str(doc.get('format', {}).get('dmf_id', '')), 'N/A')
+            doc['format_name'] = format_map.get(doc['format']['dmf_id'], 'N/A') if doc.get('format') else 'N/A'
             
             if isinstance(doc.get('department_into'), list):
                 doc['department_into'] = [department_map.get(str(dep.get('id', '')), 'N/A') for dep in doc['department_into']]
             else:
-                doc['department_into'] = []
-        
+                doc['department_into'] = []       
         # Apply filters
         if format_filter:
             documents = [doc for doc in documents if str(doc.get('format', {}).get('dmf_id', '')) == format_filter]
@@ -450,16 +473,9 @@ def update_documentGen(request, docg_id):
             print(f"Error updating document: {e}")
             return JsonResponse({'success': False, 'error': str(e)}, status=400)
 def test_view(request):
-    format_api_url = "http://192.168.45.53:8000/api/list/Document_format/"
-    response = requests.get(format_api_url)
+    
 
-    formats = response.json() if response.status_code == 200 else []
-
-    context = {
-        'formats': formats,
-        'format_filter': request.GET.get('format', '')
-    }
-    return render(request, "test.html", context)
+    return render(request, "test.html",)
 
 def form_emp(request):
     return render(request, 'employee/form_emp.html',{
@@ -474,51 +490,81 @@ def post(request):
 
 def testttt(request):
     return render(request, 'testttt.html',)
+
+def view_emp(request, emp_id):
+    
+    return render(request, 'employee/view_emp.html',{ 'database_url': DATABASE_URL, })
+import requests
+import json
+import logging
+from django.http import JsonResponse
+from django.shortcuts import render
+
+logger = logging.getLogger(__name__)
+
 def update_emp(request, emp_id):
-    employee_url = f"{DATABASE_URL}/api/employee/{emp_id}/"
+    base_url = f"{DATABASE_URL}/api/employee/{emp_id}/"
     departments_url = f"{DATABASE_URL}/api/list/departments/"
-    update_url = f"{DATABASE_URL}/api/employee/{emp_id}/"
 
     if request.method == 'GET':
+        data = {
+            'employee': {},
+            'personal_information': [],
+            'education': [],
+            'specialized_education': [],
+            'political_theory_education': [],
+            'foreign_languages': [],
+            'work_experiences': [],
+            'training_courses': [],
+            'awards': [],
+            'disciplinary_actions': [],
+            'family_members': [],
+            'evaluation': {},
+        }
+        departments = []
+
         try:
-            employee = requests.get(employee_url).json()
-            departments = requests.get(departments_url).json()
+            response = requests.get(base_url)
+            response.raise_for_status()
+            employee_data = response.json()
+            if not employee_data or not isinstance(employee_data, list):
+                # logger.error("Invalid employee data format for ID %s", emp_id)
+                data['error'] = "Invalid employee data format."
+            else:
+                employee_data = employee_data[0]  # Assuming data is a list
+                # logger.debug("Fetched employee data for ID %s: %s", emp_id, employee_data)
+
+                data['employee'] = employee_data.get('employee', {})
+                data['personal_information'] = employee_data.get('personal_information', [])
+                data['education'] = employee_data.get('education', [])
+                data['specialized_education'] = employee_data.get('specialized_education', [])
+                data['political_theory_education'] = employee_data.get('political_theory_education', [])
+                data['foreign_languages'] = employee_data.get('foreign_languages', [])
+                data['work_experiences'] = employee_data.get('work_experiences', [])
+                data['training_courses'] = employee_data.get('training_courses', [])
+                data['awards'] = employee_data.get('awards', [])
+                data['disciplinary_actions'] = employee_data.get('disciplinary_actions', [])
+                data['family_members'] = employee_data.get('family_members', [])
+                data['evaluation'] = employee_data.get('evaluation', {})
+
         except requests.exceptions.RequestException as e:
-            print(f"Error fetching data: {e}")
-            employee, departments = {}, []
+            # logger.error("Error fetching employee data for ID %s: %s", emp_id, str(e))
+            data['error'] = "Failed to fetch employee data."
+
+        try:
+            response = requests.get(departments_url)
+            response.raise_for_status()
+            departments = response.json()
+            # logger.debug("Fetched departments: %s", departments)
+        except requests.exceptions.RequestException as e:
+            # logger.error("Error fetching departments: %s", str(e))
+            departments = []
 
         return render(request, 'employee/update_emp.html', {
-            'employee': employee,
+            **data,
             'departments': departments,
-            'database_url': DATABASE_URL,  
+            'database_url': DATABASE_URL,
+            'emp_id': emp_id,
         })
 
-    elif request.method == 'POST':
-        try:
-            data = {
-                'emp_id': request.POST.get('emp_id'),
-                'lao_name': request.POST.get('lao_name'),
-                'eng_name': request.POST.get('eng_name'),
-                'nickname': request.POST.get('nickname'),
-                'Gender': request.POST.get('Gender'),
-                'birth_date': request.POST.get('birth_date'),
-                'status': request.POST.get('status'),
-                'position': request.POST.get('position'),
-                'year_entry': request.POST.get('year_entry'),
-                'salary_level': request.POST.get('salary_level'),
-                'phone': request.POST.get('phone'),
-                'Department': request.POST.get('Department'),                
-                }
-            if request.FILES.get('pic'):
-                files = {'pic': request.FILES['pic']}
-                response = requests.put(update_url, data=data, files=files)  
-            else:
-                response = requests.put(update_url, json=data)  
-            
-            response.raise_for_status()
-            print(response.json())
-            return JsonResponse({'success': True, 'message': 'ບັນທືກຂໍ້ມູນສຳເລັດ!'})
-            
-        except requests.exceptions.RequestException as e:
-            print(f"Error updating document: {e}")
-            return JsonResponse({'success': False, 'error': str(e)}, status=400)
+    

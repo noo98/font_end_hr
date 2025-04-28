@@ -16,7 +16,7 @@
                     
                     <div class="mb-3">
                         <input type="text" class="form-control" id="username" name="username" 
-                               placeholder="ຊື່ຜູ້ໃຊ້..." required>
+                               placeholder="ຊື່ຜູ້ໃຊ້..." required autocomplete="off">
                     </div>
                     
                     <div class="mb-3">
@@ -67,7 +67,6 @@
 
         <!-- Table Section -->
         <div class="col-md-8 mt-4">
-            
             <fieldset class="border border-primary p-2 px-4 pb-4" style="border-radius: 15px;">
                 <div class="table-responsive">
                 <table id="example" class="table table-striped" style="width:100%">
@@ -116,31 +115,40 @@
 <!-- Scripts -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'js/localStorage.js' %}"></script>
 
 <script>
-    const DATABASE_URL = "{{ database_url | escapejs }}";
+    var DATABASE_URL = "{{ database_url | escapejs }}";
     let departments = {};
     let employees = {};
-    
+
     async function fetchData() {
         try {
+            // Fetch departments
             const depResponse = await fetch(`${DATABASE_URL}/api/list/departments/`);
             if (!depResponse.ok) throw new Error("Failed to fetch departments");
             const depData = await depResponse.json();
             depData.forEach(dep => {
                 departments[dep.id] = dep.name;
             });
-    
+            // console.log("Departments:", departments);
+
+            // Fetch employees
             const empResponse = await fetch(`${DATABASE_URL}/api/employee/`);
             if (!empResponse.ok) throw new Error("Failed to fetch employees");
             const empData = await empResponse.json();
+            // console.log("Employees:", empData);
             const dataList = document.getElementById("employeeList");
-            empData.forEach(emp => {
+
+            // Assuming empData is an array of objects like [{ "employee": { ... } }]
+            empData.forEach(item => {
+                const emp = item.employee; // Access the "employee" object inside each item
                 employees[emp.emp_id] = emp.lao_name;
+
                 const option = document.createElement("option");
                 option.value = emp.lao_name;
                 option.setAttribute("data-emp-id", emp.emp_id);
-                option.setAttribute("data-dep-id", emp.Department || emp.department_id);
+                option.setAttribute("data-dep-id", emp.Department);
                 dataList.appendChild(option);
             });
         } catch (error) {
@@ -148,7 +156,7 @@
             Swal.fire("ຜິດພາດ", "ບໍ່ສາມາດດຶງຂໍ້ມູນເບື້ອງຕົ້ນໄດ້: " + error.message, "error");
         }
     }
-    
+
     function setDepartment() {
         const input = document.getElementById("empname");
         const options = document.getElementById("employeeList").options;
@@ -163,11 +171,13 @@
     
     document.addEventListener("DOMContentLoaded", async () => {
         await fetchData(); // ລໍຖ້າ fetchData ສຳເລັດກ່ອນ
+
+        // ກວດສອບ duplicate ID
+        
     });
     
     document.getElementById("registerForm").addEventListener("submit", async function(event) {
         event.preventDefault();
-    
         const formData = new FormData(this);
         const id = formData.get("id");
         const method = id ? "PUT" : "POST";
@@ -239,25 +249,47 @@
     });
     
     window.editRegister = async function(id) {
-        try {
-            const response = await fetch(`${DATABASE_URL}/api/users/${id}/`);
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-            const userData = await response.json();
-    
-            document.getElementById("id").value = userData.us_id || userData.id || "";
-            document.getElementById("username").value = userData.username || "";
-            document.getElementById("pwd").value = ""; // ປ່ອຍຫວ່າງເພື່ອຄວາມປອດໄພ
-            document.getElementById("empname").value = employees[userData.Employee] || userData.employee_name || "";
-            document.getElementById("depname").value = departments[userData.Department] || userData.department_name || "ບໍ່ພົບຂໍ້ມູນ";
-            document.getElementById("status").value = userData.status || "";
-            
-            document.querySelector('button[name="btnAdd"]').style.display = "none";
-            document.querySelector('button[name="btnEdit"]').style.display = "inline-block";
-        } catch (error) {
-            console.error("Error fetching user data:", error);
-            Swal.fire("ຜິດພາດ", "ບໍ່ສາມາດດຶງຂໍ້ມູນຜູ້ໃຊ້ໄດ້: " + error.message, "error");
+    try {
+        const response = await fetch(`${DATABASE_URL}/api/users/${id}/`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const userData = await response.json();
+
+        // console.log("User data from API:", userData); // Debug: ກວດສອບ response ຈາກ API
+
+        // ກວດສອບວ່າ userData ມີຄ່າຫຼືບໍ່
+        if (!userData) {
+            throw new Error("No user data returned from API");
         }
-    };
+
+        // Map ຄ່າຈາກ userData ໃສ່ໃນ form
+        const usernameField = document.getElementById("username");
+        const usernameValue = userData.username || userData.user_name || "";
+        
+        // Set ຄ່າ username
+        usernameField.value = usernameValue;
+        usernameField.dispatchEvent(new Event('input'));
+        usernameField.dispatchEvent(new Event('change'));
+        // console.log("Set username to:", usernameField.value);
+
+        // ກວດສອບຄ່າຫຼັງຈາກ set ໄປແລ້ວ 100ms
+        // setTimeout(() => {
+        //     console.log("Username after 100ms:", document.getElementById("username").value);
+        // }, 100);
+
+        document.getElementById("id").value = userData.us_id || userData.id || "";
+        document.getElementById("pwd").value = ""; // ປ່ອຍຫວ່າງເພື່ອຄວາມປອດໄພ
+        document.getElementById("empname").value = employees[userData.Employee] || userData.employee_name || "";
+        document.getElementById("depname").value = departments[userData.Department] || userData.department_name || "ບໍ່ພົບຂໍ້ມູນ";
+        document.getElementById("status").value = userData.status || "";
+        
+        // ປ່ຽນປຸ່ມເປັນໂໝດແກ້ໄຂ
+        document.querySelector('button[name="btnAdd"]').style.display = "none";
+        document.querySelector('button[name="btnEdit"]').style.display = "inline-block";
+    } catch (error) {
+        console.error("Error fetching user data:", error);
+        Swal.fire("ຜິດພາດ", "ບໍ່ສາມາດດຶງຂໍ້ມູນຜູ້ໃຊ້ໄດ້: " + error.message, "error");
+    }
+};
     
     window.deleteRegister = async function(id) {
         Swal.fire({
@@ -292,5 +324,12 @@
             }
         });
     };
-    </script>
+
+    // ເພີ່ມ event listener ໃຫ້ກັບປຸ່ມ "ຍົກເລີກ" ເພື່ອ reset form ແລະປ່ຽນປຸ່ມກັບຄືນ
+    document.getElementById("btnCancel").addEventListener("click", function() {
+        document.getElementById("registerForm").reset();
+        document.querySelector('button[name="btnAdd"]').style.display = "inline-block";
+        document.querySelector('button[name="btnEdit"]').style.display = "none";
+    });
+</script>
 {% endblock %}

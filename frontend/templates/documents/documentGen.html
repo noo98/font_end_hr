@@ -3,17 +3,19 @@
 
 <title>Lcic-HR</title>
 {% block content %}
-<div id="content ">
-    <div class="card-header ">
-        <button onclick="goBack()" class="btn-no-style mx-2">
+<div id="content">
+    <div class="row">
+        <div class="col-md-4"><button onclick="goBack()" class="btn-no-style mx-2 d-flex justify-start">
             <i class="fas fa-arrow-left mr-2"></i>
-        </button>
-        <h2 class="mb-2 text-center fw-bold">ເອກະສານທົ່ວໄປ</h2>
-    </div>
-    <div class="cardd shadow mb-4 m-2">
+        </button></div>
+        <div class="col-md-4">
+            <h3 class=" text-center fw-bold">ເອກະສານທົ່ວໄປ</h3>
+        </div>
+        <div class="col-md-"></div>
+    <div class="cardd shadow mb-4 m-1">
         <div class="card-body">
             <div class="row p-6">
-                <form method="GET" id="filterForm" class="row g-3 mb-4">
+                <form method="GET"  class="mb-1">
                     <div class="card-header d-flex justify-content-between">
                         <div class="row g-2 align-items-center"> 
                             <div class="col-md-3 col-6">
@@ -30,18 +32,14 @@
                             <!-- ช่องเลือกวันที่ -->
                             <div class="col-md-3 col-6">
                                 <input type="date" name="start_date" class="form-control date-input" value="{{ start_date_filter }}">
-                            </div>
-                
-                            
-                
+                            </div>             
                             <div class="col-md-3 col-6">
                                 <input type="date" name="end_date" class="form-control date-input" value="{{ end_date_filter }}">
-                            </div>
-                
+                            </div>     
                             <!-- ปุ่มกด -->
                             <div class="col-md-2 col-6 d-flex gap-2 justify-end">
                                 <button type="submit" class="btn btn-info"><i class="fa fa-search"></i></button>
-                                <button onclick="window.location.reload();" class="btn btn-danger" id="resetFilter">
+                                <button type="button" class="btn btn-danger" id="resetFilter">
                                     <i class="fas fa-sync"></i>
                                 </button>
                                 
@@ -66,7 +64,7 @@
                 <table id="dataTable"class="table table-bordered"  width="100%" cellspacing="0">
                     <thead class="thead-light">
                         <tr>
-                            <th style="text-align: center; width: 50px;">ລ/ດ</th>
+                            <th style=" width: 35px;">ລ/ດ</th>
                             <th>ເລກທີ່</th>
                             <th>ປະເພດ</th>
                             <th>ເນື້ອໃນ</th>
@@ -153,25 +151,33 @@
         }
         
         function renderTable(documents) {
+            // ດຶງ userRole ແລະ username ຂອງຜູ້ໃຊ້ປັດຈຸບັນຈາກ localStorage
             const userRole = localStorage.getItem("user_role");
+            const user = JSON.parse(localStorage.getItem("user"));
+            const currentUsername = user?.username || ""; // ດຶງ username ຂອງຜູ້ໃຊ້ປັດຈຸບັນ
+
+            // Debug: ກວດສອບຄ່າທີ່ດຶງມາ
+            console.log("User Role:", userRole);
+            console.log("Current Username:", currentUsername);
+
             if ($.fn.DataTable.isDataTable("#dataTable")) {
                 $("#dataTable").DataTable().destroy();
             }
-        
+
             const tableBody = document.getElementById("dataTableBody");
             tableBody.innerHTML = '';
-        
+
             if (!documents?.length) {
                 tableBody.innerHTML = '<tr><td colspan="10" class="text-center">ບໍ່ພົບຂໍ້ມູນ</td></tr>';
                 return;
             }
-        
+
             const fragment = document.createDocumentFragment();
-            documents.forEach((doc, index) => {
+            documents.forEach((doc) => {
                 const tr = document.createElement('tr');
                 tr.dataset.id = doc.docg_id;  
                 tr.innerHTML = `
-                    <td>${index + 1}</td>
+                    <td></td>
                     <td>${doc.doc_number || ''}</td>
                     <td>${doc.format_name || ''}</td>
                     <td>${doc.subject || ''}</td>
@@ -181,12 +187,12 @@
                         <a href="${doc.file}" target="_blank" class="btn btn-sm btn-link btn-view-doc">
                             <i class="fas fa-file"></i>
                         </a>
-                    </td>               
+                    </td> 
+                    ${(userRole === "admin" || doc.name === currentUsername) ? `              
                     <td class="text-center">
                         <a href="/update_documentGen/${doc.docg_id}" class="btn btn-sm btn-link" title="ແກ້ໄຂ">
                             <i class="fas fa-edit text-success"></i>
                         </a>
-                        ${userRole === "admin" ? `
                         <button class="btn btn-sm btn-link delete-btn" data-id="${doc.docg_id}" title="ລືບ">
                             <i class="fas fa-trash-alt text-danger"></i>
                         </button>` : ""}
@@ -194,24 +200,28 @@
                 `;
                 fragment.appendChild(tr);
             });
-        
+
             tableBody.appendChild(fragment);
             $(document).ready(function() {
-                $('#dataTable').DataTable({
-                    "pageLength": 10,
-                    "order": [[0, "asc"]]
+        const table = $('#dataTable').DataTable({
+            "order": [[4, "desc"]], // ຈັດລຽງຕາມ insert_date (ຄໍລຳທີ 4) ແບບ descending
+            "drawCallback": function(settings) {
+                // ອັບເດດ index ຫຼັງຈາກ DataTable ແຕ່ງຕາຕະລາງສຳເລັດ
+                const api = this.api();
+                api.rows({ page: 'current' }).every(function(rowIdx, tableLoop, rowLoop) {
+                    const cell = this.cell(rowIdx, 0); // ຄໍລຳທີ 0 (index)
+                    cell.data(rowLoop + 1); // ກຳນົດ index ໃໝ່ເລີ່ມຈາກ 1
                 });
-                // $(".dataTables_filter").insertBefore(".dataTables_wrapper");
-            });
-    
-            // ເພີ່ມ event listener ສຳລັບປຸ່ມລຶບ
-            document.querySelectorAll('.delete-btn').forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    deleteDocument(this.dataset.id);
-                });
-            });
-        }
+            }
+        });
+
+        // ເພີ່ມ Delegated Event Listener ໃຫ້ປຸ່ມລຶບ
+        $('#dataTable').on('click', '.delete-btn', function() {
+            const docId = $(this).data('id');
+            deleteDocument(docId);
+        });
+    });
+}
         
         async function deleteDocument(docId) {
             const apiUrl = `${DATABASE_URL}/api/document_general/${docId}/`;
@@ -239,7 +249,7 @@
                             const table = $('#dataTable').DataTable();
                             table.row($(`tr[data-id="${docId}"]`)).remove().draw();
                             Swal.fire("ລຶບສຳເລັດ!", "ເອກະສານໄດ້ຖືກລຶບແລ້ວ.", "success");
-                            location.reload();
+                            fetchData().then(renderTable);
                         })
                         .catch(error => {
                             Swal.fire("Error!", `ລຶບເອກະສານບໍ່ສຳເລັດ: ${error.message}`, "error");
@@ -253,7 +263,17 @@
     });
     function goBack() {
     window.history.back(); 
-}
+    }
+    document.getElementById("resetFilter").addEventListener("click", function() {
+        // เคลียร์ input ทั้งหมดใน form
+        document.querySelector('select[name="format"]').value = "";
+        document.querySelector('input[name="start_date"]').value = "";
+        document.querySelector('input[name="end_date"]').value = "";
+
+        // ลบ query string และ reload หน้า
+        window.history.replaceState({}, document.title, window.location.pathname);
+        location.reload(); // ดึงข้อมูลใหม่โดยไม่ใช้ filter
+    });
 </script>
 
 {% endblock %}

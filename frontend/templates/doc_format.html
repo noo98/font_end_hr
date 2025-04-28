@@ -89,7 +89,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<script src="{% static 'js/localStorage.js' %}"></script>
 <script>
     const DATABASE_URL = "{{ database_url | escapejs }}"; // ດຶງມາຈາກ Django context
     let us_id = localStorage.getItem("user_id");
@@ -97,19 +97,19 @@
 
     document.addEventListener("DOMContentLoaded", function () {
         const doc_formatForm = document.getElementById("doc_formatForm");
-        const btnAdd = document.querySelector('button[name="btnAdd"]');
+        const btnAdd = document.querySelector('button[name="btnAdd"]'); 
         const btnEdit = document.querySelector('button[name="btnEdit"]');
         const tbody = document.getElementById("docFormatTableBody");
 
         // Fetch and Display Data
         async function fetchDocFormats() {
             let department = localStorage.getItem("department");
-            console.log(department);
+            // console.log(department);
             try {
                 const response = await fetch(`${DATABASE_URL}/api/search/Document_format/?department_id=${department}`);
                 if (!response.ok) throw new Error("Error fetching document formats");
                 const docFormats = await response.json();
-                console.log(docFormats);
+                // console.log(docFormats);
                 renderTable(docFormats);
             } catch (error) {
                 console.error("Error:", error);
@@ -144,7 +144,7 @@
 
         // Initial Fetch
         fetchDocFormats();
-
+        
         // Form Submit (Add/Edit)
         doc_formatForm.addEventListener("submit", async (event) => {
             event.preventDefault();

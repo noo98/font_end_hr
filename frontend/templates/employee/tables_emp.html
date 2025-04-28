@@ -14,52 +14,226 @@
         <!-- Data Table -->
         <div class="card-item">
             <div class="card-header py-3 d-flex justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Employee List</h6>
-                <a href="{% url 'form_emp' %}" class="btn btn-primary">ເພີ່ມ</a>
+                <h6 class="m-0 font-weight-bold text-primary">ລາຍຊື່ພະນັກງານ</h6>
+                <a href="{% url 'form_emp' %}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> ເພີ່ມ</a>
             </div>     
-                <div class="table-responsive">
-                    {% if employees %}
-                        <table class="table table-striped" width="100%">
-                            <thead class="thead-dark">
-                                <tr style="text-align: start;">
-                                    <th style="min-width: auto">ລະຫັດ</th>                               
-                                    <th style="min-width: 150px;">ຊື່ພາສາລາວ</th>               
-                                    <th style="min-width: 150px;">ຊື່ພາສາອັງກິດ</th>
-                                    <th style="min-width: 150px;">ຊື່ຫຼີ້ນ</th>
-                                    <th style="min-width: 80px;">ເພດ</th>
-                                    <th style="min-width: 150px;">ພະແນກ</th>
-                                                               
-                                    <th style="min-width: 80px;">Action</th>                               
-                                </tr>
-                            </thead>
-                            <tbody id="employeeTableBody">
-                                {% for emp in employees %}
-                                <tr style="text-align: start;">
-                                    <td>{{ emp.emp_id}}</td>
-                                    <td>{{ emp.lao_name}}</td>
-                                    <td>{{ emp.eng_name}}</td>
-                                    <td>{{ emp.nickname}}</td>
-                                    <td>{{ emp.Gender}}</td>
-                                    <td>{{ emp.Department}}</td>                                   
-                                    <td class="text-center" style="width: 80px">
-                                        <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="ເບີ່ງ"><i class="fas fa-eye text-info"></i></a>
-                                        <a href="/update_emp/{{ emp.emp_id }}/" data-bs-toggle="tooltip" data-bs-placement="top" title="ແກ້ໄຂຂໍ້ມູນ"><i class="fas fa-edit text-success"></i></a>
-                                        <a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="ລືບຂໍ້ມູນ"><i class="fas fa-trash-alt text-danger"></i></a>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    {% else %}
-                        <p>No employees found.</p>
-                    {% endif %}
-                </div>
+            <div class="table-responsive">
+                {% if employees %}
+                    <table class="table table-striped" width="100%">
+                        <thead class="thead-dark">
+                            <tr style="text-align: start;">
+                                <th style="min-width: auto">ລະຫັດ</th>                               
+                                <th style="min-width: 150px;">ຊື່ພາສາລາວ</th>               
+                                <th style="min-width: 150px;">ຊື່ພາສາອັງກິດ</th>
+                                <th style="min-width: 150px;">ຊື່ຫຼີ້ນ</th>
+                                <th style="min-width: 80px;">ເພດ</th>
+                                <th style="min-width: 150px;">ພະແນກ</th>
+                                <th style="min-width: 80px;">Action</th>                               
+                            </tr>
+                        </thead>
+                        <tbody id="employeeTableBody">
+                            {% for emp in employees %}
+                            <tr style="text-align: start;">
+                                <td>{{ emp.emp_id }}</td>
+                                <td>{{ emp.lao_name }}</td>
+                                <td>{{ emp.eng_name }}</td>
+                                <td>{{ emp.nickname }}</td>
+                                <td>{{ emp.Gender }}</td>
+                                <td>{{ emp.Department }}</td>                                   
+                                <td class="text-center" style="width: 80px">
+                                    <a href="#" onclick="viewEmployee('{{ emp.emp_id }}')" data-bs-toggle="tooltip" data-bs-placement="top" title="ເບີ່ງ"><i class="fas fa-eye text-primary"></i></a>
+                                    <a href="/update_emp/{{ emp.emp_id }}/" data-bs-toggle="tooltip" data-bs-placement="top" title="ແກ້ໄຂຂໍ້ມູນ"><i class="fas fa-edit text-success"></i></a>
+                                    <a href="#" onclick="deleteEmployee('{{ emp.emp_id }}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="ລືບຂໍ້ມູນ"><i class="fas fa-trash-alt text-danger"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>No employees found.</p>
+                {% endif %}
             </div>
         </div>
-
     </div>
-    <!-- /.container-fluid -->
 </div>
 
 
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">ລາຍລະອຽດພະນັກງານ</h5>
+                <button type="button" class="btn-close" onclick="closeModal()" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="employee_detail">
+                <!-- ຂໍ້ມູນພະນັກງານຈະຖືກ render ທີ່ນີ້ -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">ປິດ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include Bootstrap CSS and JS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Include SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    const DATABASE_URL = "{{ database_url | escapejs }}";  
+    const DEFAULT_IMAGE = "{% static 'images/avatar.png' %}"; // ກຳນົດ default image path
+
+    // ຕົວແປເກັບ mapping ຂອງ departments
+    let departmentMap = {};
+
+    // ຕົວແປເກັບ Bootstrap Modal instance
+    let myModalInstance = null;
+
+    // ດຶງຂໍ້ມູນພະແນກຈາກ API
+    async function fetchDepartments() {
+        try {
+            const response = await fetch(`${DATABASE_URL}/api/list/departments/`, { method: 'GET' });
+            if (!response.ok) {
+                throw new Error('Error fetching departments');
+            }
+            const departments = await response.json();
+            // ສ້າງ mapping object { id: { name } }
+            departmentMap = departments.reduce((map, dept) => {
+                map[dept.id] = { name: dept.name };
+                return map;
+            }, {});
+            // console.log('Department Map:', departmentMap); // Debug: ເບິ່ງ mapping
+        } catch (error) {
+            console.error('Error fetching departments:', error);
+            Swal.fire('ເກີດຂໍ້ຜິດພາດ!', 'ບໍ່ສາມາດດຶງຂໍ້ມູນພະແນກໄດ້', 'error');
+        }
+    }
+
+    // ເອີ້ນ fetchDepartments ເມື່ອໜ້າ load
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchDepartments();
+    });
+
+    function viewEmployee(empId) {
+        const apiUrl = `${DATABASE_URL}/api/employee/${empId}/`; // ໃຊ້ endpoint ທີ່ backend ກຳນົດ
+
+        fetch(apiUrl, { method: 'GET' })
+            .then(response => {
+                console.log('Response Status:', response.status); // Debug: ເບິ່ງ status code
+                if (!response.ok) {
+                    return response.json().then(err => { throw new Error(err.error || 'Error fetching employee data'); });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response Data:', data); // Debug: ເບິ່ງ response data
+
+                // ກວດສອບວ່າ data ເປັນ array ແລະມີຂໍ້ມູນຢູ່
+                if (Array.isArray(data) && data.length > 0 && data[0].employee) {
+                    const employee = data[0].employee;
+
+                    // ສ້າງ URL ຂອງຮູບພາບ
+                    const imageUrl = employee.pic ? `${DATABASE_URL}${employee.pic}` : DEFAULT_IMAGE;
+
+                    // Map Department ID ໃຫ້ເປັນຊື່
+                    const dept = departmentMap[employee.Department] || { name: '-' };
+                    const departmentName = dept.name; // ຊື່ພາສາລາວ
+
+                    // Render ຂໍ້ມູນໃສ່ໃນ modal
+                    const employeeDetail = `
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <img src="${imageUrl}" alt="Employee Image" class="img-fluid rounded" 
+                                     style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #007bff;">
+                            </div>
+                            <div class="col-md-4">                              
+                                <p><strong>ຊື່ພາສາລາວ:</strong> ${employee.lao_name || '-'}</p>
+                                <p><strong>ຊື່ພາສາອັງກິດ:</strong> ${employee.eng_name || '-'}</p>
+                                <p><strong>ຊື່ຫຼີ້ນ:</strong> ${employee.nickname || '-'}</p>
+                                <p><strong>ເພດ:</strong> ${employee.Gender || '-'}</p>
+                                <p><strong>ພະແນກ:</strong> ${departmentName}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>ວັນເດືອນປີເກີດ:</strong> ${employee.birth_date || '-'}</p>
+                                <p><strong>ສະຖານະ:</strong> ${employee.status || '-'}</p>
+                                <p><strong>ຕຳແໜ່ງ:</strong> ${employee.position || '-'}</p>
+                                <p><strong>ວັນທີ່ເຂົ້າວຽກ:</strong> ${employee.year_entry || '-'}</p>
+                                <p><strong>ລະດັບເງິນເດືອນ:</strong> ${employee.salary_level || '-'}</p>
+                                <p><strong>ເບີໂທ:</strong> ${employee.phone || '-'}</p>
+                            </div>
+                        </div>
+                    `;
+
+                    // ໃສ່ HTML ໃນ modal body
+                    document.getElementById('employee_detail').innerHTML = employeeDetail;
+
+                    // ສະແດງ modal ແລະເກັບ instance
+                    myModalInstance = new bootstrap.Modal(document.getElementById('myModal'));
+                    myModalInstance.show();
+                } else {
+                    // ກໍລະນີທີ່ data ບໍ່ມີ employee
+                    throw new Error('ບໍ່ພົບຂໍ້ມູນພະນັກງານ');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching employee:', error);
+                Swal.fire('ເກີດຂໍ້ຜິດພາດ!', error.message, 'error');
+            });
+    }
+
+    function deleteEmployee(empId) {
+    Swal.fire({
+        title: 'ຢືນຢັນການລຶບ?',
+        text: "ຂໍ້ມູນນີ້ຈະບໍ່ສາມາດກູ້ຄືນໄດ້!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ລຶບ!',
+        cancelButtonText: 'ຍົກເລີກ'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`${DATABASE_URL}/api/employee/${empId}/`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to delete employee');
+                }
+                Swal.fire(
+                    'ລຶບແລ້ວ!',
+                    'ຂໍ້ມູນຖືກລຶບສຳເລັດ.',
+                    'success'
+                ).then(() => {
+                    location.reload(); // reload ໜ້າໃຫ້ເຫັນຜົນ
+                });
+            })
+            .catch(error => {
+                console.error('Error deleting employee:', error);
+                Swal.fire('ເກີດຂໍ້ຜິດພາດ!', 'ບໍ່ສາມາດລຶບໄດ້', 'error');
+            });
+        }
+    })
+}
+
+    
+    function closeModal() {
+        if (myModalInstance) {
+            myModalInstance.hide();
+        }
+    }
+
+    // ປິດ Modal ເມື່ອກົດຂ້າງນອກ
+    window.onclick = function(event) {
+        const modal = document.getElementById("myModal");
+        if (event.target === modal && myModalInstance) {
+            myModalInstance.hide();
+        }
+    };
+</script>
 {% endblock %}

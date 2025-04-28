@@ -1,112 +1,360 @@
 {% extends "base.html" %}
 {% load static %}
 <title>Lcic-HR | ບັນທຶກຂໍ້ມູນພະນັກງານ</title>
-
 {% block content %}
 <div class="container-fluid py-4">
     <form id="employeeForm" enctype="multipart/form-data">
         <fieldset class="border border-primary p-2 px-4 pb-4 shadow" style="border-radius: 15px; background-color: #ffffff">
             <legend class="float-none w-auto p-2 h3">ບັນທຶກຂໍ້ມູນພະນັກງານ</legend>
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="text" class="form-control" id="lao_name" name="lao_name" required>
-                        <label>ຊື່ພາສາລາວ</label>
-                    </div>
+            
+            <!-- ຂໍ້ມູນພື້ນຖານ -->
+            <div class="card mt-3">
+                <div class="card-header" data-bs-toggle="collapse" href="#employeeDetails">
+                    <h5 class="mb-0">+ ຂໍ້ມູນພື້ນຖານ <span class="float-end"><i class="fas fa-chevron-down"></i></span></h5>
                 </div>
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="text" class="form-control" id="eng_name" name="eng_name" required>
-                        <label>ຊື່ພາສາອັງກິດ</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="text" class="form-control" id="nickname" name="nickname" required>
-                        <label>ຊື່ຫຼີ້ນ</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <select class="form-select" name="Gender" id="Gender" required>
-                            <option value="" selected disabled>ເລືອກ</option>
-                            <option value="ຊາຍ">ຊາຍ</option>
-                            <option value="ຍິງ">ຍິງ</option>
-                            
-                        </select>
-                        <label>ເລືອກເພດ</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="date" class="form-control" id="birth_date" name="birth_date" required>
-                        <label>ວັນ.ເດືອນ.ປີເກີດ</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="text" class="form-control" id="status" name="status" required>
-                        <label>ສະຖານະ</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="text" class="form-control" id="position" name="position" required>
-                        <label>ຕຳແໜ່ງ</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="date" class="form-control" id="year_entry" name="year_entry" required>
-                        <label>ປີເຂົ້າການ</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="text" class="form-control" id="salary_level" name="salary_level" required>
-                        <label>ຂັ້ນເງິນເດືອນ</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="text" class="form-control" id="phone" name="phone" required>
-                        <label>ເບີໂທ</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <div class="mb-3">
-                            <label for="department" class="form-label">ພະແນກ</label>
-                            <select id="Department" name="Department" class="form-select" required>
-                                <option value="" selected disabled>ກະລຸນາເລືອກພະແນກ</option>
-                            </select>
+                <div id="employeeDetails" class="card-body collapse show">
+                    <div class="employee-entry mb-3">
+                        <div class="row g-3">
+                            <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="lao_name" name="lao_name" required><label>ຊື່ພາສາລາວ</label></div></div>
+                            <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="eng_name" name="eng_name" required><label>ຊື່ພາສາອັງກິດ</label></div></div>
+                            <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="nickname" name="nickname" required><label>ຊື່ຫຼີ້ນ</label></div></div>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-4"><div class="input-group-custom"><select class="form-select" name="Gender" id="Gender" required><option value="" selected disabled>ເລືອກ</option><option value="ຊາຍ">ຊາຍ</option><option value="ຍິງ">ຍິງ</option></select><label>ເລືອກເພດ</label></div></div>
+                            <div class="col-md-4"><div class="input-group-custom"><input type="date" class="form-control" id="birth_date" name="birth_date" required><label>ວັນ.ເດືອນ.ປີເກີດ</label></div></div>
+                            <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="status" name="status" required><label>ສະຖານະ</label></div></div>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="position" name="position" required><label>ຕຳແໜ່ງ</label></div></div>
+                            <div class="col-md-4"><div class="input-group-custom"><input type="date" class="form-control" id="year_entry" name="year_entry" required><label>ປີເຂົ້າການ</label></div></div>
+                            <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="salary_level" name="salary_level" required><label>ຂັ້ນເງິນເດືອນ</label></div></div>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="phone" name="phone" required><label>ເບີໂທ</label></div></div>
+                            <div class="col-md-4"><div class="input-group-custom"><div class="mb-3"><label for="Department" class="form-label">ພະແນກ</label><select id="Department" name="Department" class="form-select" required><option value="" selected disabled>ກະລຸນາເລືອກພະແນກ</option></select></div></div></div>
+                            <!-- <div class="col-md-4 text-center"><div class="input-group-custom"><img id="avatarPreview" src="{% static 'images/avatar.png' %}" alt="Avatar" class="rounded-circle shadow-sm" style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #007bff;" /><input type="file" class="form-control mt-2" id="avatarInput" name="pic" accept="image/*"></div></div> -->
+                            <div class="col-md-4 text-center">
+                                <div class="input-group-custom">
+                                    <img id="avatarPreview" src="{% static 'images/avatar.png' %}" alt="Avatar" class="rounded-circle shadow-sm" style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #007bff;" />
+                                    <input type="file" class="form-control mt-2" id="avatarInput" name="pic" accept="image/*">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 text-center">
-                    <div class="input-group-custom">
-                        <img id="avatarPreview" 
-                             src="{% static 'images/avatar.png' %}" 
-                             alt="Avatar" 
-                             class="rounded-circle shadow-sm"
-                             style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #007bff;" />
-                        <input type="file" class="form-control mt-2" id="avatarInput" name="pic" accept="image/*">
+            </div>
+
+            <!-- ຂໍ້ມູນສ່ວນຕົວ -->
+            <div class="card mt-3">
+                <div class="card-header" data-bs-toggle="collapse" href="#personalDetails">
+                    <h5 class="mb-0">+ ຂໍ້ມູນສ່ວນຕົວ <span class="float-end"><i class="fas fa-chevron-down"></i></span></h5>
+                </div>
+                <div id="personalDetails" class="card-body collapse ">
+                    <div class="row">
+                        <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="full_name" name="full_name"><label>ຊື່ເຕັມ</label></div></div>
+                        <div class="col-md-4"><div class="input-group-custom"><input type="date" class="form-control" id="dob" name="dob"><label>ວັນທີ່.ເດືອນ.ປີເກີດ</label></div></div>
+                        <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="eth" name="eth"><label>ຊັນຊາດ</label></div></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="rel" name="rel"><label>ສາສະໜາ</label></div></div>
+                        <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="b_vill" name="b_vill"><label>ບ້ານເກີດ</label></div></div>
+                        <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="b_dist" name="b_dist"><label>ເມືອງ</label></div></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="b_prov" name="b_prov"><label>ແຂວງ</label></div></div>
+                        <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="c_vill" name="c_vill"><label>ບ້ານຢູ່ປັດຈຸບັນ</label></div></div>
+                        <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="c_dist" name="c_dist"><label>ເມືອງ</label></div></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="c_prov" name="c_prov"><label>ແຂວງ</label></div></div>
+                        <div class="col-md-4"><div class="input-group-custom"><input type="date" class="form-control" id="gov_entry" name="gov_entry"><label>ວັນເຂົ້າສັງກັດລັດ</label></div></div>
+                        <div class="col-md-4"><div class="input-group-custom"><input type="date" class="form-control" id="youth_date" name="youth_date"><label>ວັນເຂົ້າຊາວໝຸ່ມ</label></div></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><div class="input-group-custom"><input type="date" class="form-control" id="women_date" name="women_date"><label>ວັນເຂົ້າແມ່ຍິງ</label></div></div>
+                        <div class="col-md-4"><div class="input-group-custom"><input type="date" class="form-control" id="union_date" name="union_date"><label>ວັນເຂົ້າກຳມະບານ</label></div></div>
+                        <div class="col-md-4"><div class="input-group-custom"><input type="date" class="form-control" id="party_cand_date" name="party_cand_date"><label>ວັນເຂົ້າພັກສຳຮອງ</label></div></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><div class="input-group-custom"><input type="date" class="form-control" id="full_party_date" name="full_party_date"><label>ວັນເຂົ້າພັກສົມບູນ</label></div></div>
+                        <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="curr_party_pos" name="curr_party_pos"><label>ຕຳແໜ່ງພັກປັດຈຸບັນ</label></div></div>
+                        <div class="col-md-4"><div class="input-group-custom"><input type="date" class="form-control" id="party_apt_date" name="party_apt_date"><label>ວັນແຕ່ງຕັ້ງພັກ</label></div></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6"><div class="input-group-custom"><input type="text" class="form-control" id="curr_gov_pos" name="curr_gov_pos"><label>ຕຳແໜ່ງລັດປັດຈຸບັນ</label></div></div>
+                        <div class="col-md-6"><div class="input-group-custom"><input type="date" class="form-control" id="gov_apt_date" name="gov_apt_date"><label>ວັນແຕ່ງຕັ້ງລັດ</label></div></div>
                     </div>
                 </div>
             </div>
+
+            <!-- ການສຶກສາ -->
+            <div class="card mt-3">
+                <div class="card-header" data-bs-toggle="collapse" href="#educationDetails">
+                    <h5 class="mb-0">+ ການສຶກສາ <span class="float-end"><i class="fas fa-chevron-down"></i></span></h5>
+                </div>
+                <div id="educationDetails" class="card-body collapse ">
+                    <div id="educationEntriesContainer">
+                        <div class="education-entry mb-3">
+                            <div class="row">
+                                <div class="col-md-6"><div class="input-group-custom"><label for="edu_level_0">ລະດັບການສືກສາ</label><input type="text" class="form-control" id="edu_level_0" name="edu_level[]"></div></div>
+                                <div class="col-md-6"><div class="input-group-custom"><label for="edu_school_0">ຊື່ໂຮງຮຽນ</label><input type="text" class="form-control" id="edu_school_0" name="edu_school[]"></div></div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-4"><div class="input-group-custom"><label for="edu_year_0">ປີ</label><input type="number" class="form-control" id="edu_year_0" name="edu_year[]" value=""></div></div>
+                                <div class="col-md-4"><div class="input-group-custom"><label for="edu_dom_abrd_0">ໃນ/ຕ່າງປະເທດ</label><input type="text" class="form-control" id="edu_dom_abrd_0" name="edu_dom_abrd[]"></div></div>
+                                <div class="col-md-4"><button type="button" class="btn btn-danger remove-education-entry" style="display:none; border-radius: 20px;"><i class="fas fa-close"></i></button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"><div class="col"><button type="button" id="addEducationEntry" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> ເພີ່ມ</button></div></div>
+                </div>
+            </div>
+
+            <!-- ການສຶກສາສະເພາະດ້ານ -->
+            <div class="card mt-3">
+                <div class="card-header" data-bs-toggle="collapse" href="#specializedEducationDetails">
+                    <h5 class="mb-0">+ ການສຶກສາສະເພາະດ້ານ <span class="float-end"><i class="fas fa-chevron-down"></i></span></h5>
+                </div>
+                <div id="specializedEducationDetails" class="card-body collapse ">
+                    <div id="specializedEducationEntriesContainer">
+                        <div class="specialized-education-entry mb-3">
+                            <div class="row">
+                                <div class="col-md-6"><div class="input-group-custom"><label for="spec_edu_field_0">ຂະແໜງການສຶກສາ</label><input type="text" class="form-control" id="spec_edu_field_0" name="spec_edu_field[]"></div></div>
+                                <div class="col-md-6"><div class="input-group-custom"><label for="spec_edu_inst_0">ສະຖາບັນ</label><input type="text" class="form-control" id="spec_edu_inst_0" name="spec_edu_inst[]"></div></div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-4"><div class="input-group-custom"><label for="spec_edu_level_0">ລະດັບ</label><input type="text" class="form-control" id="spec_edu_level_0" name="spec_edu_level[]"></div></div>
+                                <div class="col-md-4"><div class="input-group-custom"><label for="spec_edu_year_0">ປີ</label><input type="number" class="form-control" id="spec_edu_year_0" name="spec_edu_year[]" value=""></div></div>
+                                <div class="col-md-4"><div class="input-group-custom"><label for="spec_edu_dom_abrd_0">ໃນ/ຕ່າງປະເທດ</label><input type="text" class="form-control" id="spec_edu_dom_abrd_0" name="spec_edu_dom_abrd[]"></div></div>
+                                <div class="col-md-4"><button type="button" class="btn btn-danger remove-specialized-education-entry" style="display:none; border-radius: 20px;"><i class="fas fa-close"></i></button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3"><div class="col"><button type="button" id="addSpecializedEducationEntry" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> ເພີ່ມ</button></div></div>
+                </div>
+            </div>
+
+            <!-- ປະສົບການການເຮັດວຽກ -->
+            <div class="card mt-3">
+                <div class="card-header" data-bs-toggle="collapse" href="#workDetails">
+                    <h5 class="mb-0">+ ປະສົບການການເຮັດວຽກ <span class="float-end"><i class="fas fa-chevron-down"></i></span></h5>
+                </div>
+                <div id="workDetails" class="card-body collapse ">
+                    <div id="workExperiencesContainer">
+                        <div class="work-experiences mb-3">
+                            <div class="row">
+                                <div class="col-md-6"><div class="input-group-custom"><label for="work_place_0">ບ່ອນເຮັດວຽກ</label><input type="text" class="form-control" id="work_place_0" name="work_place[]"></div></div>
+                                <div class="col-md-6"><div class="input-group-custom"><label for="work_gov_pos_0">ຕຳແໜ່ງລັດຖະການ</label><input type="text" class="form-control" id="work_gov_pos_0" name="work_gov_pos[]"></div></div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-4"><div class="input-group-custom"><label for="work_start_0">ເລີ່ມແຕ່</label><input type="date" class="form-control" id="work_start_0" name="work_start[]"></div></div>
+                                <div class="col-md-4"><div class="input-group-custom"><label for="work_end_0">ຮອດປີ</label><input type="date" class="form-control" id="work_end_0" name="work_end[]"></div></div>
+                                <div class="col-md-4"><div class="input-group-custom"><label for="work_party_pos_0">ຕຳແໜ່ງພັກ</label><input type="text" class="form-control" id="work_party_pos_0" name="work_party_pos[]"></div></div>
+                                <div class="col-md-4"><button type="button" class="btn btn-danger remove-work-experiences" style="display:none; border-radius: 20px;"><i class="fas fa-close"></i></button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"><div class="col"><button type="button" id="addWorkExperiences" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> ເພີ່ມ</button></div></div>
+                </div>
+            </div>
+
+            <!-- ການສຶກສາທິດສະດີການເມືອງ -->
+            <div class="card mt-3">
+                <div class="card-header" data-bs-toggle="collapse" href="#politicalTheoryEducationDetails">
+                    <h5 class="mb-0">+ ການສຶກສາທິດສະດີການເມືອງ <span class="float-end"><i class="fas fa-chevron-down"></i></span></h5>
+                </div>
+                <div id="politicalTheoryEducationDetails" class="card-body collapse ">
+                    <div id="politicalTheoryEducationEntriesContainer">
+                        <div class="political-theory-education-entry mb-3">
+                            <div class="row">
+                                <div class="col-md-6"><div class="input-group-custom"><label for="pte_level_0">ລະດັບ</label><input type="text" class="form-control" id="pte_level_0" name="pte_level[]"></div></div>
+                                <div class="col-md-6"><div class="input-group-custom"><label for="pte_inst_0">ສະຖາບັນ</label><input type="text" class="form-control" id="pte_inst_0" name="pte_inst[]"></div></div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-4"><div class="input-group-custom"><label for="pte_year_0">ປີ</label><input type="number" class="form-control" id="pte_year_0" name="pte_year[]" value=""></div></div>
+                                <div class="col-md-4"><div class="input-group-custom"><label for="pte_dom_abrd_0">ໃນ/ຕ່າງປະເທດ</label><input type="text" class="form-control" id="pte_dom_abrd_0" name="pte_dom_abrd[]"></div></div>
+                                <div class="col-md-4"><button type="button" class="btn btn-danger remove-political-theory-education-entry" style="display:none; border-radius: 20px;"><i class="fas fa-close"></i></button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3"><div class="col"><button type="button" id="addPoliticalTheoryEducationEntry" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> ເພີ່ມ</button></div></div>
+                </div>
+            </div>
+
+            <!-- ພາສາຕ່າງປະເທດ -->
+            <div class="card mt-3">
+                <div class="card-header" data-bs-toggle="collapse" href="#foreignLanguageDetails">
+                    <h5 class="mb-0">+ ພາສາຕ່າງປະເທດ <span class="float-end"><i class="fas fa-chevron-down"></i></span></h5>
+                </div>
+                <div id="foreignLanguageDetails" class="card-body collapse ">
+                    <div id="foreignLanguageEntriesContainer">
+                        <div class="foreign-language-entry mb-3 text-center">
+                            <fieldset>
+                                <p>ພາສາຕ່າງປະເທດ ແລະ ລະດັບຄວາມສາມາດ</p>
+                                <div class="row">
+                                    <div class="col-md-3 text-start"></div>
+                                    <div class="col-md-3 text-start"><input class="form-check-input" type="checkbox" name="lang[]" id="lang_eng" value="ອັງກິດ"><label class="form-check-label" for="lang_eng">ອັງກິດ</label></div>
+                                    <div class="col-md-5 text-start">
+                                        <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="prof_eng" value="ພໍໃຊ້"><label class="form-check-label">ພໍໃຊ້</label></div>
+                                        <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="prof_eng" value="ປານກາງ"><label class="form-check-label">ປານກາງ</label></div>
+                                        <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="prof_eng" value="ດີ"><label class="form-check-label">ດີ</label></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 text-start"></div>
+                                    <div class="col-md-3 text-start"><input class="form-check-input" type="checkbox" name="lang[]" id="lang_vn" value="ຫວຽດນາມ"><label class="form-check-label" for="lang_vn">ຫວຽດນາມ</label></div>
+                                    <div class="col-md-5 text-start">
+                                        <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="prof_vn" value="ພໍໃຊ້"><label class="form-check-label">ພໍໃຊ້</label></div>
+                                        <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="prof_vn" value="ປານກາງ"><label class="form-check-label">ປານກາງ</label></div>
+                                        <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="prof_vn" value="ດີ"><label class="form-check-label">ດີ</label></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 text-start"></div>
+                                    <div class="col-md-3 text-start"><input class="form-check-input" type="checkbox" name="lang[]" id="lang_cn" value="ຈີນ"><label class="form-check-label" for="lang_cn">ຈີນ</label></div>
+                                    <div class="col-md-5 text-start">
+                                        <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="prof_cn" value="ພໍໃຊ້"><label class="form-check-label">ພໍໃຊ້</label></div>
+                                        <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="prof_cn" value="ປານກາງ"><label class="form-check-label">ປານກາງ</label></div>
+                                        <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="prof_cn" value="ດີ"><label class="form-check-label">ດີ</label></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 text-start"></div>
+                                    <div class="col-md-3 text-start"><input class="form-check-input" type="checkbox" name="lang[]" id="lang_other" value="ອື່ນໆ"><label class="form-check-label" for="lang_other">ອື່ນໆ</label></div>
+                                    <div class="col-md-5 text-start">
+                                        <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="prof_other" value="ພໍໃຊ້"><label class="form-check-label">ພໍໃຊ້</label></div>
+                                        <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="prof_other" value="ປານກາງ"><label class="form-check-label">ປານກາງ</label></div>
+                                        <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="prof_other" value="ດີ"><label class="form-check-label">ດີ</label></div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ການຝຶກອົບຮົມ -->
+            <div class="card mt-3">
+                <div class="card-header" data-bs-toggle="collapse" href="#trainingCourseDetails">
+                    <h5 class="mb-0">+ ການຝຶກອົບຮົມ <span class="float-end"><i class="fas fa-chevron-down"></i></span></h5>
+                </div>
+                <div id="trainingCourseDetails" class="card-body collapse">
+                    <div id="trainingCourseEntriesContainer">
+                        <div class="training-course-entry mb-3">
+                            <div class="row">
+                                <div class="col-md-4"><div class="input-group-custom"><label for="tc_start_0">ວັນທີ່ເລີ່ມ</label><input type="date" class="form-control" id="tc_start_0" name="tc_start[]"></div></div>
+                                <div class="col-md-4"><div class="input-group-custom"><label for="tc_end_0">ວັນທີ່ສິ້ນສຸດ</label><input type="date" class="form-control" id="tc_end_0" name="tc_end[]"></div></div>
+                                <div class="col-md-4"><div class="input-group-custom"><label for="tc_subj_0">ວິຊາ</label><input type="text" class="form-control" id="tc_subj_0" name="tc_subj[]"></div></div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6"><div class="input-group-custom"><label for="tc_inst_0">ສະຖາບັນ</label><input type="text" class="form-control" id="tc_inst_0" name="tc_inst[]"></div></div>
+                                <div class="col-md-4"><div class="input-group-custom"><label for="tc_country_0">ປະເທດ</label><input type="text" class="form-control" id="tc_country_0" name="tc_country[]"></div></div>
+                                <div class="col-md-2"><button type="button" class="btn btn-danger remove-training-course-entry" style="display:none; border-radius: 20px;"><i class="fas fa-close"></i></button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3"><div class="col"><button type="button" id="addTrainingCourseEntry" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> ເພີ່ມ</button></div></div>
+                </div>
+            </div>
+
+            <!-- ການຍ້ອງຍໍ -->
+            <div class="card mt-3">
+                <div class="card-header" data-bs-toggle="collapse" href="#awardDetails">
+                    <h5 class="mb-0">+ ການຍ້ອງຍໍ <span class="float-end"><i class="fas fa-chevron-down"></i></span></h5>
+                </div>
+                <div id="awardDetails" class="card-body collapse ">
+                    <div id="awardEntriesContainer">
+                        <div class="award-entry mb-3">
+                            <div class="row">
+                                <div class="col-md-6"><div class="input-group-custom"><label for="award_dec_num_0">ຂໍ້ຕົກລົງເລກທີ່</label><input type="text" class="form-control" id="award_dec_num_0" name="award_dec_num[]"></div></div>
+                                <div class="col-md-6"><div class="input-group-custom"><label for="award_date_0">ວັນທີ່</label><input type="date" class="form-control" id="award_date_0" name="award_date[]"></div></div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-4"><div class="input-group-custom"><label for="award_type_0">ຮູບການຍ້ອງຍໍ</label><input type="text" class="form-control" id="award_type_0" name="award_type[]"></div></div>
+                                <div class="col-md-4"><div class="input-group-custom"><label for="award_reason_0">ເຫດຜົນຍ້ອງຍໍ</label><input type="text" class="form-control" id="award_reason_0" name="award_reason[]"></div></div>
+                                <div class="col-md-4"><button type="button" class="btn btn-danger remove-award-entry" style="display:none; border-radius: 20px;"><i class="fas fa-close"></i></button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3"><div class="col"><button type="button" id="addAwardEntry" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> ເພີ່ມ</button></div></div>
+                </div>
+            </div>
+
+            <!-- ການປະຕິບັດວິໄນ -->
+            <div class="card mt-3">
+                <div class="card-header" data-bs-toggle="collapse" href="#disciplinaryActionDetails">
+                    <h5 class="mb-0">+ ການປະຕິບັດວິໄນ <span class="float-end"><i class="fas fa-chevron-down"></i></span></h5>
+                </div>
+                <div id="disciplinaryActionDetails" class="card-body collapse">
+                    <div id="disciplinaryActionEntriesContainer">
+                        <div class="disciplinary-action-entry mb-3">
+                            <div class="row">
+                                <div class="col-md-6"><div class="input-group-custom"><label for="da_dec_num_0">ຂໍ້ຕົກລົງເລກທີ່</label><input type="text" class="form-control" id="da_dec_num_0" name="da_dec_num[]"></div></div>
+                                <div class="col-md-6"><div class="input-group-custom"><label for="da_date_0">ວັນທີ່</label><input type="date" class="form-control" id="da_date_0" name="da_date[]"></div></div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-4"><div class="input-group-custom"><label for="da_action_type_0">ຮູບການວິໄນ</label><input type="text" class="form-control" id="da_action_type_0" name="da_action_type[]"></div></div>
+                                <div class="col-md-4"><div class="input-group-custom"><label for="da_reason_0">ເຫດຜົນຖືກວິໄນ</label><input type="text" class="form-control" id="da_reason_0" name="da_reason[]"></div></div>
+                                <div class="col-md-4"><button type="button" class="btn btn-danger remove-disciplinary-action-entry" style="display:none; border-radius: 20px;"><i class="fas fa-close"></i></button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3"><div class="col"><button type="button" id="addDisciplinaryActionEntry" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> ເພີ່ມ</button></div></div>
+                </div>
+            </div>
+
+            <!-- ສະມາຊິກໃນຄອບຄົວ -->
+            <div class="card mt-3">
+                <div class="card-header" data-bs-toggle="collapse" href="#familyMemberDetails">
+                    <h5 class="mb-0">+ ສະມາຊິກໃນຄອບຄົວ <span class="float-end"><i class="fas fa-chevron-down"></i></span></h5>
+                </div>
+                <div id="familyMemberDetails" class="card-body collapse">
+                    <div id="familyMemberEntriesContainer">
+                        <div class="family-member-entry mb-3">
+                            <div class="row">
+                                <div class="col-md-6"><div class="input-group-custom"><label for="fm_relation_0">ຄວາມສຳພັນ</label><input type="text" class="form-control" id="fm_relation_0" name="fm_relation[]"></div></div>
+                                <div class="col-md-6"><div class="input-group-custom"><label for="fm_full_name_0">ຊື່ເຕັມ</label><input type="text" class="form-control" id="fm_full_name_0" name="fm_full_name[]"></div></div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-4"><div class="input-group-custom"><label for="fm_dob_0">ວັນເກີດ</label><input type="date" class="form-control" id="fm_dob_0" name="fm_dob[]"></div></div>
+                                <div class="col-md-4"><div class="input-group-custom"><label for="fm_eth_0">ຊົນເຜົ່າ</label><input type="text" class="form-control" id="fm_eth_0" name="fm_eth[]"></div></div>
+                                <div class="col-md-4"><div class="input-group-custom"><label for="fm_rel_0">ສາສະໜາ</label><input type="text" class="form-control" id="fm_rel_0" name="fm_rel[]"></div></div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6"><div class="input-group-custom"><label for="fm_occ_0">ອາຊີບ</label><input type="text" class="form-control" id="fm_occ_0" name="fm_occ[]"></div></div>
+                                <div class="col-md-6"><div class="input-group-custom"><label for="fm_work_0">ສະຖານທີ່ເຮັດວຽກ</label><input type="text" class="form-control" id="fm_work_0" name="fm_work[]"></div></div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-4"><div class="input-group-custom"><label for="fm_vill_0">ບ້ານ</label><input type="text" class="form-control" id="fm_vill_0" name="fm_vill[]"></div></div>
+                                <div class="col-md-4"><div class="input-group-custom"><label for="fm_dist_0">ເມືອງ</label><input type="text" class="form-control" id="fm_dist_0" name="fm_dist[]"></div></div>
+                                <div class="col-md-4"><div class="input-group-custom"><label for="fm_prov_0">ແຂວງ</label><input type="text" class="form-control" id="fm_prov_0" name="fm_prov[]"></div></div>
+                                <div class="col-md-4"><button type="button" class="btn btn-danger remove-family-member-entry" style="display:none; border-radius: 20px;"><i class="fas fa-close"></i></button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3"><div class="col"><button type="button" id="addFamilyMemberEntry" class="btn btn-success btn-sm"><i class="fas fa-plus"></i> ເພີ່ມ</button></div></div>
+                </div>
+            </div>
+
+            <!-- ສັງເກດການຕີລາຄາ -->
+            <div class="card mt-3">
+                <div class="card-header" data-bs-toggle="collapse" href="#evaluationDetails">
+                    <h5 class="mb-0">+ ສັງເກດການຕີລາຄາ <span class="float-end"><i class="fas fa-chevron-down"></i></span></h5>
+                </div>
+                <div id="evaluationDetails" class="card-body collapse">
+                    <div class="evaluation-entry mb-3">
+                        <div class="row">
+                            <div class="col-md-6"><div class="input-group-custom"><label for="eval_strengths">ຈຸດດີ</label><textarea class="form-control" id="eval_strengths" name="eval_strengths" rows="3"></textarea></div></div>
+                            <div class="col-md-6"><div class="input-group-custom"><label for="eval_weaknesses">ຈຸດອ່ອນ</label><textarea class="form-control" id="eval_weaknesses" name="eval_weaknesses" rows="3"></textarea></div></div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+
+            <!-- Buttons -->
             <div class="row mt-4" style="justify-content: center;">
-                <button type="submit" name="btnAdd" class="btn btn-primary mx-2" style="width: 110px; border-radius: 20px;">
-                    <i class="fas fa-plus-circle"></i> ເພີ່ມ
-                </button>
-                <button type="reset" id="btnCancel" class="btn btn-warning mx-2" style="width: 110px; border-radius: 20px;">
-                    <i class="fas fa-sync"></i> ຍົກເລີກ
-                </button>
+                <button type="submit" name="btnAdd" class="btn btn-primary mx-2" style="width: 110px; border-radius: 20px;"><i class="fas fa-plus-circle"></i> ບັນທືກ</button>
+                <button type="reset" id="btnCancel" class="btn btn-warning mx-2" style="width: 110px; border-radius: 20px;"><i class="fas fa-sync"></i> ຍົກເລີກ</button>
             </div>
         </fieldset>
     </form>
@@ -118,14 +366,11 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const DATABASE_URL = "{{ database_url | escapejs }}";
-
     // Fetch departments
     const departmentSelect = document.getElementById('Department');
     fetch(`${DATABASE_URL}/api/list/departments/`)
         .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
             return response.json();
         })
         .then(data => {
@@ -143,59 +388,549 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
     // Avatar preview
-    document.getElementById('avatarInput').addEventListener('change', function (event) {
+    document.getElementById('avatarInput').addEventListener('change', function(event) {
         const file = event.target.files[0];
         const preview = document.getElementById('avatarPreview');
         if (file) {
             const reader = new FileReader();
-            reader.onload = function (e) {
-                preview.src = e.target.result;
-            };
+            reader.onload = function(e) { preview.src = e.target.result; };
             reader.readAsDataURL(file);
         } else {
             preview.src = '{% static "images/avatar.png" %}';
         }
     });
 
-    // Form submission
-    document.getElementById('employeeForm').addEventListener('submit', function (event) {
-        // console.log('Form submitted');
-        event.preventDefault();
-        const formData = new FormData(this);
 
-        // Debug FormData
-        for (let [key, value] of formData.entries()) {
-            // console.log(`${key}: ${value}`);
+    
+    const educationContainer = document.getElementById('educationEntriesContainer');
+    const addEducationBtn = document.getElementById('addEducationEntry');
+    const specializedEducationContainer = document.getElementById('specializedEducationEntriesContainer');
+    const addSpecializedEducationBtn = document.getElementById('addSpecializedEducationEntry');
+    const workExperiencesContainer = document.getElementById('workExperiencesContainer');
+    const addWorkExperiencesBtn = document.getElementById('addWorkExperiences');
+    const politicalTheoryEducationContainer = document.getElementById('politicalTheoryEducationEntriesContainer');
+    const addPoliticalTheoryEducationBtn = document.getElementById('addPoliticalTheoryEducationEntry');
+    const trainingCourseContainer = document.getElementById('trainingCourseEntriesContainer');
+    const addTrainingCourseBtn = document.getElementById('addTrainingCourseEntry');
+    const awardContainer = document.getElementById('awardEntriesContainer');
+    const addAwardBtn = document.getElementById('addAwardEntry');
+    const disciplinaryActionContainer = document.getElementById('disciplinaryActionEntriesContainer');
+    const addDisciplinaryActionBtn = document.getElementById('addDisciplinaryActionEntry');
+    const familyMemberContainer = document.getElementById('familyMemberEntriesContainer');
+    const addFamilyMemberBtn = document.getElementById('addFamilyMemberEntry');
+
+    let educationEntryCounter = 0;
+    let specializedEducationEntryCounter = 0;
+    let workExperiencesCounter = 0;
+    let politicalTheoryEducationEntryCounter = 0;
+    let trainingCourseEntryCounter = 0;
+    let awardEntryCounter = 0;
+    let disciplinaryActionEntryCounter = 0;
+    let familyMemberEntryCounter = 0;
+
+    // Education
+    addEducationBtn.addEventListener('click', function() {
+        educationEntryCounter++;
+        const newEntry = document.createElement('div');
+        newEntry.classList.add('education-entry', 'mb-3');
+        newEntry.innerHTML = `
+            <div class="row">
+                <div class="col-md-6"><div class="input-group-custom"><label for="edu_level_${educationEntryCounter}">ລະດັບການສືກສາ</label><input type="text" class="form-control" id="edu_level_${educationEntryCounter}" name="edu_level[]"></div></div>
+                <div class="col-md-6"><div class="input-group-custom"><label for="edu_school_${educationEntryCounter}">ໂຮງຮຽນ</label><input type="text" class="form-control" id="edu_school_${educationEntryCounter}" name="edu_school[]"></div></div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-4"><div class="input-group-custom"><label for="edu_year_${educationEntryCounter}">ປີ</label><input type="number" class="form-control" id="edu_year_${educationEntryCounter}" name="edu_year[]" value=""></div></div>
+                <div class="col-md-4"><div class="input-group-custom"><label for="edu_dom_abrd_${educationEntryCounter}">ໃນ/ຕ່າງປະເທດ</label><input type="text" class="form-control" id="edu_dom_abrd_${educationEntryCounter}" name="edu_dom_abrd[]"></div></div>
+                <div class="col-md-4"><button type="button" class="btn btn-danger remove-education-entry" style="border-radius: 20px;"><i class="fas fa-close"></i></button></div>
+            </div>
+        `;
+        educationContainer.appendChild(newEntry);
+        updateEducationRemoveButtons();
+    });
+
+    educationContainer.addEventListener('click', function(event) {
+        if (event.target.closest('.remove-education-entry')) {
+            event.target.closest('.education-entry').remove();
+            updateEducationRemoveButtons();
         }
+    });
 
-        fetch(`${DATABASE_URL}/api/employee/`, {
+    function updateEducationRemoveButtons() {
+        const entries = document.querySelectorAll('.education-entry');
+        const removeButtons = document.querySelectorAll('.remove-education-entry');
+        if (entries.length > 1) {
+            removeButtons.forEach((btn, index) => btn.style.display = index === 0 ? 'none' : 'block');
+        } else {
+            removeButtons.forEach(btn => btn.style.display = 'none');
+        }
+    }
+
+    // Specialized Education
+    addSpecializedEducationBtn.addEventListener('click', function() {
+        specializedEducationEntryCounter++;
+        const newEntry = document.createElement('div');
+        newEntry.classList.add('specialized-education-entry', 'mb-3');
+        newEntry.innerHTML = `
+            <div class="row">
+                <div class="col-md-6"><div class="input-group-custom"><label for="spec_edu_field_${specializedEducationEntryCounter}">ຂະແໜງການສຶກສາ</label><input type="text" class="form-control" id="spec_edu_field_${specializedEducationEntryCounter}" name="spec_edu_field[]"></div></div>
+                <div class="col-md-6"><div class="input-group-custom"><label for="spec_edu_inst_${specializedEducationEntryCounter}">ສະຖາບັນ</label><input type="text" class="form-control" id="spec_edu_inst_${specializedEducationEntryCounter}" name="spec_edu_inst[]"></div></div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-4"><div class="input-group-custom"><label for="spec_edu_level_${specializedEducationEntryCounter}">ລະດັບ</label><input type="text" class="form-control" id="spec_edu_level_${specializedEducationEntryCounter}" name="spec_edu_level[]"></div></div>
+                <div class="col-md-4"><div class="input-group-custom"><label for="spec_edu_year_${specializedEducationEntryCounter}">ປີ</label><input type="number" class="form-control" id="spec_edu_year_${specializedEducationEntryCounter}" name="spec_edu_year[]" value=""></div></div>
+                <div class="col-md-4"><div class="input-group-custom"><label for="spec_edu_dom_abrd_${specializedEducationEntryCounter}">ໃນ/ຕ່າງປະເທດ</label><input type="text" class="form-control" id="spec_edu_dom_abrd_${specializedEducationEntryCounter}" name="spec_edu_dom_abrd[]"></div></div>
+                <div class="col-md-4"><button type="button" class="btn btn-danger remove-specialized-education-entry" style="border-radius: 20px;"><i class="fas fa-close"></i></button></div>
+            </div>
+        `;
+        specializedEducationContainer.appendChild(newEntry);
+        updateSpecializedEducationRemoveButtons();
+    });
+
+    specializedEducationContainer.addEventListener('click', function(event) {
+        if (event.target.closest('.remove-specialized-education-entry')) {
+            event.target.closest('.specialized-education-entry').remove();
+            updateSpecializedEducationRemoveButtons();
+        }
+    });
+
+    function updateSpecializedEducationRemoveButtons() {
+        const entries = document.querySelectorAll('.specialized-education-entry');
+        const removeButtons = document.querySelectorAll('.remove-specialized-education-entry');
+        if (entries.length > 1) {
+            removeButtons.forEach((btn, index) => btn.style.display = index === 0 ? 'none' : 'block');
+        } else {
+            removeButtons.forEach(btn => btn.style.display = 'none');
+        }
+    }
+
+    // Work Experiences
+    addWorkExperiencesBtn.addEventListener('click', function() {
+        workExperiencesCounter++;
+        const newWork = document.createElement('div');
+        newWork.classList.add('work-experiences', 'mb-3');
+        newWork.innerHTML = `
+            <div class="row">
+                <div class="col-md-6"><div class="input-group-custom"><label for="work_place_${workExperiencesCounter}">ບ່ອນເຮັດວຽກ</label><input type="text" class="form-control" id="work_place_${workExperiencesCounter}" name="work_place[]"></div></div>
+                <div class="col-md-6"><div class="input-group-custom"><label for="work_gov_pos_${workExperiencesCounter}">ຕຳແໜ່ງລັດຖະການ</label><input type="text" class="form-control" id="work_gov_pos_${workExperiencesCounter}" name="work_gov_pos[]"></div></div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-4"><div class="input-group-custom"><label for="work_start_${workExperiencesCounter}">ເລີ່ມແຕ່</label><input type="date" class="form-control" id="work_start_${workExperiencesCounter}" name="work_start[]"></div></div>
+                <div class="col-md-4"><div class="input-group-custom"><label for="work_end_${workExperiencesCounter}">ຮອດປີ</label><input type="date" class="form-control" id="work_end_${workExperiencesCounter}" name="work_end[]"></div></div>
+                <div class="col-md-4"><div class="input-group-custom"><label for="work_party_pos_${workExperiencesCounter}">ຕຳແໜ່ງພັກ</label><input type="text" class="form-control" id="work_party_pos_${workExperiencesCounter}" name="work_party_pos[]"></div></div>
+                <div class="col-md-4"><button type="button" class="btn btn-danger remove-work-experiences" style="border-radius: 20px;"><i class="fas fa-close"></i></button></div>
+            </div>
+        `;
+        workExperiencesContainer.appendChild(newWork);
+        updateWorkExperiencesRemoveButtons();
+    });
+
+    workExperiencesContainer.addEventListener('click', function(event) {
+        if (event.target.closest('.remove-work-experiences')) {
+            event.target.closest('.work-experiences').remove();
+            updateWorkExperiencesRemoveButtons();
+        }
+    });
+
+    function updateWorkExperiencesRemoveButtons() {
+        const entries = document.querySelectorAll('.work-experiences');
+        const removeButtons = document.querySelectorAll('.remove-work-experiences');
+        if (entries.length > 1) {
+            removeButtons.forEach((btn, index) => btn.style.display = index === 0 ? 'none' : 'block');
+        } else {
+            removeButtons.forEach(btn => btn.style.display = 'none');
+        }
+    }
+
+    // Political Theory Education
+    addPoliticalTheoryEducationBtn.addEventListener('click', function() {
+        politicalTheoryEducationEntryCounter++;
+        const newEntry = document.createElement('div');
+        newEntry.classList.add('political-theory-education-entry', 'mb-3');
+        newEntry.innerHTML = `
+            <div class="row">
+                <div class="col-md-6"><div class="input-group-custom"><label for="pte_level_${politicalTheoryEducationEntryCounter}">ລະດັບ</label><input type="text" class="form-control" id="pte_level_${politicalTheoryEducationEntryCounter}" name="pte_level[]"></div></div>
+                <div class="col-md-6"><div class="input-group-custom"><label for="pte_inst_${politicalTheoryEducationEntryCounter}">ສະຖາບັນ</label><input type="text" class="form-control" id="pte_inst_${politicalTheoryEducationEntryCounter}" name="pte_inst[]"></div></div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-4"><div class="input-group-custom"><label for="pte_year_${politicalTheoryEducationEntryCounter}">ປີ</label><input type="number" class="form-control" id="pte_year_${politicalTheoryEducationEntryCounter}" name="pte_year[]" value=""></div></div>
+                <div class="col-md-4"><div class="input-group-custom"><label for="pte_dom_abrd_${politicalTheoryEducationEntryCounter}">ໃນ/ຕ່າງປະເທດ</label><input type="text" class="form-control" id="pte_dom_abrd_${politicalTheoryEducationEntryCounter}" name="pte_dom_abrd[]"></div></div>
+                <div class="col-md-4"><button type="button" class="btn btn-danger remove-political-theory-education-entry" style="border-radius: 20px;"><i class="fas fa-close"></i></button></div>
+            </div>
+        `;
+        politicalTheoryEducationContainer.appendChild(newEntry);
+        updatePoliticalTheoryEducationRemoveButtons();
+    });
+
+    politicalTheoryEducationContainer.addEventListener('click', function(event) {
+        if (event.target.closest('.remove-political-theory-education-entry')) {
+            event.target.closest('.political-theory-education-entry').remove();
+            updatePoliticalTheoryEducationRemoveButtons();
+        }
+    });
+
+    function updatePoliticalTheoryEducationRemoveButtons() {
+        const entries = document.querySelectorAll('.political-theory-education-entry');
+        const removeButtons = document.querySelectorAll('.remove-political-theory-education-entry');
+        if (entries.length > 1) {
+            removeButtons.forEach((btn, index) => btn.style.display = index === 0 ? 'none' : 'block');
+        } else {
+            removeButtons.forEach(btn => btn.style.display = 'none');
+        }
+    }
+
+    // Training Course
+    addTrainingCourseBtn.addEventListener('click', function() {
+        trainingCourseEntryCounter++;
+        const newEntry = document.createElement('div');
+        newEntry.classList.add('training-course-entry', 'mb-3');
+        newEntry.innerHTML = `
+            <div class="row">
+                <div class="col-md-4"><div class="input-group-custom"><label for="tc_start_${trainingCourseEntryCounter}">ວັນທີ່ເລີ່ມ</label><input type="date" class="form-control" id="tc_start_${trainingCourseEntryCounter}" name="tc_start[]"></div></div>
+                <div class="col-md-4"><div class="input-group-custom"><label for="tc_end_${trainingCourseEntryCounter}">ວັນທີ່ສິ້ນສຸດ</label><input type="date" class="form-control" id="tc_end_${trainingCourseEntryCounter}" name="tc_end[]"></div></div>
+                <div class="col-md-4"><div class="input-group-custom"><label for="tc_subj_${trainingCourseEntryCounter}">ວິຊາ</label><input type="text" class="form-control" id="tc_subj_${trainingCourseEntryCounter}" name="tc_subj[]"></div></div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-6"><div class="input-group-custom"><label for="tc_inst_${trainingCourseEntryCounter}">ສະຖາບັນ</label><input type="text" class="form-control" id="tc_inst_${trainingCourseEntryCounter}" name="tc_inst[]"></div></div>
+                <div class="col-md-4"><div class="input-group-custom"><label for="tc_country_${trainingCourseEntryCounter}">ປະເທດ</label><input type="text" class="form-control" id="tc_country_${trainingCourseEntryCounter}" name="tc_country[]"></div></div>
+                <div class="col-md-2"><button type="button" class="btn btn-danger remove-training-course-entry" style="border-radius: 20px;"><i class="fas fa-close"></i></button></div>
+            </div>
+        `;
+        trainingCourseContainer.appendChild(newEntry);
+        updateTrainingCourseRemoveButtons();
+    });
+
+    trainingCourseContainer.addEventListener('click', function(event) {
+        if (event.target.closest('.remove-training-course-entry')) {
+            event.target.closest('.training-course-entry').remove();
+            updateTrainingCourseRemoveButtons();
+        }
+    });
+
+    function updateTrainingCourseRemoveButtons() {
+        const entries = document.querySelectorAll('.training-course-entry');
+        const removeButtons = document.querySelectorAll('.remove-training-course-entry');
+        if (entries.length > 1) {
+            removeButtons.forEach((btn, index) => btn.style.display = index === 0 ? 'none' : 'block');
+        } else {
+            removeButtons.forEach(btn => btn.style.display = 'none');
+        }
+    }
+
+    // Award
+    addAwardBtn.addEventListener('click', function() {
+        awardEntryCounter++;
+        const newEntry = document.createElement('div');
+        newEntry.classList.add('award-entry', 'mb-3');
+        newEntry.innerHTML = `
+            <div class="row">
+                <div class="col-md-6"><div class="input-group-custom"><label for="award_dec_num_${awardEntryCounter}">ຂໍ້ຕົກລົງເລກທີ່</label><input type="text" class="form-control" id="award_dec_num_${awardEntryCounter}" name="award_dec_num[]"></div></div>
+                <div class="col-md-6"><div class="input-group-custom"><label for="award_date_${awardEntryCounter}">ວັນທີ່</label><input type="date" class="form-control" id="award_date_${awardEntryCounter}" name="award_date[]"></div></div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-4"><div class="input-group-custom"><label for="award_type_${awardEntryCounter}">ຮູບການຍ້ອງຍໍ</label><input type="text" class="form-control" id="award_type_${awardEntryCounter}" name="award_type[]"></div></div>
+                <div class="col-md-4"><div class="input-group-custom"><label for="award_reason_${awardEntryCounter}">ເຫດຜົນຍ້ອງຍໍ</label><input type="text" class="form-control" id="award_reason_${awardEntryCounter}" name="award_reason[]"></div></div>
+                <div class="col-md-4"><button type="button" class="btn btn-danger remove-award-entry" style="border-radius: 20px;"><i class="fas fa-close"></i></button></div>
+            </div>
+        `;
+        awardContainer.appendChild(newEntry);
+        updateAwardRemoveButtons();
+    });
+
+    awardContainer.addEventListener('click', function(event) {
+        if (event.target.closest('.remove-award-entry')) {
+            event.target.closest('.award-entry').remove();
+            updateAwardRemoveButtons();
+        }
+    });
+
+    function updateAwardRemoveButtons() {
+        const entries = document.querySelectorAll('.award-entry');
+        const removeButtons = document.querySelectorAll('.remove-award-entry');
+        if (entries.length > 1) {
+            removeButtons.forEach((btn, index) => btn.style.display = index === 0 ? 'none' : 'block');
+        } else {
+            removeButtons.forEach(btn => btn.style.display = 'none');
+        }
+    }
+
+    // Disciplinary Action
+    addDisciplinaryActionBtn.addEventListener('click', function() {
+        disciplinaryActionEntryCounter++;
+        const newEntry = document.createElement('div');
+        newEntry.classList.add('disciplinary-action-entry', 'mb-3');
+        newEntry.innerHTML = `
+            <div class="row">
+                <div class="col-md-6"><div class="input-group-custom"><label for="da_dec_num_${disciplinaryActionEntryCounter}">ຂໍ້ຕົກລົງເລກທີ່</label><input type="text" class="form-control" id="da_dec_num_${disciplinaryActionEntryCounter}" name="da_dec_num[]"></div></div>
+                <div class="col-md-6"><div class="input-group-custom"><label for="da_date_${disciplinaryActionEntryCounter}">ວັນທີ່</label><input type="date" class="form-control" id="da_date_${disciplinaryActionEntryCounter}" name="da_date[]"></div></div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-4"><div class="input-group-custom"><label for="da_action_type_${disciplinaryActionEntryCounter}">ຮູບການວິໄນ</label><input type="text" class="form-control" id="da_action_type_${disciplinaryActionEntryCounter}" name="da_action_type[]"></div></div>
+                <div class="col-md-4"><div class="input-group-custom"><label for="da_reason_${disciplinaryActionEntryCounter}">ເຫດຜົນຖືກວິໄນ</label><input type="text" class="form-control" id="da_reason_${disciplinaryActionEntryCounter}" name="da_reason[]"></div></div>
+                <div class="col-md-4"><button type="button" class="btn btn-danger remove-disciplinary-action-entry" style="border-radius: 20px;"><i class="fas fa-close"></i></button></div>
+            </div>
+        `;
+        disciplinaryActionContainer.appendChild(newEntry);
+        updateDisciplinaryActionRemoveButtons();
+    });
+
+    disciplinaryActionContainer.addEventListener('click', function(event) {
+        if (event.target.closest('.remove-disciplinary-action-entry')) {
+            event.target.closest('.disciplinary-action-entry').remove();
+            updateDisciplinaryActionRemoveButtons();
+        }
+    });
+
+    function updateDisciplinaryActionRemoveButtons() {
+        const entries = document.querySelectorAll('.disciplinary-action-entry');
+        const removeButtons = document.querySelectorAll('.remove-disciplinary-action-entry');
+        if (entries.length > 1) {
+            removeButtons.forEach((btn, index) => btn.style.display = index === 0 ? 'none' : 'block');
+        } else {
+            removeButtons.forEach(btn => btn.style.display = 'none');
+        }
+    }
+
+    // Family Member
+    addFamilyMemberBtn.addEventListener('click', function() {
+        familyMemberEntryCounter++;
+        const newEntry = document.createElement('div');
+        newEntry.classList.add('family-member-entry', 'mb-3');
+        newEntry.innerHTML = `
+            <div class="row">
+                <div class="col-md-6"><div class="input-group-custom"><label for="fm_relation_${familyMemberEntryCounter}">ຄວາມສຳພັນ</label><input type="text" class="form-control" id="fm_relation_${familyMemberEntryCounter}" name="fm_relation[]"></div></div>
+                <div class="col-md-6"><div class="input-group-custom"><label for="fm_full_name_${familyMemberEntryCounter}">ຊື່ເຕັມ</label><input type="text" class="form-control" id="fm_full_name_${familyMemberEntryCounter}" name="fm_full_name[]"></div></div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-4"><div class="input-group-custom"><label for="fm_dob_${familyMemberEntryCounter}">ວັນເກີດ</label><input type="date" class="form-control" id="fm_dob_${familyMemberEntryCounter}" name="fm_dob[]"></div></div>
+                <div class="col-md-4"><div class="input-group-custom"><label for="fm_eth_${familyMemberEntryCounter}">ຊົນເຜົ່າ</label><input type="text" class="form-control" id="fm_eth_${familyMemberEntryCounter}" name="fm_eth[]"></div></div>
+                <div class="col-md-4"><div class="input-group-custom"><label for="fm_rel_${familyMemberEntryCounter}">ສາສະໜາ</label><input type="text" class="form-control" id="fm_rel_${familyMemberEntryCounter}" name="fm_rel[]"></div></div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-6"><div class="input-group-custom"><label for="fm_occ_${familyMemberEntryCounter}">ອາຊີບ</label><input type="text" class="form-control" id="fm_occ_${familyMemberEntryCounter}" name="fm_occ[]"></div></div>
+                <div class="col-md-6"><div class="input-group-custom"><label for="fm_work_${familyMemberEntryCounter}">ສະຖານທີ່ເຮັດວຽກ</label><input type="text" class="form-control" id="fm_work_${familyMemberEntryCounter}" name="fm_work[]"></div></div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-4"><div class="input-group-custom"><label for="fm_vill_${familyMemberEntryCounter}">ບ້ານ</label><input type="text" class="form-control" id="fm_vill_${familyMemberEntryCounter}" name="fm_vill[]"></div></div>
+                <div class="col-md-4"><div class="input-group-custom"><label for="fm_dist_${familyMemberEntryCounter}">ເມືອງ</label><input type="text" class="form-control" id="fm_dist_${familyMemberEntryCounter}" name="fm_dist[]"></div></div>
+                <div class="col-md-4"><div class="input-group-custom"><label for="fm_prov_${familyMemberEntryCounter}">ແຂວງ</label><input type="text" class="form-control" id="fm_prov_${familyMemberEntryCounter}" name="fm_prov[]"></div></div>
+                <div class="col-md-4"><button type="button" class="btn btn-danger remove-family-member-entry" style="border-radius: 20px;"><i class="fas fa-close"></i></button></div>
+            </div>
+        `;
+        familyMemberContainer.appendChild(newEntry);
+        updateFamilyMemberRemoveButtons();
+    });
+
+    familyMemberContainer.addEventListener('click', function(event) {
+        if (event.target.closest('.remove-family-member-entry')) {
+            event.target.closest('.family-member-entry').remove();
+            updateFamilyMemberRemoveButtons();
+        }
+    });
+
+    function updateFamilyMemberRemoveButtons() {
+        const entries = document.querySelectorAll('.family-member-entry');
+        const removeButtons = document.querySelectorAll('.remove-family-member-entry');
+        if (entries.length > 1) {
+            removeButtons.forEach((btn, index) => btn.style.display = index === 0 ? 'none' : 'block');
+        } else {
+            removeButtons.forEach(btn => btn.style.display = 'none');
+        }
+    }
+
+    
+    // Form submission
+    document.getElementById('employeeForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const form = this;
+        const formData = new FormData(form);
+
+        // Helper function to format date or return null
+        const formatDate = (dateStr) => {
+            if (!dateStr) return null; // Return null if empty
+            const date = new Date(dateStr);
+            if (isNaN(date.getTime())) return null; // Return null if invalid
+            return date.toISOString().split('T')[0]; // Format to YYYY-MM-DD
+        };
+
+        // Create JSON data structure
+        const jsonData = {
+            "Employee_lcic": [{
+                "lao_name": formData.get('lao_name') || null,
+                "eng_name": formData.get('eng_name') || null,
+                "nickname": formData.get('nickname') || null,
+                "Gender": formData.get('Gender') || null,
+                "birth_date": formatDate(formData.get('birth_date')),
+                "status": formData.get('status') || null,
+                "position": formData.get('position') || null,
+                "year_entry": formatDate(formData.get('year_entry')),
+                "salary_level": formData.get('salary_level') || null,
+                "phone": formData.get('phone') || null,
+                "Department": formData.get('Department') || null
+            }],
+            "PersonalInformation": [{
+                "full_name": formData.get('full_name') || null,
+                "dob": formatDate(formData.get('dob')),
+                "eth": formData.get('eth') || null,
+                "rel": formData.get('rel') || null,
+                "b_vill": formData.get('b_vill') || null,
+                "b_dist": formData.get('b_dist') || null,
+                "b_prov": formData.get('b_prov') || null,
+                "c_vill": formData.get('c_vill') || null,
+                "c_dist": formData.get('c_dist') || null,
+                "c_prov": formData.get('c_prov') || null,
+                "gov_entry": formatDate(formData.get('gov_entry')) || 'null',
+                "youth_date": formatDate(formData.get('youth_date')),
+                "women_date": formatDate(formData.get('women_date')),
+                "union_date": formatDate(formData.get('union_date')),
+                "party_cand_date": formatDate(formData.get('party_cand_date')),
+                "full_party_date": formatDate(formData.get('full_party_date')),
+                "curr_party_pos": formData.get('curr_party_pos') || null,
+                "party_apt_date": formatDate(formData.get('party_apt_date')),
+                "curr_gov_pos": formData.get('curr_gov_pos') || null,
+                "gov_apt_date": formatDate(formData.get('gov_apt_date'))
+            }],
+            "Education": Array.from(document.querySelectorAll('.education-entry')).map(entry => ({
+                "level": entry.querySelector('[name="edu_level[]"]').value || null,
+                "school": entry.querySelector('[name="edu_school[]"]').value || null,
+                "year": entry.querySelector('[name="edu_year[]"]').value || null,
+                "dom_abrd": entry.querySelector('[name="edu_dom_abrd[]"]').value || null
+            })),
+            "SpecializedEducation": Array.from(document.querySelectorAll('.specialized-education-entry')).map(entry => ({
+                "field": entry.querySelector('[name="spec_edu_field[]"]').value || null,
+                "inst": entry.querySelector('[name="spec_edu_inst[]"]').value || null,
+                "level": entry.querySelector('[name="spec_edu_level[]"]').value || null,
+                "year": entry.querySelector('[name="spec_edu_year[]"]').value || null,
+                "dom_abrd": entry.querySelector('[name="spec_edu_dom_abrd[]"]').value || null
+            })),
+            "PoliticalTheoryEducation": Array.from(document.querySelectorAll('.political-theory-education-entry')).map(entry => ({
+                "level": entry.querySelector('[name="pte_level[]"]').value || null,
+                "inst": entry.querySelector('[name="pte_inst[]"]').value || null,
+                "year": entry.querySelector('[name="pte_year[]"]').value || null,
+                "dom_abrd": entry.querySelector('[name="pte_dom_abrd[]"]').value || null
+            })),
+            "ForeignLanguage": Array.from(document.querySelectorAll('[name="lang[]"]:checked')).map(lang => ({
+                "lang": lang.value || null,
+                "prof": document.querySelector(`[name="prof_${lang.id.split('_')[1]}"]:checked`)?.value || null
+            })),
+            "WorkExperience": Array.from(document.querySelectorAll('.work-experiences')).map(entry => ({
+                "work": entry.querySelector('[name="work_place[]"]').value || null,
+                "gov_pos": entry.querySelector('[name="work_gov_pos[]"]').value || null,
+                "start": formatDate(entry.querySelector('[name="work_start[]"]').value),
+                "end": formatDate(entry.querySelector('[name="work_end[]"]').value),
+                "party_pos": entry.querySelector('[name="work_party_pos[]"]').value || null
+            })),
+            "TrainingCourse": Array.from(document.querySelectorAll('.training-course-entry')).map(entry => ({
+                "start": formatDate(entry.querySelector('[name="tc_start[]"]').value),
+                "end": formatDate(entry.querySelector('[name="tc_end[]"]').value),
+                "subj": entry.querySelector('[name="tc_subj[]"]').value || null,
+                "inst": entry.querySelector('[name="tc_inst[]"]').value || null,
+                "country": entry.querySelector('[name="tc_country[]"]').value || null
+            })),
+            "Award": Array.from(document.querySelectorAll('.award-entry')).map(entry => ({
+                "dec_num": entry.querySelector('[name="award_dec_num[]"]').value || null,
+                "date": formatDate(entry.querySelector('[name="award_date[]"]').value),
+                "award_type": entry.querySelector('[name="award_type[]"]').value || null,
+                "reason": entry.querySelector('[name="award_reason[]"]').value || null
+            })),
+            "DisciplinaryAction": Array.from(document.querySelectorAll('.disciplinary-action-entry')).map(entry => ({
+                "dec_num": entry.querySelector('[name="da_dec_num[]"]').value || null,
+                "date": formatDate(entry.querySelector('[name="da_date[]"]').value),
+                "action_type": entry.querySelector('[name="da_action_type[]"]').value || null,
+                "reason": entry.querySelector('[name="da_reason[]"]').value || null
+            })),
+            "FamilyMember": Array.from(document.querySelectorAll('.family-member-entry')).map(entry => ({
+                "relation": entry.querySelector('[name="fm_relation[]"]').value || null,
+                "full_name": entry.querySelector('[name="fm_full_name[]"]').value || null,
+                "dob": formatDate(entry.querySelector('[name="fm_dob[]"]').value),
+                "eth": entry.querySelector('[name="fm_eth[]"]').value || null,
+                "rel": entry.querySelector('[name="fm_rel[]"]').value || null,
+                "occ": entry.querySelector('[name="fm_occ[]"]').value || null,
+                "work": entry.querySelector('[name="fm_work[]"]').value || null,
+                "vill": entry.querySelector('[name="fm_vill[]"]').value || null,
+                "dist": entry.querySelector('[name="fm_dist[]"]').value || null,
+                "prov": entry.querySelector('[name="fm_prov[]"]').value || null
+            })),
+            "Evaluation": [{
+                "strengths": formData.get('eval_strengths') || null,
+                "weaknesses": formData.get('eval_weaknesses') || null
+            }]
+        };
+
+        // Log JSON data for debugging
+        console.log('JSON Data:', JSON.stringify(jsonData, null, 2));
+
+        // Define requestOptions with default JSON settings
+    let requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonData)
+    };
+// Handle file upload if present
+    const avatarFile = formData.get('pic');
+    if (avatarFile && avatarFile.size > 0) {
+        console.log('File detected:', avatarFile.name, avatarFile.size); // Debug file info
+        const finalFormData = new FormData();
+        finalFormData.append('data', JSON.stringify(jsonData)); // JSON data as string
+        finalFormData.append('pic', avatarFile); // File object
+        requestOptions = {
             method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            // console.log("Response Data:", data); 
+            body: finalFormData // Use FormData instead of JSON
+            // Do not set 'Content-Type' here; browser will set it with boundary
+        };
+    } else {
+        console.log('No file selected or file is empty');
+    }
+    
 
-            if ("Success Response:", data) {  
-                Swal.fire({
-                    title: "ສຳເລັດ!",
-                    text: data.message || "ບັນທຶກສຳເລັດ",
-                    icon: "success",
-                    
-                }).then(() => {
-                    window.location.href = "//tables_emp//";
-                });
-            } else {
-                // console.error(data.status === 404);  
+        fetch('http://192.168.45.52:8000/api/employee/', requestOptions)
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => { throw new Error(JSON.stringify(err)); });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response:', data);
+                if (data) {
+                    Swal.fire({
+                        title: "ສຳເລັດ!",
+                        text: data.message || "ບັນທຶກສຳເລັດ",
+                        icon: "success",
+                        confirmButtonText: "ຕົກລົງ"
+                    }).then(() => {
+                        window.location.href = "/tables_emp/";
+                    });
+                } else {
+                    Swal.fire({
+                        title: "ເກີດຂໍ້ຜິດພາດ!",
+                        text: data.error || "ບໍ່ສາມາດບັນທຶກຂໍ້ມູນໄດ້",
+                        icon: "error",
+                        confirmButtonText: "ຕົກລົງ"
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error);
                 Swal.fire({
                     title: "ເກີດຂໍ້ຜິດພາດ!",
-                    text: data.error || "ບໍ່ສາມາດບັນທຶກເອກະສານ",
+                    text: `ບັນຫາ: ${error.message}`,
                     icon: "error",
                     confirmButtonText: "ຕົກລົງ"
                 });
-            }
-        })
+            });
     });
+
+    // Update remove buttons on page load
+    updateEducationRemoveButtons();
+    updateSpecializedEducationRemoveButtons();
+    updateWorkExperiencesRemoveButtons();
+    updatePoliticalTheoryEducationRemoveButtons();
+    updateTrainingCourseRemoveButtons();
+    updateAwardRemoveButtons();
+    updateDisciplinaryActionRemoveButtons();
+    updateFamilyMemberRemoveButtons();
 });
 </script>
 {% endblock %}
