@@ -144,12 +144,39 @@
                     const dept = departmentMap[employee.Department] || { name: '-' };
                     const departmentName = dept.name; // ຊື່ພາສາລາວ
 
-                    // Render ຂໍ້ມູນໃສ່ໃນ modal
+                    function calculateWorkDuration(yearEntry) {
+                        if (!yearEntry || yearEntry === '-') {
+                            return '-'; // ถ้าไม่มีวันที่เข้าเริ่มงาน, คืนค่า '-'
+                        }
+
+                        const startDate = new Date(yearEntry); // แปลงวันที่เข้าเริ่มงานเป็น Date object
+                        const currentDate = new Date(); // วันที่ปัจจุบัน
+
+                        // ตรวจสอบว่า startDate ถูกต้อง
+                        if (isNaN(startDate.getTime())) {
+                            return '-'; // ถ้าวันที่ไม่ถูกต้อง, คืนค่า '-'
+                        }
+
+                        // คำนวณความแตกต่าง
+                        let years = currentDate.getFullYear() - startDate.getFullYear();
+                        if (
+                            currentDate.getMonth() < startDate.getMonth() ||
+                            (currentDate.getMonth() === startDate.getMonth() && currentDate.getDate() < startDate.getDate())
+                        ) {
+                            years--;
+                        }
+
+                        // สร้าง string ผลลัพธ์
+                        return years >= 0 ? `${years} ປີ` : 'ໜ້ອຍກວ່າ 1 ປີ';
+                    }
+                        
+
+                    // สร้าง HTML สำหรับ employee detail
                     const employeeDetail = `
                         <div class="row">
                             <div class="col-md-4 text-center">
                                 <img src="${imageUrl}" alt="Employee Image" class="img-fluid rounded" 
-                                     style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #007bff;">
+                                    style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #007bff;">
                             </div>
                             <div class="col-md-4">                              
                                 <p><strong>ຊື່ພາສາລາວ:</strong> ${employee.lao_name || '-'}</p>
@@ -163,6 +190,7 @@
                                 <p><strong>ສະຖານະ:</strong> ${employee.status || '-'}</p>
                                 <p><strong>ຕຳແໜ່ງ:</strong> ${employee.position || '-'}</p>
                                 <p><strong>ວັນທີ່ເຂົ້າວຽກ:</strong> ${employee.year_entry || '-'}</p>
+                                <p><strong>ອາຍຸການ:</strong> ${calculateWorkDuration(employee.year_entry)}</p>
                                 <p><strong>ລະດັບເງິນເດືອນ:</strong> ${employee.salary_level || '-'}</p>
                                 <p><strong>ເບີໂທ:</strong> ${employee.phone || '-'}</p>
                             </div>

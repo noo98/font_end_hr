@@ -176,12 +176,20 @@
             documents.forEach((doc) => {
                 const tr = document.createElement('tr');
                 tr.dataset.id = doc.docg_id;  
+                const dateObj = new Date(doc.insert_date);
+                const formattedDate = dateObj.toLocaleDateString('en-LA', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit'
+                    });
+                
+                
                 tr.innerHTML = `
                     <td></td>
                     <td>${doc.doc_number || ''}</td>
                     <td>${doc.format_name || ''}</td>
                     <td>${doc.subject || ''}</td>
-                    <td>${doc.insert_date || ''}</td>                      
+                    <td>${formattedDate || ''}</td>                      
                     <td>${doc.name || ''}</td>
                     <td>
                         <a href="${doc.file}" target="_blank" class="btn btn-sm btn-link btn-view-doc">

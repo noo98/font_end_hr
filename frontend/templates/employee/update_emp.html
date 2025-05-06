@@ -834,198 +834,210 @@
         }
 
         document.getElementById('employeeForm').addEventListener('submit', async function(event) {
-    event.preventDefault();
-    const form = this;
-    const employeeId = form.dataset.empId;
-
-    if (!employeeId) {
-        return Swal.fire({
-            title: "ຂໍ້ມູນຜິດພາດ!",
-            text: "ບໍ່ພົບຂໍ້ມູນພະນັກງານ (employee ID)",
-            icon: "error"
-        });
-    }
-
-    // 🔧 ฟังก์ชันช่วย
-    const formatDate = dateStr => {
-        if (!dateStr) return null;
-        const date = new Date(dateStr);
-        return isNaN(date.getTime()) ? null : date.toISOString().split('T')[0];
-    };
-
-    const getVal = (entry, selector) => entry.querySelector(selector)?.value || null;
-
-    // 📦 รวบรวมข้อมูลหลัก
-    const jsonData = {
-        "employee": {
-            "lao_name": form.lao_name?.value || null,
-            "eng_name": form.eng_name?.value || null,
-            "nickname": form.nickname?.value || null,
-            "Gender": form.Gender?.value || null,
-            "birth_date": formatDate(form.birth_date?.value) || null,
-            "status": form.status?.value || null,
-            "position": form.position?.value || null,
-            "year_entry": formatDate(form.year_entry?.value) || null,
-            "salary_level": form.salary_level?.value || null,
-            "phone": form.phone?.value || null,
-            "Department": form.Department?.value || null
-        },
-        "personal_information": [{
-            "full_name": form.full_name?.value || null,
-            "dob": formatDate(form.dob?.value) || null,
-            "eth": form.eth?.value || null,
-            "rel": form.rel?.value || null,
-            "b_vill": form.b_vill?.value || null,
-            "b_dist": form.b_dist?.value || null,
-            "b_prov": form.b_prov?.value || null,
-            "c_vill": form.c_vill?.value || null,
-            "c_dist": form.c_dist?.value || null,
-            "c_prov": form.c_prov?.value || null,
-            "gov_entry": formatDate(form.gov_entry?.value) || null,
-            "youth_date": formatDate(form.youth_date?.value) || null,
-            "women_date": formatDate(form.women_date?.value) || null,
-            "union_date": formatDate(form.union_date?.value) || null,
-            "party_cand_date": formatDate(form.party_cand_date?.value) || null,
-            "full_party_date": formatDate(form.full_party_date?.value) || null,
-            "curr_party_pos": form.curr_party_pos?.value || null,
-            "party_apt_date": formatDate(form.party_apt_date?.value) || null,
-            "curr_gov_pos": form.curr_gov_pos?.value || null,
-            "gov_apt_date": formatDate(form.gov_apt_date?.value) || null,
-        }],
-        "education": [...document.querySelectorAll('.education-entry')].map(entry => ({
-            "level": getVal(entry, '[name="edu_level[]"]') || null,
-            "school": getVal(entry, '[name="edu_school[]"]') || null,
-            "year": getVal(entry, '[name="edu_year[]"]') || null,
-            "dom_abrd": getVal(entry, '[name="edu_dom_abrd[]"]') || null,
-        })),
-        "specialized_education": [...document.querySelectorAll('.specialized-education-entry')].map(entry => ({
-            "field": getVal(entry, '[name="spec_field[]"]') || null,
-            "inst": getVal(entry, '[name="spec_inst[]"]') || null,
-            "level": getVal(entry, '[name="spec_level[]"]') || null,
-            "year": getVal(entry, '[name="spec_year[]"]') || null,
-            "dom_abrd": getVal(entry, '[name="spec_dom_abrd[]"]') || null,
-        })),
-        "political_theory_education": [...document.querySelectorAll('.political-theory-education-entry')].map(entry => ({
-            "level": getVal(entry, '[name="pol_level[]"]') || null,
-            "inst": getVal(entry, '[name="pol_inst[]"]') || null,
-            "year": getVal(entry, '[name="pol_year[]"]') || null,
-            "dom_abrd": getVal(entry, '[name="pol_dom_abrd[]"]') || null,
-        })),
-        "foreign_languages": [...document.querySelectorAll('[name="lang_name[]"]:checked')].map(lang => {
-                const idSuffix = lang.id?.split('_')[1];
-                return {
-                    "id": null,
-                    "lang": lang.value || null,
-                    "prof": document.querySelector(`[name="lang_prof_${idSuffix}"]:checked`)?.value || null,
-                    "emp_id": employeeId
-                };
-            }),
-        "work_experiences": [...document.querySelectorAll('.work-experiences')].map(entry => ({
-            "work": getVal(entry, '[name="work_desc[]"]') || null,
-            "gov_pos": getVal(entry, '[name="work_gov_pos[]"]') || null,
-            "start": formatDate(getVal(entry, '[name="work_start[]"]')) || null,
-            "end": formatDate(getVal(entry, '[name="work_end[]"]')) || null,
-            "party_pos": getVal(entry, '[name="work_party_pos[]"]') || null,
-        })),
-        "training_courses": [...document.querySelectorAll('.training-course-entry')].map(entry => ({
-            "start": formatDate(getVal(entry, '[name="train_start[]"]')) || null,
-            "end": formatDate(getVal(entry, '[name="train_end[]"]')) || null,
-            "subj": getVal(entry, '[name="train_subj[]"]') || null,
-            "inst": getVal(entry, '[name="train_inst[]"]') || null,
-            "country": getVal(entry, '[name="train_country[]"]') || null,
-        })),
-        "awards": [...document.querySelectorAll('.award-entry')].map(entry => ({
-            "dec_num": getVal(entry, '[name="award_dec_num[]"]') || null,
-            "date": formatDate(getVal(entry, '[name="award_date[]"]')) || null,
-            "award_type": getVal(entry, '[name="award_type[]"]') || null,
-            "reason": getVal(entry, '[name="award_reason[]"]') || null,
-        })),
-        "disciplinary_actions": [...document.querySelectorAll('.disciplinary-action-entry')].map(entry => ({
-            "dec_num": getVal(entry, '[name="disc_dec_num[]"]') || null,
-            "date": formatDate(getVal(entry, '[name="disc_date[]"]')) || null,
-            "action_type": getVal(entry, '[name="disc_action_type[]"]') || null,
-            "reason": getVal(entry, '[name="disc_reason[]"]') || null,
-        })),
-        "family_members": [...document.querySelectorAll('.family-member-entry')].map(entry => ({
-            "relation": getVal(entry, '[name="fam_relation[]"]') || null,
-            "full_name": getVal(entry, '[name="fam_full_name[]"]') || null,
-            "dob": formatDate(getVal(entry, '[name="fam_dob[]"]')) || null,
-            "eth": getVal(entry, '[name="fam_eth[]"]') || null,
-            "rel": getVal(entry, '[name="fam_rel[]"]') || null,
-            "occ": getVal(entry, '[name="fam_occ[]"]') || null,
-            "work": getVal(entry, '[name="fam_work[]"]') || null,
-            "vill": getVal(entry, '[name="fam_vill[]"]') || null,
-            "dist": getVal(entry, '[name="fam_dist[]"]') || null,
-            "prov": getVal(entry, '[name="fam_prov[]"]') || null,
-
-        })),
-        "evaluation": [{
-            "strengths": form.eval_strengths?.value || null,
-            "weaknesses": form.eval_weaknesses?.value || null,
-
-        }]
-    };
-
-    console.log('📤 Payload JSON:', JSON.stringify(jsonData, null, 2));
-
-    const avatarFile = form.querySelector('[name="pic"]')?.files[0];
-        let requestOptions;
-
-        if (avatarFile && avatarFile.size > 0) {
-            console.log('File detected:', avatarFile.name, avatarFile.size);
-            const finalFormData = new FormData();
-            finalFormData.append('data', JSON.stringify(jsonData));
-            finalFormData.append('pic', avatarFile);
-
-            requestOptions = {
-                method: 'PATCH',
-                body: finalFormData
-            };
-        } else {
-            console.log('No file selected or file is empty');
-            requestOptions = {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(jsonData)
-            };
-        }
-
-        // 🚀 ส่งไปยัง API
-        try {
-            const response = await fetch(`${DATABASE_URL}/api/employee/${employeeId}/`, requestOptions);
-            const data = await response.json();
-
-            if (!response.ok) throw new Error(JSON.stringify(data));
-
-            await Swal.fire({
-                title: "ສຳເລັດ!",
-                text: data.message || "ແກ້ໄຂສຳເລັດ",
-                icon: "success"
+            Swal.fire({
+                title: "ກຳລັງດຳເນີນການ...",
+                text: "ກະລຸນາລໍຖ້າ",
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
             });
+            event.preventDefault();
+            const form = this;
+            const employeeId = form.dataset.empId;
 
-            window.location.href = "/tables_emp/";
-
-        } catch (error) {
-            let errorMessage = "ບັນຫາໃນການເຊື່ອມຕໍ່";
-
-            try {
-                const parsed = JSON.parse(error.message);
-                errorMessage = parsed.detail || error.message;
-                console.error("❌ Error details:", parsed);
-            } catch (e) {
-                console.error("❌ Error (raw):", error);
+            if (!employeeId) {
+                return Swal.fire({
+                    title: "ຂໍ້ຜິດພາດ!",
+                    text: "ບໍ່ພົບຂໍ້ມູນພະນັກງານ (employee ID)",
+                    icon: "error"
+                });
             }
 
-            Swal.fire({
-                title: "ເກີດຂໍ້ຜິດພາດ!",
-                text: errorMessage,
-                icon: "error"
-            });
-        }
+            const formatDate = dateStr => {
+                if (!dateStr) return null;
+                const date = new Date(dateStr);
+                return isNaN(date.getTime()) ? null : date.toISOString().split('T')[0];
+            };
 
-    });   
+            const getVal = (entry, selector) => entry.querySelector(selector)?.value || null;
+
+            const jsonData = {
+                employee: {
+                    lao_name: form.lao_name?.value || "",
+                    eng_name: form.eng_name?.value || "",
+                    nickname: form.nickname?.value || "",
+                    Gender: form.Gender?.value || "",
+                    birth_date: formatDate(form.birth_date?.value) || null,
+                    status: form.status?.value || "",
+                    position: form.position?.value || "",
+                    year_entry: formatDate(form.year_entry?.value) || null,
+                    salary_level: form.salary_level?.value || "",
+                    phone: form.phone?.value || "",
+                    Department: form.Department?.value || ""
+                },
+                personal_information: [{
+                    full_name: form.full_name?.value || "",
+                    dob: formatDate(form.dob?.value) || null,
+                    eth: form.eth?.value || "",
+                    rel: form.rel?.value || "",
+                    b_vill: form.b_vill?.value || "",
+                    b_dist: form.b_dist?.value || "",
+                    b_prov: form.b_prov?.value || "",
+                    c_vill: form.c_vill?.value || "",
+                    c_dist: form.c_dist?.value || "",
+                    c_prov: form.c_prov?.value || "",
+                    gov_entry: formatDate(form.gov_entry?.value) || null,
+                    youth_date: formatDate(form.youth_date?.value) || null,
+                    women_date: formatDate(form.women_date?.value) || null,
+                    union_date: formatDate(form.union_date?.value) || null,
+                    party_cand_date: formatDate(form.party_cand_date?.value) || null,
+                    full_party_date: formatDate(form.full_party_date?.value) || null,
+                    curr_party_pos: form.curr_party_pos?.value || "",
+                    party_apt_date: formatDate(form.party_apt_date?.value) || null,
+                    curr_gov_pos: form.curr_gov_pos?.value || "",
+                    gov_apt_date: formatDate(form.gov_apt_date?.value) || null
+                }],
+                education: [...document.querySelectorAll('.education-entry')].map(entry => ({
+                    level: getVal(entry, '[name="edu_level[]"]') || "",
+                    school: getVal(entry, '[name="edu_school[]"]') || "",
+                    year: getVal(entry, '[name="edu_year[]"]') || null,
+                    dom_abrd: getVal(entry, '[name="edu_dom_abrd[]"]') || ""
+                })),
+                specialized_education: [...document.querySelectorAll('.specialized-education-entry')].map(entry => ({
+                    field: getVal(entry, '[name="spec_field[]"]') || "",
+                    inst: getVal(entry, '[name="spec_inst[]"]') || "",
+                    level: getVal(entry, '[name="spec_level[]"]') || "",
+                    year: getVal(entry, '[name="spec_year[]"]') || null,
+                    dom_abrd: getVal(entry, '[name="spec_dom_abrd[]"]') || ""
+                })),
+                political_theory_education: [...document.querySelectorAll('.political-theory-education-entry')].map(entry => ({
+                    level: getVal(entry, '[name="pol_level[]"]') || "",
+                    inst: getVal(entry, '[name="pol_inst[]"]') || "",
+                    year: getVal(entry, '[name="pol_year[]"]') || null,
+                    dom_abrd: getVal(entry, '[name="pol_dom_abrd[]"]') || ""
+                })),
+                foreign_languages: [...document.querySelectorAll('[name="lang_name[]"]:checked')].map(lang => {
+                    const idSuffix = lang.id?.split('_')[1];
+                    return {
+                        id: null,
+                        lang: lang.value || "",
+                        prof: document.querySelector(`[name="lang_prof_${idSuffix}"]:checked`)?.value || "",
+                        emp_id: employeeId
+                    };
+                }),
+                work_experiences: [...document.querySelectorAll('.work-experiences')].map(entry => ({
+                    work: getVal(entry, '[name="work_desc[]"]') || "",
+                    gov_pos: getVal(entry, '[name="work_gov_pos[]"]') || "",
+                    start: formatDate(getVal(entry, '[name="work_start[]"]')) || null,
+                    end: formatDate(getVal(entry, '[name="work_end[]"]')) || null,
+                    party_pos: getVal(entry, '[name="work_party_pos[]"]') || ""
+                })),
+                training_courses: [...document.querySelectorAll('.training-course-entry')].map(entry => ({
+                    start: formatDate(getVal(entry, '[name="train_start[]"]')) || null,
+                    end: formatDate(getVal(entry, '[name="train_end[]"]')) || null,
+                    subj: getVal(entry, '[name="train_subj[]"]') || "",
+                    inst: getVal(entry, '[name="train_inst[]"]') || "",
+                    country: getVal(entry, '[name="train_country[]"]') || ""
+                })),
+                awards: [...document.querySelectorAll('.award-entry')].map(entry => ({
+                    dec_num: getVal(entry, '[name="award_dec_num[]"]') || "",
+                    date: formatDate(getVal(entry, '[name="award_date[]"]')) || null,
+                    award_type: getVal(entry, '[name="award_type[]"]') || "",
+                    reason: getVal(entry, '[name="award_reason[]"]') || ""
+                })),
+                disciplinary_actions: [...document.querySelectorAll('.disciplinary-action-entry')].map(entry => ({
+                    dec_num: getVal(entry, '[name="disc_dec_num[]"]') || "",
+                    date: formatDate(getVal(entry, '[name="disc_date[]"]')) || null,
+                    action_type: getVal(entry, '[name="disc_action_type[]"]') || "",
+                    reason: getVal(entry, '[name="disc_reason[]"]') || ""
+                })),
+                family_members: [...document.querySelectorAll('.family-member-entry')].map(entry => ({
+                    relation: getVal(entry, '[name="fam_relation[]"]') || "",
+                    full_name: getVal(entry, '[name="fam_full_name[]"]') || "",
+                    dob: formatDate(getVal(entry, '[name="fam_dob[]"]')) || null,
+                    eth: getVal(entry, '[name="fam_eth[]"]') || "",
+                    rel: getVal(entry, '[name="fam_rel[]"]') || "",
+                    occ: getVal(entry, '[name="fam_occ[]"]') || "",
+                    work: getVal(entry, '[name="fam_work[]"]') || "",
+                    vill: getVal(entry, '[name="fam_vill[]"]') || "",
+                    dist: getVal(entry, '[name="fam_dist[]"]') || "",
+                    prov: getVal(entry, '[name="fam_prov[]"]') || ""
+                })),
+                evaluation: [{
+                    strengths: form.eval_strengths?.value || "",
+                    weaknesses: form.eval_weaknesses?.value || ""
+                }]
+            };
+
+            // console.log('📤 Payload JSON:', JSON.stringify(jsonData, null, 2));
+
+            const picInput = form.querySelector('[name="pic"]');
+            const picFile = picInput?.files[0];
+            const deletePicCheckbox = form.querySelector('[name="delete_pic"]');
+
+            const formData = new FormData();
+            formData.append('data', JSON.stringify(jsonData));
+
+            if (picFile && picFile.size > 0) {
+                if (picFile.size > 5 * 1024 * 1024) {
+                    Swal.fire({
+                        title: "ຂໍ້ຜິດພາດ!",
+                        text: "ຮູບພາບມີຂະໜາດໃຫຍ່ເກີນໄປ (ສູງສຸດ 5MB)",
+                        icon: "error"
+                    });
+                    return;
+                }
+                formData.append('pic', picFile);
+                // console.log('📦 Added new image to FormData:', picFile.name, picFile.size);
+            } else if (deletePicCheckbox?.checked) {
+                jsonData.employee.pic = null; // ส่ง null เพื่อลบรูป
+                formData.set('data', JSON.stringify(jsonData));
+                // console.log('📤 Updated JSON to delete pic');
+            }
+
+            // console.log('📤 Final FormData:');
+            for (let [key, value] of formData.entries()) {
+                // console.log(`${key}:`, value);
+            }
+
+            const requestOptions = {
+                method: 'PATCH',
+                body: formData
+            };
+
+            try {
+                const response = await fetch(`${DATABASE_URL}/api/employee/${employeeId}/`, requestOptions);
+                const data = await response.json();
+
+                console.log('📥 API Response:', data);
+
+                if (!response.ok) throw new Error(JSON.stringify(data));
+
+                await Swal.fire({
+                    title: "ສຳເລັດ!",
+                    text: data.message || "ແກ້ໄຂສຳເລັດ",
+                    icon: "success"
+                });
+
+                window.location.href = `/tables_emp/?t=${new Date().getTime()}`;
+            } catch (error) {
+                let errorMessage = "ບັນຫາໃນການເຊື່ອມຕໍ່";
+                try {
+                    const parsed = JSON.parse(error.message);
+                    errorMessage = parsed.error || parsed.detail || parsed.message || error.message;
+                    console.error("❌ Error details:", parsed);
+                } catch (e) {
+                    console.error("❌ Error (raw):", error);
+                }
+
+                Swal.fire({
+                    title: "ເກີດຂໍ້ຜິດພາດ!",
+                    text: errorMessage,
+                    icon: "error"
+                });
+            }
+        });
         // Initialize remove buttons visibility on page load
         updateEducationRemoveButtons();
         updateSpecializedEducationRemoveButtons();

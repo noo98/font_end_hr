@@ -222,6 +222,7 @@
                                 <tr>
                                     <th class="text-center" style="width: 40px;">ລ/ດ</th>                               
                                     <th class="text-start" style="width: 400px;">ເນື້ອໃນ</th>
+                                    <th class="text-center" style="width: 200px;">ພະແນກ</th>
                                     <th class="text-center" style="width: 70px;">ລົງວັນທີ່</th>                 
                                     <th class="text-center" style="width: 40px;">ໄຟລ໌</th>                
                                 </tr>
@@ -358,7 +359,7 @@
             const formatFilter = urlParams.get('format') || '';
             const startDateFilter = urlParams.get('start_date') || '';
             const endDateFilter = urlParams.get('end_date') || '';
-        
+           
             try {
                 const [documentsRes, departmentsRes, formatsRes] = await Promise.all([
                     fetch(documentApiUrl),
@@ -381,10 +382,12 @@
                     format_name: formatMap[doc.format] || 'N/A',
                     subject: doc.subject || 'N/A',
                     insert_date: doc.insert_date || 'N/A',
+                    department_id: doc.department || null,
+                    department: departmentMap[doc.department] || 'N/A',
                     name: doc.name || 'N/A',
                     file: doc.file ? `${DATABASE_URL}/${doc.file}` : '#'
                 }));
-        
+                // console.log("sdfsdf:", processedDocuments);
                 const sortedDocuments = processedDocuments.sort((a, b) => {
                     return new Date(b.insert_date) - new Date(a.insert_date);
                 });
@@ -420,7 +423,11 @@
                 tr.dataset.id = doc.docg_id;
                 
                 const dateObj = new Date(doc.insert_date);
-                const formattedDate = dateObj.toLocaleDateString('lo-LA');
+                const formattedDate = dateObj.toLocaleDateString('en-TH', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit'
+                    });
                 
                 const newBadge = (index < 3) ? 
                     `<span class="badge badge-success ml-2 new-badge blink" 
@@ -431,6 +438,7 @@
                 tr.innerHTML = `
                     <td class="text-center">${index + 1}</td>
                     <td>${doc.subject || ''}${newBadge}</td>
+                    <td class="text-center">${department || ''}</td>
                     <td class="text-center">${formattedDate || ''}</td>
                     <td class="text-center">
                         <a href="${doc.file}" target="_blank" class="btn btn-sm btn-outline-primary btn-view-doc">

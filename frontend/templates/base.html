@@ -138,7 +138,7 @@
                                 <i class="fa fa-address-book mr-2"></i>ພະແນກ : <span class=" d-none pl-1 d-lg-inline " id="departments"></span>
                             </div>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="#" onclick="viewProfile()">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 ໂປຣໄຟລ໌
                             </a>
@@ -162,6 +162,22 @@
                 {% endblock %}
             </div>
         </div>
+        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">ລາຍລະອຽດພະນັກງານ</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="employee_detail">
+                        <!-- Employee details will be inserted here -->
+                    </div>
+                    <div class="modal-footer" style="justify-content: start;">
+                        <a href="#">ປ່ຽນລະຫັດຜ່ານ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -176,42 +192,73 @@
     <script src="{% static 'js/sb-admin-2.js' %}"></script>
     <script src="{% static 'js/localStorage.js' %}"></script>
     <script>
-        const DATABASE_URL = "{{ database_url | escapejs }}";  
+        // Define global variables
+        window.DATABASE_URL = "{{ database_url | escapejs }}";
+        window.DEFAULT_IMAGE = "{% static 'images/avatar.png' %}";
+        window.departmentMap = {};
+        window.myModalInstance = null;
+
+        // Sidebar toggle
         $(document).ready(function() {
             $("#sidebarToggle, #sidebarToggleTop").on('click', function() {
                 $("body").toggleClass("sidebar-toggled");
                 $(".sidebar").toggleClass("toggled");
                 if ($(".sidebar").hasClass("toggled")) {
                     $('.sidebar .collapse').collapse('hide');
-                };
+                }
             });
+
+            // Fetch departments on page load
+            fetchDepartments();
+
+            // Display username and department in header
+            const username = localStorage.getItem('username');
+            const departmentName = localStorage.getItem('department_name');
+            if (username) {
+                $('#header-username').text(username);
+            }
+            if (departmentName) {
+                $('#departments').text(departmentName);
+            }
         });
-    
+
+        // Fetch departments
+        // async function fetchDepartments() {
+        //     try {
+        //         const response = await fetch(`${window.DATABASE_URL}/api/list/departments/`, { method: 'GET' });
+        //         if (!response.ok) {
+        //             throw new Error('Error fetching departments');
+        //         }
+        //         const departments = await response.json();
+        //         window.departmentMap = departments.reduce((map, dept) => {
+        //             map[dept.id] = { name: dept.name };
+        //             return map;
+        //         }, {});
+        //         // console.log('Department Map:', window.departmentMap);
+        //     } catch (error) {
+        //         console.error('Error fetching departments:', error);
+        //         Swal.fire('ເກີດຂໍ້ຜິດພາດ!', 'ບໍ່ສາມາດດຶງຂໍ້ມູນພະແນກໄດ້', 'error');
+        //         window.departmentMap = {};
+        //     }
+        // }
+
+        // Update document status
         function UpDocument(event) {
             event.preventDefault();
-            
-            fetch(`${DATABASE_URL}/api/auto-update-status/`, {
+            fetch(`${window.DATABASE_URL}/api/auto-update-status/`, {
                 method: 'POST',
             })
-            .then(response => response.json())  
+            .then(response => response.json())
             .then(data => {
                 console.log('Response:', data);
-                if (data.success) {  
+                if (data.success) {
                     console.log('API updated successfully');
-                    window.location.href = "/index/"; 
-                } 
+                    window.location.href = "/index/";
+                }
             })
             .catch(error => {
-                // console.error('Error:', error);
+                console.error('Error:', error);
             });
-        }
-        
-        // Logout function
-        function logout() {
-            localStorage.removeItem("user");
-            localStorage.removeItem("department"); 
-            localStorage.removeItem("department_name"); 
-            window.location.href = "/login/";
         }
     </script>
 </body>

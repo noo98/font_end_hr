@@ -1,0 +1,145 @@
+ /* Custom fonts */
+ @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@400;500;600;700&display=swap');
+    
+ /* CSS Reset */
+ * {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: 'Noto Sans Lao', Phetsarath OT, sans-serif;
+ }
+ 
+ /* Main styles */
+ body {
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background: linear-gradient(135deg, #4E51F3, #010825);
+ }
+ 
+ .login-container {
+   width: 90%;
+   max-width: 400px;
+   background-color: rgba(255, 255, 255, 0.95);
+   border-radius: 45px 0 45px 0;
+   padding: 2.5rem;
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+   transition: all 0.3s ease;
+ }
+ 
+ .logo-container {
+   display: flex;
+   justify-content: center;
+   margin-bottom: 2rem;
+ }
+ 
+ .logo-container img {
+   width: 100px;
+   height: 100px;
+   object-fit: contain;
+   transition: transform 0.3s ease;
+ }
+ 
+ .logo-container img:hover {
+   transform: scale(1.05);
+ }
+ 
+ .form-group {
+   margin-bottom: 1.5rem;
+   position: relative;
+ }
+ 
+ .input-with-icon {
+   position: relative;
+ }
+ 
+ .input-with-icon i {
+   position: absolute;
+   left: 1rem;
+   top: 50%;
+   transform: translateY(-50%);
+   color: #8f8f8f;
+   transition: color 0.3s ease;
+ }
+ 
+ .form-control {
+   width: 100%;
+   padding: 0.8rem 1rem 0.8rem 3rem;
+   border: none;
+   border-radius: 30px;
+   background-color: #f5f5f5;
+   font-size: 1rem;
+   transition: all 0.3s ease;
+   outline: none;
+   box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+ }
+ 
+ .form-control:focus {
+   background-color: #fff;
+   box-shadow: 0 0 0 2px rgba(78, 81, 243, 0.3), inset 0 1px 3px rgba(0,0,0,0.1);
+ }
+ 
+ .form-control:focus + i {
+   color: #4E51F3;
+ }
+ 
+ .submit-btn {
+   width: 100%;
+   padding: 0.8rem;
+   border: none;
+   border-radius: 30px;
+   background: linear-gradient(135deg, #4E51F3, #3235B9);
+   color: white;
+   font-size: 1rem;
+   font-weight: 600;
+   cursor: pointer;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 0.5rem;
+   transition: all 0.3s ease;
+   box-shadow: 0 4px 10px rgba(78, 81, 243, 0.3);
+ }
+ 
+ .submit-btn:hover {
+   background: linear-gradient(135deg, #3235B9, #252899);
+   transform: translateY(-2px);
+   box-shadow: 0 6px 15px rgba(78, 81, 243, 0.4);
+ }
+ 
+ .submit-btn:active {
+   transform: translateY(1px);
+   box-shadow: 0 2px 5px rgba(78, 81, 243, 0.4);
+ }
+ 
+ .submit-btn svg {
+   transition: transform 0.3s ease;
+ }
+ 
+ .submit-btn:hover svg {
+   transform: translateX(3px);
+ }
+ 
+ /* Responsive adjustments */
+ @media (max-width: 480px) {
+   .login-container {
+     width: 95%;
+     padding: 2rem 1.5rem;
+   }
+   
+   .logo-container img {
+     width: 80px;
+     height: 80px;
+   }
+ }
+ 
+ /* Animation effects */
+ @keyframes fadeIn {
+   from { opacity: 0; transform: translateY(-20px); }
+   to { opacity: 1; transform: translateY(0); }
+ }
+ 
+ .login-container {
+   animation: fadeIn 0.6s ease-out forwards;
+ }

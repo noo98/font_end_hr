@@ -568,3 +568,4 @@ def update_emp(request, emp_id):
         })
 
     
+    
