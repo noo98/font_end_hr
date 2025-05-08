@@ -204,6 +204,17 @@
                             </div>
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" href="/position/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-warning mr-3">person_pin</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຂໍ້ມູນຕຳແໜ່ງ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການຂໍ້ມູນຕຳແໜ່ງ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -438,7 +449,7 @@
                 tr.innerHTML = `
                     <td class="text-center">${index + 1}</td>
                     <td>${doc.subject || ''}${newBadge}</td>
-                    <td class="text-center">${department || ''}</td>
+                    <td class="text-center">${doc.department || ''}</td>
                     <td class="text-center">${formattedDate || ''}</td>
                     <td class="text-center">
                         <a href="${doc.file}" target="_blank" class="btn btn-sm btn-outline-primary btn-view-doc">

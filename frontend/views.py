@@ -148,8 +148,22 @@ def register(request):
         'database_url': DATABASE_URL,
     })
         
-def education_level(request):
-    return render(request, 'education_level.html',)
+def position(request):
+    url = f"{DATABASE_URL}/api/positions/"
+    # print(f"document_api_url: {url}")
+    # Fetch data from the API
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  
+        positions = response.json()  
+        print("Positions:", positions)  
+    except requests.exceptions.RequestException as e:
+        positions = []  
+        # print(f"Error fetching data: {e}")   
+    return render(request, 'position.html', {
+        'positions': positions,                        
+        'database_url': DATABASE_URL,  
+    })
 
 def salary_grade(request):
     return render(request, 'salary_grade.html',)

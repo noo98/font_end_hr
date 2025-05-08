@@ -21,7 +21,7 @@
                     
                     <div class="mb-3">
                         <input type="password" class="form-control" id="pwd" name="pwd" 
-                               placeholder="ລະຫັດຜ່ານ..." required>
+                               placeholder="ລະຫັດຜ່ານ...">
                     </div>
                     
                     <div class="mb-3">
@@ -280,7 +280,7 @@
         document.getElementById("pwd").value = ""; // ປ່ອຍຫວ່າງເພື່ອຄວາມປອດໄພ
         document.getElementById("empname").value = employees[userData.Employee] || userData.employee_name || "";
         document.getElementById("depname").value = departments[userData.Department] || userData.department_name || "ບໍ່ພົບຂໍ້ມູນ";
-        document.getElementById("status").value = userData.status || "";
+        document.getElementById("status").value = userData.status !== undefined ? String(userData.status) : "";
         
         // ປ່ຽນປຸ່ມເປັນໂໝດແກ້ໄຂ
         document.querySelector('button[name="btnAdd"]').style.display = "none";

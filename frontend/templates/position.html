@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% load static %}
+
+<title>Lcic-HR</title>
+
+{% block content %} 
+<div class="container-fluid">
+    <div class="row mx-3">
+        <div class="col-md-4">
+            <fieldset class="border border-primary p-2 px-4 pb-4" style="border-radius: 15px; background-color: #E7E9EB">
+                <legend class="float-none w-auto p-2 h5">ຈັດການຂໍ້ມູນຕຳແໜ່ງ</legend>
+                <form id="positionsForm">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="id" placeholder="ລະຫັດຕຳແໜ່ງ" name="id" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="name" placeholder="ປ້ອນຊື່ຕຳແໜ່ງ" name="name" required>
+                    </div>
+                    <div class="row mt-4" style="justify-content: center;">
+                        <button type="submit" name="btnEdit" class="btn btn-info" style="width: 110px; border-radius: 20px; display: none;">
+                            <i class="fas fa-edit"></i>&nbsp;&nbsp;ແກ້ໄຂ
+                        </button>
+                        <button type="submit" name="btnAdd" class="btn btn-primary mx-2" style="width: 110px; border-radius: 20px;">
+                            <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;ເພີ່ມ
+                        </button>
+                        <button type="reset" id="btnCancel" class="btn btn-warning mx-2" style="width: 110px; border-radius: 20px;">
+                            <i class="fas fa-sync"></i>&nbsp;&nbsp;ຍົກເລີກ
+                        </button>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+        <div class="col-md-8 mt-4">
+            <fieldset class="border border-primary p-2 px-4 pb-4" style="border-radius: 15px;">
+                <div class="table-responsive">
+                    <table id="example" class="table table-striped" style="width:100%">
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <th class="text-center">ລໍາດັບ</th>
+                                <th>ຊື່ຕຳແໜ່ງ</th>
+                                <th class="text-center">ຈັດການ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for position in positions %}
+                            <tr>
+                                <td class="text-center">{{ forloop.counter }}</td>
+                                <td>{{ position.name }}</td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm btn-success" onclick="editPositions('{{ position.pos_id }}')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger" onclick="deletePositions('{{ position.pos_id }}')">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'js/localStorage.js' %}"></script>
+<script>
+
+const DATABASE_URL = "{{ database_url | escapejs }}";
+
+const positionsForm = document.getElementById('positionsForm');
+const btnAdd = document.querySelector('[name="btnAdd"]');
+const btnEdit = document.querySelector('[name="btnEdit"]');
+
+
+
+// Handle Form Submission
+positionsForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    console.log('Form submitted');
+
+    const positionsId = document.getElementById('id').value;
+    const positionsName = document.getElementById('name').value;
+      
+    const isEdit = Boolean(positionsId);
+
+    const apiUrl = isEdit
+        ? `${DATABASE_URL}/api/positions/${positionsId}/`
+        : `${DATABASE_URL}/api/positions/`;
+      
+    const method = isEdit ? 'PUT' : 'POST';
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: positionsId, name: positionsName }),
+        });
+
+        if (!response.ok) throw new Error('Error: ' + response.statusText);
+
+        const successMessage = isEdit
+            ? 'ຂໍ້ມູນຖືກແກ້ໄຂແລ້ວ'
+            : 'ຂໍ້ມູນຖືກເພີ່ມແລ້ວ';
+        Swal.fire('ສໍາເລັດ!', successMessage, 'success').then(() => {
+            window.location.reload();
+        });
+    } catch (error) {
+        console.error('Form submission error:', error);
+        Swal.fire('ມີຂໍ້ຜິດພາດ', error.message, 'error'); 
+    }
+});
+
+// Function to edit positions
+async function editPositions(posId) {
+    
+    // Check if posId is valid
+    if (!posId || posId === 'undefined' || posId === '') {
+        console.error('Invalid position ID:', posId);
+        Swal.fire('ມີຂໍ້ຜິດພາດ!', 'ບໍ່ພົບຂໍ້ມູນ ID ຂອງຕຳແໜ່ງ', 'error');
+        return;
+    }
+    
+    try {
+        const apiUrl = `${DATABASE_URL}/api/positions/${posId}/`;
+ 
+        const response = await fetch(apiUrl);
+        
+        if (!response.ok) throw new Error(`Error fetching data: ${response.statusText}`);
+        
+        const positions = await response.json();
+
+        document.getElementById('id').value = positions.pos_id;
+        document.getElementById('name').value = positions.name;
+        btnAdd.style.display = 'none';
+        btnEdit.style.display = 'inline-block';
+    } catch (error) {
+        console.error('Edit error:', error);
+        Swal.fire('ມີຂໍ້ຜິດພາດ!', error.message, 'error');
+    }
+}
+
+// Function to delete positions
+function deletePositions(posId) {
+    
+    // Check if posId is valid
+    if (!posId || posId === 'undefined' || posId === '') {
+        console.error('Invalid position ID:', posId);
+        Swal.fire('ມີຂໍ້ຜິດພາດ!', 'ບໍ່ພົບຂໍ້ມູນ ID ຂອງຕຳແໜ່ງ', 'error');
+        return;
+    }
+    
+    const apiUrl = `${DATABASE_URL}/api/positions/${posId}/`;
+    
+    Swal.fire({
+        title: 'ທ່ານແນ່ໃຈບໍ?',
+        text: 'ຂໍ້ມູນຈະຖືກລືບອອກ!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ຢືນຢັນ',
+        cancelButtonText: 'ຍົກເລີກ'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(apiUrl, { method: 'DELETE' })
+                .then((response) => {
+                    console.log('Delete response status:', response.status);
+                    if (!response.ok) {
+                        throw new Error('Error deleting positions: ' + response.statusText);
+                    }
+                    return response.text().then(text => {
+                        console.log('Delete response text:', text);
+                        return text ? JSON.parse(text) : {};
+                    });
+                })
+                .then(() => {
+                    Swal.fire('ລຶບສໍາເລັດ!', 'ຂໍ້ມູນຖືກລຶບແລ້ວ', 'success')
+                    .then(() => window.location.reload());
+                })
+                .catch((error) => {
+                    console.error('Delete error:', error);
+                    Swal.fire('ມີຂໍ້ຜິດພາດ!', error.message, 'error');
+                });
+        }
+    });
+}
+
+// Reset Form
+document.getElementById('btnCancel').addEventListener('click', () => {
+    console.log('Form reset');
+    btnAdd.style.display = 'inline-block';
+    btnEdit.style.display = 'none';
+    positionsForm.reset();
+});
+</script>
+{% endblock %}

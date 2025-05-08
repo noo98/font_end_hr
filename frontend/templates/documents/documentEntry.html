@@ -149,7 +149,7 @@
                     status: doc.status || []
                 };
             });
-    
+            console.log("Processed Documents:", processedDocuments);
             const filteredDocuments = processedDocuments.filter(doc => {
                 const docDate = new Date(doc.insert_date);
                 return (!formatFilter || doc.format_id == formatFilter) &&
@@ -191,16 +191,24 @@
         });
         const tr = document.createElement('tr');
         tr.dataset.id = doc.doc_id;
+
+        const dateObj = new Date(doc.insert_date);
+        const formattedDate = dateObj.toLocaleDateString('en-LA', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+
         tr.innerHTML = `
             <td></td>
             <td>${doc.doc_number || ''}</td>
             <td>${doc.format_name || ''}</td>
             <td>${doc.subject || ''}</td>
-            <td>${doc.insert_date || ''}</td>
+            <td>${formattedDate || ''}</td>
             <td>${doc.department || ''}</td>
             <td>${doc.name || ''}</td> 
             <td style="text-align: center;">
-                <a href="${doc.file}" onclick="UpDocument(event, '${doc.doc_id}')" target="_blank" class="btn btn-sm btn-link">
+                <a href="${doc.file}" onclick="UpDoc(event, '${doc.doc_id}')" target="_blank" class="btn btn-sm btn-link">
                     <span id="status-${doc.doc_id}" class="badge ${userViewed ? 'bg-success' : 'bg-danger'}">
                         ${userViewed ? '<i class="fas fa-check"></i>' : '<i class="fas fa-eye"></i>'}
                     </span>
@@ -241,7 +249,7 @@
     });
 }
     
-    function UpDocument(event, docId) {
+    function UpDoc(event, docId) {
         // event.preventDefault();  
         const userId = localStorage.getItem("user_id");
         if (!userId) {

@@ -124,14 +124,14 @@
 
         fetch(apiUrl, { method: 'GET' })
             .then(response => {
-                console.log('Response Status:', response.status); // Debug: ເບິ່ງ status code
+                // console.log('Response Status:', response.status); // Debug: ເບິ່ງ status code
                 if (!response.ok) {
                     return response.json().then(err => { throw new Error(err.error || 'Error fetching employee data'); });
                 }
                 return response.json();
             })
             .then(data => {
-                console.log('Response Data:', data); // Debug: ເບິ່ງ response data
+                // console.log('Response Data:', data); // Debug: ເບິ່ງ response data
 
                 // ກວດສອບວ່າ data ເປັນ array ແລະມີຂໍ້ມູນຢູ່
                 if (Array.isArray(data) && data.length > 0 && data[0].employee) {
@@ -169,7 +169,19 @@
                         // สร้าง string ผลลัพธ์
                         return years >= 0 ? `${years} ປີ` : 'ໜ້ອຍກວ່າ 1 ປີ';
                     }
-                        
+                    const dateObj = new Date(employee.birth_date); // ປ່ອນວັນເກີດເຂົ້າໃນ Date object
+                    const formattedDate = dateObj.toLocaleDateString('en-LA', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                        });    
+
+                    const yearEntryDate = new Date(employee.year_entry); // ວັນເຂົ້າວຽກ
+                    const formattedYearEntry = !isNaN(yearEntryDate) ? yearEntryDate.toLocaleDateString('en-LA', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                        }) : '-';
 
                     // สร้าง HTML สำหรับ employee detail
                     const employeeDetail = `
@@ -186,10 +198,10 @@
                                 <p><strong>ພະແນກ:</strong> ${departmentName}</p>
                             </div>
                             <div class="col-md-4">
-                                <p><strong>ວັນເດືອນປີເກີດ:</strong> ${employee.birth_date || '-'}</p>
+                                <p><strong>ວັນເດືອນປີເກີດ:</strong> ${formattedDate || '-'}</p>
                                 <p><strong>ສະຖານະ:</strong> ${employee.status || '-'}</p>
                                 <p><strong>ຕຳແໜ່ງ:</strong> ${employee.position || '-'}</p>
-                                <p><strong>ວັນທີ່ເຂົ້າວຽກ:</strong> ${employee.year_entry || '-'}</p>
+                                <p><strong>ວັນທີ່ເຂົ້າວຽກ:</strong> ${formattedYearEntry || '-'}</p>
                                 <p><strong>ອາຍຸການ:</strong> ${calculateWorkDuration(employee.year_entry)}</p>
                                 <p><strong>ລະດັບເງິນເດືອນ:</strong> ${employee.salary_level || '-'}</p>
                                 <p><strong>ເບີໂທ:</strong> ${employee.phone || '-'}</p>

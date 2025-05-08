@@ -142,10 +142,13 @@
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 ໂປຣໄຟລ໌
                             </a>
+                            
+                            <!-- <a class="btn btn-primary" data-bs-toggle="modal" href="#" onclick="viewProfile()" role="button">viewProfile</a> -->
                             <!-- <a class="dropdown-item" href="/register/">
                                 <i class="fa fa-user-plus mr-2 text-gray-400"></i>
                                 ເພີ່ມຜູ້ໃຊ້
                             </a> -->
+                            
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="" onclick="logout()" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -162,22 +165,26 @@
                 {% endblock %}
             </div>
         </div>
-        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="myModalLabel">ລາຍລະອຽດພະນັກງານ</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" id="employee_detail">
-                        <!-- Employee details will be inserted here -->
-                    </div>
-                    <div class="modal-footer" style="justify-content: start;">
-                        <a href="#">ປ່ຽນລະຫັດຜ່ານ</a>
-                    </div>
+        <div class="modal fade" id="exampleModalToggle" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Profile</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body" id="profile_body">
+                  <!-- profile content here -->
+                </div>
+                <div class="modal-footer">
+                    <a href="#">ປ່ຽນລະຫັດຜ່ານ</a>
+                </div>
+              </div>
             </div>
         </div>
+        
+          
+        
+        
     </div>
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -192,11 +199,9 @@
     <script src="{% static 'js/sb-admin-2.js' %}"></script>
     <script src="{% static 'js/localStorage.js' %}"></script>
     <script>
-        // Define global variables
-        window.DATABASE_URL = "{{ database_url | escapejs }}";
-        window.DEFAULT_IMAGE = "{% static 'images/avatar.png' %}";
-        window.departmentMap = {};
-        window.myModalInstance = null;
+        // Constants
+        const DATABASE_URL = "{{ database_url | escapejs }}";
+        const DEFAULT_IMAGE = "{% static 'images/avatar.png' %}"; // Fallback image
 
         // Sidebar toggle
         $(document).ready(function() {
@@ -221,31 +226,10 @@
                 $('#departments').text(departmentName);
             }
         });
-
-        // Fetch departments
-        // async function fetchDepartments() {
-        //     try {
-        //         const response = await fetch(`${window.DATABASE_URL}/api/list/departments/`, { method: 'GET' });
-        //         if (!response.ok) {
-        //             throw new Error('Error fetching departments');
-        //         }
-        //         const departments = await response.json();
-        //         window.departmentMap = departments.reduce((map, dept) => {
-        //             map[dept.id] = { name: dept.name };
-        //             return map;
-        //         }, {});
-        //         // console.log('Department Map:', window.departmentMap);
-        //     } catch (error) {
-        //         console.error('Error fetching departments:', error);
-        //         Swal.fire('ເກີດຂໍ້ຜິດພາດ!', 'ບໍ່ສາມາດດຶງຂໍ້ມູນພະແນກໄດ້', 'error');
-        //         window.departmentMap = {};
-        //     }
-        // }
-
         // Update document status
         function UpDocument(event) {
             event.preventDefault();
-            fetch(`${window.DATABASE_URL}/api/auto-update-status/`, {
+            fetch(`${DATABASE_URL}/api/auto-update-status/`, {
                 method: 'POST',
             })
             .then(response => response.json())
@@ -260,6 +244,96 @@
                 console.error('Error:', error);
             });
         }
+            async function viewProfile() { 
+        const userId = localStorage.getItem("user_id");
+        if (!userId) {
+            alert("ບໍ່ພົບ ID ຂອງຜູ້ໃຊ້!");
+            return;
+        }
+        // console.log("User ID:", userId); // Debug
+
+        try {
+            // Fetch user_emp & departments
+            const [userResponse, depResponse] = await Promise.all([
+                fetch(`${DATABASE_URL}/api/user_emp/${userId}/`),
+                fetch(`${DATABASE_URL}/api/list/departments/`)
+            ]);
+
+            if (!userResponse.ok || !depResponse.ok) {
+                throw new Error("ການດຶງຂໍ້ມູນບໍ່ສຳເລັດ");
+            }
+
+            const userData = await userResponse.json();
+            const departments = await depResponse.json();
+
+            // console.log("User Data: ", userData);
+
+            const employee = userData.Employee;  // id ຂອງ employee
+            const departmentId = userData.Department;
+            const status = userData.status;
+            const pic = userData.pic;
+
+            // Map status code to text
+            const statusMap = {
+                1: "Admin",
+                2: "User MM",
+                3: "User IT",
+                4: "User OP",
+                5: "User DQ"
+            };
+            const statusName = statusMap[status] || "Unknown";
+
+            // Find department name
+            const department = departments.find(d => d.id === departmentId);
+            const departmentName = department ? department.name : "N/A";
+
+            // Build HTML
+            const profileHTML = `
+                <div class="text-center">
+                    <img src="${DATABASE_URL}${pic ?? '/media/default.jpg'}" alt="Profile Picture" class="img-thumbnail" style="width: 150px;">
+                </div>
+                <p><strong>ຊື່ຜູ້ໃຊ້:</strong> ${userData.username}</p>
+                <p><strong>ພະແນກ:</strong> ${departmentName}</p>   
+                <p><strong>ສະຖານະ:</strong> ${statusName}</p>                     
+            `;
+
+            document.getElementById('profile_body').innerHTML = profileHTML;
+
+            // Show modal
+            const modalElement = document.getElementById('exampleModalToggle');
+            if (!modalElement) {
+                console.error("Modal element not found!");
+                return;
+            }
+            const myModal = new bootstrap.Modal(modalElement);
+            myModal.show();
+
+        } catch (error) {
+            console.error("ຜິດພາດ:", error);
+            alert("ມີຂໍ້ຜິດພາດໃນການດຶງຂໍ້ມູນ!");
+        }
+    }
+
+        function fetchDepartments() {
+            fetch(`${DATABASE_URL}/api/list/departments/`)
+                .then(response => response.json())
+                .then(data => {
+                    const departmentSelect = document.getElementById('departmentSelect');
+                    data.forEach(department => {
+                        const option = document.createElement('option');
+                        option.value = department.id;
+                        option.textContent = department.name;
+                        departmentSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching departments:', error));
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = "/login/";
+        }
+
     </script>
 </body>
 

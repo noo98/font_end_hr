@@ -31,7 +31,7 @@ urlpatterns = [
     
     path('documentEntry/', documentEntry, name='document_entry'),
     path('department/', views.department, name='department'),
-    path('education_level/', views.education_level, name='education_level'),
+    path('position/', views.position, name='position'),
     path('salary_grade/', views.salary_grade, name='salary_grade'),
     path('documentEntry/', views.documentEntry, name='documentEntry'),
     path('documentOut/', views.documentOut, name='documentOut'),

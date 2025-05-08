@@ -74,9 +74,9 @@
                             <th>ປະເພດ</th>
                             <th>ເນື້ອໃນ</th>
                             <th>ວັນທີ່</th>
-                            <!-- <th>ຈາກພະແນກ</th> -->
+                            <th>ຈາກພະແນກ</th>
                             <th>ຜູ້ສົ່ງ</th>
-                            <th>ຫາພະແນກ</th>                            
+                            <!-- <th>ຫາພະແນກ</th>                             -->
                             <th style="text-align: center; width: 70px;">ສະຖານະ</th>
                             <!-- <th>ສະຖານະ</th> -->
                             <th style="text-align: center; width: 70px;">Action</th>
@@ -206,7 +206,7 @@
             <td>${doc.department || ''}</td>
             <td>${doc.name || ''}</td> 
             <td style="text-align: center;">
-                <a href="${doc.file}" onclick="UpDocument(event, '${doc.doc_id}')" target="_blank" class="btn btn-sm btn-link">
+                <a href="${doc.file}" onclick="UpDoc(event, '${doc.doc_id}')" target="_blank" class="btn btn-sm btn-link">
                     <span id="status-${doc.doc_id}" class="badge ${userViewed ? 'bg-success' : 'bg-danger'}">
                         ${userViewed ? '<i class="fas fa-check"></i>' : '<i class="fas fa-eye"></i>'}
                     </span>
@@ -247,7 +247,7 @@
         });
     });
 }
-    function UpDocument(event, docId) {
+    function UpDoc(event, docId) {
         // event.preventDefault();  // ຖ້າບໍ່ຕ້ອງການໃຫ້ປິດການ redirect ໃຫ້ເອົາອອກ
         const userId = localStorage.getItem("user_id");
         if (!userId) {
