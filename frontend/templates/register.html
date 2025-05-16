@@ -2,52 +2,53 @@
 {% load static %}
 
 <title>Lcic-HR</title>
-
+                    
 {% block content %}
 <div class="container-fluid">
-    <div class="row mx-3">
+    <div class=" mx-3">
         <!-- Form Section -->
-        <div class="col-md-4">
+        <div class="col-md-12">
             <fieldset class="border border-primary p-2 px-4 pb-4" style="border-radius: 15px; background-color: #E7E9EB">
                 <legend class="float-none w-auto p-2 h5">ເພີ່ນຂໍ້ມູນຜູ້ໃຊ້</legend>
                 <form id="registerForm">
                     {% csrf_token %}
                     <input type="hidden" id="id" name="id">
-                    
-                    <div class="mb-3">
-                        <input type="text" class="form-control" id="username" name="username" 
-                               placeholder="ຊື່ຜູ້ໃຊ້..." required autocomplete="off">
-                    </div>
-                    
-                    <div class="mb-3">
-                        <input type="password" class="form-control" id="pwd" name="pwd" 
-                               placeholder="ລະຫັດຜ່ານ...">
-                    </div>
-                    
-                    <div class="mb-3">
-                        <input type="text" class="form-control" id="empname" name="empname" 
-                               placeholder="ຊື່ພະນັກງານ..." list="employeeList" 
-                               oninput="setDepartment()" required>
-                        <datalist id="employeeList"></datalist>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <input type="text" class="form-control" id="depname" name="depname" 
-                               placeholder="ຊື່ພະແນກ..." readonly required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <select class="form-select" id="status" name="status" required>
-                            <option value="">ເລືອກສະຖານະ</option>
-                            <option value="1">Admin</option>
-                            <option value="2">User MM</option>
-                            <option value="3">User IT</option>
-                            <option value="4">User OP</option>
-                            <option value="5">User DQ</option>
-                        </select>
-                    </div>
-                    
-                    <div class="row mt-4" style="justify-content: center;">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="username" name="username" 
+                                        placeholder="ຊື່ຜູ້ໃຊ້..." required autocomplete="off">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="empname" name="empname" 
+                                        placeholder="ຊື່ພະນັກງານ..." list="employeeList" 
+                                        oninput="setDepartment()" required>
+                                    <datalist id="employeeList"></datalist>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="depname" name="depname" 
+                                    placeholder="ຊື່ພະແນກ..." readonly required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <input type="password" class="form-control" id="pwd" name="pwd" 
+                                        placeholder="ລະຫັດຜ່ານ...">
+                                </div>
+                            
+                                <div class="col">
+                                    <select class="form-select" id="status" name="status" required>
+                                        <option value="">ເລືອກສະຖານະ</option>
+                                        <option value="1">Admin</option>
+                                        <option value="2">User MM</option>
+                                        <option value="3">User IT</option>
+                                        <option value="4">User OP</option>
+                                        <option value="5">User DQ</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-5" style="justify-content: center; margin-left: 70px;">
                         <button type="submit" name="btnEdit" class="btn btn-info" 
                                 style="width: 110px; border-radius: 20px; display: none;">
                             <i class="fas fa-edit"></i>  ແກ້ໄຂ
@@ -61,12 +62,17 @@
                             <i class="fas fa-sync"></i>  ຍົກເລີກ
                         </button>
                     </div>
+                        </div>
+                        <div class="col-md-4" style="text-align: center;">
+                            <img id="avatarPreview" src="{% static 'images/avatar.png' %}" alt="Avatar" class="rounded-circle shadow-sm ml-3" style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #007bff; justify-content: center;" />
+                            <input type="file" class="form-control mt-2" id="avatarInput" name="pic" accept="image/*">                      
+                        </div>                                      
                 </form>
             </fieldset>
         </div>
 
         <!-- Table Section -->
-        <div class="col-md-8 mt-4">
+        <div class="col-md-12 mt-4">
             <fieldset class="border border-primary p-2 px-4 pb-4" style="border-radius: 15px;">
                 <div class="table-responsive">
                 <table id="example" class="table table-striped" style="width:100%">
@@ -77,6 +83,7 @@
                             <th>ຊື່ພະນັກງານ</th>
                             <th>ຊື່ພະແນກ</th>
                             <th>ສະຖານະ</th>
+                            <!-- <th>ຮູບພາບ</th>                             -->
                             <th class="text-center">Option</th>
                         </tr>
                     </thead>
@@ -88,6 +95,9 @@
                             <td>{{ register.employee_name }}</td>
                             <td>{{ register.department_name }}</td>
                             <td>{{ register.status }}</td>
+                            <!-- <td>
+                                <img src="{{ register.pic }}" style="width: 40px; height: 40px; border-radius: 50%;">
+                            </td> -->
                             <td class="text-center">
                                 <a href="#" onclick="editRegister('{{ register.id }}')" 
                                    data-bs-toggle="tooltip" title="ແກ້ໄຂຂໍ້ມູນ">
@@ -177,112 +187,124 @@
     });
     
     document.getElementById("registerForm").addEventListener("submit", async function(event) {
-        event.preventDefault();
-        const formData = new FormData(this);
-        const id = formData.get("id");
-        const method = id ? "PUT" : "POST";
-        const url = id ? `${DATABASE_URL}/api/users/${id}/` : `${DATABASE_URL}/api/users/`;
-    
-        const username = formData.get("username");
-        const password = formData.get("pwd");
-        const empname = formData.get("empname");
-        const department = formData.get("depname");
-        const status = formData.get("status");
-    
-        let employeeId = null;
-        const employeeOptions = document.getElementById("employeeList").options;
-        for (let option of employeeOptions) {
-            if (option.value === empname) {
-                employeeId = option.getAttribute("data-emp-id");
-                break;
-            }
+    event.preventDefault();
+
+    const formData = new FormData(this);
+    const id = formData.get("id");
+    const method = id ? "PUT" : "POST";
+    const url = id ? `${DATABASE_URL}/api/users/${id}/` : `${DATABASE_URL}/api/users/`;
+
+    const username = formData.get("username");
+    const password = formData.get("pwd");
+    const empname = formData.get("empname");
+    const department = formData.get("depname");
+    const status = formData.get("status");
+
+    // หาค่า employeeId จาก datalist
+    let employeeId = null;
+    const employeeOptions = document.getElementById("employeeList").options;
+    for (let option of employeeOptions) {
+        if (option.value === empname) {
+            employeeId = option.getAttribute("data-emp-id");
+            break;
         }
-        if (!employeeId) {
-            Swal.fire("ຜິດພາດ", "ບໍ່ພົບຂໍ້ມູນພະນັກງານ!", "error");
+    }
+    if (!employeeId) {
+        Swal.fire("ຜິດພາດ", "ບໍ່ພົບຂໍ້ມູນພະນັກງານ!", "error");
+        return;
+    }
+
+    // หา departmentId จาก object departments
+    const departmentId = Object.keys(departments).find(key => departments[key] === department);
+    if (!departmentId) {
+        Swal.fire("ຜິດພາດ", "ບໍ່ພົບພະແນກ!", "error");
+        return;
+    }
+
+    // เตรียมข้อมูลใส่ FormData
+    formData.set("username", username);
+    formData.set("password", password || "");
+    formData.set("status", parseInt(status));
+    formData.set("Department", parseInt(departmentId));
+    formData.set("Employee", parseInt(employeeId));
+
+    // แนบไฟล์รูปภาพ ถ้ามี
+    const fileInput = document.getElementById("avatarInput");
+    if (fileInput && fileInput.files.length > 0) {
+        formData.set("pic", fileInput.files[0]);
+    }
+
+    try {
+        const response = await fetch(url, {
+            method: method,
+            headers: {
+                "X-CSRFToken": formData.get("csrfmiddlewaretoken")
+            },
+            body: formData
+        });
+
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            const errorText = await response.text();
+            console.error("Non-JSON response:", errorText);
+            Swal.fire("ຜິດພາດ", "Server ຕອບກັບບໍ່ຖືກຕ້ອງ (ບໍ່ແມ່ນ JSON)", "error");
             return;
         }
-    
-        const departmentId = Object.keys(departments).find(key => departments[key] === department);
-        if (!departmentId) {
-            Swal.fire("ຜິດພາດ", "ບໍ່ພົບພະແນກ!", "error");
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            Swal.fire("ຜິດພາດ", result.message || "ບໍ່ສາມາດດຳເນີນການໄດ້", "error");
             return;
         }
-    
-        const requestData = {
-            username: username,
-            password: password || undefined,
-            status: parseInt(status),
-            Department: parseInt(departmentId),
-            Employee: parseInt(employeeId)
-        };
-    
-        try {
-            const response = await fetch(url, {
-                method: method,
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": formData.get("csrfmiddlewaretoken")
-                },
-                body: JSON.stringify(requestData)
-            });
-    
-            const result = await response.json();
-    
-            if (response.ok) {
-                Swal.fire({
-                    title: "ສຳເລັດ!",
-                    text: id ? "ແກ້ໄຂຜູ້ໃຊ້ສຳເລັດ" : "ເພີ່ມຜູ້ໃຊ້ສຳເລັດ",
-                    icon: "success"
-                }).then(() => {
-                    location.reload();
-                });
-                this.reset();
-                document.querySelector('button[name="btnAdd"]').style.display = "inline-block";
-                document.querySelector('button[name="btnEdit"]').style.display = "none";
-            } else {
-                Swal.fire("ຜິດພາດ", result.message || "ບໍ່ສາມາດດຳເນີນການໄດ້", "error");
-            }
-        } catch (error) {
-            console.error("API Error:", error);
-            Swal.fire("ຜິດພາດ", "ເກີດບັນຫາໃນລະບົບ: " + error.message, "error");
-        }
-    });
-    
-    window.editRegister = async function(id) {
+
+        Swal.fire({
+            title: "ສຳເລັດ!",
+            text: id ? "ແກ້ໄຂຜູ້ໃຊ້ສຳເລັດ" : "ເພີ່ມຜູ້ໃຊ້ສຳເລັດ",
+            icon: "success"
+        }).then(() => {
+            location.reload();
+        });
+
+        this.reset();
+        document.querySelector('button[name="btnAdd"]').style.display = "inline-block";
+        document.querySelector('button[name="btnEdit"]').style.display = "none";
+
+    } catch (error) {
+        console.error("API Error:", error);
+        Swal.fire("ຜິດພາດ", "ເກີດບັນຫາໃນລະບົບ: " + error.message, "error");
+    }
+});
+
+
+// ຮັກສາຟັງຊັນ editRegister ແລະ preview ຮູບພາບຈາກການຕອບກ່ອນ
+window.editRegister = async function(id) {
     try {
         const response = await fetch(`${DATABASE_URL}/api/users/${id}/`);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const userData = await response.json();
 
-        // console.log("User data from API:", userData); // Debug: ກວດສອບ response ຈາກ API
-
-        // ກວດສອບວ່າ userData ມີຄ່າຫຼືບໍ່
         if (!userData) {
             throw new Error("No user data returned from API");
         }
 
-        // Map ຄ່າຈາກ userData ໃສ່ໃນ form
-        const usernameField = document.getElementById("username");
-        const usernameValue = userData.username || userData.user_name || "";
-        
-        // Set ຄ່າ username
-        usernameField.value = usernameValue;
-        usernameField.dispatchEvent(new Event('input'));
-        usernameField.dispatchEvent(new Event('change'));
-        // console.log("Set username to:", usernameField.value);
-
-        // ກວດສອບຄ່າຫຼັງຈາກ set ໄປແລ້ວ 100ms
-        // setTimeout(() => {
-        //     console.log("Username after 100ms:", document.getElementById("username").value);
-        // }, 100);
-
         document.getElementById("id").value = userData.us_id || userData.id || "";
-        document.getElementById("pwd").value = ""; // ປ່ອຍຫວ່າງເພື່ອຄວາມປອດໄພ
+        document.getElementById("username").value = userData.username || userData.user_name || "";
+        document.getElementById("pwd").value = "";
         document.getElementById("empname").value = employees[userData.Employee] || userData.employee_name || "";
-        document.getElementById("depname").value = departments[userData.Department] || userData.department_name || "ບໍ່ພົບຂໍ້ມູນ";
+        document.getElementById("depname").value = departments[userData.Department] || userData.department_name || "";
         document.getElementById("status").value = userData.status !== undefined ? String(userData.status) : "";
-        
-        // ປ່ຽນປຸ່ມເປັນໂໝດແກ້ໄຂ
+
+        const avatarPreview = document.getElementById("avatarPreview");
+            if (userData.pic) {
+        // ตรวจสอบว่าค่า pic เป็น path แบบ relative ให้ต่อ BASE_URL เข้าไป
+                avatarPreview.src = `${DATABASE_URL}${userData.pic}`;
+                avatarPreview.style.display = "block";
+            } else {
+                avatarPreview.src = "{% static 'images/avatar.png' %}";
+                avatarPreview.style.display = "block";
+            }
+
         document.querySelector('button[name="btnAdd"]').style.display = "none";
         document.querySelector('button[name="btnEdit"]').style.display = "inline-block";
     } catch (error) {
@@ -290,6 +312,21 @@
         Swal.fire("ຜິດພາດ", "ບໍ່ສາມາດດຶງຂໍ້ມູນຜູ້ໃຊ້ໄດ້: " + error.message, "error");
     }
 };
+
+
+// Preview ຮູບພາບກ່ອນອັບໂຫຼດ
+// Avatar preview
+    document.getElementById('avatarInput').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('avatarPreview');
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) { preview.src = e.target.result; };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '{% static "images/avatar.png" %}';
+        }
+    });
     
     window.deleteRegister = async function(id) {
         Swal.fire({

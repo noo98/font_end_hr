@@ -131,7 +131,6 @@ async function editDepartment(depId) {
         Swal.fire('Error!', error.message, 'error');
     }
 }
-
 // Delete Department
 function deleteDepartment(depId) {
     const apiUrl = `${DATABASE_URL}/api/delete/departments/${depId}/`;
@@ -156,7 +155,6 @@ function deleteDepartment(depId) {
         }
     });
 }
-
 // Reset Form
 document.getElementById('btnCancel').addEventListener('click', () => {
     btnAdd.style.display = 'inline-block';

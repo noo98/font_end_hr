@@ -82,6 +82,12 @@
         localStorage.setItem("user", JSON.stringify(userData));
         localStorage.setItem("user_role", userData.status === 1 ? "admin" : "user");
 
+        if (userData.pic) {
+          localStorage.setItem("user_pic", userData.pic);
+        } else {
+          localStorage.setItem("user_pic", "");
+        }
+
         // 4. Fetch department data
         let deptResponse = await fetch(`${DATABASE_URL}/api/list/departments/`);
         let departments = await deptResponse.json();

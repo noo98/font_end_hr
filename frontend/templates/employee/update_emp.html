@@ -36,7 +36,19 @@
                             <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="status" name="status" value="{{ employee.status }}" required><label>ສະຖານະ</label></div></div>
                         </div>
                         <div class="row g-3">
-                            <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="position" name="position" value="{{ employee.position }}" required><label>ຕຳແໜ່ງ</label></div></div>
+                            <div class="col-md-4">
+                                <div class="input-group-custom">
+                                    <label for="position" class="form-label">ຕຳແໜ່ງ</label>
+                                    <select id="position" name="pos_id" class="form-select" >
+                                        <option value="" selected disabled>ກະລຸນາເລືອກຕຳແໜ່ງ</option>
+                                        {% for pos in positions %}
+                                            <option value="{{ pos.pos_id }}" {% if employee.pos_id == pos.pos_id %}selected{% endif %}>{{ pos.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                
+                                </div>
+                            </div>
+
                             <div class="col-md-4"><div class="input-group-custom"><input type="date" class="form-control" id="year_entry" name="year_entry" value="{{ employee.year_entry }}" required><label>ປີເຂົ້າການ</label></div></div>
                             <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="salary_level" name="salary_level" value="{{ employee.salary_level }}" required><label>ຂັ້ນເງິນເດືອນ</label></div></div>
                         </div>
@@ -870,7 +882,7 @@
                     Gender: form.Gender?.value || "",
                     birth_date: formatDate(form.birth_date?.value) || null,
                     status: form.status?.value || "",
-                    position: form.position?.value || "",
+                    pos_id: form.pos_id?.value || "",
                     year_entry: formatDate(form.year_entry?.value) || null,
                     salary_level: form.salary_level?.value || "",
                     phone: form.phone?.value || "",

@@ -24,21 +24,25 @@ def index1(request):
 def tables_emp(request): 
     api_url = f"{DATABASE_URL}/api/employee/"
     departments_api = f"{DATABASE_URL}/api/list/departments/"
-
+    positions_api = f"{DATABASE_URL}/api/positions/"
+    
     employees = []
 
     try:
         # Fetch data from API
         emp_response = requests.get(api_url)
         dept_response = requests.get(departments_api)
-
+        pos_response = requests.get(positions_api)
         # Check API response status
         emp_data = emp_response.json() if emp_response.status_code == 200 else []
         dept_data = dept_response.json() if dept_response.status_code == 200 else []
-
+        pos_data = pos_response.json() if pos_response.status_code == 200 else []
         # Create department mapping
         department_map = {dept["id"]: dept["name"] for dept in dept_data}
-
+        print(f"API URL6: {department_map}")
+        # Create position mapping
+        position_map = {pos["pos_id"]: pos["name"] for pos in pos_data}
+        print(f"API URL7: {position_map}")
         # Process employee data
         for emp in emp_data:
             employees.append({
@@ -48,7 +52,7 @@ def tables_emp(request):
                 "nickname": emp.get("employee", {}).get("nickname", "N/A"),
                 "Gender": emp.get("employee", {}).get("Gender", "N/A"),
                 "Department": department_map.get(emp.get("employee", {}).get("Department"), "N/A"),
-                "position": emp.get("employee", {}).get("position", "N/A"),
+                "position": position_map.get(emp.get("employee", {}).get("position"), "N/A"),
                 "phone": emp.get("employee", {}).get("phone", "N/A"),
                 "salary_level": emp.get("employee", {}).get("salary_level", "N/A"),
 
@@ -68,7 +72,7 @@ def tables_emp(request):
     except Exception as e:
         print(f"Error fetching data: {e}")
         employees = []  # Ensure employees is empty on error
-
+        print("Employees:", employees)
     return render(request, 'employee/tables_emp.html', {
         "employees": employees,
         "database_url": DATABASE_URL,
@@ -135,7 +139,8 @@ def register(request):
                 "username": user["username"],
                 "employee_name": employee_map.get(user["Employee"], "N/A"),
                 "department_name": department_map.get(user["Department"], "N/A"),
-                "status": status_map.get(user["status"], "Unknown")
+                "status": status_map.get(user["status"], "Unknown"),
+                "pic": user["pic"] if user["pic"] else ""
             })
         # print("Register List:", register_list)
 
@@ -519,6 +524,7 @@ logger = logging.getLogger(__name__)
 def update_emp(request, emp_id):
     base_url = f"{DATABASE_URL}/api/employee/{emp_id}/"
     departments_url = f"{DATABASE_URL}/api/list/departments/"
+    positions_url = f"{DATABASE_URL}/api/positions/"
 
     if request.method == 'GET':
         data = {
@@ -536,6 +542,7 @@ def update_emp(request, emp_id):
             'evaluation': {},
         }
         departments = []
+        positions = []
 
         try:
             response = requests.get(base_url)
@@ -573,9 +580,18 @@ def update_emp(request, emp_id):
         except requests.exceptions.RequestException as e:
             # logger.error("Error fetching departments: %s", str(e))
             departments = []
+        try:
+            response = requests.get(positions_url)
+            response.raise_for_status()
+            positions = response.json()
+            logger.debug("Fetched positions: %s", positions)
+        except requests.exceptions.RequestException as e:
+            # logger.error("Error fetching positions: %s", str(e))
+            positions = []
 
         return render(request, 'employee/update_emp.html', {
             **data,
+            'positions': positions,
             'departments': departments,
             'database_url': DATABASE_URL,
             'emp_id': emp_id,

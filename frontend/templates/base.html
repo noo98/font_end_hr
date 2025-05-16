@@ -22,11 +22,11 @@
     <link rel="stylesheet" href="{% static 'css/sb-admin-2.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/sb-admin-2.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}">
     
@@ -70,17 +70,18 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="material-icons">queue</i>
                     <span>ຈັດການຂໍ້ມູນ</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">ຈັດການຂໍ້ມູນ:</h6>
                         <a class="collapse-item" href="{% url 'tables_emp' %}">ເພີ່ມຂໍ້ມູນພະນັກງານ</a>
-                        <div class="nav-item dropdown">
-                            <a class="collapse-item dropdown-toggle" href="#" data-toggle="collapse" data-target="#nestedDropdown" aria-expanded="false">
+                        
+                        <div class="nav-item">
+                            <a class="collapse-item collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#nestedDropdown" aria-expanded="false">
                                 ຈັດການເອກະສານ
                             </a>
                             <div id="nestedDropdown" class="collapse">
@@ -89,12 +90,13 @@
                                 <a class="collapse-item" href="{% url 'documentGen' %}">ເອກະສານທົ່ວໄປ</a>
                             </div>
                         </div>
+
                         <a class="collapse-item" href="{% url 'department' %}">ເພີ່ມຂໍ້ມູນພະແນກ</a>
                         <a class="collapse-item" href="{% url 'doc_format' %}">ເພີ່ມປະເພດເອກສານ</a>
-                      
                     </div>
                 </div>
             </li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -112,48 +114,36 @@
         <div id="content-wrapper" class="d-flex flex-column">
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                <!-- Sidebar Toggle (Topbar) -->
+
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                     <i class="fa fa-bars"></i>
                 </button>
 
-                <!-- Topbar Navbar -->
+            
                 <ul class="navbar-nav ml-auto">                  
                    
                     <div class="topbar-divider d-none d-sm-block"></div>
 
-                    <!-- Nav Item - User Information -->
+                   
                     <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle mr-4" href="#" id="userDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="{% static 'images/img.png' %}" alt="logo" width="35" height="35">
-                            
-                            
+                        <a class="nav-link dropdown-toggle me-4" href="#" id="userDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <img id="userImage" src="{% static 'images/img.png' %}" alt="User Profile" width="35" height="35" style="border-radius: 45%;">   
                         </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right mr-1 shadow animated--grow-in" style="width: 230px;"
+                        <div class="dropdown-menu dropdown-menu-end shadow animated--grow-in" style="width: 230px;"
                             aria-labelledby="userDropdown">
-                            <div class="mx-2">
-                                <i class="fa fa-user mr-2"></i>ຜູ້ໃຊ້ :<span class=" d-none pl-2 d-lg-inline" id="header-username"></span><br>
-                                <i class="fa fa-address-book mr-2"></i>ພະແນກ : <span class=" d-none pl-1 d-lg-inline " id="departments"></span>
-                            </div>
+                                <div class="mx-2">
+                                    <i class="fa fa-user me-2"></i>ຜູ້ໃຊ້ :
+                                        <span class="d-none ps-2 d-lg-inline" id="header-username"></span><br>
+                                    <i class="fa fa-address-book me-2"></i>ພະແນກ :
+                                        <span class="d-none ps-1 d-lg-inline" id="departments"></span>
+                                </div>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" onclick="viewProfile()">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                ໂປຣໄຟລ໌
-                            </a>
-                            
-                            <!-- <a class="btn btn-primary" data-bs-toggle="modal" href="#" onclick="viewProfile()" role="button">viewProfile</a> -->
-                            <!-- <a class="dropdown-item" href="/register/">
-                                <i class="fa fa-user-plus mr-2 text-gray-400"></i>
-                                ເພີ່ມຜູ້ໃຊ້
-                            </a> -->
-                            
+                                <a class="dropdown-item" href="#" onclick="viewProfile()">
+                                    <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>ໂປຣໄຟລ໌</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="" onclick="logout()" data-toggle="modal" data-target="#logoutModal">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                ອອກຈາກລະບົບ
-                            </a>
+                                <a class="dropdown-item" href="#" onclick="logout()">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>ອອກຈາກລະບົບ</a>
                         </div>
                     </li>
                 </ul>
@@ -169,31 +159,26 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Profile</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <h5 class="modal-title text-primary fw-bold">ໂປຣໄຟລ໌</h5>
+                  <button type="button" class="btn-close" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="profile_body">
                   <!-- profile content here -->
                 </div>
                 <div class="modal-footer">
-                    <a href="#">ປ່ຽນລະຫັດຜ່ານ</a>
+                  <a href="#" onclick="Forget()">ປ່ຽນລະຫັດຜ່ານ</a>
                 </div>
               </div>
             </div>
-        </div>
-        
-          
-        
-        
-    </div>
+        </div>            
+   </div>
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
     <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 
     <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
     <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
-    
     <!-- Page level custom scripts -->
     <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
     <script src="{% static 'js/sb-admin-2.js' %}"></script>
@@ -202,7 +187,10 @@
         // Constants
         const DATABASE_URL = "{{ database_url | escapejs }}";
         const DEFAULT_IMAGE = "{% static 'images/avatar.png' %}"; // Fallback image
-
+        document.addEventListener("DOMContentLoaded", function() {
+            const userId = localStorage.getItem("user_id");
+           
+        });
         // Sidebar toggle
         $(document).ready(function() {
             $("#sidebarToggle, #sidebarToggleTop").on('click', function() {
@@ -244,97 +232,15 @@
                 console.error('Error:', error);
             });
         }
-            async function viewProfile() { 
-        const userId = localStorage.getItem("user_id");
-        if (!userId) {
-            alert("ບໍ່ພົບ ID ຂອງຜູ້ໃຊ້!");
-            return;
-        }
-        // console.log("User ID:", userId); // Debug
+        // Add this function to your JavaScript file
 
-        try {
-            // Fetch user_emp & departments
-            const [userResponse, depResponse] = await Promise.all([
-                fetch(`${DATABASE_URL}/api/user_emp/${userId}/`),
-                fetch(`${DATABASE_URL}/api/list/departments/`)
-            ]);
-
-            if (!userResponse.ok || !depResponse.ok) {
-                throw new Error("ການດຶງຂໍ້ມູນບໍ່ສຳເລັດ");
-            }
-
-            const userData = await userResponse.json();
-            const departments = await depResponse.json();
-
-            // console.log("User Data: ", userData);
-
-            const employee = userData.Employee;  // id ຂອງ employee
-            const departmentId = userData.Department;
-            const status = userData.status;
-            const pic = userData.pic;
-
-            // Map status code to text
-            const statusMap = {
-                1: "Admin",
-                2: "User MM",
-                3: "User IT",
-                4: "User OP",
-                5: "User DQ"
-            };
-            const statusName = statusMap[status] || "Unknown";
-
-            // Find department name
-            const department = departments.find(d => d.id === departmentId);
-            const departmentName = department ? department.name : "N/A";
-
-            // Build HTML
-            const profileHTML = `
-                <div class="text-center">
-                    <img src="${DATABASE_URL}${pic ?? '/media/default.jpg'}" alt="Profile Picture" class="img-thumbnail" style="width: 150px;">
-                </div>
-                <p><strong>ຊື່ຜູ້ໃຊ້:</strong> ${userData.username}</p>
-                <p><strong>ພະແນກ:</strong> ${departmentName}</p>   
-                <p><strong>ສະຖານະ:</strong> ${statusName}</p>                     
-            `;
-
-            document.getElementById('profile_body').innerHTML = profileHTML;
-
-            // Show modal
-            const modalElement = document.getElementById('exampleModalToggle');
-            if (!modalElement) {
-                console.error("Modal element not found!");
-                return;
-            }
-            const myModal = new bootstrap.Modal(modalElement);
-            myModal.show();
-
-        } catch (error) {
-            console.error("ຜິດພາດ:", error);
-            alert("ມີຂໍ້ຜິດພາດໃນການດຶງຂໍ້ມູນ!");
-        }
-    }
-
-        function fetchDepartments() {
-            fetch(`${DATABASE_URL}/api/list/departments/`)
-                .then(response => response.json())
-                .then(data => {
-                    const departmentSelect = document.getElementById('departmentSelect');
-                    data.forEach(department => {
-                        const option = document.createElement('option');
-                        option.value = department.id;
-                        option.textContent = department.name;
-                        departmentSelect.appendChild(option);
-                    });
-                })
-                .catch(error => console.error('Error fetching departments:', error));
-        }
-
+            
         function logout() {
             localStorage.clear();
             window.location.href = "/login/";
         }
 
     </script>
-</body>
 
+</body>
 </html>

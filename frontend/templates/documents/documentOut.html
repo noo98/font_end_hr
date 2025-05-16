@@ -74,9 +74,8 @@
                             <th>ປະເພດ</th>
                             <th>ເນື້ອໃນ</th>
                             <th>ວັນທີ່</th>
-                            <th>ຈາກພະແນກ</th>
                             <th>ຜູ້ສົ່ງ</th>
-                            <!-- <th>ຫາພະແນກ</th>                             -->
+                            <th>ຫາພະແນກ</th>
                             <th style="text-align: center; width: 70px;">ສະຖານະ</th>
                             <!-- <th>ສະຖານະ</th> -->
                             <th style="text-align: center; width: 70px;">Action</th>
@@ -192,19 +191,20 @@
         tr.dataset.id = doc.doc_id;
 
         const dateObj = new Date(doc.insert_date);
-        const formattedDate = dateObj.toLocaleDateString('en-LA', {
+        const formattedDate = dateObj.toLocaleDateString('en-GB', {
             year: 'numeric',
             month: '2-digit',
             day: '2-digit'
         });
         tr.innerHTML = `
-            <td></td> <!-- ປ່ອຍຊ່ອງຫວ່າງໄວ້ສຳລັບ index -->
+            <td></td> 
             <td>${doc.doc_number || ''}</td>
             <td>${doc.format_name || ''}</td>
             <td>${doc.subject || ''}</td>
             <td>${formattedDate || ''}</td>
-            <td>${doc.department || ''}</td>
             <td>${doc.name || ''}</td> 
+            <td>${doc.department_into || ''}</td>
+            
             <td style="text-align: center;">
                 <a href="${doc.file}" onclick="UpDoc(event, '${doc.doc_id}')" target="_blank" class="btn btn-sm btn-link">
                     <span id="status-${doc.doc_id}" class="badge ${userViewed ? 'bg-success' : 'bg-danger'}">
@@ -214,7 +214,7 @@
             </td>
             ${(userRole === "admin" || doc.name === currentUsername) ? `              
                 <td class="text-center">
-                    <a href="/update_documentE/${doc.doc_id}" class="btn btn-sm btn-link" title="ແກ້ໄຂ">
+                    <a href="/update_documentO/${doc.doc_id}" class="btn btn-sm btn-link" title="ແກ້ໄຂ">
                         <i class="fas fa-edit text-success"></i>
                     </a>
                     <button class="btn btn-sm btn-link delete-btn" data-id="${doc.doc_id}" title="ລຶບ">
