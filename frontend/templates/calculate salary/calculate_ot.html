@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+{% load static %}
+<title>Lcic-HR</title>
+
+{% block content %}
+<body class="bg-light">
+    <div class="container-fluid main-container">
+        <div id="messages" class="my-3"></div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card header-card">
+                    <div class="card-body text-center">
+                        <h2 class="card-title">ຈັດການຂໍ້ມູນເຮັດວຽກນອກໂມງ</h2>  
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card table-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="card-title mb-0">ລາຍການຂໍ້ມູນເຮັດວຽກນອກໂມງ</h3>
+                        <div>
+                            <button class="btn btn-outline-success me-2" onclick="exportToExcel()">
+                            <i class="bi bi-file-earmark-excel"></i> Export Excel
+                            </button>
+                            <button class="btn btn-outline-info me-2" onclick="printTable()">
+                                <i class="bi bi-printer"></i> Print
+                            </button>
+                            <button class="btn btn-outline-danger me-2" id="resetBtn">
+                                <i class="bi bi-arrow-counterclockwise"></i> Reset
+                            </button>
+                            <button class="btn btn-outline-primary" id="saveBtn">
+                                <i class="bi bi-download"></i> ບັນທຶກ
+                            </button>
+                        </div>       
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th><th>ພະນັກງານ</th>
+                                        <th>CSD ແລງ</th><th>CSD ກາງຄືນ</th><th>HD ເຊົ້າ-ບ່າຍ</th>
+                                        <th>HD ແລງ</th><th>HD ກາງຄືນ</th><th>ບັນທຶກ</th><th>ເງິນເດືອນ</th>
+                                        <th>150%</th><th>200%</th><th>250%</th>
+                                        <th>300%</th><th>350%</th><th>ລວມ</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="otTableBody">
+                                    <tr id="loadingRow">
+                                        <td colspan="15" class="text-center py-4">
+                                            <div class="spinner-border text-primary" role="status"></div>
+                                            <div class="mt-2">ກຳລັງໂຫຼດຂໍ້ມູນ...</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="{% static 'js/calculate_ot_print.js'%}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+   
+    // Show message function
+    function showMessage(message, type = 'success') {
+        const messagesDiv = document.getElementById('messages');
+        messagesDiv.innerHTML = `
+            <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                <i class="bi bi-${type === 'success' ? 'check-circle' : 'exclamation-circle'} me-2"></i>
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        `;
+        setTimeout(() => {
+            const alert = messagesDiv.querySelector('.alert');
+            if (alert) alert.remove();
+        }, 5000);
+    }
+
+    let employeeMap = {};
+
+    async function fetchEmployee() {
+        try {
+            const res = await fetch(`${DATABASE_URL}/api/employee/`);
+            if (!res.ok) throw new Error();
+            const data = await res.json();
+            employeeMap = data.reduce((map, emp) => {
+                if (emp.employee && emp.employee.emp_id) {
+                    map[emp.employee.emp_id] = {
+                        lao_name: emp.employee.lao_name || 'ບໍ່ລະບຸຊື່'
+                    };
+                }
+                return map;
+            }, {});
+        } catch {
+            Swal.fire('ຜິດພາດ', 'ບໍ່ສາມາດໂຫຼດພະນັກງານໄດ້', 'error');
+        }
+    }
+
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('lo-LA', {
+            style: 'decimal',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(amount);
+    }
+    function formatDecimal(value) {
+        const number = parseFloat(value);
+        if (isNaN(number) || number === 0) return '0';
+        return number.toFixed(2);
+    }
+
+    async function loadOTData() {
+        try {
+            const res = await fetch(`${DATABASE_URL}/api/ot/`);
+            const data = await res.json();
+            const tbody = document.getElementById('otTableBody');
+
+            if (!data.length) {
+                tbody.innerHTML = `<tr><td colspan="15" class="text-center py-4">ບໍ່ມີຂໍ້ມູນ</td></tr>`;
+                return;
+            }
+            let totalSalary = 0;
+            let total150 = 0;
+            let total200 = 0;
+            let total250 = 0;
+            let total300 = 0;
+            let total350 = 0;
+            let totalOT = 0;
+            tbody.innerHTML = data.map((item, index) => {
+                const emp = employeeMap[item.emp_id] || { lao_name: 'ບໍ່ມີຂໍ້ມູນ' };
+                totalSalary += parseFloat(item.salary) || 0;
+                total150 += parseFloat(item.value_150) || 0;
+                total200 += parseFloat(item.value_200) || 0;
+                total250 += parseFloat(item.value_250) || 0;
+                total300 += parseFloat(item.value_300) || 0;
+                total350 += parseFloat(item.value_350) || 0;
+                totalOT += parseFloat(item.total_ot) || 0;
+                return `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${emp.lao_name}</td>
+                        ${['csd_evening', 'csd_night', 'hd_mor_after', 'hd_evening', 'hd_night'].map(field =>
+                            `<td>
+                                <input type="text" class="form-control form-control-sm text-end" 
+                                value="${formatDecimal(item[field])}" 
+                                data-id="${item.ot_id}" data-field="${field}">
+                            </td>`).join('')}
+                        <td>
+                            <button class="btn btn-sm btn-primary save-ot" data-id="${item.ot_id}">ບັນທຶກ</button> 
+                        </td>
+                        <td>${formatCurrency(item.salary)}</td>
+                        ${['value_150','value_200','value_250','value_300','value_350'].map(k => 
+                            `<td>${formatCurrency(item[k])}</td>`).join('')}
+                        <td class="fw-bold text-success">${formatCurrency(item.total_ot)}</td>
+                    </tr>
+                `;
+            }).join('');
+            tbody.innerHTML += `
+                <tr class="table-success fw-bold text-end">
+                    <td colspan="8" class="text-center">ຜົນລວມ</td>
+                    <td>${formatCurrency(totalSalary)}</td>
+                    <td>${formatCurrency(total150)}</td>
+                    <td>${formatCurrency(total200)}</td>
+                    <td>${formatCurrency(total250)}</td>
+                    <td>${formatCurrency(total300)}</td>
+                    <td>${formatCurrency(total350)}</td>
+                    <td class="text-success">${formatCurrency(totalOT)}</td>
+                </tr>
+            `;
+        } catch {
+            showMessage('ຜິດພາດໃນການໂຫຼດຂໍ້ມູນ', 'danger');
+        }
+    }
+
+    document.getElementById('otTableBody').addEventListener('click', async e => {
+        if (e.target.classList.contains('save-ot')) {
+            const row = e.target.closest('tr');
+            const inputs = row.querySelectorAll('input');
+            const data = {};
+            const otId = e.target.dataset.id;
+
+            inputs.forEach(i => {
+                const field = i.dataset.field;
+                data[field] = parseFloat(i.value) || 0;
+            });
+
+            try {
+                const res = await fetch(`${DATABASE_URL}/api/ot/${otId}/`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                console.log('Saving data:', data);
+                if (!res.ok) throw new Error();
+                showMessage('ບັນທຶກສຳເລັດ!', 'success');
+                await loadOTData(); // Reload data after save
+            } catch {
+                showMessage('ບັນທຶກບໍ່ສຳເລັດ!', 'danger');
+            }
+        }
+    });
+    document.getElementById('resetBtn').addEventListener('click', async function (event) {
+        event.preventDefault();
+
+        try {
+            const response = await fetch(`${DATABASE_URL}/api/reset_all_ot/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            const data = await response.json();
+
+            console.log('Response:', data);
+
+            if (data.message && data.message.toLowerCase().includes('reset')) {
+                showMessage('Reset ຂໍ້ມູນ OT ສຳເລັດ!', 'success');
+                await loadOTData(); 
+            } else {
+                showMessage('Reset ບໍ່ສຳເລັດ!', 'danger');
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+            showMessage('ເກີດຂໍ້ຜິດພາດໃນການ reset', 'danger');
+        }
+    });
+ async function backupOtTohistory() {
+        try {
+            const res = await fetch(`${DATABASE_URL}/api/ot/`);
+            if (!res.ok) throw new Error('ດຶງຂໍ້ມູນ OT ບໍ່ສຳເລັດ');
+
+            const rawData = await res.json();
+            console.log('OT Data:', rawData);
+
+            const cleanedData = rawData.filter(
+                item => item.csd_evening !== null && item.csd_night !== null && item.hd_mor_after !== null && 
+                 item.hd_evening !== null && item.hd_night !== null && item.value_150 !== null && 
+                 item.value_200 !== null && item.value_250 !==null && item.value_300 !== null && 
+                 item.value_350 !== null && item.total_ot !== null
+            );
+            if (!cleanedData.length) {
+                Swal.fire('ຂໍ້ຄວາມ', 'ບໍ່ມີຂໍ້ມູນ OT ສົ່ງໄດ້', 'info');
+                return;
+            }
+            
+            const postRes = await fetch(`${DATABASE_URL}/api/ot_history/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(cleanedData)
+            });
+            if (!postRes.ok) {
+                const errorJson = await postRes.json();
+                console.error('Server responded with:', errorJson);
+                const err = new Error('Server error');
+                err.responseJson = errorJson;
+                throw err;
+            }
+            Swal.fire('ສຳເລັດ', 'ສຳຮອງ OT ສຳເລັດ', 'success');
+
+        } catch (error) {
+            console.error('❌ Error:', error);
+            if (error.responseJson && error.responseJson.error) {
+                Swal.fire('ຜິດພາດ', error.responseJson.error, 'error');
+            } else {
+                Swal.fire('ຜິດພາດ', error.message || 'ບໍ່ສາມາດສຳຮອງ OT ໄດ້', 'error');
+            }
+        }
+    }   
+    document.getElementById('saveBtn').addEventListener('click', backupOtTohistory);
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        await fetchEmployee();
+        await loadOTData();
+    });
+</script>
+</body>
+{% endblock %}

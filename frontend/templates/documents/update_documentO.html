@@ -121,9 +121,9 @@
         });
 
         // Debug: ພິມຄ່າ FormData
-        console.log("Department Into (Transformed):", departmentInto);
+        // console.log("Department Into (Transformed):", departmentInto);
         for (let pair of formData.entries()) {
-            console.log(pair[0] + ": " + pair[1]);
+            // console.log(pair[0] + ": " + pair[1]);
         }
  
         // ສົ່ງ request ໄປ API ດ້ວຍ PUT
@@ -143,14 +143,24 @@
                     title: "ຜິດພາດ!",
                     text: data.error || "ແກ້ໄຂຜິດພາດ",
                     icon: "error",
-                    confirmButtonText: "ຕົກລົງ"
+                    confirmButtonText: "ຕົກລົງ",
+                    customClass: {
+                        text: 'lao-font',
+                        htmlContainer: 'lao-font',
+                        confirmButton: 'lao-font'
+                    }
                 });
             } else {
                 Swal.fire({
                     title: "ສຳເລັດ!",
                     text: data.message || "ແກ້ໄຂສຳເລັດ",
                     icon: "success",
-                    confirmButtonText: "ຕົກລົງ"
+                    confirmButtonText: "ຕົກລົງ",
+                    customClass: {
+                        text: 'lao-font',
+                        htmlContainer: 'lao-font',
+                        confirmButton: 'lao-font'
+                    }
                 }).then(() => {
                     window.location.href = "{% url 'documentOut' %}";
                 });
@@ -162,7 +172,12 @@
                 title: "ຜິດພາດ!",
                 text: "ເກີດຂໍ້ຜິດພາດທີ່ບໍ່ຄາດຄິດ",
                 icon: "error",
-                confirmButtonText: "ຕົກລົງ"
+                confirmButtonText: "ຕົກລົງ",
+                customClass: {
+                    text: 'lao-font',
+                    htmlContainer: 'lao-font',
+                    confirmButton: 'lao-font'
+                }
             });
         });
     });

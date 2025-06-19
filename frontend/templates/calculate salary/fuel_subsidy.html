@@ -1,0 +1,243 @@
+{% extends "base.html" %}
+{% load static %}
+<title>Lcic-HR</title>
+{% block content %}
+<div class="container-fluid">
+  <div class="row mx-3">
+    <div class="col-md-4">
+      <fieldset class="border border-primary p-2 px-4 pb-4" style="border-radius: 15px; background-color: #e7e9eb">
+        <legend class="float-none w-auto p-2 h5">ຈັດການເງິນນ້ຳມັນ</legend>
+        <form id="dataForm">
+          {% csrf_token %}
+          <div class="mb-3">
+            <input type="hidden" class="form-control" id="id" placeholder="ລະຫັດ" name="id" readonly />
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" id="fuel_subsidy" placeholder="ປ້ອນຈຳນວນເງິນ" name="fuel_subsidy" value="" required />
+          </div>
+            <div class="mb-3">
+              <select id="position" name="position" class="form-select" required>
+                <option value="" selected disabled></option>
+              </select>
+            </div>
+          <div class="row mt-4" style="justify-content: center">
+            <button type="submit" name="btnEdit" class="btn btn-info" style="width: 110px; border-radius: 20px; display: none">
+              <i class="fas fa-edit"></i>  ແກ້ໄຂ
+            </button>
+            <button type="submit" name="btnAdd" class="btn btn-primary mx-2" style="width: 110px; border-radius: 20px">
+              <i class="fas fa-plus-circle"></i>  ເພີ່ມ
+            </button>
+            <button type="reset" id="btnCancel" class="btn btn-warning mx-2" style="width: 110px; border-radius: 20px">
+              <i class="fas fa-sync"></i>  ຍົກເລີກ
+            </button>
+          </div>
+        </form>
+      </fieldset>
+    </div>
+    <div class="col-md-8 mt-4">
+      <fieldset class="border border-primary p-2 px-4 pb-4" style="border-radius: 15px">
+        <table id="example" class="table table-striped" style="width: 100%">
+          <thead class="bg-secondary text-white">
+            <tr>
+              <th class="text-center">ລໍາດັບ</th>
+              <th>ຈຳນວນລິດ</th>
+              <th>ຕຳແໜ່ງ</th>
+              <th class="text-center">Option</th>
+            </tr>
+          </thead>
+            <tbody id="fuelSubsidyTableBody">
+
+            </tbody>
+        </table>
+      </fieldset>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'js/localStorage.js' %}"></script>
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+    const dataForm = document.getElementById("dataForm");
+    const btnAdd = document.querySelector('button[name="btnAdd"]');
+    const btnEdit = document.querySelector('button[name="btnEdit"]');
+    const tbody = document.getElementById("fuelSubsidyTableBody");
+    const positionSelect = document.getElementById('position');
+
+    // ตัวแปรเก็บตำแหน่งทั้งหมด
+    let allPositions = [];
+
+    // โหลดตำแหน่งทั้งหมดก่อน
+    fetch(`${DATABASE_URL}/api/positions/`)
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+            return response.json();
+        })
+        .then(data => {
+            allPositions = data;
+
+            // เติม dropdown
+            positionSelect.innerHTML = '<option value="" selected disabled>ກະລຸນາເລືອກຕຳແໜ່ງ</option>';
+            data.forEach(position => {
+                const option = document.createElement('option');
+                option.value = position.pos_id;
+                option.textContent = position.name;
+                positionSelect.appendChild(option);
+            });
+
+            // หลังโหลดตำแหน่งเสร็จแล้วค่อยโหลด salary data
+            fetchData();
+        })
+        .catch(error => {
+            console.error('Error fetching positions:', error);
+            positionSelect.innerHTML = '<option value="">ບໍ່ສາມາດໂຫຼດຕຳແໜ່ງໄດ້</option>';
+        });
+
+    // โหลด salary data
+    async function fetchData() {
+        try {
+            const response = await fetch(`${DATABASE_URL}/api/fuel/`);
+            if (!response.ok) throw new Error("Error fetching salary data");
+            const Salarys = await response.json();
+            renderTable(Salarys);
+            // console.log("Salarys:", Salarys);
+        } catch (error) {
+            console.error("Error:", error);
+            tbody.innerHTML = `<tr><td colspan="6" class="text-center">ເກີດຂໍ້ຜິດພາດໃນການດຶງຂໍ້ມູນ</td></tr>`;
+        }
+    }
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('lo-LA', {
+            style: 'decimal',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(amount);
+    }
+
+    // render table พร้อมแสดงชื่อຕຳແໜ່ງ
+    function renderTable(Salarys) {
+        tbody.innerHTML = "";
+        Salarys.forEach((fs, index) => {
+            // หา position name จาก pos_id
+            const pos = allPositions.find(p => p.pos_id === fs.pos_id);
+            const positionName = pos ? pos.name : "ບໍ່ຮູ້ຈັກ";
+
+            const row = `
+                <tr>
+                    <td class="text-center">${index + 1}</td>
+                    <td>${formatCurrency(fs.fuel_subsidy)}</td>
+                    <td>${positionName}</td>
+                    <td class="text-center">
+                        <a href="#" onclick="editDoc_format('${fs.fs_id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="ແກ້ໄຂຂໍ້ມູນ">
+                            <i class="fas fa-edit text-success"></i>
+                        </a>
+                        <a href="#" onclick="deleteDoc_format('${fs.fs_id}')" data-bs-toggle="tooltip" data-bs-placement="bottom" title="ລຶບຂໍ້ມູນ">
+                            <i class="fas fa-trash-alt text-danger"></i>
+                        </a>
+                    </td>
+                </tr>
+            `;
+            tbody.innerHTML += row;
+        });
+    }
+    dataForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const id = document.getElementById("id").value;
+    const fuel_subsidy = document.getElementById("fuel_subsidy").value;
+    const pos_id = document.getElementById("position").value;
+
+    const payload = {
+        fuel_subsidy: fuel_subsidy,
+        pos_id: pos_id
+    };
+    // console.log("Payload:", payload);
+    const url = id
+        ? `${DATABASE_URL}/api/fuel/${id}/`
+        : `${DATABASE_URL}/api/fuel/`;
+
+    const method = id ? "PATCH" : "POST";
+
+    try {
+        const response = await fetch(url, {
+            method: method,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) throw new Error("Submit failed");
+
+        Swal.fire({
+            icon: "success",
+            title: id ? "ແກ້ໄຂສໍາເລັດ" : "ເພີ່ມສໍາເລັດ"
+        });
+
+        dataForm.reset();
+        document.getElementById("id").value = "";
+        btnAdd.style.display = "inline-block";
+        btnEdit.style.display = "none";
+        fetchData();
+    } catch (error) {
+        Swal.fire({
+            icon: "error",
+            title: "ບັນທຶກຜິດພາດ",
+            text: error.message
+        });
+    }
+});
+    // Edit function
+    window.editDoc_format = async function (id) {
+    try {
+        const response = await fetch(`${DATABASE_URL}/api/fuel/${id}/`);
+        if (!response.ok) throw new Error("Error fetching record");
+        const data = await response.json();
+
+        document.getElementById("id").value = data.fs_id;
+        document.getElementById("fuel_subsidy").value = data.fuel_subsidy
+        document.getElementById("position").value = data.pos_id;
+
+        btnAdd.style.display = "none";
+        btnEdit.style.display = "inline-block";
+    } catch (error) {
+        console.error("Edit error:", error);
+        Swal.fire("Error", "ບໍ່ສາມາດໂຫຼດຂໍ້ມູນ", "error");
+    }
+};
+    // Delete function
+    window.deleteDoc_format = async function (id) {
+    const result = await Swal.fire({
+        title: "ຢືນຢັນການລຶບ?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "ລຶບ",
+        cancelButtonText: "ຍົກເລີກ"
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+        const response = await fetch(`${DATABASE_URL}/api/fuel/${id}/`, {
+            method: "DELETE"
+        });
+
+        if (!response.ok) throw new Error("Delete failed");
+
+        Swal.fire("ລຶບແລ້ວ!", "ຂໍ້ມູນຖືກລຶບແລ້ວ", "success");
+        fetchData();
+    } catch (error) {
+        Swal.fire("ຜິດພາດ!", "ບໍ່ສາມາດລຶບໄດ້", "error");
+    }
+};
+
+    // Reset form
+    document.getElementById("btnCancel").addEventListener("click", () => {
+        btnAdd.style.display = "inline-block";
+        btnEdit.style.display = "none";
+        dataForm.reset();
+        document.getElementById("id").value = "";
+    });
+});
+</script>
+{% endblock %}

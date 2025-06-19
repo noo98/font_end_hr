@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Noto Sans Lao';
+  src: url("/static/fonts/NotoSansLao-VariableFont_wdth,wght.ttf") format("truetype");
+}
+
+.lao-font {
+  font-family: 'Noto Sans Lao', sans-serif;
+}
+.modal{
+  font-family: 'Noto Sans Lao', sans-serif;
+}
+

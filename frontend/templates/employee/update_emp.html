@@ -850,6 +850,10 @@
                 title: "ກຳລັງດຳເນີນການ...",
                 text: "ກະລຸນາລໍຖ້າ",
                 allowOutsideClick: false,
+                customClass: {
+                    title: 'lao-font',
+                    htmlContainer: 'lao-font',
+                },
                 didOpen: () => {
                     Swal.showLoading();
                 }
@@ -1029,7 +1033,11 @@
                 await Swal.fire({
                     title: "ສຳເລັດ!",
                     text: data.message || "ແກ້ໄຂສຳເລັດ",
-                    icon: "success"
+                    icon: "success",
+                    customClass: {
+                        title: 'lao-font',
+                        htmlContainer: 'lao-font'
+                    }     
                 });
 
                 window.location.href = `/tables_emp/?t=${new Date().getTime()}`;
@@ -1046,7 +1054,11 @@
                 Swal.fire({
                     title: "ເກີດຂໍ້ຜິດພາດ!",
                     text: errorMessage,
-                    icon: "error"
+                    icon: "error",
+                    customClass: {
+                        title: 'lao-font',
+                        htmlContainer: 'lao-font',
+                    }
                 });
             }
         });

@@ -5,6 +5,7 @@ from django.urls import path
 from frontend.views import documentEntry
 from frontend import views
 from frontend.views import add_documentO
+
 # from frontend.views import form_login
 def redirect_to_login(request):
     return redirect('/login/')
@@ -19,7 +20,7 @@ urlpatterns = [
     path('tables_emp/', views.tables_emp, name='tables_emp'),
     path('update_emp/<int:emp_id>/', views.update_emp, name='update_emp'),
     path('view_emp/', views.view_emp, name='view_emp'),
-    path('print_emp/', views.print_emp, name='print_emp'),
+    path('print_emp/<int:emp_id>/', views.print_emp, name='print_emp'),
 
     path('login/', views.form_login, name='form_login'),
     path('profile/', views.profile, name='profile'), 
@@ -45,7 +46,19 @@ urlpatterns = [
     
     path('update_documentO/<int:doc_id>/', views.update_documentO, name='update_documentO'),
     path('update_documentE/<int:doc_id>/', views.update_documentE, name='update_documentE'),
-    # path('testttt/', views.testttt_view, name='testttt'),
    
+    path('homeSalary/', views.homeSalary, name='homeSalary'),
+    path('baseSalary/', views.baseSalary, name='baseSalary'),
+    path('subsidyPosition/', views.subsidyPosition, name='subsidyPosition'),
+    path('workerSubsidy/', views.workerSubsidy, name='workerSubsidy'),
+    path('fuelSubsidy/', views.fuelSubsidy, name='fuelSubsidy'),
 
+    path('calculateOt/', views.calculateOt, name='calculcateOt'),
+    path('calculateFuel/', views.calculateFuel, name='calculateFuel'),
+    path('calculateSalary/', views.calculateSalary, name='calculateSalary'),
+    path('calculateFood/', views.calculateFood, name='calculateFood'),
+
+    path('reportSupFood/', views.reportSupFood, name='reportSupFood'),
+    path('reportFuel/', views.reportFuel, name='reportFuel'),
+    path('reportOt/', views.reportOt, name='reportOt'),
 ]

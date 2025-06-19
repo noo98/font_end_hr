@@ -1,202 +1,63 @@
-{% extends "base.html" %}
-{% load static %}
-<title>Lcic-HR | ບັນທຶກຂໍ້ມູນພະນັກງານ</title>
-
-{% block content %}
-<div class="container-fluid py-4">
-    <form id="employeeForm" enctype="multipart/form-data">
-        <fieldset class="border border-primary p-2 px-4 pb-4 shadow" style="border-radius: 15px; background-color: #ffffff">
-            <legend class="float-none w-auto p-2 h3">ບັນທຶກຂໍ້ມູນພະນັກງານ</legend>
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="text" class="form-control" id="lao_name" name="lao_name" required>
-                        <label>ຊື່ພາສາລາວ</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="text" class="form-control" id="eng_name" name="eng_name" required>
-                        <label>ຊື່ພາສາອັງກິດ</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="text" class="form-control" id="nickname" name="nickname" required>
-                        <label>ຊື່ຫຼີ້ນ</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <select class="form-select" name="Gender" id="Gender" required>
-                            <option value="" selected disabled>ເລືອກ</option>
-                            <option value="ຊາຍ">ຊາຍ</option>
-                            <option value="ຍິງ">ຍິງ</option>
-                            
-                        </select>
-                        <label>ເລືອກເພດ</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="date" class="form-control" id="birth_date" name="birth_date" required>
-                        <label>ວັນ.ເດືອນ.ປີເກີດ</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="text" class="form-control" id="status" name="status" required>
-                        <label>ສະຖານະ</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="text" class="form-control" id="position" name="position" required>
-                        <label>ຕຳແໜ່ງ</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="date" class="form-control" id="year_entry" name="year_entry" required>
-                        <label>ປີເຂົ້າການ</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="text" class="form-control" id="salary_level" name="salary_level" required>
-                        <label>ຂັ້ນເງິນເດືອນ</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <input type="text" class="form-control" id="phone" name="phone" required>
-                        <label>ເບີໂທ</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group-custom">
-                        <div class="mb-3">
-                            <label for="department" class="form-label">ພະແນກ</label>
-                            <input type="text" id="Department" name="Department" class="form-select" required>
-                                <option value="" selected disabled>ກະລຸນາເລືອກພະແນກ</option>
-                            </input>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center">
-                    <div class="input-group-custom">
-                        <img id="avatarPreview" 
-                             src="{% static 'images/avatar.png' %}" 
-                             alt="Avatar" 
-                             class="rounded-circle shadow-sm"
-                             style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #007bff;" />
-                        <input type="file" class="form-control mt-2" id="avatarInput" name="pic" accept="image/*">
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4" style="justify-content: center;">
-                <button type="submit" name="btnAdd" class="btn btn-primary mx-2" style="width: 110px; border-radius: 20px;">
-                    <i class="fas fa-plus-circle"></i> ເພີ່ມ
-                </button>
-                <button type="reset" id="btnCancel" class="btn btn-warning mx-2" style="width: 110px; border-radius: 20px;">
-                    <i class="fas fa-sync"></i> ຍົກເລີກ
-                </button>
-            </div>
-        </fieldset>
-    </form>
-</div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const DATABASE_URL = "{{ database_url | escapejs }}";
-
-    // Fetch departments
-    const departmentSelect = document.getElementById('Department');
-    fetch(`${DATABASE_URL}/api/list/departments/`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            departmentSelect.innerHTML = '<option value="" selected disabled>ກະລຸນາເລືອກພະແນກ</option>';
-            data.forEach(department => {
-                const option = document.createElement('option');
-                option.value = department.id;
-                option.textContent = department.name;
-                departmentSelect.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching departments:', error);
-            departmentSelect.innerHTML = '<option value="">ບໍ່ສາມາດໂຫຼດພະແນກໄດ້</option>';
-        });
-
-    // Avatar preview
-    document.getElementById('avatarInput').addEventListener('change', function (event) {
-        const file = event.target.files[0];
-        const preview = document.getElementById('avatarPreview');
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                preview.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        } else {
-            preview.src = '{% static "images/avatar.png" %}';
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ສະຫຼັບສອງໜ້າ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
         }
-    });
-
-    // Form submission
-    document.getElementById('employeeForm').addEventListener('submit', function (event) {
-        // console.log('Form submitted');
-        event.preventDefault();
-        const formData = new FormData(this);
-        console.log("FormData:", formData);
-        // Debug FormData
-        for (let [key, value] of formData.entries()) {
-            console.log(`${key}: ${value}`);
+        .page {
+            display: none;
+            text-align: center;
         }
-
-        fetch(`${DATABASE_URL}/api/employee/`, {
-            method: 'POST',
-            body: formData
-        })
+        .page.active {
+            display: block;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button onclick="switchPage('page2')">ໄປຫາໜ້າທີ່ 2</button>
+         <button onclick="switchPage('page1')">ກັບໄປໜ້າທີ່ 1</button>
+    </div>
+    <div id="page1" class="page" style="display: none;">
+        <h1>ໜ້າທີ່ 1</h1>
+        <p>ນີ້ແມ່ນເນື້ອຫາຂອງໜ້າທີ່ 1</p>
         
-        .then(response => response.json())
-        .then(data => {
-            // console.log("Response Data:", data); 
+    </div>
+    <div id="page2" class="page">
+        <h1>ໜ້າທີ່ 2</h1>
+        <p>ນີ້ແມ່ນເນື້ອຫາຂອງໜ້າທີ່ 2</p>
+        
+    </div>
 
-            if ("Success Response:", data) {  
-                Swal.fire({
-                    title: "ສຳເລັດ!",
-                    text: data.message || "ບັນທຶກສຳເລັດ",
-                    icon: "success",
-                    
-                }).then(() => {
-                    window.location.href = "//tables_emp//";
-                });
-            } else {
-                // console.error(data.status === 404);  
-                Swal.fire({
-                    title: "ເກີດຂໍ້ຜິດພາດ!",
-                    text: data.error || "ບໍ່ສາມາດບັນທຶກເອກະສານ",
-                    icon: "error",
-                    confirmButtonText: "ຕົກລົງ"
-                });
-            }
-        })
-    });
-});
-</script>
-{% endblock %}
+    <script>
+        function switchPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -11,33 +11,355 @@
 <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+<style>
+    body {
+         font-family: "Phetsarath OT", sans-serif; padding: 15px; font-size: 12px; 
+    }
+    .text {
+        font-size: 12px;
+        font-weight: bold; 
+    }
+</style>
 {% block content %}
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid p-5">
+         {% csrf_token %}
+         
         <div class="text-center">
-            <img src="{% static 'images/Lao National.png' %}" alt="logo" width="100" height="100"> <br>
+            <img src="{% static 'images/Lao National.png' %}" alt="logo" width="80" height="80"> <br>
             ສາທາລະນະລັດ ປະຊາທິປະໄຕ ປະຊາຊົນລາວ<br>
             ສັນຕິພາບ ເອກະລາດ ປະຊາທິປະໄຕ ເອກະພາບ ວັດທະນະຖາວອນ<br>  
         </div>
         <div class="row">
             <div class="col-4"></div>           
             <div class="col-4" >
-                <p class="text-center fw-bold h5 mt-5">ຮ່າງຊີວະປະຫວັດຫຍໍ້</p>
+                <p class="text-center fw-bold h6 mt-5">ຮ່າງຊີວະປະຫວັດຫຍໍ້</p>
             </div>
-            <div class="col-4 text-center">
-                <div class="row">
-                    <div class="col-8"></div>
-                    <div class="col-4 text-center">
-                        <div class="card" style="width: 8rem; height: 10rem;">
-                            <p class="mt-5">ຕິດຮູບ</p>
-                            <p>ຂະໜາດ 3 x 4</p><br>
-                        </div>
+            <div class="col-1"></div>
+            <div class="col-3 text-center">
+                <div class="col-2 text-center">
+                    <div class="card" style="width: 8rem;">
+                        <img id="avatarPreview" 
+                            src="{% if employee.pic %}{{ database_url }}{{ employee.pic }}{% else %}{% static 'images/avatar.png' %}{% endif %}" 
+                            alt="Avatar" 
+                            class="rounded shadow-sm"
+                            style="width: 100%; aspect-ratio: 3/4; object-fit: cover;" />
                     </div>
-                </div>
+                </div>      
             </div>            
         </div>
-        <h5>II. ປະຫວັດສ່ວນຕົວ</h5>
+        <p class="text">I. ປະຫວັດສ່ວນຕົວ</p>
+        <div class="row px-4">
+            <div class="col-12">
+                <p>- ຊື່ ແລະ ນາມສະກຸນ:...<b>{{ personal_information.0.full_name }}</b>.................  </p>
+            </div>
+            <div class="col-6">               
+                <p data-date="{{ personal_information.0.dob|default:'' }}" data-target="formattedDob1">- ວັນ,ເດືອນ,ປີເກີດ: <b id="formattedDob1"></b></p>
+            </div>
+            <div class="col-3">               
+                <p>, ຊົນເຜົ່າ:..<b>{{ personal_information.0.eth }}</b></p>
+            </div>
+            <div class="col-3">               
+                <p>, ສາສະໜາ:..<b>{{ personal_information.0.rel }}</b></p>
+            </div>
+            <div class="col-4">               
+                <p>- ບ້ານເກີດ:..<b>{{ personal_information.0.b_vill }}</b></p>
+            </div>
+            <div class="col-4">               
+                <p>, ເມືອງ:..<b>{{ personal_information.0.b_dist }}</b></p>
+            </div>
+            <div class="col-4">               
+                <p>, ແຂວງ:..<b>{{ personal_information.0.b_prov }}</b></p>
+            </div>
+            <div class="col-4">               
+                <p>- ບ່ອນຢູ່ປະຈູບັນ ບ້ານ:..<b>{{ personal_information.0.c_vill }}</b></p>
+            </div>
+            <div class="col-4">               
+                <p>, ເມືອງ:..<b>{{ personal_information.0.c_dist }}</b></p>
+            </div>
+            <div class="col-4">               
+                <p>, ແຂວງ:..<b>{{ personal_information.0.c_prov }}</b></p>
+            </div>
+            <div class="col-12">
+                <p data-date="{{ personal_information.0.gov_entry|default:'' }}" data-target="formattedGovEntry">-  ວັນ,ເດືອນ,ປີ ເຂົ້າສັງກັດລັດ(ເຂົ້າເປັນພະນັກງານສົມບູນ):..<b id="formattedGovEntry"></b></p>
+                
+            </div>
+            <div class="col-12">
+                <p>- ວັນ,ເດືອນ,ປີ ເຂົ້າອົງການຈັດຕັ້ງມະຫາຊົນ: </p>
+               <div class="row px-4">
+                    <div class="col-4">
+                        <p data-date="{{ personal_information.0.youth_date|default:''}}" data-target="formattedYouthDate">ຊາວໜຸ່ມ:..<b id="formattedYouthDate"></b>......</p>
+                    </div>
+                    <div class="col-4">
+                        <p data-date="{{ personal_information.0.women_date|default:''}}" data-target="formattedWomenDate">ແມ່ຍິງ:..<b id="formattedWomenDate"></b>........ </p>
+                    </div>
+                    <div class="col-4">
+                        <p data-date="{{ personal_information.0.union_date|default:''}}" data-target="UnionDate">ກຳມະບານ:..<b id="UnionDate"></b>........</p>
+                    </div>
+               </div>
+            </div>
+            <div class="col-6">
+                <p data-date="{{ personal_information.0.party_cand_date|default:'' }}" data-target="PartyCand">- ວັນ,ເດືອນ,ປີ ເຂົ້າສະມາຊີກພັກສຳຮອງ:..<b id="PartyCand"></b> </p>
+            </div>
+            <div class="col-6">
+                <p data-date="{{ personal_information.0.full_party_date|default:'' }}" data-target="FullParty">, ສະມາຊີກພັກສົມບູນ:..<b id="FullParty"></b>........................ </p>
+            </div>
+            <div class="col-6">
+                <p>- ຕຳແໜ່ງເບື້ອງພັກ ປະຈຸບັນ:..<b>{{ personal_information.0.curr_party_pos}}</b>.... </p>
+            </div>
+            <div class="col-6">
+                <p data-date="{{ personal_information.0.party_apt_date|default:'' }}" data-target="PartyApt">, ວັນ,ເດືອນ,ປີແຕ່ງຕັ້ງ:..<b id="PartyApt"></b>.............</p>
+            </div>
+            <div class="col-6">
+                <p>- ຕຳແໜ່ງເບື້ອງລັດ ປະຈຸບັນ:..<b>{{ personal_information.0.curr_gov_pos}}</b>............ </p>
+            </div>
+            <div class="col-6">
+                <p data-date="{{ personal_information.0.gov_apt_date|default:'' }}" data-target="GovApt">, ວັນ,ເດືອນ,ປີແຕ່ງຕັ້ງ:..<b id="GovApt"></b>............. </p>
+            </div>
+        </div>
+        <p class="text">II. ປະຫວັດການສືກສາ, ການປະກອບສ່ວນວຽກງານ, ຝືກອັບຮົມ, ການຍ້ອງຍໍ ແລະ ປະຕິບັດວິໄນ ຜ່ານມາ:</p>        
+        <p  class="text px-4">+ ປະຫວັດການສືກສາ</p>
+        <div class="row px-4">
+            {% for edu in education %}
+            <div class="col-4">
+                <p>- ການສືກສາລະດັບສາມັນ:..<b>{{ edu.level }}</b></p>
+            </div>
+            <div class="col-4">
+                <p>, ປີ:..<b>{{ edu.year }}</b>...........</p>
+            </div>
+            <div class="col-4">
+                <p>, ຊື່ໂຮງຮຽນ:..<b>{{ edu.school }}</b>..............</p>
+            </div>
+            <div class="col-12">
+                <p> ພາຍໃນ/ຕ່າງປະເທດ:..<b>{{ edu.dom_abrd }}</b>............................ </p>
+            </div>
+            {% empty %}{% endfor %}
+            {% for spec in specialized_education %}
+            <div class="col-4">
+                <p>- ຈົບລະດັບວິຊາສະເພາະ ສາຂາ:..<b>{{ spec.field }}</b>..........</p>
+            </div>
+            <div class="col-4">
+                <p>, ລະດັບ:..<b>{{ spec.level }}</b>..............</p>
+            </div>
+            <div class="col-4">
+                <p>, ປີ:..<b>{{ spec.year }}</b>............</p>
+            </div>             
+            <div class="col-4">
+                <p>ຊື່ໂຮງຮຽນ:..<b>{{ spec.inst }}</b>.............</p>
+            </div>
+            <div class="col-6">
+                <p>, ພາຍໃນ/ຕ່າງປະເທດ:..<b>{{ spec.dom_abrd }}</b>.................................. </p>
+            </div>
+            {% empty %}{% endfor %}
+            {% for pol in political_theory_education %}
+            <div class="col-4">
+                <p>- ທິດສະດີການເມືອງ ລະດັບ:..<b>{{ pol.level }}</b>.....................</p>
+            </div>
+            <div class="col-4">
+                <p>, ປີ:..<b>{{ pol.year }}</b>.......................</p>
+            </div>
+            
+            <div class="col-4">
+                <p>ຊື່ໂຮງຮຽນ:..<b>{{ pol.inst }}</b>......................</p>
+            </div>
+            <div class="col-6">
+                <p>, ພາຍໃນ/ຕ່າງປະເທດ:..<b>{{ pol.dom_abrd }}</b>.......................................</p>
+            </div>
+            {% empty %}{% endfor %}
+            <div class="col-12">
+                <p>- ພາສາຕ່າງປະເທດທີ່ສາມາດສື່ສານໄດ້:</p>{% for lang in foreign_languages %}
+                <div class="row px-5">
+                    <div class="col-md-3">
+                        <p>ພາສາ:..<b>{{ lang.lang }}</b>.............</p>
+                    </div>
+                    <div class="col-md-9">
+                        <p>ລະດັບຄວາມສາມາດ:..<b>{{ lang.prof|default:"-" }}</b>............</p>
+                </div>                        
+            </div>
+            {% empty %}{% endfor %}
+            <div class="col-12">
+                <p class="text">+ ການປະກອບສ່ວນວຽກງານ:</p>
+                
+                <div class="px-5">
+                    <table class="table table-bordered" style="font-size: 12px;">
+                        <thead>
+                            <tr>
+                            <th>ລ/ດ</th>
+                            <th>ບ່ອນເຮັດວຽກ</th>
+                            <th>ເລີ່ມແຕ່</th>
+                            <th>ຮອດປີ</th>
+                            <th>ຕຳແໜ່ງລັດຖະການ</th>
+                            <th>ຕຳແໜ່ງພັກ</th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                            {% for work in work_experiences %}
+                            <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ work.work }}</td>
+                            <td data-date="{{ work.start|date:'Y-m-d'|default:'' }}" data-target="formattedStart{{ forloop.counter }}">{{ work.start|date:'Y-m-d'|default:'-' }}</td>
+                            <td data-date="{{ work.end|date:'Y-m-d'|default:'' }}" data-target="formattedEnd{{ forloop.counter }}">{{ work.end|date:'Y-m-d'|default:'-' }}</td>
+                            <td>{{ work.gov_pos }}</td>
+                            <td>{{ work.party_pos }}</td>
+                            </tr>
+                            {% empty %}{% endfor %}   
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text">+ ການຝືກອົບຮົມ:</p>
+                <div class="px-5">
+                    <table class="table table-bordered" style="font-size: 12px;">
+                        <thead>
+                            <tr>
+                            <th>ລ/ດ</th>
+                            <th>ເລີ່ມແຕ່</th>
+                            <th>ຮອດປີ</th>
+                            <th>ວິຊາ(ຝືກອັບຮົມ,ສຳມະນາ ບຳລູງ ຫຼື ກໍ່ສ້າງ)</th>
+                            <th>ສະຖານທີ່(ສະຖານບັນ)</th>
+                            <th>ພາຍໃນ/ຕ່າງປະເທດ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for train in training_courses %}
+                            <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td data-date="{{ train.start|date:'Y-m-d'|default:''}}" data-target="TrianStart{{forloop.counter }}">{{ train.start|date:'Y-m-d'|default:'-'}}</td>
+                            <td data-date="{{ train.end|date:'Y-m-d'|default:''}}" data-target="TrianEnd{{forloop.counter }}">{{ train.end|date:'Y-m-d'|default:'-'}}</td>
+                            <td>{{ train.subj }}</td>
+                            <td>{{ train.inst }}</td>
+                            <td>{{ train.country }}</td>
+                            </tr>
+                            {% empty %}{% endfor %}    
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text">+ ການຝືກຍ້ອງຍໍ:</p>
+                <div class="px-5">
+                    <table class="table table-bordered" style="font-size: 12px;">
+                        <thead>
+                            <tr>
+                            <th>ລ/ດ</th>
+                            <th>ຂໍ້ຕົກລົງເລກທີ່</th>
+                            <th>ລົງວັນທີ່</th>
+                            <th>ຮູບການຍ້ອງຍໍ</th>
+                            <th>ເຫດຜົນຍ້ອງຍໍ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for award in awards %}
+                            <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ award.dec_num }}</td>
+                            <td data-date="{{ award.date|date:'Y-m-d'|default:''}}" data-target="Award{{forloop.counter }}">{{ award.date|date:'Y-m-d'|default:'-'}}</td>
+                            <td>{{ award.award_type }}</td>
+                            <td>{{ award.reason }}</td>
+                            </tr>
+                            {% empty %}{% endfor %}   
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text">+ ການປະຕິບັດວິໄນ:</p>
+                <div class="px-5">
+                    <table class="table table-bordered" style="font-size: 12px;">
+                        <thead>
+                            <tr>
+                            <th>ລ/ດ</th>
+                            <th>ຂໍ້ຕົກລົງເລກທີ່</th>
+                            <th>ລົງວັນທີ່</th>
+                            <th>ຮູບການວິໄນ</th>
+                            <th>ເຫດຜົນຖືກໄນ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for disc in disciplinary_actions %}
+                            <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ disc.dec_num }}</td>
+                            <td data-date="{{ disc.date|date:'Y-m-d'|default:''}}" data-target="Disc{{forloop.counter }}">{{ disc.date|date:'Y-m-d'|default:'-'}}</td>
+                            <td>{{ disc.action_type }}</td>
+                            <td>{{ disc.reason }}</td>
+                            </tr>
+                            {% empty %}{% endfor %}   
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+                </div>
+            <p class="text">III. ສະມາຊິກໃນຄອບຄົວ</p>
+            <div class="row px-4">
+                {% for fam in family_members %}
+                <div class="col-4">
+                    <p>- ຄວາມສຳພັນ:..<b>{{ fam.relation }}</b></p>
+                </div>
+                <div class="col-8">               
+                    <p>- ຊື່ ແລະ ນາມສະກຸນ:..<b>{{ fam.full_name }}</b>................ </p>
+                </div>
+                <div class="col-4"> 
+                    <p data-date="{{ fam.dob|default:'' }}" data-target="FanDob">- ວັນ,ເດືອນ,ປີເກີດ:..<b id="FanDob"></b></p>
+                </div>
+                <div class="col-4">               
+                    <p>, ຊົນເຜົ່າ:..<b>{{ fam.eth }}</b>................ </p>
+                </div>
+                <div class="col-4">               
+                    <p>, ສາສະໜາ:..<b>{{ fam.rel }}</b>................ </p>
+                </div>
+                <div class="col-4">               
+                    <p>- ອາຊີບ:..<b>{{ fam.occ }}</b>...... </p>
+                </div>
+                <div class="col-8">               
+                    <p>, ສະຖານທີ່ເຮັດວຽກ:..<b>{{ fam.work }}</b>................ </p>
+                </div>
+                <div class="col-4">               
+                    <p>- ບ້ານ:.<b>{{ fam.vill }}</b>................. </p>
+                </div>
+                <div class="col-4">               
+                    <p>, ເມືອງ:..<b>{{ fam.dist }}</b>................ </p>
+                </div>
+                <div class="col-4">               
+                    <p>, ແຂວງ:..<b>{{ fam.prov }}</b>................</p>
+                </div>
+                {% empty %}{% endfor %}
+            </div>
+            <p class="text">IV. ການຕີລາຄາ</p>
+            <p  class="text px-4">+ ດ້ານດີທີ່ເປັນ</p>
+
+            <div class="row px-4">
+                <div class="col-12">
+                    <p>ພື້ນຖານ:..<b>{{ evaluation.strengths }}</b>............  </p>
+                </div>    
+            </div>
+            <p class="text px-4">+ ດ້ານອ່ອນ</p>
+            <div class="row px-4">
+                <div class="col-12">
+                    <p>ພື້ນຖານ:..<b>{{ evaluation.weaknesses }}</b>................  </p>
+                </div>    
+            </div>
+        </div>
     </div>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const dateElements = document.querySelectorAll('[data-date]');
+    dateElements.forEach(element => {
+        const date = element.getAttribute('data-date');
+        const targetId = element.getAttribute('data-target');
+        
+        if (date) {
+            const dateObj = new Date(date);
+            if (!isNaN(dateObj.getTime())) {
+                const formattedDate = dateObj.toLocaleDateString('en-GB', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit'
+                });
+                document.getElementById(targetId).textContent = formattedDate;
+            } else {
+                document.getElementById(targetId).textContent = '-';
+            }
+        } else {
+            document.getElementById(targetId).textContent = '-';
+        }
+    });
+}); 
+</script>
 {% endblock %}

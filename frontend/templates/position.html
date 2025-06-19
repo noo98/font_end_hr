@@ -108,12 +108,30 @@ positionsForm.addEventListener('submit', async (event) => {
         const successMessage = isEdit
             ? 'ຂໍ້ມູນຖືກແກ້ໄຂແລ້ວ'
             : 'ຂໍ້ມູນຖືກເພີ່ມແລ້ວ';
-        Swal.fire('ສໍາເລັດ!', successMessage, 'success').then(() => {
+        Swal.fire({
+            title: 'ເພີ່ມສຳເລັດ',
+            text: successMessage,
+            icon: 'success',
+            customClass: {
+                title: 'lao-font',
+                htmlContainer: 'lao-font',
+                confirmButton: 'lao-font'
+            }
+        }).then(() => {
             window.location.reload();
         });
     } catch (error) {
         console.error('Form submission error:', error);
-        Swal.fire('ມີຂໍ້ຜິດພາດ', error.message, 'error'); 
+        Swal.fire({
+            title: 'ມີຂໍ້ຜິດພາດ',
+            text: error.message,
+            icon: 'error',
+            customClass: {
+                title: 'lao-font',
+                htmlContainer: 'lao-font',
+                confirmButton: 'lao-font'
+            }
+        }); 
     }
 });
 
@@ -123,7 +141,16 @@ async function editPositions(posId) {
     // Check if posId is valid
     if (!posId || posId === 'undefined' || posId === '') {
         console.error('Invalid position ID:', posId);
-        Swal.fire('ມີຂໍ້ຜິດພາດ!', 'ບໍ່ພົບຂໍ້ມູນ ID ຂອງຕຳແໜ່ງ', 'error');
+        Swal.fire({
+            title: 'ມີຂໍ້ຜິດພາດ!',
+            text: 'ບໍ່ພົບຂໍ້ມູນ ID ຂອງຕຳແໜ່ງ',
+            icon: 'error',
+            customClass: {
+                title: 'lao-font',
+                htmlContainer: 'lao-font',
+                confirmButton: 'lao-font'
+            }
+        });
         return;
     }
     
@@ -142,7 +169,16 @@ async function editPositions(posId) {
         btnEdit.style.display = 'inline-block';
     } catch (error) {
         console.error('Edit error:', error);
-        Swal.fire('ມີຂໍ້ຜິດພາດ!', error.message, 'error');
+        Swal.fire({
+            title: 'ມີຂໍ້ຜິດພາດ',
+            text: error.message,
+            icon: 'error',
+            customClass: {
+                title: 'lao-font',
+                htmlContainer: 'lao-font',
+                confirmButton: 'lao-font'
+            }
+        });
     }
 }
 
@@ -152,7 +188,16 @@ function deletePositions(posId) {
     // Check if posId is valid
     if (!posId || posId === 'undefined' || posId === '') {
         console.error('Invalid position ID:', posId);
-        Swal.fire('ມີຂໍ້ຜິດພາດ!', 'ບໍ່ພົບຂໍ້ມູນ ID ຂອງຕຳແໜ່ງ', 'error');
+        Swal.fire({
+            title: 'ມີຂໍ້ຜິດພາດ!',
+            text: 'ບໍ່ພົບຂໍ້ມູນ ID ຂອງຕຳແໜ່ງ',
+            icon: 'error',
+            customClass: {
+                title: 'lao-font',
+                htmlContainer: 'lao-font',
+                confirmButton: 'lao-font'
+            }
+        });
         return;
     }
     
@@ -166,7 +211,13 @@ function deletePositions(posId) {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'ຢືນຢັນ',
-        cancelButtonText: 'ຍົກເລີກ'
+        cancelButtonText: 'ຍົກເລີກ',
+        customClass: {
+            title: 'lao-font',
+            htmlContainer: 'lao-font',
+            confirmButton: 'lao-font',
+            cancelButton: 'lao-font'
+        }
     }).then((result) => {
         if (result.isConfirmed) {
             fetch(apiUrl, { method: 'DELETE' })
@@ -181,12 +232,29 @@ function deletePositions(posId) {
                     });
                 })
                 .then(() => {
-                    Swal.fire('ລຶບສໍາເລັດ!', 'ຂໍ້ມູນຖືກລຶບແລ້ວ', 'success')
-                    .then(() => window.location.reload());
+                    Swal.fire({
+                        title: 'ສຳເລັດ!',
+                        text: 'ຕຳແໜ່ງຖືກລຶບແລ້ວ',
+                        icon: 'success',
+                        customClass: {
+                            title: 'lao-font',
+                            htmlContainer: 'lao-font',
+                            confirmButton: 'lao-font'
+                        }
+                    }).then(() => window.location.reload());
                 })
                 .catch((error) => {
                     console.error('Delete error:', error);
-                    Swal.fire('ມີຂໍ້ຜິດພາດ!', error.message, 'error');
+                    Swal.fire({
+                        title: 'ມີຂໍ້ຜິດພາດ',
+                        text: error.message,
+                        icon: 'error',
+                        customClass: {
+                            title: 'lao-font',
+                            htmlContainer: 'lao-font',
+                            confirmButton: 'lao-font'
+                        }
+                    });
                 });
         }
     });

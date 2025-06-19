@@ -2,14 +2,8 @@
 {% load static %}
 <title>Lcic-HR - ລະບົບບໍລິຫານ ແລະ ຈັດການພາຍໃນ</title>
 {% block content %}
-
-
-<header>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
     
-</header>
-
-
     <!-- Page Heading -->
     <div class="dashboard-header ml-2">
         <h1><i class="fas fa-tachometer-alt"></i> ລະບົບບໍລິຫານ ແລະ ຈັດການພາຍໃນ</h1>            
@@ -154,6 +148,17 @@
                                 <div>
                                     <div class="text-sm font-weight-bold">ລາຍງານຊັບສີນ</div>
                                     <div class="text-xs text-gray-500">ເບິ່ງລາຍການຊັບສີນທັງໝົດ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/homeSalary">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-info mr-3">payments</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ໄລ່ເງິນພະນັກງານ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການເງິນເດືອນແລະການໄລ່ເງິນ</div>
                                 </div>
                             </div>
                         </a>
@@ -556,4 +561,4 @@
         }
     });
     </script>
-        {% endblock %}
+    {% endblock %}

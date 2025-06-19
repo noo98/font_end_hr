@@ -29,8 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // ພິມລອກຂໍ້ມູນທີ່ຖືກຕ້ອງ
-        console.log("User ID:", userId);
-        console.log("User Picture:", userPic || "No picture available");
+
 });
 function setupModalCloseBehavior(myModal, modalElement) {
     // กำหนดให้ปุ่ม close ปิด modal
@@ -101,7 +100,6 @@ function setupModalCloseBehavior(myModal, modalElement) {
       const modalElement = document.getElementById('exampleModalToggle');
       const myModal = new bootstrap.Modal(modalElement);
   
-      // setup close behavior (ทำครั้งเดียวเมื่อเปิด modal)
       setupModalCloseBehavior(myModal, modalElement);
   
       myModal.show();
@@ -121,32 +119,29 @@ function Forget() {
     // Create a modal for changing password if it doesn't exist
     if (!document.getElementById('changePasswordModal')) {
         const modalHTML = `
-        <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-hidden="true" style="font-family: 'Noto Sans Lao', sans-serif;">
             <div class="modal-dialog">
-                <div class="modal-content" style="border-radius: 15px; border: 1px solid #007bff; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
-                    
-                        
-                    
+                <div class="modal-content" style="border-radius: 15px; border: 1px solid #007bff; box-shadow: 0 0 15px rgba(0,0,0,0.1);">    
                     <div class="modal-body pt-0">
                         <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                             <h5 class="float-none w-auto p-2 h5 text-primary fw-bold">ປ່ຽນລະຫັດຜ່ານ</h5>
-                            
                             <form id="changePasswordForm">
                                 <div class="mb-4">
                                     <div class="input-group-custom">
                                       <input type="password" class="form-control" id="newPassword" required>
                                       <label for="newPassword" >ລະຫັດຜ່ານໃໝ່</label>
+                                    </div>
                                 </div>
                                 <div class="mb-4">
                                     <div class="input-group-custom">
                                       <input type="password" class="form-control" id="confirmPassword" required>
                                       <label for="confirmPassword">ຢືນຢັນລະຫັດຜ່ານໃໝ່</label>
-                                </div>
-                                <div class="d-grid mt-4">
-                                    <button type="submit" class="btn btn-primary btn-lg fw-bold" style="border-radius: 10px; padding: 12px;">ຢືນຢັນ</button>
+                                    </div>
+                                    <div class="d-grid mt-4">
+                                        <button type="submit" class="btn btn-primary btn-lg fw-bold" style="border-radius: 10px; padding: 12px;">ຢືນຢັນ</button>
+                                    </div>
                                 </div>
                             </form>
-                        
                     </div>
                 </div>
             </div>
@@ -241,10 +236,3 @@ if (data.message?.includes('ສຳເລັດ')) {
     }
 }
 
-
-    function logout() {
-        localStorage.removeItem("user");
-        localStorage.removeItem("department");
-        localStorage.removeItem("department_name");
-        window.location.href = "/login/";
-    }

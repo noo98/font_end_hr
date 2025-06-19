@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% load static %}
+<title>Lcic-HR</title>
+
+{% block content %}
+
+<body class="bg-light">
+    <div class="container-fluid main-container">
+
+        <!-- ✅ แสดงผลข้อความ -->
+        <div id="messages" class="my-3"></div>
+
+        <!-- Header -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card header-card">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">
+                            ລາຍງານຂໍ້ມູນການຈ່າຍເງິນກິນເຂົ້າ
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Table Section -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card table-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <!-- <div class="align-items-center">
+                            <input type="month" id="monthFilter" class="form-control form-control-sm" onchange="loadOTData()"/>
+                        </div> -->
+                        <div class="ms-4">
+                                <label for="monthFilter" class="form-label mb-0 me-2">ເລືອກເດືອນ:</label>
+                                <input type="month" id="monthFilter" class="form-control d-inline-block w-auto" onchange="loadOTData()">
+                            </div>
+                        <div>
+                            <button class="btn btn-outline-success me-2" onclick="exportToExcel()">
+                                <i class="bi bi-file-earmark-excel"></i> Export Excel
+                            </button>
+                            <button class="btn btn-outline-info me-2" onclick="printTable()">
+                                <i class="bi bi-printer"></i> Print
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>ລໍາດັບ</th>
+                                        <th>ພະນັກງານ</th>
+                                        <th>ຕຳແໜ່ງ</th>
+                                        <th>ຈຳນວນວັນ</th>
+                                        <!-- <th>ວັນທີ່</th> -->
+                                        <th>ຈຳນວນເງິນ/ວັນ</th>
+                                        <th>ຈຳນວນເງິນ</th>
+                                        <th>ເງິນນະໂຍບາຍ</th>
+                                        <th>ລວມ</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="monlyTableBody">
+                                    <tr id="loadingRow">
+                                        <td colspan="15" class="text-center py-4">
+                                            <div class="spinner-border text-primary" role="status"></div>
+                                            <div class="mt-2">ກຳລັງໂຫຼດຂໍ້ມູນ...</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'js/calculate_food_print.js'%}"></script>
+<script>
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('lo-LA', {
+            style: 'decimal',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(amount);
+    }
+
+    async function loadOTData() {
+        const tbody = document.getElementById('monlyTableBody');
+        const selectedMonth = document.getElementById('monthFilter').value;
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="15" class="text-center py-4">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <div class="mt-2">ກຳລັງໂຫຼດຂໍ້ມູນ...</div>
+                </td>
+            </tr>
+        `;
+
+        try {
+            const res = await fetch(`${DATABASE_URL}/api/col_history/`);
+            console.log('Response status:', res.status);
+
+            const text = await res.text();
+            console.log('Raw response:', text);
+
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (parseErr) {
+                console.error('JSON parsing error:', parseErr);
+                Swal.fire('ຜິດພາດ', 'ຂໍ້ມູນທີ່ໄດ້ບໍ່ແມ່ນ JSON', 'error');
+                tbody.innerHTML = `<tr><td colspan="15" class="text-center py-4 text-danger">❌ ຂໍ້ມູນບໍ່ຖືກຕ້ອງ</td></tr>`;
+                return;
+            }
+
+            if (!Array.isArray(data)) {
+                Swal.fire('ຜິດພາດ', 'ຂໍ້ມູນທີ່ໄດ້ບໍ່ແມ່ນ array', 'error');
+                tbody.innerHTML = `<tr><td colspan="15" class="text-center py-4 text-danger">❌ ຂໍ້ມູນບໍ່ແມ່ນ array</td></tr>`;
+                return;
+            }
+
+            const filteredData = selectedMonth
+                ? data.filter(item => {
+                    const itemDate = new Date(item.date);
+                    return itemDate.toISOString().slice(0, 7) === selectedMonth;
+                })
+                : data;
+
+            if (!filteredData.length) {
+                tbody.innerHTML = `<tr><td colspan="15" class="text-center py-4">ບໍ່ມີຂໍ້ມູນ</td></tr>`;
+                return;
+            }
+
+            let totalMount = 0;
+            let totalPolicy = 0;
+            let totalPayment = 0;
+
+            const formatDate = (dateString) => {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-GB', {
+                    year: 'numeric',
+                    month: 'numeric',
+                    day: 'numeric'
+                });
+            };
+
+            tbody.innerHTML = filteredData.map((item, index) => {
+                totalMount += parseFloat(item.total_amount) || 0;
+                totalPolicy += parseFloat(item.jm_policy) || 0;
+                totalPayment += parseFloat(item.total_payment) || 0;
+                return `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${item.emp_name}</td>
+                        <td>${item.pos_name}</td>
+                        <td>${formatCurrency(item.number_of_days)}</td>
+                        <td>${formatCurrency(item.amount_per_day)}</td>
+                        <td>${formatCurrency(item.total_amount)}</td>
+                        <td>${formatCurrency(item.jm_policy)}</td>
+                        <td>${formatCurrency(item.total_payment)}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            tbody.innerHTML += `
+                <tr class="table-success fw-bold">
+                    <td colspan="5" class="text-center">ລວມ</td>
+                    <td>${formatCurrency(totalMount)}</td>
+                    <td>${formatCurrency(totalPolicy)}</td>
+                    <td>${formatCurrency(totalPayment)}</td>
+                </tr>
+            `;
+        } catch (error) {
+            console.error('Error fetching or processing data:', error);
+            Swal.fire('ຜິດພາດ', 'ຜິດພາດໃນການໂຫຼດຂໍ້ມູນ', 'error');
+            tbody.innerHTML = `<tr><td colspan="15" class="text-center py-4 text-danger"> ໂຫຼດຂໍ້ມູນຜິດພາດ</td></tr>`;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const now = new Date();
+        document.getElementById('monthFilter').value = now.toISOString().slice(0, 7);
+        loadOTData();
+    });
+</script>
+
+</body>
+{% endblock %}

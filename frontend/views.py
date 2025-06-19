@@ -39,10 +39,10 @@ def tables_emp(request):
         pos_data = pos_response.json() if pos_response.status_code == 200 else []
         # Create department mapping
         department_map = {dept["id"]: dept["name"] for dept in dept_data}
-        print(f"API URL6: {department_map}")
+        # print(f"API URL6: {department_map}")
         # Create position mapping
         position_map = {pos["pos_id"]: pos["name"] for pos in pos_data}
-        print(f"API URL7: {position_map}")
+        # print(f"API URL7: {position_map}")
         # Process employee data
         for emp in emp_data:
             employees.append({
@@ -77,10 +77,82 @@ def tables_emp(request):
         "employees": employees,
         "database_url": DATABASE_URL,
     })
-def print_emp(request):
-    return render(request, 'employee/print_emp.html', {
-        'database_url': DATABASE_URL,  
-    })
+def print_emp(request, emp_id):
+    base_url = f"{DATABASE_URL}/api/employee/{emp_id}/"
+    departments_url = f"{DATABASE_URL}/api/list/departments/"
+    positions_url = f"{DATABASE_URL}/api/positions/"
+
+    if request.method == 'GET':
+        data = {
+            'employee': {},
+            'personal_information': [],
+            'education': [],
+            'specialized_education': [],
+            'political_theory_education': [],
+            'foreign_languages': [],
+            'work_experiences': [],
+            'training_courses': [],
+            'awards': [],
+            'disciplinary_actions': [],
+            'family_members': [],
+            'evaluation': {},
+        }
+        departments = []
+        positions = []
+
+        try:
+            response = requests.get(base_url)
+            response.raise_for_status()
+            employee_data = response.json()
+            if not employee_data or not isinstance(employee_data, list):
+                # logger.error("Invalid employee data format for ID %s", emp_id)
+                data['error'] = "Invalid employee data format."
+            else:
+                employee_data = employee_data[0]  # Assuming data is a list
+                # logger.debug("Fetched employee data for ID %s: %s", emp_id, employee_data)
+
+                data['employee'] = employee_data.get('employee', {})
+                data['personal_information'] = employee_data.get('personal_information', [])
+                data['education'] = employee_data.get('education', [])
+                data['specialized_education'] = employee_data.get('specialized_education', [])
+                data['political_theory_education'] = employee_data.get('political_theory_education', [])
+                data['foreign_languages'] = employee_data.get('foreign_languages', [])
+                data['work_experiences'] = employee_data.get('work_experiences', [])
+                data['training_courses'] = employee_data.get('training_courses', [])
+                data['awards'] = employee_data.get('awards', [])
+                data['disciplinary_actions'] = employee_data.get('disciplinary_actions', [])
+                data['family_members'] = employee_data.get('family_members', [])
+                data['evaluation'] = employee_data.get('evaluation', {})
+
+        except requests.exceptions.RequestException as e:
+            # logger.error("Error fetching employee data for ID %s: %s", emp_id, str(e))
+            data['error'] = "Failed to fetch employee data."
+
+        try:
+            response = requests.get(departments_url)
+            response.raise_for_status()
+            departments = response.json()
+            # logger.debug("Fetched departments: %s", departments)
+        except requests.exceptions.RequestException as e:
+            # logger.error("Error fetching departments: %s", str(e))
+            departments = []
+        try:
+            response = requests.get(positions_url)
+            response.raise_for_status()
+            positions = response.json()
+            # logger.debug("Fetched positions: %s", positions)
+        except requests.exceptions.RequestException as e:
+            # logger.error("Error fetching positions: %s", str(e))
+            positions = []
+
+        return render(request, 'employee/print_emp.html', {
+            **data,
+            'positions': positions,
+            'departments': departments,
+            'database_url': DATABASE_URL,
+            'emp_id': emp_id,
+        })
+
 
 def doc_format(request):
     return render(request, 'doc_format.html', {'database_url': DATABASE_URL})
@@ -256,8 +328,7 @@ def documentEntry(request):
         'end_date_filter': end_date_filter,
         'documents_json': json.dumps(documents),
         'database_url': DATABASE_URL,
-    }
-    )
+    })
 
 
 
@@ -316,6 +387,7 @@ def documentOut(request):
         'department_filter': department_filter,
         'start_date_filter': start_date_filter,
         'end_date_filter': end_date_filter,
+        'documents_json': json.dumps(documents),
         'database_url': DATABASE_URL,  
     })
 def view_post(request):
@@ -377,7 +449,6 @@ def update_documentE(request, doc_id):
     document_url = f"{DATABASE_URL}/api/list/document_lcic/{doc_id}/"
     departments_url = f"{DATABASE_URL}/api/list/departments/"
     document_format_url = f"{DATABASE_URL}/api/list/Document_format/"
-    update_url = f"{DATABASE_URL}/api/update/document_lcic/{doc_id}/"
 
     if request.method == 'GET':
         try:
@@ -387,39 +458,18 @@ def update_documentE(request, doc_id):
         except requests.exceptions.RequestException as e:
             print(f"Error fetching data: {e}")
             document, departments, document_format = {}, [], []
-            
+
         return render(request, 'documents/update_documentE.html', {
             'document': document,
             'departments': departments,
             'Document_format': document_format,
-            'database_url': DATABASE_URL,
+            'database_url': DATABASE_URL,  
+            'doc_id': doc_id,  
         })
 
-    elif request.method == 'POST':        
-        try:
-            data = {
-                'doc_number': request.POST.get('doc_number'),
-                'insert_date': request.POST.get('insert_date'),
-                'subject': request.POST.get('subject'),
-                'format': request.POST.get('format'),
-                'doc_type': request.POST.get('doc_type'),
-                'document_detail': request.POST.get('document_detail'),
-                'department': request.POST.get('department'),
-                'name': request.POST.get('name'),
-            }
-            if request.FILES.get('file'):
-                files = {'file': request.FILES['file']}
-                response = requests.put(update_url, data=data, files=files)  
-            else:
-                response = requests.put(update_url, json=data)  
-            
-            response.raise_for_status()
-            return JsonResponse({'success': True, 'message': 'ບັນທືກຂໍ້ມູນສຳເລັດ!'})
-            
-        except requests.exceptions.RequestException as e:
-            print(f"Error updating document: {e}")
-            return JsonResponse({'success': False, 'error': str(e)}, status=400)
-        
+    # ບໍ່ຈັດການ POST ທີ່ນີ້ ເພາະ frontend ຈະເຮັດແທນ
+    return JsonResponse({'success': False, 'error': 'Method not allowed'}, status=405)
+
 def update_documentO(request, doc_id):
     document_url = f"{DATABASE_URL}/api/list/document_lcic/{doc_id}/"
     departments_url = f"{DATABASE_URL}/api/list/departments/"
@@ -491,10 +541,13 @@ def update_documentGen(request, docg_id):
         except requests.exceptions.RequestException as e:
             print(f"Error updating document: {e}")
             return JsonResponse({'success': False, 'error': str(e)}, status=400)
+
 def test_view(request):
     
 
-    return render(request, "test.html",)
+    return render(request, "test.html",{
+        'database_url': DATABASE_URL,
+    })
 
 def form_emp(request):
     return render(request, 'employee/form_emp.html',{
@@ -510,9 +563,9 @@ def post(request):
 def testttt(request):
     return render(request, 'testttt.html',)
 
-def view_emp(request, emp_id):
-    
-    return render(request, 'employee/view_emp.html',{ 'database_url': DATABASE_URL, })
+def view_emp(request):
+    return render(request, 'employee/view_emp.html',
+                  { 'database_url': DATABASE_URL, })
 import requests
 import json
 import logging
@@ -584,7 +637,7 @@ def update_emp(request, emp_id):
             response = requests.get(positions_url)
             response.raise_for_status()
             positions = response.json()
-            logger.debug("Fetched positions: %s", positions)
+            # logger.debug("Fetched positions: %s", positions)
         except requests.exceptions.RequestException as e:
             # logger.error("Error fetching positions: %s", str(e))
             positions = []
@@ -598,4 +651,51 @@ def update_emp(request, emp_id):
         })
 
     
-    
+def homeSalary(request):
+    return render(request, "calculate salary/home_salary.html",{
+        'database_url': DATABASE_URL,
+    })
+def baseSalary(request):
+    return render(request, "calculate salary/base_salary.html",{
+        'database_url': DATABASE_URL,
+    }) 
+def subsidyPosition(request):
+    return render(request, "calculate salary/subsidy_position.html",{
+        'database_url': DATABASE_URL,
+    })
+def workerSubsidy(request):
+    return render(request, "calculate salary/worker_subsidy.html",{
+        'database_url': DATABASE_URL,
+    })
+def fuelSubsidy(request):
+    return render(request, "calculate salary/fuel_subsidy.html",{
+        'database_url': DATABASE_URL,
+    })  
+def calculateOt(request):    
+    return render(request, "calculate salary/calculate_ot.html",{
+        'database_url': DATABASE_URL,
+    })
+def calculateFuel(request):
+    return render(request, "calculate salary/calculate_fuel.html",{
+        'database_url': DATABASE_URL,
+    })
+def calculateSalary(request):
+    return render(request, "calculate salary/calculate_salary.html",{
+        'database_url': DATABASE_URL,
+    })
+def calculateFood(request):
+    return render(request, "calculate salary/calculate_food.html",{
+        'database_url': DATABASE_URL,
+    })
+def reportSupFood(request):
+    return render(request, "calculate salary/report_sup_food.html",{
+        'database_url': DATABASE_URL,
+    })
+def reportFuel(request): 
+    return render(request, "calculate salary/report_fuel.html",{
+        'database_url': DATABASE_URL,
+    })
+def reportOt(request):
+    return render(request, "calculate salary/report_ot.html",{
+        'database_url': DATABASE_URL,
+    })

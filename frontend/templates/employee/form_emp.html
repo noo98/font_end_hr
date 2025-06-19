@@ -917,7 +917,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         title: "ສຳເລັດ!",
                         text: data.message || "ບັນທຶກສຳເລັດ",
                         icon: "success",
-                        confirmButtonText: "ຕົກລົງ"
+                        confirmButtonText: "ຕົກລົງ",
+                        customClass: {
+                            title: 'lao-font',
+                            htmlContainer: 'lao-font',
+                            confirmButton: 'lao-font'
+                        }
                     }).then(() => {
                         window.location.href = "/tables_emp/";
                     });
@@ -926,7 +931,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         title: "ເກີດຂໍ້ຜິດພາດ!",
                         text: data.error || "ບໍ່ສາມາດບັນທຶກຂໍ້ມູນໄດ້",
                         icon: "error",
-                        confirmButtonText: "ຕົກລົງ"
+                        confirmButtonText: "ຕົກລົງ",
+                        customClass: {
+                            title: 'lao-font',
+                            htmlContainer: 'lao-font',
+                            confirmButton: 'lao-font'
+                        }
                     });
                 }
             })
@@ -936,7 +946,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     title: "ເກີດຂໍ້ຜິດພາດ!",
                     text: `ບັນຫາ: ${error.message}`,
                     icon: "error",
-                    confirmButtonText: "ຕົກລົງ"
+                    confirmButtonText: "ຕົກລົງ",
+                    customClass: {
+                        title: 'lao-font',
+                        htmlContainer: 'lao-font',
+                        confirmButton: 'lao-font'
+                    }
                 });
             });
     });

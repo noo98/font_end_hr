@@ -3,39 +3,6 @@
 <title>Lcic-HR</title>
 
 {% block content %}
-<style>
-  /* ກຳນົດ font-size ພື້ນຖານໃຫ້ html */
-  html {
-    font-size: 16px; /* ຄ່າພື້ນຖານ */
-  }
-
-  /* ປັບ font-size ໃຫ້ responsive ຕາມຂະໜາດໜ້າຈໍ */
-  @media (max-width: 576px) { /* Mobile */
-    html { font-size: 14px; }
-    .h5 { font-size: 1.2rem; }
-    .btn { font-size: 0.9rem; }
-    .table th, .table td { font-size: 0.85rem; }
-  }
-
-  @media (min-width: 577px) and (max-width: 768px) { /* Tablet */
-    html { font-size: 15px; }
-    .h5 { font-size: 1.3rem; }
-    .btn { font-size: 1rem; }
-    .table th, .table td { font-size: 0.9rem; }
-  }
-
-  @media (min-width: 769px) { /* Desktop */
-    html { font-size: 16px; }
-    .h5 { font-size: 1.5rem; }
-    .btn { font-size: 1.1rem; }
-    .table th, .table td { font-size: 1rem; }
-  }
-
-  /* ກຳນົດໃຫ້ input ແລະ element ອື່ນໆ responsive */
-  .form-control {
-    font-size: 1rem;
-  }
-</style>
 
 <div class="container-fluid">
   <div class="row mx-3">
@@ -74,7 +41,6 @@
               <th>ຜູ້ສ້າງ</th>
               <th>ພະແນກ</th>
               <th class="text-start">ມື້ສ້າງ</th>
-              <!-- <th class="text-start">ມື້ອັບເດດ</th> -->
               <th class="text-center">Option</th>
             </tr>
           </thead>
@@ -91,7 +57,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{% static 'js/localStorage.js' %}"></script>
 <script>
-    const DATABASE_URL = "{{ database_url | escapejs }}"; // ດຶງມາຈາກ Django context
+    // const DATABASE_URL = "{{ database_url | escapejs }}"; // ດຶງມາຈາກ Django context
     let us_id = localStorage.getItem("user_id");
     let Department = localStorage.getItem("department");
 
@@ -215,6 +181,12 @@
                 showCancelButton: true,
                 confirmButtonText: "ຢືນຢັນ",
                 cancelButtonText: "ຍົກເລີກ",
+                customClass: {
+                    title: "lao-font",
+                    htmlContainer: "lao-font",
+                    confirmButton: "lao-font",
+                    cancelButton: "lao-font"
+                }
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     try {
@@ -222,7 +194,15 @@
                         const data = await response.json();
                         if (!response.ok) throw new Error(data.error || "Error deleting data");
 
-                        Swal.fire("ລຶບສຳເລັດ!", "", "success").then(() => {
+                        Swal.fire({
+                            title: 'ສຳເລັດ!',
+                            icon: 'success',
+                            customClass: {
+                                title: 'lao-font',
+                                htmlContainer: 'lao-font',
+                                confirmButton: 'lao-font'
+                            }
+                        }).then(() => {
                             fetchDocFormats(); 
                         });
                     } catch (error) {

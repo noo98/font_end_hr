@@ -195,7 +195,12 @@
                     title: "ສຳເລັດ!",
                     text: data.message || "ບັນທຶກສຳເລັດ",
                     icon: "success",
-                    confirmButtonText: "ຕົກລົງ"
+                    confirmButtonText: "ຕົກລົງ",
+                    customClass: {
+                        title: "lao-font",
+                        htmlContainer: "lao-font",
+                        confirmButton: "lao-font"
+                    }
                 }).then(() => {
                     window.location.href = "/documentGen/";
                 });
@@ -204,7 +209,12 @@
                     title: "ຜິດພາດ!",
                     text: data.message || "ບໍ່ສາມາດບັນທຶກເອກະສານ",
                     icon: "error",
-                    confirmButtonText: "ຕົກລົງ"
+                    confirmButtonText: "ຕົກລົງ",
+                    customClass:{
+                        title: "lao-font",
+                        htmlContainer: "lao-font",
+                        confirmButton: "lao-font"
+                    }
                 });
             }
         } catch (error) {
@@ -213,7 +223,12 @@
                 title: "ເກີດຂໍ້ຜິດພາດ!",
                 text: error.message,
                 icon: "error",
-                confirmButtonText: "ຕົກລົງ"
+                confirmButtonText: "ຕົກລົງ",
+                customClass:{
+                        title: "lao-font",
+                        htmlContainer: "lao-font",
+                        confirmButton: "lao-font"
+                    }
             });
         }
     });

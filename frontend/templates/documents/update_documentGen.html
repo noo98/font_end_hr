@@ -90,7 +90,7 @@ document.querySelector("#updateForm").addEventListener("submit", function(event)
 
     // Debug: ພິມຄ່າ FormData
     for (let pair of formData.entries()) {
-        console.log(pair[0] + ": " + pair[1]);
+        // console.log(pair[0] + ": " + pair[1]);
     }
 
     // ສົ່ງ request ໄປ Django view
@@ -113,7 +113,12 @@ document.querySelector("#updateForm").addEventListener("submit", function(event)
                 title: "ສຳເລັດ!",
                 text: data.message || "ແກ້ໄຂສຳເລັດ",
                 icon: "success",
-                confirmButtonText: "ຕົກລົງ"
+                confirmButtonText: "ຕົກລົງ",
+                customClass:{
+                    title: "lao-font",
+                    htmlContainer: "lao-font",
+                    confirmButton: "lao-font"
+                }
             }).then(() => {
                 window.location.href = "{% url 'documentGen' %}";
             });
@@ -122,7 +127,12 @@ document.querySelector("#updateForm").addEventListener("submit", function(event)
                 title: "ເກີດຂໍ້ຜິດພາດ!",
                 text: data.error || "ບໍ່ສາມາດແກ້ໄຂເອກະສານ",
                 icon: "error",
-                confirmButtonText: "ຕົກລົງ"
+                confirmButtonText: "ຕົກລົງ",
+                customClass:{
+                    title: "lao-font",
+                    htmlContainer: "lao-font",
+                    confirmButton: "lao-font"
+                }
             });
         }
     })
@@ -132,7 +142,12 @@ document.querySelector("#updateForm").addEventListener("submit", function(event)
             title: "ເກີດຂໍ້ຜິດພາດ!",
             text: "ມີບາງຢ່າງຜິດປົກກະຕິ: " + error.message,
             icon: "error",
-            confirmButtonText: "ຕົກລົງ"
+            confirmButtonText: "ຕົກລົງ",
+            customClass:{
+                title: "lao-font",
+                htmlContainer: "lao-font",
+                confirmButton: "lao-font"
+            }
         });
     });
 });

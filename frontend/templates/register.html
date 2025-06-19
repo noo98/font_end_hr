@@ -128,7 +128,7 @@
 <script src="{% static 'js/localStorage.js' %}"></script>
 
 <script>
-    var DATABASE_URL = "{{ database_url | escapejs }}";
+    // var DATABASE_URL = "{{ database_url | escapejs }}";
     let departments = {};
     let employees = {};
 
@@ -163,7 +163,17 @@
             });
         } catch (error) {
             console.error("Error fetching initial data:", error);
-            Swal.fire("ຜິດພາດ", "ບໍ່ສາມາດດຶງຂໍ້ມູນເບື້ອງຕົ້ນໄດ້: " + error.message, "error");
+            Swal.fire({
+                title: "ຜິດພາດ",
+                text: "ບໍ່ສາມາດໂຫຼດຂໍ້ມູນ: " + error.message,
+                icon: "error",
+                confirmButtonText: "ຕົກລົງ",
+                customClass: {
+                    title: "lao-font",
+                    htmlContainer: "lao-font",
+                    confirmButton: "lao-font"
+                }
+            });
         }
     }
 
@@ -217,7 +227,16 @@
     // หา departmentId จาก object departments
     const departmentId = Object.keys(departments).find(key => departments[key] === department);
     if (!departmentId) {
-        Swal.fire("ຜິດພາດ", "ບໍ່ພົບພະແນກ!", "error");
+        Swal.fire({
+            title: "ຜິດພາດ",
+            text: "ບໍ່ພົບຂໍ້ມູນພະແນກ!",
+            icon: "error",
+            customClass: {
+                title: "lao-font",
+                content: "lao-font",
+                confirmButton: "lao-font"
+            }
+        });
         return;
     }
 
@@ -232,14 +251,14 @@
     const fileInput = document.getElementById("avatarInput");
     if (fileInput && fileInput.files.length > 0) {
         formData.set("pic", fileInput.files[0]);
+    } else {
+        formData.delete("pic");
     }
 
     try {
         const response = await fetch(url, {
             method: method,
-            headers: {
-                "X-CSRFToken": formData.get("csrfmiddlewaretoken")
-            },
+            
             body: formData
         });
 
@@ -247,21 +266,47 @@
         if (!contentType || !contentType.includes("application/json")) {
             const errorText = await response.text();
             console.error("Non-JSON response:", errorText);
-            Swal.fire("ຜິດພາດ", "Server ຕອບກັບບໍ່ຖືກຕ້ອງ (ບໍ່ແມ່ນ JSON)", "error");
+            Swal.fire({
+                title: "ຜິດພາດ",
+                text: "ບໍ່ສາມາດສົ່ງຂໍ້ມູນ: ຮູບແບບຂໍ້ມູນບໍ່ເປັນ JSON",
+                icon: "error",
+                confirmButtonText: "ຕົກລົງ",
+                customClass: {
+                    title: "lao-font",
+                    htmlContainer: "lao-font",
+                    confirmButton: "lao-font"
+                }
+            });
             return;
         }
 
         const result = await response.json();
 
         if (!response.ok) {
-            Swal.fire("ຜິດພາດ", result.message || "ບໍ່ສາມາດດຳເນີນການໄດ້", "error");
+            Swal.fire({
+                title: "ຜິດພາດ",
+                text: result.message || "ບໍ່ສາມາດສົ່ງຂໍ້ມູນ: " + result.error,
+                icon: "error",
+                confirmButtonText: "ຕົກລົງ",
+                customClass: {
+                    title: "lao-font",
+                    htmlContainer: "lao-font",
+                    confirmButton: "lao-font"
+                }
+            });
             return;
         }
 
         Swal.fire({
             title: "ສຳເລັດ!",
             text: id ? "ແກ້ໄຂຜູ້ໃຊ້ສຳເລັດ" : "ເພີ່ມຜູ້ໃຊ້ສຳເລັດ",
-            icon: "success"
+            icon: "success",
+            confirmButtonText: "ຕົກລົງ",
+            customClass: {
+                title: "lao-font",
+                htmlContainer: "lao-font",
+                confirmButton: "lao-font"
+            }
         }).then(() => {
             location.reload();
         });
@@ -272,7 +317,17 @@
 
     } catch (error) {
         console.error("API Error:", error);
-        Swal.fire("ຜິດພາດ", "ເກີດບັນຫາໃນລະບົບ: " + error.message, "error");
+        Swal.fire({
+            title: "ຜິດພາດ",
+            text: "ບໍ່ສາມາດສົ່ງຂໍ້ມູນ: " + error.message,
+            icon: "error",
+            confirmButtonText: "ຕົກລົງ",
+            customClass: {
+                title: "lao-font",
+                htmlContainer: "lao-font",
+                confirmButton: "lao-font"
+            }
+        });
     }
 });
 
@@ -309,7 +364,17 @@ window.editRegister = async function(id) {
         document.querySelector('button[name="btnEdit"]').style.display = "inline-block";
     } catch (error) {
         console.error("Error fetching user data:", error);
-        Swal.fire("ຜິດພາດ", "ບໍ່ສາມາດດຶງຂໍ້ມູນຜູ້ໃຊ້ໄດ້: " + error.message, "error");
+        Swal.fire({
+            title: "ຜິດພາດ",
+            text: "ບໍ່ສາມາດເຂົ້າເຖິງຂໍ້ມູນຜູ້ໃຊ້: " + error.message,
+            icon: "error",
+            confirmButtonText: "ຕົກລົງ",
+            customClass: {
+                title: "lao-font",
+                htmlContainer: "lao-font",
+                confirmButton: "lao-font"
+            }
+        });
     }
 };
 
@@ -335,7 +400,13 @@ window.editRegister = async function(id) {
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "ຕົກລົງ",
-            cancelButtonText: "ຍົກເລີກ"
+            cancelButtonText: "ຍົກເລີກ",
+            customClass: {
+                title: "lao-font",
+                htmlContainer: "lao-font",
+                confirmButton: "lao-font",
+                cancelButton: "lao-font"
+            }
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
@@ -347,16 +418,46 @@ window.editRegister = async function(id) {
                     });
     
                     if (response.ok) {
-                        Swal.fire("ສຳເລັດ!", "ລຶບຜູ້ໃຊ້ສຳເລັດ", "success").then(() => {
+                        Swal.fire({
+                            title: "ສຳເລັດ!",
+                            text: "ລຶບຜູ້ໃຊ້ນີ້ສຳເລັດ",
+                            icon: "success",
+                            confirmButtonText: "ຕົກລົງ",
+                            customClass: {
+                                title: "lao-font",
+                                htmlContainer: "lao-font",
+                                confirmButton: "lao-font"
+                            }
+                        }).then(() => {
                             location.reload();
                         });
                     } else {
                         const result = await response.json();
-                        Swal.fire("ຜິດພາດ", result.message || "ບໍ່ສາມາດລຶບຜູ້ໃຊ້ໄດ້", "error");
+                        Swal.fire({
+                            title: "ຜິດພາດ",
+                            text: result.message || "ບໍ່ສາມາດລຶບຜູ້ໃຊ້ນີ້",
+                            icon: "error",
+                            confirmButtonText: "ຕົກລົງ",
+                            customClass: {
+                                title: "lao-font",
+                                htmlContainer: "lao-font",
+                                confirmButton: "lao-font"
+                            }
+                        });
                     }
                 } catch (error) {
                     console.error("Error deleting user:", error);
-                    Swal.fire("ຜິດພາດ", "ເກີດບັນຫາໃນລະບົບ: " + error.message, "error");
+                    Swal.fire({
+                        title: "ຜິດພາດ",
+                        text: "ເກີດບັນຫາໃນການລຶບ: " + error.message,
+                        icon: "error",
+                        confirmButtonText: "ຕົກລົງ",
+                        customClass: {
+                            title: "lao-font",
+                            htmlContainer: "lao-font",
+                            confirmButton: "lao-font"
+                        }
+                    });
                 }
             }
         });

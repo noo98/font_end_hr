@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% load static %}
+<title>Lcic-HR</title>
+
+{% block content %}
+<body class="bg-light">
+    <div class="container-fluid main-container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card header-card">
+                    <div class="card-body text-center">
+                        <h1 class="card-title">
+                            ຈັດການເງິນນ້ຳມັນ
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card table-card">
+                <div class="card-header d-flex justify-content-between align-items-center" >
+                    <form id="fuelSubsidyform">
+                        <div class="row">
+                            <div class="col-6 ">
+                                <input type="text" class="form-control" id="value" placeholder="ປ້ອນລາຄາ" name="value" >
+                            </div>
+                            <div class="col-3 ">     
+                            <button type="submit" name="btnAdd" class="btn btn-primary mx-2" style="width: 110px; border-radius: 10px;">
+                                <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;ຕົກລົງ
+                            </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div>
+                        
+                        <button class="btn btn-outline-success me-2" onclick="exportToExcel()">
+                            <i class="bi bi-file-earmark-excel"></i> Export Excel
+                        </button>
+                        <button class="btn btn-outline-info me-2" onclick="printTable()">
+                            <i class="bi bi-printer"></i> Print
+                        </button>
+                        <button class="btn btn-outline-primary" id="backupBtn">
+                            <i class="bi bi-download"></i> ບັນທືກ
+                        </button>
+                    </div>
+                </div>   
+            
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>ລໍາດັບ</th>
+                                <th>ພະນັກງານ</th>
+                                <th>ຕຳແໜ່ງ</th>
+                                <th>ຈຳນວນລິດ</th>
+                                <th>ລາຄາ/ລິດ</th>
+                                <th>ລວມ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fuelSubsidyTableBody">
+                            <tr id="loadingRow">
+                                <td colspan="6" class="text-center py-4">
+                                    <div class="spinner-border text-primary" role="status"></div>
+                                    <div class="mt-2">ກຳລັງໂຫຼດຂໍ້ມູນ...</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'js/calculate_fuel_print.js' %}"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    loadData();
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('lo-LA', {
+            style: 'decimal',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(amount);
+    }
+
+
+    async function loadData() {
+        try {
+            const res = await fetch(`${DATABASE_URL}/api/fuel_payment/`);
+            const data = await res.json();
+            const tbody = document.getElementById('fuelSubsidyTableBody');
+            // console.log('Fetched data:', data);
+            if (!data.length) {
+                tbody.innerHTML = `<tr><td colspan="15" class="text-center py-4">ບໍ່ມີຂໍ້ມູນ</td></tr>`;
+                return;
+            }
+            
+            let totalFuel = 0;
+            
+            tbody.innerHTML = data.map((item, index) => { 
+                
+                totalFuel += parseFloat(item.total_fuel) || 0;
+                return `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${item.emp_name}</td>
+                        <td>${item.position}</td>
+                        <td>${formatCurrency(item.fuel_subsidy)}</td>
+                        <td>${formatCurrency(item.fuel_price)}</td> 
+                        <td>${formatCurrency(item.total_fuel)}</td>
+                        
+                    </tr>
+                `;
+            }).join('');
+            tbody.innerHTML += `
+                
+                <tr class="table-success fw-bold">
+                    <td colspan="5" class="text-center">ລວມ</td>
+                    <td>${formatCurrency(totalFuel)}</td>
+                </tr>
+            `;
+        } catch {
+            showMessage('ຜິດພາດໃນການໂຫຼດຂໍ້ມູນ', 'danger');
+        }
+    }
+
+    document.getElementById("fuelSubsidyform").addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const value = document.getElementById("value").value;
+
+        if (!value) {
+            Swal.fire("ກະລຸນາໃສ່ລາຄາ", "ກະລຸນາໃສ່ລາຄາ ກ່ຽວກັບ ລາຄາ/ລິດ", "warning");
+            return;
+        }
+
+        try {
+            const response = await fetch(`${DATABASE_URL}/api/fuel/`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ value }),
+            });
+
+            if (!response.ok) throw new Error("Error adding fuel subsidy");
+
+            Swal.fire("ສໍາເລັດ!", "ເພີ່ມ ຂໍ້ມູນ ແລ້ວ", "success").then(() => {
+                loadData();
+                document.getElementById("value").value = "";
+            });
+        } catch (error) {
+            Swal.fire("Error", "Failed to add fuel subsidy", "error");
+        }
+    });
+
+    async function backupFuelToHistory() {
+        try {
+            const res = await fetch(`${DATABASE_URL}/api/fuel_payment/`);
+            if (!res.ok) throw new Error('ດຶງຂໍ້ມູນຜິດພາດ');
+
+            const rawData = await res.json();
+            console.log('Fetched data:', rawData);
+
+            const cleanedData = rawData.filter(
+                item => item.fuel_subsidy !== null && item.fuel_price !== null && item.total_fuel !== null
+            );
+
+            if (!cleanedData.length) {
+                Swal.fire('ຂໍ້ຄວາມ', 'ບໍ່ມີຂໍ້ມູນສົ່ງໄດ້', 'info');
+                return;
+            }
+
+            const postRes = await fetch(`${DATABASE_URL}/api/fuel_history/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(cleanedData),
+            });
+
+            if (!postRes.ok) {
+                const errorJson = await postRes.json();
+                console.error('Server responded with:', errorJson);
+                const err = new Error('Server error');
+                err.responseJson = errorJson;
+                throw err;
+            }
+
+            Swal.fire('ສຳເລັດ', 'ສຳເລັດການສຳຮອງ', 'success');
+
+        } catch (error) {
+            console.error('❌ Error:', error);
+
+            if (error.responseJson && error.responseJson.error) {
+                Swal.fire('ຜິດພາດ', error.responseJson.error, 'error');
+            } else {
+                Swal.fire('ຜິດພາດ', error.message || 'ບໍ່ສາມາດສຳຮອງໄດ້', 'error');
+            }
+        }
+    }
+
+        document.getElementById('backupBtn').addEventListener('click', backupFuelToHistory);
+
+        
+});
+</script>
+</body>
+{% endblock %}

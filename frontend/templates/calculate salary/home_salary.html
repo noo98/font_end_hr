@@ -1,0 +1,356 @@
+{% extends "base.html" %}
+{% load static %}
+<title>Lcic-HR - ລະບົບບໍລິຫານ ແລະ ຈັດການພາຍໃນ</title>
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <!-- Content Row -->
+    <div class="row mx-1">
+        <!-- Document Management -->
+        <div class="col-xl-4 col-md-4 mb-4">
+            <div class="dropdown">
+                <div class="card border-left-primary shadow h-100 py-2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-sm font-weight-bold text-primary mb-3">
+                                    ການໄລ່ເງິນພະນັກງານ
+                                </div>
+                                <div class="text-xs text-gray-600">ຄລິກເພື່ອໄລ່ເງິນພະນັກງານ</div>                                 
+                            </div>                               
+                            <div class="col-auto">
+                                <i class="fa fa-calculator fa-2x text-primary"></i>
+                            </div>
+                            <i class="fa fa-calculator card-icon text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+                <ul class="dropdown-menu shadow" style="width: 100%">
+                    <li>
+                        <a class="dropdown-item" href="/calculateSalary/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-primary mr-3">account_balance_wallet</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຄິດໄລ່ເງິນເດືອນ</div>
+                                    <div class="text-xs text-gray-500">ຄິດໄລ່ເງິນເດືອນປະຈຳເດືອນ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/calculateFuel/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-primary mr-3">local_gas_station</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຄິດໄລ່ເງິນນ້ຳມັນ</div>
+                                    <div class="text-xs text-gray-500">ຄິດໄລ່ເງິນອຸດໜູນນ້ຳມັນ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/calculateFood/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-primary mr-3">restaurant</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຄິດໄລ່ເງິນກິນເຂົ້າ</div>
+                                    <div class="text-xs text-gray-500">ຄິດໄລ່ເງິນອຸດໜູນອາຫານ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/calculateOt/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-primary mr-3">schedule</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຈັດການໂອທີ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການຂໍ້ມູນເງິນໂອວ໌ໄຕມ໌</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-primary mr-3">event</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຄິດໄລ່ເງິນວັນພິເສດ</div>
+                                    <div class="text-xs text-gray-500">ຄິດໄລ່ເງິນອຸດໜູນວັນພິເສດ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-primary mr-3">checkroom</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຄິດໄລ່ເງິນຕັດຊຸດ</div>
+                                    <div class="text-xs text-gray-500">ຄິດໄລ່ເງິນອຸດໜູນເຄື່ອງແຕ່ງກາຍ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-primary mr-3">assessment</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຄິດໄລ່ເງິນປະເມີນ</div>
+                                    <div class="text-xs text-gray-500">ຄິດໄລ່ເງິນປະເມີນຜົນງານ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-primary mr-3">phone_iphone</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຄິດໄລ່ເງິນອຸດໜູນໂທລະສັບ</div>
+                                    <div class="text-xs text-gray-500">ຄິດໄລ່ເງິນອຸດໜູນໂທລະສັບ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-md-4 mb-4">
+            <div class="dropdown">
+                <div class="card border-left-success shadow h-100 py-2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-sm font-weight-bold text-success mb-3">
+                                    ຈັດການຂໍ້ມູນເງິນພະນັກງານ
+                                </div>
+                                <div class="text-xs text-gray-600">ຄລິກເພື່ອຈັດການຂໍ້ມູນເງິນພະນັກງານ</div>                                 
+                            </div>                               
+                            <div class="col-auto">
+                                <i class="fa fa-database fa-2x text-success"></i>
+                            </div>
+                            <i class="fa fa-database card-icon text-success"></i>
+                        </div>
+                    </div>
+                </div>
+                <ul class="dropdown-menu shadow" style="width: 100%">
+                    <li>
+                        <a class="dropdown-item" href="/baseSalary/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-success mr-3">account_balance_wallet</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຈັດການເງິນເດືອນ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການຂໍ້ມູນເງິນເດືອນພະນັກງານ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/subsidyPosition/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-success mr-3">person_pin</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຈັດການເງິນອຸດໜູນຕຳແໜ່ງ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການຂໍ້ມູນເງິນອຸດໜູນຕໍາແໜ່ງ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/workerSubsidy/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-success mr-3">trending_up</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຈັດການເງິນປີການ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການຂໍ້ມູນເງິນຊ່ວຍເຫລືອປີການ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/fuelSubsidy/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-success mr-3">local_gas_station</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຈັດການເງິນນ້ຳມັນ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການຂໍ້ມູນເງິນຊ່ວຍເຫລືອນ້ຳມັນ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-success mr-3">restaurant</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຈັດການເງິນກິນເຂົ້າ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການຂໍ້ມູນເງິນຊ່ວຍເຫລືອອາຫານ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-success mr-3">event</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຈັດການເງິນວັນພິເສດ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການຂໍ້ມູນເງິນໂບນັດວັນພິເສດ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-success mr-3">assessment</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຈັດການເງິນປະເມີນ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການຂໍ້ມູນເງິນປະເມີນຜົນງານ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-success mr-3">checkroom</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຈັດການເງິນຕັດຊຸດ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການຂໍ້ມູນເງິນຊ່ວຍເຫລືອເຄື່ອງແຕ່ງກາຍ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-success mr-3">phone_iphone</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ຈັດການເງິນອຸດໜູນໂທລະສັບ</div>
+                                    <div class="text-xs text-gray-500">ຈັດການຂໍ້ມູນເງິນອຸດໜູນໂທລະສັບ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-md-4 mb-4">
+            <div class="dropdown">
+                <div class="card border-left-info shadow h-100 py-2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-sm font-weight-bold text-info mb-3">
+                                    ລາຍງານຂໍ້ມູນ
+                                </div>
+                                <div class="text-xs text-gray-600">ຄລິກເພື່ອເບິ່ງລາຍງານຕ່າງໆ</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fa fa-chart-line fa-2x text-info"></i>
+                            </div>
+                            <i class="fa fa-chart-line card-icon text-info"></i>
+                        </div>
+                    </div>
+                </div>
+                <ul class="dropdown-menu shadow" style="width: 100%">
+                    <li>
+                        <a class="dropdown-item" href="/reports/salary/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-info mr-3">assignment</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ລາຍງານເງິນເດືອນ</div>
+                                    <div class="text-xs text-gray-500">ລາຍງານສະຫຼຸບເງິນເດືອນພະນັກງານ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/reportFuel/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-info mr-3">analytics</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ລາຍງານເງິນນ້ຳມັນ</div>
+                                    <div class="text-xs text-gray-500">ລາຍງານການຈ່າຍເງິນອຸດໜູນນ້ຳມັນ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/reportSupFood/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-info mr-3">assessment</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ລາຍງານເງິນກິນເຂົ້າ</div>
+                                    <div class="text-xs text-gray-500">ລາຍງານການຈ່າຍເງິນອຸດໜູນອາຫານ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/reportOt/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-info mr-3">schedule</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ລາຍງານໂອທີ</div>
+                                    <div class="text-xs text-gray-500">ລາຍງານຂໍ້ມູນເງິນໂອວ໌ໄຕມ໌</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/reports/special_day/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-info mr-3">receipt_long</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ລາຍງານເງິນວັນພິເສດ</div>
+                                    <div class="text-xs text-gray-500">ລາຍງານການຈ່າຍເງິນອຸດໜູນວັນພິເສດ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/reports/uniform/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-info mr-3">article</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ລາຍງານເງິນຕັດຊຸດ</div>
+                                    <div class="text-xs text-gray-500">ລາຍງານການຈ່າຍເງິນອຸດໜູນເຄື່ອງແຕ່ງກາຍ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/reports/evaluation/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-info mr-3">summarize</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ລາຍງານເງິນປະເມີນ</div>
+                                    <div class="text-xs text-gray-500">ລາຍງານການຈ່າຍເງິນປະເມີນຜົນງານ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/reports/phone_allowance/">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons text-info mr-3">description</span>
+                                <div>
+                                    <div class="text-sm font-weight-bold">ລາຍງານເງິນອຸດໜູນໂທລະສັບ</div>
+                                    <div class="text-xs text-gray-500">ລາຍງານການຈ່າຍເງິນອຸດໜູນໂທລະສັບ</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>   
+    </div>
+</div>     
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock %}

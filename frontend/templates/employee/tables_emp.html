@@ -67,8 +67,9 @@
             <div class="modal-body" id="employee_detail">
                 <!-- ຂໍ້ມູນພະນັກງານຈະຖືກ render ທີ່ນີ້ -->
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeModal()">ປິດ</button>
+            <div class="modal-footer justify-content-between">
+                <a id="printEmpLink" href="#" class="btn btn-outline-primary">ເບິ່ງທັງໜົດ</a>
+                <button type="button" class="btn btn-outline-danger" onclick="closeModal()">ປິດ</button>
             </div>
         </div>
     </div>
@@ -232,7 +233,7 @@
 
                     // ໃສ່ HTML ໃນ modal body
                     document.getElementById('employee_detail').innerHTML = employeeDetail;
-
+                    document.getElementById('printEmpLink').href = `/print_emp/${empId}/`;
                     // ສະແດງ modal ແລະເກັບ instance
                     myModalInstance = new bootstrap.Modal(document.getElementById('myModal'));
                     myModalInstance.show();
@@ -256,7 +257,13 @@
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'ລຶບ!',
-        cancelButtonText: 'ຍົກເລີກ'
+        cancelButtonText: 'ຍົກເລີກ',
+        customClass: {
+            title: 'lao-font',
+            htmlContainer: 'lao-font',
+            confirmButton: 'lao-font',
+            cancelButton: 'lao-font'
+        }
     }).then((result) => {
         if (result.isConfirmed) {
             fetch(`${DATABASE_URL}/api/employee/${empId}/`, {
