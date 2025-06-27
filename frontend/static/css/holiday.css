@@ -1,0 +1,75 @@
+
+    .holiday-card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            background: white;
+            margin-bottom: 10px;
+        }
+        
+        .holiday-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .card-body {
+            padding: 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .holiday-icon {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .custom-checkbox {
+            transform: scale(1.2);
+            accent-color: #667eea;
+        }
+        
+        .custom-checkbox:checked + .checkmark {
+            background-color: #667eea;
+        }
+        
+        .card-1 { background: linear-gradient(135deg, #ff9a9e 0%, #d47db9 100%); }
+        .card-2 { background: linear-gradient(135deg, #a8edea 0%, #a8d8e4 100%); }
+        .card-3 { background: linear-gradient(135deg, #fcb69f 0%, #fcb69f 100%); }
+        .card-4 { background: linear-gradient(135deg, #d299c2 0%, #d299c2 100%); }
+        .card-5 { background: linear-gradient(135deg, #66a6ff 0%, #78adf7 100%); }
+        .card-6 { background: linear-gradient(135deg, #22c1c3 0%, #95dddf 100%); }
+        
+        .card-1 .holiday-icon { color: #e91e63; }
+        .card-2 .holiday-icon { color: #009688; }
+        .card-3 .holiday-icon { color: #ff9800; }
+        .card-4 .holiday-icon { color: #9c27b0; }
+        .card-5 .holiday-icon { color: #2196f3; }
+        .card-6 .holiday-icon { color: #ff5722; }
+        
+        .container-title {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .container-title h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .container-title p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }

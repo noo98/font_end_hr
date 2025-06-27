@@ -68,7 +68,7 @@
                 <!-- ຂໍ້ມູນພະນັກງານຈະຖືກ render ທີ່ນີ້ -->
             </div>
             <div class="modal-footer justify-content-between">
-                <a id="printEmpLink" href="#" class="btn btn-outline-primary">ເບິ່ງທັງໜົດ</a>
+                <a id="printEmpLink" href="#" class="btn btn-outline-primary">ພີມ</a>
                 <button type="button" class="btn btn-outline-danger" onclick="closeModal()">ປິດ</button>
             </div>
         </div>
@@ -233,7 +233,11 @@
 
                     // ໃສ່ HTML ໃນ modal body
                     document.getElementById('employee_detail').innerHTML = employeeDetail;
-                    document.getElementById('printEmpLink').href = `/print_emp/${empId}/`;
+                    document.getElementById('printEmpLink').addEventListener('click', function () {
+                            const url = `/print_emp/${empId}/`;
+                            window.open(url, '_blank');
+                        });
+                    
                     // ສະແດງ modal ແລະເກັບ instance
                     myModalInstance = new bootstrap.Modal(document.getElementById('myModal'));
                     myModalInstance.show();

@@ -699,3 +699,15 @@ def reportOt(request):
     return render(request, "calculate salary/report_ot.html",{
         'database_url': DATABASE_URL,
     })
+def specialAllowances(request):
+    return render(request, "calculate salary/special_allowances.html",{
+        'database_url': DATABASE_URL,
+    })
+def cal_SpecialAllowces(request):
+    return render(request, "calculate salary/calculate_specialAllow.html",{
+        'database_url': DATABASE_URL,
+    })
+def reportSalary(request):
+    return render(request, "calculate salary/report_salary.html",{
+        'database_url': DATABASE_URL,
+    })

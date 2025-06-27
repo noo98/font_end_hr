@@ -21,7 +21,7 @@
     }
 </style>
 {% block content %}
-<body>
+<body onload="autoPrint()">
     <div class="container-fluid p-5">
          {% csrf_token %}
          
@@ -338,6 +338,12 @@
     </div>
 </body>
 <script>
+    function autoPrint() {
+            window.print();
+            window.close(); 
+        }
+
+
     document.addEventListener('DOMContentLoaded', () => {
     const dateElements = document.querySelectorAll('[data-date]');
     dateElements.forEach(element => {

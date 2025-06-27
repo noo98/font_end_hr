@@ -53923,3 +53923,1964 @@ Not Found: /favicon.ico
 Not Found: /reports/salary/
 Not Found: /reports/salary/
 Not Found: /favicon.ico
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Internal Server Error: /reportFuel/
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'static/images/Lao'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py", line 695, in reportFuel
+    return render(request, "calculate salary/report_fuel.html",{
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 563, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 196: 'static/images/Lao', expected 'endblock'. Did you forget to register or load this tag?
+Internal Server Error: /reportFuel/
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'static/images/Lao'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py", line 695, in reportFuel
+    return render(request, "calculate salary/report_fuel.html",{
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 563, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 196: 'static/images/Lao', expected 'endblock'. Did you forget to register or load this tag?
+Internal Server Error: /reportFuel/
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: '"static/images/Lao'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py", line 695, in reportFuel
+    return render(request, "calculate salary/report_fuel.html",{
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 563, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 196: '"static/images/Lao', expected 'endblock'. Did you forget to register or load this tag?
+Internal Server Error: /reportFuel/
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: '"static/images/Lao'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py", line 695, in reportFuel
+    return render(request, "calculate salary/report_fuel.html",{
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 563, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 196: '"static/images/Lao', expected 'endblock'. Did you forget to register or load this tag?
+Internal Server Error: /reportFuel/
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: '"static/images/Lao'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py", line 695, in reportFuel
+    return render(request, "calculate salary/report_fuel.html",{
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 563, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 196: '"static/images/Lao', expected 'endblock'. Did you forget to register or load this tag?
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Not Found: /reports/salary/
+Not Found: /reports/salary/
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/2/ HTTP/11" 200 1580
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/2/ HTTP/11" 200 1580
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/25/ HTTP/11" 200 564
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/25/ HTTP/11" 200 564
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/10/ HTTP/11" 200 551
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/10/ HTTP/11" 200 551
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/3/ HTTP/11" 200 1648
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/3/ HTTP/11" 200 1648
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/3/ HTTP/11" 200 1648
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/25/ HTTP/11" 200 564
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/25/ HTTP/11" 200 564
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/25/ HTTP/11" 200 564
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/25/ HTTP/11" 200 564
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/24/ HTTP/11" 200 1604
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/24/ HTTP/11" 200 1604
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Not Found: /table/
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/3/ HTTP/11" 200 1648
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Not Found: /table_emp/
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/24/ HTTP/11" 200 1604
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/20/ HTTP/11" 200 591
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/20/ HTTP/11" 200 591
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/20/ HTTP/11" 200 591
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/4/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/2/ HTTP/11" 200 1580
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/3/ HTTP/11" 200 1648
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/3/ HTTP/11" 200 1648
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/3/ HTTP/11" 200 1648
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/3/ HTTP/11" 200 1648
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/3/ HTTP/11" 200 1648
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/3/ HTTP/11" 200 1648
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/3/ HTTP/11" 200 1648
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/3/ HTTP/11" 200 1648
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/3/ HTTP/11" 200 1648
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/3/ HTTP/11" 200 1648
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/3/ HTTP/11" 200 1648
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Not Found: /favicon.ico
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Not Found: /favicon.ico
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Not Found: /favicon.ico
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Not Found: /favicon.ico
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 986
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 5916
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 6670
+Internal Server Error: /specialAllowances/
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py", line 703, in specialAllowances
+    return render(request, "calculate salary/special_allowances.html",{
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 969, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'home' not found. 'home' is not a valid view function or pattern name.
+Internal Server Error: /specialAllowances/
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py", line 703, in specialAllowances
+    return render(request, "calculate salary/special_allowances.html",{
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 969, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'home' not found. 'home' is not a valid view function or pattern name.
+Internal Server Error: /specialAllowances/
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py", line 703, in specialAllowances
+    return render(request, "calculate salary/special_allowances.html",{
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 969, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'home' not found. 'home' is not a valid view function or pattern name.
+Internal Server Error: /specialAllowances/
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py", line 703, in specialAllowances
+    return render(request, "calculate salary/special_allowances.html",{
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 969, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'home' not found. 'home' is not a valid view function or pattern name.
+Internal Server Error: /specialAllowances/
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py", line 703, in specialAllowances
+    return render(request, "calculate salary/special_allowances.html",{
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 969, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 969, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 969, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'select_occasion' not found. 'select_occasion' is not a valid view function or pattern name.
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Internal Server Error: /cal_SpecialAllowces/
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py", line 707, in cal_SpecialAllowces
+    return render(request, "calculate salary/cal_special_allowces.html",{
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: calculate salary/cal_special_allowces.html
+Internal Server Error: /cal_SpecialAllowces/
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py", line 707, in cal_SpecialAllowces
+    return render(request, "calculate salary/cal_special_allowces.html",{
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: calculate salary/cal_special_allowces.html
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 986
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 6670
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Internal Server Error: /cal_SpecialAllowces/
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py", line 707, in cal_SpecialAllowces
+    return render(request, "calculate salary/calculate_specialAllow.html",{
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 605, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 701, in __init__
+    filter_func = parser.find_filter(filter_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\template\base.py", line 611, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/users/ HTTP/11" 200 2805
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 986
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 6670
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 986
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 6726
+Not Found: /reports/salary/
+Not Found: /reports/special_day/
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Not Found: /reports/special_day/
+Not Found: /reports/special_day/
+Not Found: /reports/special_day/

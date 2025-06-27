@@ -1,0 +1,228 @@
+{% extends 'base.html' %}
+{% load static %}
+<title>ລະບົບເບີກຈ່າຍເງິນ</title>
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/holiday.css' %}">
+<h2 class="mb-4 text-center">ເບີກຈ່າຍເງິນສຳລັບ</h2>
+
+<div class="card shadow-sm mb-4 p-3">
+    <div class="card-header bg-light">
+        <h5 class="mb-0">ລາຍລະອຽດການເບີກຈ່າຍ</h5>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card holiday-card">
+                <div class="card-body card-1">
+                    <i class="fas fa-flag holiday-icon"></i>
+                    <h5 class="card-title">ວັນຊາດ</h5>
+                    <div class="form-check">
+                        <input class="form-check-input custom-checkbox" type="checkbox" id="nationalDay" data-sdg-id="1">
+                        <label class="form-check-label" for="nationalDay"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card holiday-card">
+                <div class="card-body card-2">
+                    <i class="fas fa-building holiday-icon"></i>
+                    <h5 class="card-title">ວັນຄົບຮອບສ້າງຕັ້ງບໍລິສັດ ຂສລ</h5>
+                    <div class="form-check">
+                        <input class="form-check-input custom-checkbox" type="checkbox" id="companyAnniversary" data-sdg-id="4">
+                        <label class="form-check-label" for="companyAnniversary"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card holiday-card">
+                <div class="card-body card-3">
+                    <i class="fas fa-champagne-glasses holiday-icon"></i>
+                    <h5 class="card-title">ວັນປີໃໝ່ສາກົນ</h5>
+                    <div class="form-check">
+                        <input class="form-check-input custom-checkbox" type="checkbox" id="internationalNewYear" data-sdg-id="5">
+                        <label class="form-check-label" for="internationalNewYear"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card holiday-card">
+                <div class="card-body card-4">
+                    <i class="fas fa-venus holiday-icon"></i>
+                    <h5 class="card-title">ວັນແມ່ຍິງສາກົນ</h5>
+                    <div class="form-check">
+                        <input class="form-check-input custom-checkbox" type="checkbox" id="internationalWomensDay" data-sdg-id="3">
+                        <label class="form-check-label" for="internationalWomensDay"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card holiday-card">
+                <div class="card-body card-5">
+                    <i class="fa-solid fa-holly-berry holiday-icon"></i>
+                    <h5 class="card-title">ວັນປີໃໝ່ລາວ</h5>
+                    <div class="form-check">
+                        <input class="form-check-input custom-checkbox" type="checkbox" id="laoNewYear" data-sdg-id="6">
+                        <label class="form-check-label" for="laoNewYear"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card holiday-card">
+                <div class="card-body card-6">
+                    <i class="fas fa-hard-hat holiday-icon"></i>
+                    <h5 class="card-title">ວັນກຳມະກອນ</h5>
+                    <div class="form-check">
+                        <input class="form-check-input custom-checkbox" type="checkbox" id="laborDay" data-sdg-id="2">
+                        <label class="form-check-label" for="laborDay"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <button class="btn btn-light btn-lg" id="calculateButton">
+                <i class="fas fa-check-double"></i> ຄຳນວນ
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">ຊື່</th>
+                        <th scope="col">ຕຳແໜ່ງ</th>
+                        <th scope="col">ວັນ</th>
+                        <th scope="col" class="text-end">ວົງເງິນ (ກີບ)</th>
+                    </tr>
+                </thead>
+                <tbody id="employeeList">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-6 text-md-end">
+                <p class="mb-0">ລວມວົງເງິນທີ່ຈະເບີກຈ່າຍ: <span id="totalAmount" class="fw-bold text-success">0.00 ₭</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button type="button" class="btn btn-primary btn-lg" id="confirmDisbursementBtn" data-bs-toggle="modal" data-bs-target="#confirmDisbursementModal">
+        <i class="bi bi-wallet-fill"></i> ຢືນຢັນການເບີກຈ່າຍ
+    </button>
+    <button type="button" class="btn btn-secondary btn-lg" onclick="window.history.back();">
+        <i class="bi bi-arrow-left-circle"></i> ກັບຄືນ
+    </button>
+</div>
+
+<div class="modal fade" id="confirmDisbursementModal" tabindex="-1" aria-labelledby="confirmDisbursementModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="confirmDisbursementModalLabel">ຢືນຢັນການເບີກຈ່າຍ</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ທ່ານແນ່ໃຈບໍ່ວ່າຈະດຳເນີນການເບີກຈ່າຍເງິນນີ້?
+                <br>
+                <span class="fw-bold" id="modalSelectedCount">0</span> ຄົນ, ລວມເປັນເງິນ <span class="fw-bold text-success" id="modalTotalAmount">0.00 ₭</span>.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ຍົກເລີກ</button>
+                <button type="button" class="btn btn-primary" id="finalDisburseButton">ຢືນຢັນ</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const apiUrl = "http://192.168.45.52:8000/api/sdg_emp/";
+    let employeeData = [];
+
+    // 1. ດຶງຂໍ້ມູນຈາກ API
+    async function fetchEmployeeData() {
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error("ດຶງຂໍ້ມູນບໍ່ສຳເລັດ");
+            const data = await response.json();
+
+            if (!Array.isArray(data)) throw new Error("ຂໍ້ມູນຈາກ API ບໍ່ແມ່ນ array");
+
+            employeeData = data;
+            
+            console.log("✅ Employee data loaded:", employeeData);
+        } catch (err) {
+            console.error("❌ Error:", err);
+            Swal.fire("ຜິດພາດ", err.message, "error");
+        }
+    }
+
+    // 2. ເມື່ອ checkbox ຖືກເລືອກ ແລ້ວຄຳນວນ
+    function handleCheckboxClick() {
+    const selectedDays = document.querySelectorAll('.custom-checkbox:checked');
+    const employeeList = document.getElementById('employeeList');
+    const totalAmountSpan = document.getElementById('totalAmount');
+    const modalSelectedCount = document.getElementById('modalSelectedCount');
+    const modalTotalAmount = document.getElementById('modalTotalAmount');
+
+    let totalAmount = 0;
+    let totalPeople = 0;
+    employeeList.innerHTML = '';
+
+    selectedDays.forEach(checkbox => {
+        const sdgId = parseInt(checkbox.dataset.sdgId);
+
+        employeeData.forEach(employee => {
+            const matchedDay = employee.special_day.find(day => day.sdg_id === sdgId);
+
+            if (matchedDay && matchedDay.grant > 0) {
+                totalAmount += matchedDay.grant;
+                totalPeople++;
+
+                const row = `
+                    <tr>
+                        <td>${employee.lao_name}</td>
+                        <td>${employee.pos_name}</td>
+                        <td>${matchedDay.sdg_name}</td>
+                        <td class="text-end">${matchedDay.grant.toLocaleString()} ₭</td>
+                    </tr>`;
+                employeeList.insertAdjacentHTML('beforeend', row);
+            }
+        });
+    });
+
+    totalAmountSpan.textContent = totalAmount.toLocaleString() + " ₭";
+    modalSelectedCount.textContent = totalPeople;
+    modalTotalAmount.textContent = totalAmount.toLocaleString() + " ₭";
+}
+
+
+    // 3. ໂຫຼດຂໍ້ມູນແລ້ວ bind checkbox
+    fetchEmployeeData().then(() => {
+        const checkboxes = document.querySelectorAll('.custom-checkbox');
+        checkboxes.forEach(cb => cb.addEventListener('change', handleCheckboxClick));
+
+        document.getElementById('calculateButton').addEventListener('click', handleCheckboxClick);
+    });
+});
+</script>
+
+
+
+{% endblock %}

@@ -57,7 +57,10 @@ urlpatterns = [
     path('calculateFuel/', views.calculateFuel, name='calculateFuel'),
     path('calculateSalary/', views.calculateSalary, name='calculateSalary'),
     path('calculateFood/', views.calculateFood, name='calculateFood'),
+    path('specialAllowances/', views.specialAllowances, name='specialSallowances'),
+    path('cal_SpecialAllowces/', views.cal_SpecialAllowces, name='cal_SpecialAllowces'),
 
+    path('reportSalary/', views.reportSalary, name='reportSalary'),
     path('reportSupFood/', views.reportSupFood, name='reportSupFood'),
     path('reportFuel/', views.reportFuel, name='reportFuel'),
     path('reportOt/', views.reportOt, name='reportOt'),

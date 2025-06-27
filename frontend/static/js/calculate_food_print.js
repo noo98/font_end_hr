@@ -63,10 +63,8 @@ function printTable() {
     `);
     newWindow.document.close();
     newWindow.print();
-    // It's usually better to close only once after printing if needed.
-    // Having newWindow.close() twice might cause issues in some browsers.
-    // If you want it to close automatically, keep one at the end.
-    // newWindow.close(); // Removed duplicate close
+    newWindow.close();
+    newWindow.focus();
 }
 
 function exportToExcel() {
