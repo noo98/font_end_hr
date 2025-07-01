@@ -51,7 +51,7 @@
                 </div>
                 {% endif %}
     
-            <div class="table-responsive">
+            <div class="table-responsive" style="font-size: smaller;">
                 <table id="dataTable"class="table table-bordered"  width="100%" cellspacing="0">
                     <thead class="thead-light">
                         <tr>
@@ -86,146 +86,167 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", async function() {
-        const DATABASE_URL = "{{ database_url | escapejs }}";  
-    
-        async function fetchData() { 
-    let department = localStorage.getItem("department_name");
-    
-    const documentApiUrl = `${DATABASE_URL}/api/search/document_general/?department=${department}`;
-    const departmentApiUrl = `${DATABASE_URL}/api/list/departments/`;
-    const formatApiUrl = `${DATABASE_URL}/api/list/Document_format/`;
-    
-    const urlParams = new URLSearchParams(window.location.search);
-    const formatFilter = urlParams.get('format') || '';
-    const startDateFilter = urlParams.get('start_date') || '';
-    const endDateFilter = urlParams.get('end_date') || '';
-    
-    try {
-        const [documentsRes, departmentsRes, formatsRes] = await Promise.all([
-            fetch(documentApiUrl),
-            fetch(departmentApiUrl),
-            fetch(formatApiUrl)
-        ]);
-    
-        const documents = documentsRes.ok ? await documentsRes.json() : [];
-        const departments = departmentsRes.ok ? await departmentsRes.json() : [];
-        const formats = formatsRes.ok ? await formatsRes.json() : [];
-    
-        const departmentMap = Object.fromEntries(departments.map(d => [d.id, d.name]));
-        const formatMap = Object.fromEntries(formats.map(f => [f.dmf_id, f.name]));
-    
-        // Process documents
-        let processedDocuments = documents.map(doc => ({
-            docg_id: doc.docg_id || 'N/A',
-            doc_number: doc.doc_number || 'N/A',
-            format_id: doc.format || null,
-            format_name: formatMap[doc.format] || 'N/A',
-            subject: doc.subject || 'N/A',
-            insert_date: doc.insert_date || 'N/A',
-            name: doc.name || 'N/A',
-            file: doc.file ? `${DATABASE_URL}/${doc.file}` : '#'  // Use DATABASE_URL with file path
-        }));
-    
-        // Sort documents by insert_date in descending order
-        processedDocuments.sort((a, b) => new Date(b.insert_date) - new Date(a.insert_date));
-    
-        // Assign indices after sorting
-        processedDocuments = processedDocuments.map((doc, index) => ({
-            ...doc,
-            index: index + 1
-        }));
-    
-        // Filter documents
-        const filteredDocuments = processedDocuments.filter(doc => {
-            const docDate = new Date(doc.insert_date);
-            return (!formatFilter || doc.format_id.toString() === formatFilter) &&
-                   (!startDateFilter || docDate >= new Date(startDateFilter)) &&
-                   (!endDateFilter || docDate <= new Date(endDateFilter));
-        });
-    
-        return filteredDocuments;
-    
-    } catch (error) {
-        console.error("Error fetching API data:", error);
-        return [];
-    }
-}
+        const DATABASE_URL = "{{ database_url | escapejs }}";
 
-function renderTable(documents) {
-    // Retrieve userRole and username from localStorage
-    const userRole = localStorage.getItem("user_role");
-    const user = JSON.parse(localStorage.getItem("user"));
-    const currentUsername = user?.username || "";
+        async function fetchData() {
+            let department = localStorage.getItem("department_name");
 
-    // Debug: Log retrieved values
-    
+            const documentApiUrl = `${DATABASE_URL}/api/search/document_general/?department=${department}`;
+            const departmentApiUrl = `${DATABASE_URL}/api/list/departments/`;
+            const formatApiUrl = `${DATABASE_URL}/api/list/Document_format/`;
 
-    if ($.fn.DataTable.isDataTable("#dataTable")) {
-        $("#dataTable").DataTable().destroy();
-    }
+            const urlParams = new URLSearchParams(window.location.search);
+            const formatFilter = urlParams.get('format') || '';
+            const startDateFilter = urlParams.get('start_date') || '';
+            const endDateFilter = urlParams.get('end_date') || '';
 
-    const tableBody = document.getElementById("dataTableBody");
-    tableBody.innerHTML = '';
+            try {
+                const [documentsRes, departmentsRes, formatsRes] = await Promise.all([
+                    fetch(documentApiUrl),
+                    fetch(departmentApiUrl),
+                    fetch(formatApiUrl)
+                ]);
 
-    if (!documents?.length) {
-        tableBody.innerHTML = '<tr><td colspan="10" class="text-center">ບໍ່ພົບຂໍ້ມູນ</td></tr>';
-        return;
-    }
+                const documents = documentsRes.ok ? await documentsRes.json() : [];
+                const departments = departmentsRes.ok ? await departmentsRes.json() : [];
+                const formats = formatsRes.ok ? await formatsRes.json() : [];
 
-    const fragment = document.createDocumentFragment();
-    documents.forEach((doc) => {
-        const tr = document.createElement('tr');
-        tr.dataset.id = doc.docg_id;  
-        const dateObj = new Date(doc.insert_date);
-        const formattedDate = dateObj.toLocaleDateString('en-GB', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit'
-        });
-        
-        tr.innerHTML = `
-            <td>${doc.index}</td> <!-- Use pre-assigned index -->
-            <td>${doc.doc_number || ''}</td>
-            <td>${doc.format_name || ''}</td>
-            <td>${doc.subject || ''}</td>
-            <td>${formattedDate || ''}</td>                      
-            <td>${doc.name || ''}</td>
-            <td>
-                <a href="${doc.file}" target="_blank" class="btn btn-sm btn-link btn-view-doc">
-                    <i class="fas fa-file"></i>
-                </a>
-            </td> 
-            ${(userRole === "admin" || doc.name === currentUsername) ? `              
-            <td class="text-center">
-                <a href="/update_documentGen/${doc.docg_id}" class="btn btn-sm btn-link" title="ແກ້ໄຂ">
-                    <i class="fas fa-edit text-success"></i>
-                </a>
-                <button class="btn btn-sm btn-link delete-btn" data-id="${doc.docg_id}" title="ລຶບ">
-                    <i class="fas fa-trash-alt text-danger"></i>
-                </button>` : ""}
-            </td>
-        `;
-        fragment.appendChild(tr);
-    });
+                const departmentMap = Object.fromEntries(departments.map(d => [d.id, d.name]));
+                const formatMap = Object.fromEntries(formats.map(f => [f.dmf_id, f.name]));
 
-    tableBody.appendChild(fragment);
-    $(document).ready(function() {
-        const table = $('#dataTable').DataTable({
-            "order": [[5, "desc"]], // Sort by insert_date (column 4) descending
-            // No need for drawCallback to reassign indices
-        });
+                // Process documents
+                let processedDocuments = documents.map(doc => ({
+                    docg_id: doc.docg_id || 'N/A',
+                    doc_number: doc.doc_number || 'N/A',
+                    format_id: doc.format || null,
+                    format_name: formatMap[doc.format] || 'N/A',
+                    subject: doc.subject || 'N/A',
+                    insert_date: doc.insert_date || 'N/A',
+                    name: doc.name || 'N/A',
+                    file: doc.file ? `${DATABASE_URL}/${doc.file}` : null // ປ່ຽນ # ເປັນ null ເພື່ອໃຫ້ logic ຂ້າງລຸ່ມເຮັດວຽກຖືກຕ້ອງ
+                }));
 
-        // Add Delegated Event Listener for delete button
-        $('#dataTable').on('click', '.delete-btn', function() {
-            const docId = $(this).data('id');
-            deleteDocument(docId);
-        });
-    });
-}
-        
+                // Sort documents by insert_date in descending order
+                processedDocuments.sort((a, b) => new Date(b.insert_date) - new Date(a.insert_date));
+
+                // Assign indices after sorting
+                processedDocuments = processedDocuments.map((doc, index) => ({
+                    ...doc,
+                    index: index + 1
+                }));
+
+                // Filter documents
+                const filteredDocuments = processedDocuments.filter(doc => {
+                    const docDate = new Date(doc.insert_date);
+                    return (!formatFilter || doc.format_id.toString() === formatFilter) &&
+                        (!startDateFilter || docDate >= new Date(startDateFilter)) &&
+                        (!endDateFilter || docDate <= new Date(endDateFilter));
+                });
+
+                return filteredDocuments;
+
+            } catch (error) {
+                console.error("Error fetching API data:", error);
+                return [];
+            }
+        }
+
+        function renderTable(documents) {
+            // Retrieve userRole and username from localStorage
+            const userRole = localStorage.getItem("user_role");
+            const user = JSON.parse(localStorage.getItem("user"));
+            const currentUsername = user?.username || "";
+
+            if ($.fn.DataTable.isDataTable("#dataTable")) {
+                $("#dataTable").DataTable().destroy();
+            }
+
+            const tableBody = document.getElementById("dataTableBody");
+            tableBody.innerHTML = '';
+
+            if (!documents?.length) {
+                tableBody.innerHTML = '<tr><td colspan="10" class="text-center">ບໍ່ພົບຂໍ້ມູນ</td></tr>';
+                return;
+            }
+
+            const fragment = document.createDocumentFragment();
+            documents.forEach((doc) => {
+                const tr = document.createElement('tr');
+                tr.dataset.id = doc.docg_id;
+                const dateObj = new Date(doc.insert_date);
+                const formattedDate = dateObj.toLocaleDateString('en-GB', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit'
+                });
+
+                // --- ເລີ່ມຕົ້ນໂຄດການສ້າງລິ້ງໄຟລ໌ທີ່ເຈົ້າໃຫ້ມາ ---
+                // ປ່ຽນ fullFileURL ໃຫ້ກົງກັບ doc.file ທີ່ໄດ້ມາຈາກ fetchData
+                const fullFileURL = doc.file; // doc.file ຄວນຈະເປັນ URL ເຕັມແລ້ວ
+
+                let fileLinks = 'No File';
+                if (fullFileURL) {
+                    // ດຶງນາມສະກຸນຈາກ URL
+                    const ext = fullFileURL.split('.').pop().toLowerCase().split('?')[0]; // ເພີ່ມ .split('?')[0] ເພື່ອຕັດ query parameters ອອກ
+
+                    if (ext === 'pdf') {
+                        fileLinks = `
+                            <div class="flex flex-col space-y-1">
+                                <a href="${fullFileURL}" target="_blank" class="btn btn-sm btn-info text-white" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;">📁 ເບິ່ງໄຟລ໌</a> 
+                            </div>`;
+                    } else if (['doc', 'docx'].includes(ext)) {
+                        fileLinks = `
+                            <div class="flex flex-col space-y-1">
+                                <a href="ms-word:ofe|u|${fullFileURL}" class="btn btn-sm btn-info text-white" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;">📁 ເບິ່ງໄຟລ໌</a>
+                            </div>`;
+                    } else {
+                        fileLinks = `<a href="${fullFileURL}" target="_blank" class="btn btn-sm btn-info text-white" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;">📁 ເບິ່ງໄຟລ໌</a>`;
+                    }
+                }
+                // --- ສິ້ນສຸດໂຄດການສ້າງລິ້ງໄຟລ໌ ---
+
+                tr.innerHTML = `
+                    <td>${doc.index}</td>
+                    <td>${doc.doc_number || ''}</td>
+                    <td>${doc.format_name || ''}</td>
+                    <td>${doc.subject || ''}</td>
+                    <td>${formattedDate || ''}</td>
+                    <td>${doc.name || ''}</td>
+                    <td>
+                        ${fileLinks}
+                    </td>
+                    ${(userRole === "admin" || doc.name === currentUsername) ? `
+                    <td class="text-center">
+                        <a href="/update_documentGen/${doc.docg_id}" class="btn btn-sm btn-link" title="ແກ້ໄຂ">
+                            <i class="fas fa-edit text-success"></i>
+                        </a>
+                        <button class="btn btn-sm btn-link delete-btn" data-id="${doc.docg_id}" title="ລຶບ">
+                            <i class="fas fa-trash-alt text-danger"></i>
+                        </button>
+                    </td>` : `<td></td>`}
+                `;
+                fragment.appendChild(tr);
+            });
+
+            tableBody.appendChild(fragment);
+
+            $(document).ready(function() {
+                // ໃຫ້ແນ່ໃຈວ່າ DataTable ຖືກສ້າງພຽງເທື່ອດຽວ
+                if (!$.fn.DataTable.isDataTable("#dataTable")) {
+                    const table = $('#dataTable').DataTable({});
+                }
+
+                // Add Delegated Event Listener for delete button
+                $('#dataTable').on('click', '.delete-btn', function() {
+                    const docId = $(this).data('id');
+                    deleteDocument(docId);
+                });
+            });
+        }
+
         async function deleteDocument(docId) {
             const apiUrl = `${DATABASE_URL}/api/document_general/${docId}/`;
-        
+
             Swal.fire({
                 title: "ທ່ານແນ່ໃຈບໍ?",
                 text: "ທ່ານຈະບໍ່ສາມາດກູ້ຂໍ້ມູນຄືນໄດ້!",
@@ -234,7 +255,7 @@ function renderTable(documents) {
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "ຢືນຢັນ",
-                cancelButtonText: "Cancel",
+                cancelButtonText: "ຍົກເລີກ", // ປ່ຽນເປັນພາສາລາວ
                 customClass: {
                     title: "lao-font",
                     htmlContainer: "lao-font",
@@ -243,7 +264,9 @@ function renderTable(documents) {
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch(apiUrl, { method: 'DELETE' })
+                    fetch(apiUrl, {
+                            method: 'DELETE'
+                        })
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -251,11 +274,12 @@ function renderTable(documents) {
                             return response.json();
                         })
                         .then(() => {
-                            // ລຶບຕົວແບບຈາກ DataTable ໂດຍບໍ່reload
+                            // ລຶບຕົວແບບຈາກ DataTable ໂດຍບໍ່ reload
                             const table = $('#dataTable').DataTable();
                             table.row($(`tr[data-id="${docId}"]`)).remove().draw();
                             Swal.fire("ລຶບສຳເລັດ!", "ເອກະສານໄດ້ຖືກລຶບແລ້ວ.", "success");
-                            fetchData().then(renderTable);
+                            // ບໍ່ຈຳເປັນຕ້ອງ fetchData().then(renderTable); ຫຼັງຈາກ delete ສຳເລັດ
+                            // ເພາະ DataTable ຖືກ update ແລ້ວດ້ວຍ .remove().draw()
                         })
                         .catch(error => {
                             Swal.fire("Error!", `ລຶບເອກະສານບໍ່ສຳເລັດ: ${error.message}`, "error");
@@ -263,22 +287,24 @@ function renderTable(documents) {
                 }
             });
         }
-        
+
         const documents = await fetchData();
         renderTable(documents);
     });
+
     function goBack() {
-    window.history.back(); 
+        window.history.back();
     }
+
     document.getElementById("resetFilter").addEventListener("click", function() {
-        // เคลียร์ input ทั้งหมดใน form
+        // ເຄລຍ input ທັງໝົດໃນ form
         document.querySelector('select[name="format"]').value = "";
         document.querySelector('input[name="start_date"]').value = "";
         document.querySelector('input[name="end_date"]').value = "";
 
-        // ลบ query string และ reload หน้า
+        // ລົບ query string ແລະ reload ໜ້າ
         window.history.replaceState({}, document.title, window.location.pathname);
-        location.reload(); // ดึงข้อมูลใหม่โดยไม่ใช้ filter
+        location.reload(); // ດຶງຂໍ້ມູນໃໝ່ໂດຍບໍ່ໃຊ້ filter
     });
 </script>
 

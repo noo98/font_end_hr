@@ -4,12 +4,9 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/holiday.css' %}">
-<h2 class="mb-4 text-center">ເບີກຈ່າຍເງິນສຳລັບ</h2>
+<h2 class="mb-4 text-center">ເບີກຈ່າຍເງິນສຳລັບວັນພິເສດ</h2>
 
 <div class="card shadow-sm mb-4 p-3">
-    <div class="card-header bg-light">
-        <h5 class="mb-0">ລາຍລະອຽດການເບີກຈ່າຍ</h5>
-    </div>
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card holiday-card">
@@ -89,18 +86,13 @@
             </div>
         </div>
     </div>
-    <div class="row mt-4">
-        <div class="col-12 text-center">
-            <button class="btn btn-light btn-lg" id="calculateButton">
-                <i class="fas fa-check-double"></i> ຄຳນວນ
-            </button>
-        </div>
-    </div>
+    
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered table-striped align-middle">
                 <thead>
                     <tr>
+                        <th scope="col">ລຳດັບ</th>
                         <th scope="col">ຊື່</th>
                         <th scope="col">ຕຳແໜ່ງ</th>
                         <th scope="col">ວັນ</th>
@@ -152,7 +144,7 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const apiUrl = "http://192.168.45.52:8000/api/sdg_emp/";
+    const apiUrl = `${DATABASE_URL}/api/sdg_emp/`;
     let employeeData = [];
 
     // 1. ດຶງຂໍ້ມູນຈາກ API
@@ -188,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
     selectedDays.forEach(checkbox => {
         const sdgId = parseInt(checkbox.dataset.sdgId);
 
-        employeeData.forEach(employee => {
+        employeeData.forEach((employee,index) => {
             const matchedDay = employee.special_day.find(day => day.sdg_id === sdgId);
 
             if (matchedDay && matchedDay.grant > 0) {
@@ -197,10 +189,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const row = `
                     <tr>
+                        <td>${index +1 }</td>
                         <td>${employee.lao_name}</td>
                         <td>${employee.pos_name}</td>
                         <td>${matchedDay.sdg_name}</td>
-                        <td class="text-end">${matchedDay.grant.toLocaleString()} ₭</td>
+                        <td class="text-end">${matchedDay.grant.toLocaleString()} ກີບ</td>
                     </tr>`;
                 employeeList.insertAdjacentHTML('beforeend', row);
             }

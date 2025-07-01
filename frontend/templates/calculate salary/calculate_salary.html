@@ -15,7 +15,7 @@
                 <div class="card header-card">
                     <div class="card-body text-center">
                         <h1 class="card-title">
-                            ລາຍງານຂໍ້ມູນການຈ່າຍເງິນເດຶອນ
+                            ຂໍ້ມູນການຈ່າຍເງິນເດືອນ
                         </h1>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                     </div>
                     </div>
                     <div class="card-body p-0">
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="font-size: smaller;">
                             <table class="table table-hover mb-0">
                                 <thead>
                                     <tr>
@@ -100,10 +100,10 @@
                         <td>${item.lao_name}</td>
                         <td>${item.position}</td>
                         <td>${formatCurrency(item.salary)}</td>
-                        <td>${formatCurrency(item.total_subsidy)}</td> 
-                        <td>${formatCurrency(item.subsidyPosition)}</td> 
-                        <td>${formatCurrency(item.total_ot)}</td>
-                        <td>${formatCurrency(item.salary_payment)}</td>  
+                        <td>${formatCurrency(item.year_subsidy_total)}</td> 
+                        <td>${formatCurrency(item.position_subsidy)}</td> 
+                        <td>${formatCurrency(item.ot)}</td>
+                        <td>${formatCurrency(item.net_salary)}</td>  
                     </tr>
                 `;
             }).join('');

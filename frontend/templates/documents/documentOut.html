@@ -59,7 +59,7 @@
                 </div>
                 {% endif %}
     
-            <div class="table-responsive">
+            <div class="table-responsive" style="font-size: smaller;">
                 <table id="dataTable"class="table table-bordered"  width="100%" cellspacing="0">
                     <thead class="thead-light">
                         <tr>
@@ -137,7 +137,7 @@
                         doc.department_into.map(dep => departmentMap[dep.id] || 'N/A').join(', ') : 'N/A',
                     name: doc.name || 'N/A',
                     status2: doc.status2 || 'N/A',
-                    file: doc.file ? `${DATABASE_URL}/${doc.file}` : '#',  // ໃຊ້ DATABASE_URL ກັບ file path
+                    file: doc.file ? `${DATABASE_URL}/${doc.file}` : null,  // ໃຊ້ DATABASE_URL ກັບ file path
                     status: doc.status || []
                 };
             });
@@ -164,13 +164,15 @@
     const currentUsername = user?.username || ""; 
     const userId = localStorage.getItem("user_id");
 
+    // ທຳລາຍ DataTable ເກົ່າຖ້າມີ
     if ($.fn.DataTable.isDataTable("#dataTable")) {
         $("#dataTable").DataTable().destroy();
     }
 
     const tableBody = document.getElementById("dataTableBody");
-    tableBody.innerHTML = '';
+    tableBody.innerHTML = ''; // ລ້າງເນື້ອຫາຕາຕະລາງເກົ່າ
 
+    // ກວດສອບວ່າບໍ່ມີຂໍ້ມູນ
     if (!documents?.length) {
         tableBody.innerHTML = '<tr><td colspan="10" class="text-center">ບໍ່ພົບຂໍ້ມູນ</td></tr>';
         return;
@@ -178,20 +180,51 @@
 
     const fragment = document.createDocumentFragment();
     documents.forEach((doc) => {
+        // ກວດສອບວ່າຜູ້ໃຊ້ເບິ່ງເອກະສານນີ້ແລ້ວຫຼືຍັງ
         const userViewed = doc.status?.some(status => {
             return status.us_id == userId && status.Doc_status === "viewed";
         });
+        
         const tr = document.createElement('tr');
         tr.dataset.id = doc.doc_id;
 
+        // ຈັດຮູບແບບວັນທີ
         const dateObj = new Date(doc.insert_date);
         const formattedDate = dateObj.toLocaleDateString('en-GB', {
             year: 'numeric',
             month: '2-digit',
             day: '2-digit'
         });
+
+        const fullFileURL = doc.file;
+        let fileLinksContent = '';
+
+        // ສ້າງລິ້ງໄຟລ໌ຕາມປະເພດ
+        if (fullFileURL) {
+            const ext = fullFileURL.split('.').pop().toLowerCase().split('?')[0]; // ດຶງນາມສະກຸນແລະຕັດ query params
+
+            if (ext === 'pdf') {
+                fileLinksContent = `
+                    <a href="${fullFileURL}" onclick="UpDoc(event, '${doc.doc_id}')" target="_blank" class="btn btn-sm btn-info text-white me-1" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;">📁 ເບິ່ງໄຟລ໌</a>
+                
+                `;
+            } else if (['doc', 'docx'].includes(ext)) {
+                fileLinksContent = `
+                    <a href="ms-word:ofe|u|${fullFileURL}" onclick="UpDoc(event, '${doc.doc_id}')" class="btn btn-sm btn-info text-white me-1" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;">📁 ເບິ່ງໄຟລ໌</a>
+                    
+                `;
+            } else {
+                // ສຳລັບໄຟລ໌ປະເພດອື່ນໆ, ສະແດງປຸ່ມເບິ່ງໄຟລ໌ເທົ່ານັ້ນ
+                fileLinksContent = `
+                    <a href="${fullFileURL}" onclick="UpDoc(event, '${doc.doc_id}')" target="_blank" class="btn btn-sm btn-info text-white" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;">📁 ເບິ່ງໄຟລ໌</a>
+                `;
+            }
+        } else {
+            fileLinksContent = '<span>ບໍ່ມີໄຟລ໌</span>'; // ສະແດງຂໍ້ຄວາມຖ້າບໍ່ມີໄຟລ໌
+        }
+
         tr.innerHTML = `
-            <td></td> 
+            <td>${doc.index}</td> 
             <td>${doc.doc_number || ''}</td>
             <td>${doc.format_name || ''}</td>
             <td>${doc.subject || ''}</td>
@@ -200,13 +233,15 @@
             <td>${doc.department_into || ''}</td>
             
             <td style="text-align: center;">
-                <a href="${doc.file}" onclick="UpDoc(event, '${doc.doc_id}')" target="_blank" class="btn btn-sm btn-link">
-                    <span id="status-${doc.doc_id}" class="badge ${userViewed ? 'bg-success' : 'bg-danger'}">
-                        ${userViewed ? '<i class="fas fa-check"></i>' : '<i class="fas fa-eye"></i>'}
+                <div class="d-flex flex-column align-items-center justify-content-center">
+                    <span id="status-${doc.doc_id}" class="badge ${userViewed ? 'bg-success' : 'bg-danger'} mb-2">
+                        ${userViewed ? '<i class="fas fa-check"></i> ເບິ່ງແລ້ວ' : '<i class="fas fa-eye"></i> ຍັງບໍ່ໄດ້ເບິ່ງ'}
                     </span>
-                </a>
+                    <div class="d-flex justify-content-center flex-wrap"> ${fileLinksContent}
+                    </div>
+                </div>
             </td>
-            ${(userRole === "admin" || doc.name === currentUsername) ? `              
+            ${(userRole === "admin" || doc.name === currentUsername) ? `
                 <td class="text-center">
                     <a href="/update_documentO/${doc.doc_id}" class="btn btn-sm btn-link" title="ແກ້ໄຂ">
                         <i class="fas fa-edit text-success"></i>
@@ -221,18 +256,14 @@
 
     tableBody.appendChild(fragment);
 
+    // Initialize DataTable ຫຼັງຈາກຂໍ້ມູນຖືກໂຫຼດແລ້ວ
     $(document).ready(function() {
-        const table = $('#dataTable').DataTable({
-            "order": [[4, "desc"]], // ຈັດລຽງຕາມ insert_date (ຄໍລຳທີ 4) ແບບ descending
-            "drawCallback": function(settings) {
-                // ອັບເດດ index ຫຼັງຈາກ DataTable ແຕ່ງຕາຕະລາງສຳເລັດ
-                const api = this.api();
-                api.rows({ page: 'current' }).every(function(rowIdx, tableLoop, rowLoop) {
-                    const cell = this.cell(rowIdx, 0); // ຄໍລຳທີ 0 (index)
-                    cell.data(rowLoop + 1); // ກຳນົດ index ໃໝ່ເລີ່ມຈາກ 1
-                });
-            }
-        });
+        if (!$.fn.DataTable.isDataTable("#dataTable")) { // ປ້ອງກັນການສ້າງ DataTable ຊໍ້າກັນ
+            $('#dataTable').DataTable({
+                // ເຈົ້າສາມາດເພີ່ມ options ອື່ນໆຂອງ DataTable ໄດ້ທີ່ນີ້
+                // ຕົວຢ່າງ: "paging": true, "searching": true, "ordering": false
+            });
+        }
 
         // ເພີ່ມ Delegated Event Listener ໃຫ້ປຸ່ມລຶບ
         $('#dataTable').on('click', '.delete-btn', function() {

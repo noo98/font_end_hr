@@ -9,10 +9,10 @@
         <div class="row">
             <div class="col-4"> 
                 <input type="hidden" class="form-control" id="id" name="id" required>
-                <div class="input-group-custom"><input type="text" class="form-control" id="special_day" name="special_day" required><label>ວັນ</label></div>
+                <div class="input-group-custom"><input type="text" class="form-control" id="special_day" name="special_day" disabled><label>ວັນ</label></div>
             </div>
             <div class="col-4"> 
-                <div class="input-group-custom"><input type="text" class="form-control" id="pos_name" name="pos_name" required><label>ຕຳແໜ່ງ</label></div>
+                <div class="input-group-custom"><input type="text" class="form-control" id="pos_name" name="pos_name" disabled><label>ຕຳແໜ່ງ</label></div>
             </div>
             <div class="col-4"> 
                 <div class="input-group-custom"><input type="text" class="form-control" id="grant" name="grant" required><label>ຈຳນວນເງິນ</label></div>
@@ -20,9 +20,8 @@
         </div>
         <div class="row mt-3 text-center">
             <div class="col-12">
-                <button type="submit" name="btnAdd" class="btn btn-primary">
-                    <i class="fas fa-plus-circle"></i> ບັນທຶກ</button>
-                <button type="submit" name="btnEdit" class="btn btn-primary d-none">
+                
+                <button type="submit" name="btnEdit" class="btn btn-primary ">
                     <i class="fas fa-edit"></i> ແກ້ໄຂ</button>
                 <button type="reset" id="btnCancel" class="btn btn-secondary"><i class="fas fa-sync"></i> ຍົກເລີກ</button>
             </div>
@@ -31,7 +30,11 @@
     </form>
 </div>
 <div class="card shadow-sm mb-4 p-3">
-    <h5 class="mb-4 text-center">ລາຍການເງິນໂບນັດວັນພິເສດ</h5>
+    <div class="col-4 mb-3">
+        <select name="filterDay" id="filterDay" class="form-select">
+            <option value="">ທຸກວັນ</option>
+        </select>
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -49,47 +52,89 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-const DATABASE_URL = "http://192.168.45.52:8000"; // ກຳນົດ URL ທີ່ຊັດເຈນ
+
 const specialAllowanceForm = document.getElementById('specialAllowanceForm');
-const btnAdd = document.querySelector('[name="btnAdd"]');
-const btnEdit = document.querySelector('[name="btnEdit"]');
+
 const specialAllowanceTableBody = document.getElementById('specialAllowanceTableBody');
 
-async function fetchSpecialAllowances() {
+document.addEventListener("DOMContentLoaded", function () {
+    loadOccasions(); // โหลด dropdown
+    fetchSpecialAllowances(); // โหลดข้อมูลทั้งหมด
+
+    // filter event
+    document.getElementById("filterDay").addEventListener("change", function () {
+        const selectedId = this.value;
+        fetchSpecialAllowances(selectedId);
+    });
+});
+
+// 🔹 Load options for dropdown filter
+async function loadOccasions() {
     try {
-        console.log('Fetching data from:', `${DATABASE_URL}/api/sdg/`);
-        const response = await fetch(`${DATABASE_URL}/api/sdg/`);
-        console.log('Response:', response);
+        const response = await fetch(`${DATABASE_URL}/api/sd/`);
         if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
+            throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
-        const specialAllowances = await response.json();
-        console.log('Data received:', specialAllowances);
-        specialAllowanceTableBody.innerHTML = '';
-        if (specialAllowances.length === 0) {
-            console.log('No data to display');
-            specialAllowanceTableBody.innerHTML = '<tr><td colspan="4" class="text-center">ບໍ່ມີຂໍ້ມູນ</td></tr>';
-            return;
-        }
-        specialAllowances.forEach((specialAllowance,index) => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${index +1 }</td>
-                <td>${specialAllowance.special_day}</td>
-                <td>${specialAllowance.pos_name}</td>
-                <td>${parseFloat(specialAllowance.grant).toFixed(2)}</td>
-                <td>
-                    <button class="btn btn-info btn-sm" onclick="editSpecialAllowance(${specialAllowance.id})">ແກ້ໄຂ</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteSpecialAllowance(${specialAllowance.id})">ລຶບ</button>
-                </td>
-            `;
-            specialAllowanceTableBody.appendChild(row);
+        const data = await response.json();
+        const select = document.getElementById("filterDay");
+
+        data.forEach(item => {
+            const option = document.createElement("option");
+            option.value = item.sdg_id;
+            option.textContent = item.occasion_name;
+            select.appendChild(option);
         });
     } catch (error) {
-        console.error('Error in fetchSpecialAllowances:', error);
-        Swal.fire('ມີຂໍ້ຜິດພາດ', error.message, 'error');
+        console.error("Error loading occasions:", error);
     }
 }
+function formatNumber(num) {
+            return new Intl.NumberFormat('lo-LA', {
+                style: 'decimal',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(num);
+        }
+
+// 🔹 Load and filter special allowances
+async function fetchSpecialAllowances(filterSdgId = '') {
+    try {
+        const response = await fetch(`${DATABASE_URL}/api/sdg/`);
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+        const data = await response.json();
+        const tbody = document.getElementById("specialAllowanceTableBody");
+        tbody.innerHTML = '';
+
+        const filtered = filterSdgId ? data.filter(item => item.sdg_id == filterSdgId) : data;
+
+        if (filtered.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" class="text-center">ບໍ່ມີຂໍ້ມູນ</td></tr>';
+            return;
+        }
+
+        filtered.forEach((item, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${item.special_day}</td>
+                <td>${item.pos_name}</td>
+                <td>${formatNumber(item.grant)}</td>
+                <td>
+                    <button class="btn btn-info btn-sm" onclick="editSpecialAllowance(${item.id})">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    } catch (error) {
+        console.error("Error loading special allowances:", error);
+        Swal.fire("ມີຂໍ້ຜິດພາດ", error.message, "error");
+    }
+}
+
 
 specialAllowanceForm.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -122,7 +167,7 @@ specialAllowanceForm.addEventListener('submit', async (event) => {
             body: JSON.stringify({
                 special_day: special_day,
                 pos_name: pos_name,
-                grant: parseFloat(grant)
+                grant: grant
             }),
         });
 
@@ -162,54 +207,18 @@ async function editSpecialAllowance(special_dayId) {
         document.getElementById('pos_name').value = specialAllowance.pos_name;
         document.getElementById('grant').value = specialAllowance.grant;
 
-        btnAdd.classList.add('d-none');
-        btnEdit.classList.remove('d-none');
+       
     } catch (error) {
         console.error('Error in editSpecialAllowance:', error);
         Swal.fire('ມີຂໍ້ຜິດພາດ', error.message, 'error');
     }
 }
 
-async function deleteSpecialAllowance(special_dayId) {
-    const apiUrl = `${DATABASE_URL}/api/sdg/${special_dayId}/`;
-    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken
-            },
-        });
 
-        if (!response.ok) throw new Error('Network response was not ok');
-
-        Swal.fire({
-            title: 'ສຳເລັດ!',
-            text: 'ລາຍການເງິນໂບນັດວັນພິເສດ ຖືກລຶບແລ້ວ',
-            icon: 'success',
-            customClass: {
-                title: 'lao-font',
-                htmlContainer: 'lao-font',
-                confirmButton: 'lao-font'
-            }
-        }).then(() => {
-            window.location.reload();
-            specialAllowanceForm.reset();
-            btnAdd.classList.remove('d-none');  
-            btnEdit.classList.add('d-none');
-        });
-    } catch (error) {
-        console.error('Error in deleteSpecialAllowance:', error);
-        Swal.fire('ມີຂໍ້ຜິດພາດ', error.message, 'error');
-    }
-}
 
 document.getElementById('btnCancel').addEventListener('click', () => {
     specialAllowanceForm.reset();
-    btnAdd.classList.remove('d-none');
-    btnEdit.classList.add('d-none');
+    
 });
 
 // ເອີ້ນ fetchSpecialAllowances ເມື່ອໜ້າໂຫຼດ
