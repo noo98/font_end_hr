@@ -10,8 +10,11 @@ import os
 from datetime import datetime
 
 env = environ.Env()
-environ.Env.read_env()  
-DATABASE_URL = env('DATABASE_URL')  
+environ.Env.read_env()
+
+# อ่านค่าจาก .env
+DATABASE_URL = env('DATABASE_URL')
+FILE_PATH = env('FILE_PATH')
 
 
 @api_view(['GET'])
@@ -328,6 +331,8 @@ def documentEntry(request):
         'end_date_filter': end_date_filter,
         'documents_json': json.dumps(documents),
         'database_url': DATABASE_URL,
+        'file_path': FILE_PATH,
+        
     })
 
 
@@ -388,7 +393,8 @@ def documentOut(request):
         'start_date_filter': start_date_filter,
         'end_date_filter': end_date_filter,
         'documents_json': json.dumps(documents),
-        'database_url': DATABASE_URL,  
+        'database_url': DATABASE_URL, 
+        'file_path': FILE_PATH, 
     })
 def view_post(request):
     return render(request, 'documents/view_post.html', {       
@@ -427,7 +433,8 @@ def documentGen(request):
         'department_filter': department_filter,
         'start_date_filter': start_date_filter,
         'end_date_filter': end_date_filter,
-        'database_url': DATABASE_URL,  
+        'database_url': DATABASE_URL,
+        'file_path': FILE_PATH,   
     })
 
 def add_documentE(request):

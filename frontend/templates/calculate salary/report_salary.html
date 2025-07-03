@@ -27,9 +27,9 @@
             <div class="col-12">
                 <div class="card header-card">
                     <div class="card-body text-center">
-                        <h1 class="card-title">
+                        <h3 class="card-title">
                             ລາຍງານຂໍ້ມູນການຈ່າຍເງິນເດືອນ
-                        </h1>
+                        </h3>
                     </div>
                 </div>
             </div>
@@ -37,8 +37,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="card table-card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h3 class="card-title mb-0">ລາຍງານຂໍ້ມູນ</h3>
+                    <div class="card-header d-flex justify-content-between align-items-center" style="font-size: smaller;">
+                        <div>
+                            <button type="button" class="btn btn-outline-secondary active" id="salaryTabBtn">ເງິນເດືອນ<i class="bi bi-plus"></i></button>
+                            <button type="button" class="btn btn-outline-secondary" id="taxTabBtn">ອາກອນ<i class="bi bi-plus"></i></button>
+                            <button type="button" class="btn btn-outline-secondary" id="savingTabBtn">ສະຫະກອນອອມຊັບ<i class="bi bi-plus"></i></button>
+                        </div>
                         <div>
                             <button class="btn btn-outline-success me-2" onclick="exportToExcel()">
                                 <i class="bi bi-file-earmark-excel"></i> Export Excel
@@ -48,7 +52,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card-body p-0">
+                    <div class="card-body p-0" id="monlyTableContainer">
                         <div class="table-responsive" style="font-size: smaller;">
                             <table class="table table-hover mb-0" id="monlyTable">
                                 <thead>
@@ -56,15 +60,8 @@
                                         <th>ID</th>
                                         <th>ວັນທີ</th>
                                         <th>ພະນັກງານ</th>
-                                        <th>ຕຳແໜ່ງ</th>
                                         <th>ເງິນເດືອນ</th>
-                                        <th>ສະວັດດີການ 8%</th>
-                                        <th>ສະວັດດີການ 5.5%</th>
-                                        <th>ສະວັດດີການ 8.5%</th>
-                                        <th>ສະວັດດີການ 6%</th>
                                         <th>ເງິນອຸໜູນຕຳແໜ່ງ</th>
-                                        <th>ປີການ</th>
-                                        <th>ເງິນປີການ</th>
                                         <th>ເງິນປີການລວມ</th>
                                         <th>ເງິນໂອທີ</th>
                                         <th>ລວມລາຍຮັບພື້ນຖານ</th>
@@ -72,28 +69,69 @@
                                         <th>ລາຍຮັບປະຈຳ</th>
                                         <th>ລາຍຮັບອື່ນ</th>
                                         <th>ລາຍຮັບກ່ອນພາສີ</th>
+                                        <th>ລາຍຮັບສຸດທິພື້ນຖານ</th>
+                                        <th>ເງິນອຸດໜູນລູກ</th>
+                                        <th>ເງິນອຸດໜູນລູກລວມ</th>
+                                        <th>ເງິນອຸດໜູນສຸຂະພາບ</th>
+                                        <th>ເງິນສຸດທິ</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="monlyTableBody">
+                                    <tr id="monlyLoadingRow">
+                                        <td colspan="17" class="text-center py-4">
+                                            <div class="spinner-border text-primary" role="status"></div>
+                                            <div class="mt-2">ກຳລັງໂຫຼດຂໍ້ມູນເງິນເດືອນ...</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-body p-0" id="taxTableContainer" style="display: none;">
+                        <div class="table-responsive" style="font-size: smaller;">
+                            <table class="table table-hover mb-0" id="taxTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>ວັນທີ</th>
+                                        <th>ພະນັກງານ</th>
+                                        <th>ເງິນເດືອນ</th>
+                                        <th>ລາຍຮັບກ່ອນພາສີ</th>
                                         <th>ຍົກຍົກພາສີ</th>
                                         <th>ພາສີ 5%</th>
                                         <th>ພາສີ 10%</th>
                                         <th>ພາສີ 15%</th>
                                         <th>ພາສີລວມ</th>
-                                        <th>ລາຍຮັບສຸດທິພື້ນຖານ</th>
-                                        <th>ຈຳນວນລູກ</th>
-                                        <th>ເງິນອຸດໜູນລູກ</th>
-                                        <th>ເງິນອຸດໜູນລູກລວມ</th>
-                                        <th>ເງິນອຸດໜູນສຸຂະພາບ</th>
-                                        <th>ເງິນສັງຄົມ</th>
-                                        <th>ດອກເບ້ຍ</th>
-                                        <th>ເງິນຝາກ</th>
-                                        <th>ລວມເງິນສັງຄົມ</th>
                                         <th>ເງິນສຸດທິ</th>
                                     </tr>
                                 </thead>
-                                <tbody id="monlyTableBody">
-                                    <tr id="loadingRow">
-                                        <td colspan="34" class="text-center py-4">
+                                <tbody id="taxTableBody">
+                                    <tr id="taxLoadingRow">
+                                        <td colspan="11" class="text-center py-4">
                                             <div class="spinner-border text-primary" role="status"></div>
-                                            <div class="mt-2">ກຳລັງໂຫຼດຂໍ້ມູນ...</div>
+                                            <div class="mt-2">ກຳລັງໂຫຼດຂໍ້ມູນອາກອນ...</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-body p-0" id="savingTableContainer" style="display: none;">
+                        <div class="table-responsive" style="font-size: smaller;">
+                            <table class="table table-hover mb-0" id="savingTable"> <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>ວັນທີ</th>
+                                        <th>ພະນັກງານ</th>
+                                        <th>ເງິນເດືອນ</th>
+                                        <th>ເງິນກູ້</th>
+                                        <th>ດອກເບັ້ຍ</th>
+                                        <th>ເງິນຝາກ</th>
+                                        <th>ລວມຫັກເງິນສະຫະກອນອອມຊັບ</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="savingTableBody"> <tr id="savingLoadingRow"> <td colspan="8" class="text-center py-4"> <div class="spinner-border text-primary" role="status"></div>
+                                            <div class="mt-2">ກຳລັງໂຫຼດຂໍ້ມູນສະຫະກອນອອມຊັບ...</div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -110,107 +148,269 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // Fetch data from API and populate table
-        async function fetchData() {
+        // Define the single API URL
+        const API_URL = 'http://192.168.45.52:8000/api/mon_ly/';
+
+        // Get references to elements
+        const salaryTabBtn = document.getElementById('salaryTabBtn');
+        const taxTabBtn = document.getElementById('taxTabBtn');
+        const savingTabBtn = document.getElementById('savingTabBtn'); // Added saving tab button
+        const monlyTableContainer = document.getElementById('monlyTableContainer');
+        const taxTableContainer = document.getElementById('taxTableContainer');
+        const savingTableContainer = document.getElementById('savingTableContainer'); // Added saving table container
+        const monlyTableBody = document.getElementById('monlyTableBody');
+        const taxTableBody = document.getElementById('taxTableBody');
+        const savingTableBody = document.getElementById('savingTableBody'); // Added saving table body
+
+        // --- Functions to manage table visibility and data fetching ---
+
+        /**
+         * Shows the specified table and hides others, then fetches data.
+         * @param {string} tableType - 'salary', 'tax', or 'saving'
+         */
+        async function showTable(tableType) {
+            // Hide all table containers and deactivate buttons
+            monlyTableContainer.style.display = 'none';
+            taxTableContainer.style.display = 'none';
+            savingTableContainer.style.display = 'none'; // Hide saving container
+            salaryTabBtn.classList.remove('active');
+            taxTabBtn.classList.remove('active');
+            savingTabBtn.classList.remove('active'); // Deactivate saving button
+
+            // Show the selected table and activate its button
+            let currentTbody, currentLoadingRowId, currentTableColspan;
+            let loadingText; // Variable for dynamic loading text
+
+            if (tableType === 'salary') {
+                monlyTableContainer.style.display = 'block';
+                salaryTabBtn.classList.add('active');
+                currentTbody = monlyTableBody;
+                currentLoadingRowId = 'monlyLoadingRow';
+                currentTableColspan = 17; // Colspan for salary table
+                loadingText = 'ເງິນເດືອນ';
+            } else if (tableType === 'tax') {
+                taxTableContainer.style.display = 'block';
+                taxTabBtn.classList.add('active');
+                currentTbody = taxTableBody;
+                currentLoadingRowId = 'taxLoadingRow';
+                currentTableColspan = 11; // Colspan for tax table
+                loadingText = 'ອາກອນ';
+            } else if (tableType === 'saving') {
+                savingTableContainer.style.display = 'block';
+                savingTabBtn.classList.add('active');
+                currentTbody = savingTableBody;
+                currentLoadingRowId = 'savingLoadingRow';
+                currentTableColspan = 8; // Colspan for saving table
+                loadingText = 'ສະຫະກອນອອມຊັບ';
+            } else {
+                console.error('Invalid table type:', tableType);
+                return;
+            }
+
+            // Show loading state for the active table
+            currentTbody.innerHTML = `
+                <tr id="${currentLoadingRowId}">
+                    <td colspan="${currentTableColspan}" class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status"></div>
+                        <div class="mt-2">ກຳລັງໂຫຼດຂໍ້ມູນ${loadingText}...</div>
+                    </td>
+                </tr>`;
+
             try {
-                const response = await fetch('http://192.168.45.52:8000/api/mon_ly/');
+                const response = await fetch(API_URL); // Fetch from the single API URL
                 if (!response.ok) throw new Error('Network response was not ok');
                 const data = await response.json();
-                populateTable(data);
+                populateTable(data, tableType); // Populate the specific table with the fetched data
             } catch (error) {
-                console.error('Error fetching data:', error);
-                document.getElementById('loadingRow').innerHTML = `
-                    <td colspan="34" class="text-center py-4 text-danger">
-                        ມີຂໍ້ຜິດພາດໃນການໂຫຼດຂໍ້ມູນ: ${error.message}
-                    </td>`;
+                console.error(`Error fetching ${tableType} data:`, error);
+                currentTbody.innerHTML = `
+                    <tr>
+                        <td colspan="${currentTableColspan}" class="text-center py-4 text-danger">
+                            ມີຂໍ້ຜິດພາດໃນການໂຫຼດຂໍ້ມູນ: ${error.message}
+                        </td>
+                    </tr>`;
             }
         }
 
-        // Populate table with API data
-        function populateTable(data) {
-            const tbody = document.getElementById('monlyTableBody');
+        /**
+         * Populates the specified table body with data.
+         * @param {Array} data - The data array from the API.
+         * @param {string} tableType - 'salary', 'tax', or 'saving', indicating which table to populate.
+         */
+        function populateTable(data, tableType) {
+            let tbody;
+            let colspan;
+
+            if (tableType === 'salary') {
+                tbody = monlyTableBody;
+                colspan = 17;
+            } else if (tableType === 'tax') {
+                tbody = taxTableBody;
+                colspan = 11;
+            } else if (tableType === 'saving') {
+                tbody = savingTableBody; // Correct tbody for saving table
+                colspan = 8; // Correct colspan for saving table
+            } else {
+                console.error('Invalid table type for population:', tableType);
+                return;
+            }
+
             tbody.innerHTML = ''; // Clear loading row
+
             if (data.length === 0) {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="34" class="text-center py-4">
+                        <td colspan="${colspan}" class="text-center py-4">
                             ບໍ່ມີຂໍ້ມູນທີ່ຈະສະແດງ
                         </td>
                     </tr>`;
                 return;
             }
 
-            data.forEach((item, index )=> {
+            data.forEach((item, index) => {
                 const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${formatDate(item.date)}</td>
-                    <td>${item.lao_name}</td>
-                    <td>${item.position}</td>
-                    <td>${formatNumber(item.salary)}</td>
-                    <td>${formatNumber(item.wf_8)}</td>
-                    <td>${formatNumber(item.wf_5_5)}</td>
-                    <td>${formatNumber(item.wf_8_5)}</td>
-                    <td>${formatNumber(item.wf_6)}</td>
-                    <td>${formatNumber(item.position_subsidy)}</td>
-                    <td>${item.age}</td>
-                    <td>${formatNumber(item.year_subsidy)}</td>
-                    <td>${formatNumber(item.year_subsidy_total)}</td>
-                    <td>${formatNumber(item.ot)}</td>
-                    <td>${formatNumber(item.basic_income)}</td>
-                    <td>${formatNumber(item.fuel)}</td>
-                    <td>${formatNumber(item.regular_income)}</td>
-                    <td>${formatNumber(item.other_income)}</td>
-                    <td>${formatNumber(item.income_before_tax)}</td>
-                    <td>${formatNumber(item.exempt)}</td>
-                    <td>${formatNumber(item.tax_5)}</td>
-                    <td>${formatNumber(item.tax_10)}</td>
-                    <td>${formatNumber(item.tax_15)}</td>
-                    <td>${formatNumber(item.total_tax)}</td>
-                    <td>${formatNumber(item.net_basic_income)}</td>
-                    <td>${item.child}</td>
-                    <td>${formatNumber(item.child_Subsidy)}</td>
-                    <td>${formatNumber(item.child_subsidy_total)}</td>
-                    <td>${formatNumber(item.health_Subsidy)}</td>
-                    <td>${formatNumber(item.loan)}</td>
-                    <td>${formatNumber(item.interest)}</td>
-                    <td>${formatNumber(item.deposit)}</td>
-                    <td>${formatNumber(item.saving_total)}</td>
-                    <td>${formatNumber(item.net_salary)}</td>
-                `;
+                if (tableType === 'salary') {
+                    // Columns for the "ເງິນເດືອນ" (Monthly Salary) table
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${formatDate(item.date)}</td>
+                        <td>${item.lao_name}</td>
+                        <td>${formatNumber(item.salary)}</td>
+                        <td>${formatNumber(item.position_subsidy)}</td>
+                        <td>${formatNumber(item.year_subsidy_total)}</td>
+                        <td>${formatNumber(item.ot)}</td>
+                        <td>${formatNumber(item.basic_income)}</td>
+                        <td>${formatNumber(item.fuel)}</td>
+                        <td>${formatNumber(item.regular_income)}</td>
+                        <td>${formatNumber(item.other_income)}</td>
+                        <td>${formatNumber(item.income_before_tax)}</td>
+                        <td>${formatNumber(item.net_basic_income)}</td>
+                        <td>${formatNumber(item.child_Subsidy)}</td>
+                        <td>${formatNumber(item.child_subsidy_total)}</td>
+                        <td>${formatNumber(item.health_Subsidy)}</td>
+                        <td>${formatNumber(item.net_salary)}</td>
+                    `;
+                } else if (tableType === 'tax') {
+                    // Columns for the "ອາກອນ" (Tax) table
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${formatDate(item.date)}</td>
+                        <td>${item.lao_name}</td>
+                        <td>${formatNumber(item.salary)}</td>
+                        <td>${formatNumber(item.income_before_tax)}</td>
+                        <td>${formatNumber(item.exempt)}</td>
+                        <td>${formatNumber(item.tax_5)}</td>
+                        <td>${formatNumber(item.tax_10)}</td>
+                        <td>${formatNumber(item.tax_15)}</td>
+                        <td>${formatNumber(item.total_tax)}</td>
+                        <td>${formatNumber(item.net_salary)}</td>
+                    `;
+                } else if (tableType === 'saving') {
+                    // Columns for the "ສະຫະກອນອອມຊັບ" (Saving) table
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${formatDate(item.date)}</td>
+                        <td>${item.lao_name}</td>
+                        <td>${formatNumber(item.salary)}</td>
+                        <td>${formatNumber(item.loan)}</td>
+                        <td>${formatNumber(item.interest)}</td>
+                        <td>${formatNumber(item.deposit)}</td>
+                        <td>${formatNumber(item.saving_total)}</td> `;
+                }
                 tbody.appendChild(row);
             });
         }
 
-        // Format number with commas
+        // --- Utility Functions (unchanged) ---
+
         function formatNumber(num) {
+            // Handle null or undefined numbers
+            if (num === null || num === undefined) {
+                return '0'; // Or return '-' or '' as per your display preference
+            }
             return new Intl.NumberFormat('lo-LA', {
                 style: 'decimal',
                 minimumFractionDigits: 0,
                 maximumFractionDigits: 0
             }).format(num);
         }
+
         const formatDate = (dateString) => {
-                const date = new Date(dateString);
-                return date.toLocaleDateString('en-GB', {
-                    year: 'numeric',
-                    month: 'numeric',
-                    day: 'numeric'
-                });
-            };
-        // Export table to Excel
+            if (!dateString) return ''; // Handle empty or null date strings
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-GB', {
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric'
+            });
+        };
+
+        // Export table to Excel (exports the currently visible table)
         function exportToExcel() {
-            const table = document.getElementById('monlyTable');
+            let activeTableId;
+            let sheetName;
+            let fileName;
+
+            if (monlyTableContainer.style.display === 'block') {
+                activeTableId = 'monlyTable';
+                sheetName = 'ລາຍງານເງິນເດືອນ';
+                fileName = 'monthly_salary_report.xlsx';
+            } else if (taxTableContainer.style.display === 'block') {
+                activeTableId = 'taxTable';
+                sheetName = 'ລາຍງານອາກອນ';
+                fileName = 'tax_report.xlsx';
+            } else if (savingTableContainer.style.display === 'block') {
+                activeTableId = 'savingTable'; // Corrected ID
+                sheetName = 'ລາຍງານສະຫະກອນ';
+                fileName = 'saving_report.xlsx';
+            } else {
+                console.warn("No table is currently visible for export.");
+                alert("ບໍ່ມີຕາຕະລາງໃດຖືກສະແດງເພື່ອສົ່ງອອກ.");
+                return;
+            }
+
+            const table = document.getElementById(activeTableId);
+            if (!table) {
+                console.error(`Table with ID ${activeTableId} not found.`);
+                alert("ຂໍອະໄພ, ບໍ່ພົບຕາຕະລາງທີ່ຈະສົ່ງອອກ.");
+                return;
+            }
             const ws = XLSX.utils.table_to_sheet(table);
             const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, 'Monthly Report');
-            XLSX.write(wb, 'xlsx', 'monthly_salary_report.xlsx');
+            XLSX.utils.book_append_sheet(wb, ws, sheetName);
+            XLSX.writeFile(wb, fileName);
         }
 
-        // Print table
+        // Print table (prints the currently visible table)
         function printTable() {
-            const table = document.getElementById('monlyTable').outerHTML;
+            let activeTableId;
+            let reportTitle;
+
+            if (monlyTableContainer.style.display === 'block') {
+                activeTableId = 'monlyTable';
+                reportTitle = 'ລາຍງານຂໍ້ມູນການຈ່າຍເງິນເດືອນ';
+            } else if (taxTableContainer.style.display === 'block') {
+                activeTableId = 'taxTable';
+                reportTitle = 'ລາຍງານຂໍ້ມູນອາກອນ';
+            } else if (savingTableContainer.style.display === 'block') {
+                activeTableId = 'savingTable'; // Corrected ID
+                reportTitle = 'ລາຍງານຂໍ້ມູນສະຫະກອນ';
+            } else {
+                console.warn("No table is currently visible for printing.");
+                alert("ບໍ່ມີຕາຕະລາງໃດຖືກສະແດງເພື່ອພິມ.");
+                return;
+            }
+
+            const table = document.getElementById(activeTableId);
+            if (!table) {
+                console.error(`Table with ID ${activeTableId} not found.`);
+                alert("ຂໍອະໄພ, ບໍ່ພົບຕາຕະລາງທີ່ຈະພິມ.");
+                return;
+            }
+
+            const tableHTML = table.outerHTML;
             const printWindow = window.open('', '', 'height=600,width=800');
             printWindow.document.write(`
                 <html>
@@ -224,16 +424,26 @@
                         </style>
                     </head>
                     <body>
-                        <h1 style="text-align: center;">ລາຍງານຂໍ້ມູນການຈ່າຍເງິນເດືອນ</h1>
-                        ${table}
+                        <h1 style="text-align: center;">${reportTitle}</h1>
+                        ${tableHTML}
                     </body>
                 </html>
             `);
             printWindow.document.close();
             printWindow.print();
         }
-        document.addEventListener('DOMContentLoaded', fetchData);
-    </script>
 
+        // --- Event Listeners and Initial Load ---
+
+        // Add event listeners to buttons
+        salaryTabBtn.addEventListener('click', () => showTable('salary'));
+        taxTabBtn.addEventListener('click', () => showTable('tax'));
+        savingTabBtn.addEventListener('click', () => showTable('saving')); // Added event listener for saving tab
+
+        // Load the default table (salary) when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            showTable('salary');
+        });
+    </script>
 </body>
 {% endblock %}

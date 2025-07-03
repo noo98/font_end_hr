@@ -97,6 +97,7 @@
 
 <script>
     const DATABASE_URL = "{{ database_url | escapejs }}";  
+    const FILE_PATH = "{{ file_path | escapejs }}"; 
     
     async function fetchData() {
     let department = localStorage.getItem("department_name");
@@ -128,6 +129,25 @@
         const formatMap = Object.fromEntries(formats.map(f => [f.dmf_id, f.name]));
 
         const processedDocuments = documents.map((doc, index) => {
+             // ดึงชื่อไฟล์
+        const fileName = doc.file || null;
+        let fullFilePath = null;
+
+        if (fileName) {
+            const ext = fileName.split('.').pop().toLowerCase();
+
+            // ประเภทภาพ
+            const imageTypes = ['jpg', 'jpeg', 'png', 'gif'];
+
+            if (ext === 'pdf' || imageTypes.includes(ext)) {
+                fullFilePath = `${DATABASE_URL}/${fileName}`;
+            } else if (['doc', 'docx'].includes(ext)) {
+                fullFilePath = `${FILE_PATH}/${fileName}`;
+            } else {
+                fullFilePath = `${DATABASE_URL}/${fileName}`; // fallback
+            }
+        }
+
             return {
                 index: index + 1,
                 doc_id: doc.doc_id || 'N/A',
@@ -138,12 +158,12 @@
                 insert_date: doc.insert_date || 'N/A',
                 department_id: doc.department ? doc.department.id : null,
                 department: doc.department ? departmentMap[doc.department.id] || 'N/A' : 'N/A',
-                department_into: Array.isArray(doc.department_into) ?
-                    doc.department_into.map(dep => departmentMap[dep.id] || 'N/A').join(', ') : 'N/A',
+                department_into: Array.isArray(doc.department_into)
+                    ? doc.department_into.map(dep => departmentMap[dep.id] || 'N/A').join(', ')
+                    : 'N/A',
                 name: doc.name || 'N/A',
                 status2: doc.status2 || 'N/A',
-                // ໃຊ້ DATABASE_URL ກັບ file path, ແລະປ່ຽນ '#' ເປັນ null ເພື່ອໃຫ້ logic ລິ້ງເຮັດວຽກຖືກຕ້ອງ
-                file: doc.file ? `${DATABASE_URL}/${doc.file}` : null,
+                file: fullFilePath , 
                 status: doc.status || []
             };
         });
@@ -207,18 +227,17 @@ function renderTable(documents) {
 
             if (ext === 'pdf') {
                 fileLinksContent = `
-                    <a href="${fullFileURL}" onclick="UpDoc(event, '${doc.doc_id}')" target="_blank" class="btn btn-sm btn-info text-white me-1" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;">📁 ເບິ່ງໄຟລ໌</a>
+                    <a href="${fullFileURL}" onclick="UpDoc(event, '${doc.doc_id}')" target="_blank" class="btn btn-sm text-white" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;"><i class="bi bi-folder"></i></a>
                 
                 `;
             } else if (['doc', 'docx'].includes(ext)) {
                 fileLinksContent = `
-                    <a href="ms-word:ofe|u|${fullFileURL}" onclick="UpDoc(event, '${doc.doc_id}')" class="btn btn-sm btn-info text-white me-1" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;">📁 ເບິ່ງໄຟລ໌</a>
+                    <a href="ms-word:ofe|u|${fullFileURL}" onclick="UpDoc(event, '${doc.doc_id}')" class="btn btn-sm text-white" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;"><i class="bi bi-folder"></i></a>
                     
                 `;
             } else {
-                // ສຳລັບໄຟລ໌ປະເພດອື່ນໆ, ສະແດງປຸ່ມເບິ່ງໄຟລ໌ເທົ່ານັ້ນ
                 fileLinksContent = `
-                    <a href="${fullFileURL}" onclick="UpDoc(event, '${doc.doc_id}')" target="_blank" class="btn btn-sm btn-info text-white" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;">📁 ເບິ່ງໄຟລ໌</a>
+                    <a href="${fullFileURL}" onclick="UpDoc(event, '${doc.doc_id}')" target="_blank" class="btn btn-sm text-white" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;"><i class="bi bi-folder"></i></a>
                 `;
             }
         } else {
@@ -236,11 +255,9 @@ function renderTable(documents) {
             <td>${doc.name || ''}</td>
             <td style="text-align: center;">
                 <div class="d-flex flex-column align-items-center justify-content-center">
-                    <span id="status-${doc.doc_id}" class="badge ${userViewed ? 'bg-success' : 'bg-danger'} mb-2">
-                        ${userViewed ? '<i class="fas fa-check"></i> ເບິ່ງແລ້ວ' : '<i class="fas fa-eye"></i> ຍັງບໍ່ໄດ້ເບິ່ງ'}
+                    <span  id="status-${doc.doc_id}" class="badge ${userViewed ? 'bg-success' : 'bg-danger'} mb-2">${fileLinksContent}
+                        ${userViewed ? '<i class="fas fa-check"></i>' : '<i class="fas fa-eye"></i>'}
                     </span>
-                    <div class="d-flex"> ${fileLinksContent}
-                    </div>
                 </div>
             </td>
             ${(userRole === "admin" || doc.name === currentUsername) ? `

@@ -26,8 +26,8 @@
                         </div>
                         <div class="row g-3">
                             <div class="col-md-4"><div class="input-group-custom"><div class="mb-3"><label for="position" class="form-label">ຕຳແໜ່ງ</label><select id="position" name="pos_id" class="form-select" required><option value="" selected disabled>ກະລຸນາເລືອກຕຳແໜ່ງ</option></select></div></div></div>
-                            <div class="col-md-4"><div class="input-group-custom"><input type="date" class="form-control" id="year_entry" name="year_entry" required><label>ປີເຂົ້າການ</label></div></div>
-                            <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="salary_level" name="salary_level" required><label>ຂັ້ນເງິນເດືອນ</label></div></div>
+                            <div class="col-md-4"><div class="input-group-custom"><input type="date" class="form-control" id="year_entry" name="year_entry" required><label>ປີເຂົ້າການ(ສົມບູນ)</label></div></div>
+                            <!-- <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="salary_level" name="salary_level" required><label>ຂັ້ນເງິນເດືອນ</label></div></div> -->
                         </div>
                         <div class="row g-3">
                             <div class="col-md-4"><div class="input-group-custom"><input type="text" class="form-control" id="phone" name="phone" required><label>ເບີໂທ</label></div></div>
@@ -782,7 +782,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 "status": formData.get('status') || null,
                 "pos_id": formData.get('pos_id') || null,
                 "year_entry": formatDate(formData.get('year_entry')),
-                "salary_level": formData.get('salary_level') || null,
+                // "salary_level": formData.get('salary_level') || null,
                 "phone": formData.get('phone') || null,
                 "Department": formData.get('Department') || null
             }],

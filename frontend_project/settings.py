@@ -162,5 +162,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import environ
 env = environ.Env()
-environ.Env.read_env()
-DATABASE_URL = env('DATABASE_URL') 
+environ.Env.read_env()  # ต้องเรียกก่อนใช้ env(...)
+DATABASE_URL = env('DATABASE_URL')
+FILE_PATH = env('FILE_PATH')

@@ -56824,3 +56824,968 @@ http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
 Not Found: /favicon.ico
 Not Found: /reports/special_day/
 Not Found: /reports/special_day/
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Not Found: /favicon.ico
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 14874
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 15654
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 16439
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 16495
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 16551
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 16551
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 17333
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 17389
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 17389
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 17447
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 17447
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 17447
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 17447
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 17447
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 17447
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 17447
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'FILE_PATH' casted as 'None' with default '<NoValue>'
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 17447
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'File_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'File_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'File_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'File_PATH' casted as 'None' with default '<NoValue>'
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 17447
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'File_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'File_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'File_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'File_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'File_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'File_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'FILE_PATH' casted as 'None' with default '<NoValue>'
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 18223
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 18995
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'FILE_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'FILE_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'FILE_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'FILE_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend_project\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'FILE_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'FILE_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'FILE_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'FILE_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'FILE_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'FILE_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'FILE_PATH' casted as 'None' with default '<NoValue>'
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'FILE_PATH' casted as 'None' with default '<NoValue>'
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 19051
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 19108
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 19889
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 19889
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 19946
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 20705
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 20761
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 21518
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 21574
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 21574
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2189
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 21574
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 21574
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 21574
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 21574
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 21574
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 21632
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 22384
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 22384
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 22384
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 18319
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 18319
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 15746
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 6436
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 6492
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 7321
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 8150
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 8207
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 8207
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2189
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2541
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2541
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2541
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 8207
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 8207
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2541
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2541
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2541
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2541
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 8207
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2541
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2900
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 8207
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2900
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 8207
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2900
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py changed, reloading.
+Watching for file changes with StatReloader
+Read environment variables from: C:\Users\Advice\Desktop\font_end\frontend_project\frontend\.env
+get 'DATABASE_URL' casted as 'None' with default '<NoValue>'
+get 'FILE_PATH' casted as 'None' with default '<NoValue>'
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2900
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2900
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2900
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2900
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 8207
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2900
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 3205
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Not Found: /favicon.ico
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 8207
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 8985
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 8985
+Not Found: /favicon.ico
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/2/ HTTP/11" 200 1580
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/2/ HTTP/11" 200 1580
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/25/ HTTP/11" 200 564
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Not Found: /favicon.ico
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 21917
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/3/ HTTP/11" 200 1648
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/25/ HTTP/11" 200 564
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/25/ HTTP/11" 200 564
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/25/ HTTP/11" 200 564
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/25/ HTTP/11" 200 564
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/25/ HTTP/11" 200 564
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/25/ HTTP/11" 200 564
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 22954
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/25/ HTTP/11" 200 1600
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 22954
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/2/ HTTP/11" 200 1581
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/2/ HTTP/11" 200 1581
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 22954
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1578
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 22955
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Not Found: /favicon.ico
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/ HTTP/11" 200 22955
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1579
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/employee/1/ HTTP/11" 200 1579
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/positions/ HTTP/11" 200 802
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 8985
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+Starting new HTTP connection (1): 192.168.45.52:8000
+Starting new HTTP connection (1): 192.168.45.52:8000
+Starting new HTTP connection (1): 192.168.45.52:8000
+Starting new HTTP connection (1): 192.168.45.52:8000
+Starting new HTTP connection (1): 192.168.45.52:8000
+Starting new HTTP connection (1): 192.168.45.52:8000
+Internal Server Error: /documentEntry/
+Traceback (most recent call last):
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Advice\Desktop\font_end\frontend_project\frontend\views.py", line 327, in documentEntry
+    'formats': formats,
+               ^^^^^^^
+UnboundLocalError: cannot access local variable 'formats' where it is not associated with a value
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+Starting new HTTP connection (1): 192.168.45.52:8000
+Starting new HTTP connection (1): 192.168.45.52:8000
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 9797
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 10599
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 10599
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 10656
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 10713
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 10713
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 9912
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 9912
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 9912
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 9912
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 9912
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 10029
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 10029
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 10029
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 10029
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 10029
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 10029
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 10029
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 10029
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 10029
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 10029
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 3205
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 3205
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2835
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2563
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 10029
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/search/document_lcic/?doc_type_info=%E0%BA%82%E0%BA%B2%E0%BB%80%E0%BA%82%E0%BA%BB%E0%BB%89%E0%BA%B2&department_into= HTTP/11" 200 10029
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 10029
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/document_lcic/ HTTP/11" 200 10029
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229
+Not Found: /favicon.ico
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/document_general/ HTTP/11" 200 2563
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/departments/ HTTP/11" 200 741
+Starting new HTTP connection (1): 192.168.45.52:8000
+http://192.168.45.52:8000 "GET /api/list/Document_format/ HTTP/11" 200 1229

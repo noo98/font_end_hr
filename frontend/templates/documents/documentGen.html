@@ -87,6 +87,7 @@
 <script>
     document.addEventListener("DOMContentLoaded", async function() {
         const DATABASE_URL = "{{ database_url | escapejs }}";
+        const FILE_PATH = "{{ file_path | escapejs }}";
 
         async function fetchData() {
             let department = localStorage.getItem("department_name");
@@ -115,16 +116,29 @@
                 const formatMap = Object.fromEntries(formats.map(f => [f.dmf_id, f.name]));
 
                 // Process documents
-                let processedDocuments = documents.map(doc => ({
-                    docg_id: doc.docg_id || 'N/A',
-                    doc_number: doc.doc_number || 'N/A',
-                    format_id: doc.format || null,
-                    format_name: formatMap[doc.format] || 'N/A',
-                    subject: doc.subject || 'N/A',
-                    insert_date: doc.insert_date || 'N/A',
-                    name: doc.name || 'N/A',
-                    file: doc.file ? `${DATABASE_URL}/${doc.file}` : null // ປ່ຽນ # ເປັນ null ເພື່ອໃຫ້ logic ຂ້າງລຸ່ມເຮັດວຽກຖືກຕ້ອງ
-                }));
+                let processedDocuments = documents.map(doc => {
+                     // ກວດເບິ່ງນາມສະກຸນໄຟລ໌
+                    let fileURL = null;
+                    if (doc.file) {
+                        const ext = doc.file.split('.').pop().toLowerCase().split('?')[0];
+                        if (['pdf', 'jpg', 'jpeg', 'png'].includes(ext)) {
+                            fileURL = `${DATABASE_URL}/${doc.file}`;
+                        } else if (['doc', 'docx'].includes(ext)) {
+                            fileURL = `${FILE_PATH}/${doc.file}`;
+                        }
+                    }
+
+                    return {
+                        docg_id: doc.docg_id || 'N/A',
+                        doc_number: doc.doc_number || 'N/A',
+                        format_id: doc.format || null,
+                        format_name: formatMap[doc.format] || 'N/A',
+                        subject: doc.subject || 'N/A',
+                        insert_date: doc.insert_date || 'N/A',
+                        name: doc.name || 'N/A',
+                        file: fileURL,
+                    };
+                });
 
                 // Sort documents by insert_date in descending order
                 processedDocuments.sort((a, b) => new Date(b.insert_date) - new Date(a.insert_date));
@@ -192,15 +206,15 @@
                     if (ext === 'pdf') {
                         fileLinks = `
                             <div class="flex flex-col space-y-1">
-                                <a href="${fullFileURL}" target="_blank" class="btn btn-sm btn-info text-white" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;">📁 ເບິ່ງໄຟລ໌</a> 
+                                <a href="${fullFileURL}" target="_blank" class="btn btn-sm btn-info text-white" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;"><i class="bi bi-folder"></i></a> 
                             </div>`;
                     } else if (['doc', 'docx'].includes(ext)) {
                         fileLinks = `
                             <div class="flex flex-col space-y-1">
-                                <a href="ms-word:ofe|u|${fullFileURL}" class="btn btn-sm btn-info text-white" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;">📁 ເບິ່ງໄຟລ໌</a>
+                                <a href="ms-word:ofe|u|${fullFileURL}" class="btn btn-sm btn-info text-white" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;"><i class="bi bi-folder"></i></a>
                             </div>`;
                     } else {
-                        fileLinks = `<a href="${fullFileURL}" target="_blank" class="btn btn-sm btn-info text-white" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;">📁 ເບິ່ງໄຟລ໌</a>`;
+                        fileLinks = `<a href="${fullFileURL}" target="_blank" class="btn btn-sm btn-info text-white" style="font-size: 0.8rem; padding: 0.2rem 0.5rem;"><i class="bi bi-folder"></i></a>`;
                     }
                 }
                 // --- ສິ້ນສຸດໂຄດການສ້າງລິ້ງໄຟລ໌ ---
